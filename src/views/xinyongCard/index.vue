@@ -13,7 +13,7 @@
         <p :class="tabIndex==1?'pActive':''" @click="tabClick(1)">新卡推荐</p>
       </div>
       <div class="xinyongList">
-        <router-link v-for="item in 4" to="/cardInfo">
+        <router-link v-for="item in 4" to="/cardInfo" :key="item">
           <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=371772476,1548437417&fm=27&gp=0.jpg" alt="图片">
           <div>
             <div>交通银行标准信用卡</div>
