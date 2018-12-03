@@ -3,15 +3,22 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store'
 import YDUI from 'vue-ydui'
 import 'vue-ydui/dist/ydui.px.css'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
 
 Vue.config.productionTip = false
+Vue.use(VueAwesomeSwiper)
 Vue.use(YDUI)
+
+
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
