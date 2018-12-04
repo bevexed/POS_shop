@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import login from '@/views/login/login'
-import register from '@/views/login/register'
-import forgetPwd from '@/views/login/forgetPwd'
-import indexPage from '@/views/index/index'
-import xinyongCard from '@/views/xinyongCard/index'
-import shoppingCar from '@/views/shoppingCar/index'
-import my from '@/views/my/index'
-import cardInfo from '@/views/xinyongCard/cardInfo'
-import productDetail from '@/views/index/productDetail'
+import login from '@/page/login/login'
+import register from '@/page/login/register'
+import forgetPwd from '@/page/login/forgetPwd'
+import indexPage from '@/page/index/index'
+import xinyongCard from '@/page/xinyongCard/index'
+import shoppingCar from '@/page/shoppingCar/index'
+import my from '@/page/my/index'
+import cardInfo from '@/page/xinyongCard/cardInfo'
+import productDetail from '@/page/index/productDetail'
 
 Vue.use(Router)
 

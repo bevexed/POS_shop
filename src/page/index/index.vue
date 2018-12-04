@@ -8,7 +8,7 @@
       </swiper>
 
       <div class="commidity_class">
-        <p>企业POS机</p>
+        <p class="active">企业POS机</p>
         <p>个人POS机</p>
       </div>
       <div class="commidity_step">
@@ -85,6 +85,7 @@
       border-radius: 10px;
       border: 1px #FF6D4B solid;
       display: flex;
+      overflow: hidden;
       &>p {
         width: 50%;
         display: flex;
@@ -92,12 +93,12 @@
         justify-content: center;
         font-size: 15px;
       }
-      &>p:nth-child(1) {
-        background: #ff6D4B;
-        color: #fff;
-      }
-      &>p:nth-child(2){
+      &>p{
         color: #ff6D4B;
+      }
+      &> .active{
+        color: #fff;
+        background: #ff6D4B;
       }
     }
     .commidity_step {
