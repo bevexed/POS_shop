@@ -1,9 +1,9 @@
-import axios from 'axios'
+import fly from 'flyio'
 
-export default function ajax(url,data={},type="POST") {
-  return new Promise((resolve,reject)=>{
+export default function ajax(url, data = {}, type = "POST") {
+  return new Promise((resolve, reject) => {
     let promise
-    if (type === 'GET'){
+    if (type === 'GET') {
       // 准备url query参数数据
       let dataStr = '' //数据拼接字符串
       Object.keys(data).forEach(key => {
@@ -14,13 +14,13 @@ export default function ajax(url,data={},type="POST") {
         url = url + '?' + dataStr
       }
       // 发送get请求
-      promise = axios.get(url)
+      promise = fly.get(url)
     } else {
-      promise = axios.post(url,data)
+      promise = fly.post(url, data)
     }
-    promise.then(response=>{
-      resolve(response.data)
-    }).catch(error=>{
+    promise.then(response => {
+      resolve(response)
+    }).catch(error => {
       reject(error)
     })
   })

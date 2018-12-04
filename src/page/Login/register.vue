@@ -24,12 +24,14 @@
           </yd-cell-item>
         </yd-cell-group>
 
-        <yd-button class="loginBtn" size="large" type="primary" shape="circle">注册</yd-button>
+        <yd-button class="loginBtn" size="large" type="primary" shape="circle" @click.native="doRegister">注册</yd-button>
       </div>
     </div>
 </template>
 
 <script>
+  import {doRegister} from "../../api";
+  import {mapActions} from 'vuex'
   import headers from '../../components/headers'
     export default {
       data(){
@@ -42,12 +44,23 @@
       },
       components:{
         headers
+      },
+      methods:{
+        ...mapActions(['register']),
+        async doRegister(){
+          let {mobile,password,code,promote} = this
+          let a = await doRegister(mobile,password,code,promote)
+          // this.register(mobile,password,code,promote)
+        }
+      },
+      mounted() {
       }
     }
 </script>
 
 <style scoped lang="less">
   .login_head {
+    text-align: center;
     height: 334px;
     background: #ff6d48;
     color: #fff;

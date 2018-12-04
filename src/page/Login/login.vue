@@ -23,6 +23,7 @@
 </template>
 
 <script>
+  import {mapActions} from 'vuex'
   import headers from '../../components/headers'
     export default {
       data(){
@@ -35,16 +36,23 @@
       components:{
         headers
       },
+      // methods:{
+      //   login(){
+      //     this.$router.push('/indexPage')
+      //   }
+      // },
       methods:{
-        login(){
-          this.$router.push('/indexPage')
-        }
+        ...mapActions(['login']),
       },
+      mounted() {
+        this.login()
+      }
     }
 </script>
 <style scoped lang="less">
   @width:100%;
   .login_head {
+    text-align: center;
     height: 334px;
     background: #ff6d48;
     color: #fff;

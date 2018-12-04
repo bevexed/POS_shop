@@ -39,7 +39,7 @@
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /*text-align: center;*/
   color: #4d4d4d;
   font-size: 14px;
   font-family: myFont,sans-serif;
