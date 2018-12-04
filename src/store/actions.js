@@ -5,18 +5,18 @@ import {
 import {
   doRegister,
   doLogin
-} from '../api'
+} from '../api/login'
 
 export default {
   async login({commit, state},payload) {
     console.log(payload);
-    const userInfo = await doLogin(...payload);
+    const userInfo = await doLogin(payload);
     commit(LOGIN, {userInfo})
   },
 
   async register({commit, state},payload) {
     console.log(payload);
-    let result = await doRegister(...payload);
+    let result = await doRegister(payload);
     let userInfo = result.data
     commit(LOGIN, {userInfo})
   },

@@ -20,11 +20,6 @@ export default new Router({
       redirect:'/login'
     },
     {
-      path: '/index',
-      component: indexPage,
-      meta: {index: 0}
-    },
-    {
       path: '/Login',
       component: login,
       meta: {index: 0}
@@ -40,7 +35,7 @@ export default new Router({
       meta: {index: 1}
     },
     {
-      path: '/indexPage',
+      path: '/index',
       component: indexPage,
       meta: {index: 1, navShow: true}
     },

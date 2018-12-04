@@ -1,6 +1,5 @@
 import ajax from './ajax'
-
-const BASE_URL = 'http://lzxprogrammer.com'
+import {BASE_URL} from './BASE_URL'
 
 /*
 * 注册
@@ -9,7 +8,7 @@ const BASE_URL = 'http://lzxprogrammer.com'
 * @param   code       短信验证码    必传
 * @param   promote    邀请码        可选
 * */
-export const doRegister = (mobile,password,code,promote) => ajax(BASE_URL + '/login/doRegister',{mobile,password,code,promote})
+export const doRegister = ({mobile,password,code,promote}) => ajax(BASE_URL + '/login/doRegister',{mobile,password,code,promote})
 // export const doRegister = (mobile,password,code,promote) => ajax(`https://shop.zhihuimall.com.cn:443/zhihuishop/public/index.php/api/allbanner/bannerlist`,{mobile,password,code,promote})
 
 /*

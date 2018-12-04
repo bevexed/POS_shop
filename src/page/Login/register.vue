@@ -30,7 +30,7 @@
 </template>
 
 <script>
-  import {doRegister} from "../../api";
+  import {doRegister} from "../../api/login";
   import {mapActions} from 'vuex'
   import headers from '../../components/headers'
     export default {
@@ -49,8 +49,8 @@
         ...mapActions(['register']),
         async doRegister(){
           let {mobile,password,code,promote} = this
-          let a = await doRegister(mobile,password,code,promote)
-          // this.register(mobile,password,code,promote)
+          // let a = await doRegister(mobile,password,code,promote)
+          this.register({mobile,password,code,promote})
         }
       },
       mounted() {

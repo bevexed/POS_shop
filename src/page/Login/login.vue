@@ -36,11 +36,6 @@
       components:{
         headers
       },
-      // methods:{
-      //   login(){
-      //     this.$router.push('/indexPage')
-      //   }
-      // },
       methods:{
         ...mapActions(['login']),
       },

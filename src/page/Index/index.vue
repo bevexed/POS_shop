@@ -32,6 +32,7 @@
 </template>
 
 <script>
+  import {banner} from "../../api/indexPage";
   import headers from '../../components/headers'
     export default {
        name: "index",
@@ -51,8 +52,13 @@
          headers
       },
       mounted(){
+         this.getBanner()
       },
       methods:{
+         async getBanner(){
+           let result = await banner()
+           console.log(result);
+         },
          tabBarClick(num){
            this.tabBar = num;
          }
