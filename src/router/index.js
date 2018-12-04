@@ -9,6 +9,7 @@ import shoppingCar from '@/page/ShoppingCar/index'
 import my from '@/page/my/index'
 import cardInfo from '@/page/CreditCard/cardinfo'
 import productDetail from '@/page/ProductDetail/index'
+import Booking from '@/page/Booking/index'
 
 Vue.use(Router)
 
@@ -30,7 +31,7 @@ export default new Router({
       meta: {index: 1}
     },
     {
-      path: '/forgetPwd',
+      path: '/forgetpwd',
       component: forgetPwd,
       meta: {index: 1}
     },
@@ -40,12 +41,12 @@ export default new Router({
       meta: {index: 1, navShow: true}
     },
     {
-      path: '/CreditCard',
+      path: '/creditcard',
       component: CreditCard,
       meta: {index: 1, navShow: true}
     },
     {
-      path: '/shoppingCar',
+      path: '/shoppingcar',
       component: shoppingCar,
       meta: {index: 1, navShow: true}
     },
@@ -63,6 +64,11 @@ export default new Router({
       path: '/productdetail',
       component: productDetail,
       meta: {index: 2}
+    },
+    {
+      path: '/booking',
+      component: Booking,
+      meta: {index: 1}
     }
   ],
   //跳转页面scrolltop为0
