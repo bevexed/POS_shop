@@ -16,6 +16,10 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      path:'/',
+      redirect:'/login'
+    },
+    {
       path: '/index',
       component: indexPage,
       meta: {index: 0}
