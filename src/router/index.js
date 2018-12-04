@@ -6,10 +6,11 @@ import forgetPwd from '@/page/Login/forgetPwd'
 import indexPage from '@/page/Index/index'
 import CreditCard from '@/page/CreditCard/index'
 import shoppingCar from '@/page/ShoppingCar/index'
-import my from '@/page/my/index'
+import my from '@/page/My/index'
 import cardInfo from '@/page/CreditCard/cardinfo'
 import productDetail from '@/page/ProductDetail/index'
 import Booking from '@/page/Booking/index'
+import MyBooking from '@/page/MyBooking/index'
 
 Vue.use(Router)
 
@@ -50,7 +51,7 @@ export default new Router({
       meta: {index: 1, navShow: true}
     },
     {
-      path: '/my',
+      path: '/My',
       component: my,
       meta: {index: 1, navShow: true}
     },
@@ -68,6 +69,11 @@ export default new Router({
       path: '/booking',
       component: Booking,
       meta: {index: 1}
+    },
+    {
+      path: '/mybooking',
+      component: MyBooking,
+      meta: {index: 1,}
     }
   ],
   //跳转页面scrolltop为0

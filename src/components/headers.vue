@@ -5,6 +5,7 @@
         <img v-if="isPosition" class="positionImg" src="../assets/dingwei.png" alt="">
         <p v-if="title">{{title}}</p>
         <span v-if="isRegister" class="register_span" @click="goRegister">注册</span>
+        <yd-icon v-if="isSearch" size="20px" name="search" class="register_span"></yd-icon>
       </div>
       <div class="empty"></div>
     </div>
@@ -21,7 +22,8 @@
         isRegister:Boolean,
         title:String,
         isBack:Boolean,
-        isPosition:Boolean
+        isPosition:Boolean,
+        isSearch:Boolean
       },
       methods:{
         goRegister(){
