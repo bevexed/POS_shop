@@ -5,7 +5,7 @@
           <img src="../assets/shouye.png" alt="">
           <p>首页</p>
         </router-link>
-        <router-link to="/xinyongCard">
+        <router-link to="/creditCard">
           <img src="../assets/xinyongCard.png" alt="">
           <p>信用卡</p>
         </router-link>

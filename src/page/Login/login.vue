@@ -39,7 +39,7 @@
         login(){
           this.$router.push('/indexPage')
         }
-      }
+      },
     }
 </script>
 <style scoped lang="less">

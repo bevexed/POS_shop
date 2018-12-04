@@ -9,18 +9,18 @@
       <div class="register_box">
         <yd-cell-group>
           <yd-cell-item>
-            <yd-input regex="mobile" slot="right" required v-model="input1" max="20" placeholder="请输入账户"></yd-input>
+            <yd-input regex="mobile" slot="right" required v-model="mobile" max="11" placeholder="请输入手机号码"></yd-input>
           </yd-cell-item>
           <yd-cell-item>
-            <yd-input slot="right" type="password" v-model="input2" placeholder="请输入密码"></yd-input>
+            <yd-input slot="right" type="password" v-model="password" placeholder="请输入密码"></yd-input>
           </yd-cell-item>
           <yd-cell-item>
-            <yd-input slot="right" v-model="input3" placeholder="请输入验证码"></yd-input>
+            <yd-input slot="right" v-model="code" placeholder="请输入验证码"></yd-input>
             <span slot="right" class="circleSpan"></span>
             <div slot="right" class="getCodeSpan">获取验证码</div>
           </yd-cell-item>
           <yd-cell-item>
-            <yd-input slot="right" v-model="input5" placeholder="请输入邀请码"></yd-input>
+            <yd-input slot="right" v-model="promote" placeholder="请输入邀请码"></yd-input>
           </yd-cell-item>
         </yd-cell-group>
 
@@ -34,12 +34,10 @@
     export default {
       data(){
         return{
-          input1:'',
-          input2:'',
-          input3:'',
-          input4:'',
-          input5:''
-
+          mobile:'',
+          password:'',
+          code:'',
+          promote:'',
         }
       },
       components:{
