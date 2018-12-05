@@ -45,10 +45,10 @@
           <img src="../../assets/my/shezhi@3x.png" alt="">
           <p>我的设置</p>
         </li>
-        <li>
+        <router-link to="/mybooking" tag="li">
           <img src="../../assets/my/dingdanguanli@3x.png" alt="">
           <p>订单管理</p>
-        </li>
+        </router-link>
         <li>
           <img src="../../assets/my/huiyuanguanli@3x.png" alt="">
           <p>会员管理</p>
