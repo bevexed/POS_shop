@@ -20,6 +20,7 @@ import BankCard from '@/page/BankCard/index'
 import editAddress from '@/page/address/editAddress'
 import addAddress from '@/page/address/addAddress'
 import PhoneNumber from '@/page/PhoneNumber/index'
+import ManageBankCard from '@/page/ManageBankCard/index'
 
 Vue.use(Router)
 
@@ -127,6 +128,11 @@ export default new Router({
     {
       path:'/phonenumber',
       component:PhoneNumber,
+      meta:{index:3}
+    },
+    {
+      path:'/managebankcard',
+      component:ManageBankCard,
       meta:{index:3}
     }
   ],

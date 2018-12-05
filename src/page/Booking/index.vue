@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section style="min-height: 100vh">
     <headers :title="'确认订单'" :isBack="true"></headers>
     <section class="address">
       <header>
@@ -17,10 +17,13 @@
       <img src="" alt="">
       <section>
         <header>
-          POS机哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈好
+          POS机哈哈哈哈哈哈哈哈哈
         </header>
         <p>
           系列：企业pos机
+        </p>
+        <p>
+          通道类别：123
         </p>
         <div class="price">
           ￥286.<i>00</i> <span>x1</span>
@@ -134,7 +137,7 @@
       }
 
       .price {
-        margin-top: 15px;
+        margin-top: 10px;
         font-size: 18px;
         color: #f60012;
 
