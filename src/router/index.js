@@ -13,6 +13,10 @@ import Booking from '@/page/Booking/index'
 import MyBooking from '@/page/MyBooking/index'
 import DeliveryAddress from '@/page/address/Delivery address'
 import bookingSearch from '@/page/Booking/bookingSearch'
+import BookingDetail from '@/page/BookingDetail/index'
+import Setting from '@/page/Setting/index'
+import ChangePassword from '@/page/ChangePassword/index'
+import BankCard from '@/page/BankCard/index'
 
 Vue.use(Router)
 
@@ -76,16 +80,6 @@ export default new Router({
       path: '/mybooking',
       component: MyBooking,
       meta: {index: 1,}
-    },
-    {
-      path:'/DeliveryAddress',
-      component:DeliveryAddress,
-      meta: {index:2}
-    },
-    {
-      path:'/bookingSearch',
-      component:bookingSearch,
-      meta:{index:3}
     }
   ],
   //跳转页面scrolltop为0
