@@ -6,6 +6,7 @@
         <p v-if="title">{{title}}</p>
         <span v-if="isRegister" class="register_span" @click="goRegister">注册</span>
         <span v-if="isManage" class="register_span" @click="goManage">管理</span>
+        <yd-icon v-if="isSearch" size="20px" name="search" class="register_span"></yd-icon>
       </div>
       <div class="empty"></div>
     </div>
@@ -22,8 +23,9 @@
         isRegister:Boolean,
         title:String,
         isBack:Boolean,
+        isManage:Boolean,
         isPosition:Boolean,
-        isManage:Boolean
+        isSearch:Boolean
       },
       methods:{
         goRegister(){
@@ -31,9 +33,6 @@
         },
         goBack(){
           this.$router.back()
-        },
-        goManage(){
-
         }
       }
     }

@@ -19,7 +19,7 @@ export default function ajax(url, data = {}, type = "POST") {
       promise = fly.post(url, data)
     }
     promise.then(response => {
-      resolve(response)
+      resolve(response.data)
     }).catch(error => {
       reject(error)
     })
