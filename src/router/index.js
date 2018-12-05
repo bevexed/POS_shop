@@ -13,6 +13,7 @@ import Booking from '@/page/Booking/index'
 import MyBooking from '@/page/MyBooking/index'
 import BookingDetail from '@/page/BookingDetail/index'
 import Setting from '@/page/Setting/index'
+import ChangePassword from '@/page/ChangePassword/index'
 
 Vue.use(Router)
 
@@ -85,6 +86,11 @@ export default new Router({
     {
       path: '/setting',
       component: Setting,
+      meta: {index: 2,}
+    },
+    {
+      path: '/changepassword',
+      component: ChangePassword,
       meta: {index: 2,}
     }
   ],
