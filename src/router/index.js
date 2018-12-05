@@ -22,6 +22,7 @@ import addAddress from '@/page/address/addAddress'
 import PhoneNumber from '@/page/PhoneNumber/index'
 import ManageBankCard from '@/page/ManageBankCard/index'
 import RealName from '@/page/RealName/index'
+import Vip from '@/page/Vip/index'
 
 Vue.use(Router)
 
@@ -139,6 +140,11 @@ export default new Router({
     {
       path:'/realname',
       component:RealName,
+      meta:{index:3}
+    },
+    {
+      path:'/vip',
+      component:Vip,
       meta:{index:3}
     }
   ],
