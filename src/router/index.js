@@ -19,6 +19,7 @@ import ChangePassword from '@/page/ChangePassword/index'
 import BankCard from '@/page/BankCard/index'
 import editAddress from '@/page/address/editAddress'
 import addAddress from '@/page/address/addAddress'
+import PhoneNumber from '@/page/PhoneNumber/index'
 
 Vue.use(Router)
 
@@ -121,6 +122,11 @@ export default new Router({
     {
       path:'/addAddress',
       component:addAddress,
+      meta:{index:3}
+    },
+    {
+      path:'/phonenumber',
+      component:PhoneNumber,
       meta:{index:3}
     }
   ],
