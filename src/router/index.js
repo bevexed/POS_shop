@@ -17,6 +17,7 @@ import BookingDetail from '@/page/BookingDetail/index'
 import Setting from '@/page/Setting/index'
 import ChangePassword from '@/page/ChangePassword/index'
 import BankCard from '@/page/BankCard/index'
+import PhoneNumber from '@/page/PhoneNumber/index'
 
 Vue.use(Router)
 
@@ -109,6 +110,11 @@ export default new Router({
     {
       path:'/bookingSearch',
       component:bookingSearch,
+      meta:{index:3}
+    },
+    {
+      path:'/phonenumber',
+      component:PhoneNumber,
       meta:{index:3}
     }
   ],
