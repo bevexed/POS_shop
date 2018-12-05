@@ -18,6 +18,7 @@ import Setting from '@/page/Setting/index'
 import ChangePassword from '@/page/ChangePassword/index'
 import BankCard from '@/page/BankCard/index'
 import PhoneNumber from '@/page/PhoneNumber/index'
+import ManageBankCard from '@/page/ManageBankCard/index'
 
 Vue.use(Router)
 
@@ -115,6 +116,11 @@ export default new Router({
     {
       path:'/phonenumber',
       component:PhoneNumber,
+      meta:{index:3}
+    },
+    {
+      path:'/managebankcard',
+      component:ManageBankCard,
       meta:{index:3}
     }
   ],

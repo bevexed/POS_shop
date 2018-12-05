@@ -22,6 +22,9 @@
         <p>
           系列：企业pos机
         </p>
+        <p>
+          通道类型：123
+        </p>
         <div class="price">
           ￥286.<i>00</i> <span>x1</span>
         </div>
@@ -132,7 +135,7 @@
       }
 
       .price {
-        margin-top: 15px;
+        margin-top: 5px;
         font-size: 18px;
         color: #f60012;
 
