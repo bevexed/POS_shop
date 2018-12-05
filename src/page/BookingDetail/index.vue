@@ -97,7 +97,7 @@
       align-items: center;
 
       p {
-        margin: 0 4px;
+        margin: 0 6px;
       }
     }
   }

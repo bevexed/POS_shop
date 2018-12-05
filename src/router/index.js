@@ -12,6 +12,7 @@ import productDetail from '@/page/ProductDetail/index'
 import Booking from '@/page/Booking/index'
 import MyBooking from '@/page/MyBooking/index'
 import BookingDetail from '@/page/BookingDetail/index'
+import Setting from '@/page/Setting/index'
 
 Vue.use(Router)
 
@@ -79,6 +80,11 @@ export default new Router({
     {
       path: '/bookingdetail',
       component: BookingDetail,
+      meta: {index: 1,}
+    },
+    {
+      path: '/setting',
+      component: Setting,
       meta: {index: 1,}
     }
   ],
