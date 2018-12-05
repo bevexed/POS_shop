@@ -14,6 +14,7 @@ import MyBooking from '@/page/MyBooking/index'
 import BookingDetail from '@/page/BookingDetail/index'
 import Setting from '@/page/Setting/index'
 import ChangePassword from '@/page/ChangePassword/index'
+import BankCard from '@/page/BankCard/index'
 
 Vue.use(Router)
 
@@ -91,6 +92,11 @@ export default new Router({
     {
       path: '/changepassword',
       component: ChangePassword,
+      meta: {index: 2,}
+    },
+    {
+      path: '/bankcard',
+      component: BankCard,
       meta: {index: 2,}
     }
   ],
