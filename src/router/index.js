@@ -13,6 +13,10 @@ import Booking from '@/page/Booking/index'
 import MyBooking from '@/page/MyBooking/index'
 import DeliveryAddress from '@/page/address/Delivery address'
 import bookingSearch from '@/page/Booking/bookingSearch'
+import BookingDetail from '@/page/BookingDetail/index'
+import Setting from '@/page/Setting/index'
+import ChangePassword from '@/page/ChangePassword/index'
+import BankCard from '@/page/BankCard/index'
 
 Vue.use(Router)
 
@@ -73,9 +77,31 @@ export default new Router({
       meta: {index: 1}
     },
     {
+      path: '/bookingdetail',
+      component: BookingDetail,
+      meta: {index: 2,}
+    },
+    {
+      path: '/setting',
+      component: Setting,
+      meta: {index: 2,}
+    },
+    {
+      path: '/changepassword',
+      component: ChangePassword,
+      meta: {index: 2,}
+    },
+    {
       path: '/mybooking',
       component: MyBooking,
       meta: {index: 1,}
+    },
+    {
+      path: '/bankcard',
+      component: BankCard,
+      meta: {index: 2,}
+    },
+
     },
     {
       path:'/DeliveryAddress',
