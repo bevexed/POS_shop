@@ -4,7 +4,6 @@
       <ul class="shopList">
         <li v-for="(item,index) in items" :key="index">
           <div class="circle_div" :class="item.isChecked?'checked':''" @click="select(index)"></div>
-          <!--<div class="circle_div" :class="item.isChecked?'checked':''" @click="select"></div>-->
           <img class="shopImg" src="http://img1.shikee.com/try/2016/06/23/14381920926024616259.jpg" alt="">
           <div class="shopContent">
             <p>POS机哈哈哈哈个人哦哈哈活哈哈 哈哈哈哈</p>
@@ -87,6 +86,7 @@
     height: 16px;
     border-radius: 50%;
     border: 1px #979797 solid;
+    cursor: pointer;
   }
   .checked {
     background-image: url("../../assets/circleChecked.png");

@@ -33,6 +33,9 @@
         },
         goBack(){
           this.$router.back()
+        },
+        goManage(){
+
         }
       }
     }

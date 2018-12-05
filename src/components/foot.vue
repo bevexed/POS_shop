@@ -1,7 +1,7 @@
 <template>
     <div>
       <div class="footDiv">
-        <router-link to="/indexPage">
+        <router-link to="/index">
           <img src="../assets/shouye.png" alt="">
           <p>首页</p>
         </router-link>
