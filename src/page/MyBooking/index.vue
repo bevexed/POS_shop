@@ -1,12 +1,19 @@
 <template>
   <section>
-    <headers :title="title" :is-search="isSearch"/>
+    <headers :title="selectComponent[selected].type" :is-search="isSearch" :is-back="true"/>
     <nav>
       <ul>
         <li v-for="(v,i) in selectComponent" @click="select(i)" :class="{active:selected === i}">{{v.type}}</li>
       </ul>
     </nav>
-    <All/>
+    <All
+      v-for="(val,i) in allData"
+      :key="i"
+      :waitPay="val.state"
+      :waitPost="val.state"
+      :waitGet="val.state"
+      :waitElva="val.state"
+    />
   </section>
 </template>
 
@@ -14,6 +21,7 @@
   import headers from '../../components/headers'
 
   import All from './All'
+
   export default {
     name: "myBooking",
     components: {
@@ -26,11 +34,17 @@
         selected: 0,
         title: '我的订单',
         selectComponent: [
-          {type: '全部', components: ''},
-          {type: '待付款', components: ''},
-          {type: '待发货', components: ''},
-          {type: '待收货', components: ''},
-          {type: '待评价', components: ''}
+          {type: '全部'},
+          {type: '待付款'},
+          {type: '待发货'},
+          {type: '待收货'},
+          {type: '待评价'}
+        ],
+        allData:[
+          {state:0},
+          {state:1},
+          {state:2},
+          {state:3},
         ]
       }
     },
