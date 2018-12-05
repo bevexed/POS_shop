@@ -40,11 +40,11 @@
           {type: '待收货'},
           {type: '待评价'}
         ],
-        allData:[
-          {state:0},
-          {state:1},
-          {state:2},
-          {state:3},
+        allData: [
+          {state: 0},
+          {state: 1},
+          {state: 2},
+          {state: 3},
         ]
       }
     },

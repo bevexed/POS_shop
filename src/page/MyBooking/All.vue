@@ -38,7 +38,7 @@
 <script>
   export default {
     name: "all",
-    props:['waitPay','waitPost','waitGet','waitElva']
+    props: ['waitPay', 'waitPost', 'waitGet', 'waitElva']
   }
 </script>
 
@@ -95,6 +95,7 @@
     footer {
       text-align: end;
       margin-top: 20px;
+
       span {
         display: inline-block;
         width: 81px;
@@ -104,7 +105,8 @@
         border: 1px solid #979797;
         text-align: center;
         margin-left: 10px;
-        &.pay,&.elva {
+
+        &.pay, &.elva {
           border-color: #ff6d4b;
           color: #ff6d4b;
         }
