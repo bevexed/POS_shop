@@ -11,6 +11,8 @@ import cardInfo from '@/page/CreditCard/cardinfo'
 import productDetail from '@/page/ProductDetail/index'
 import Booking from '@/page/Booking/index'
 import MyBooking from '@/page/MyBooking/index'
+import DeliveryAddress from '@/page/address/Delivery address'
+import bookingSearch from '@/page/Booking/bookingSearch'
 import BookingDetail from '@/page/BookingDetail/index'
 import Setting from '@/page/Setting/index'
 import ChangePassword from '@/page/ChangePassword/index'
@@ -77,27 +79,7 @@ export default new Router({
     {
       path: '/mybooking',
       component: MyBooking,
-      meta: {index: 2,}
-    },
-    {
-      path: '/bookingdetail',
-      component: BookingDetail,
-      meta: {index: 2,}
-    },
-    {
-      path: '/setting',
-      component: Setting,
-      meta: {index: 2,}
-    },
-    {
-      path: '/changepassword',
-      component: ChangePassword,
-      meta: {index: 2,}
-    },
-    {
-      path: '/bankcard',
-      component: BankCard,
-      meta: {index: 2,}
+      meta: {index: 1,}
     }
   ],
   //跳转页面scrolltop为0
