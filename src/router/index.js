@@ -77,10 +77,31 @@ export default new Router({
       meta: {index: 1}
     },
     {
+      path: '/bookingdetail',
+      component: BookingDetail,
+      meta: {index: 2,}
+    },
+    {
+      path: '/setting',
+      component: Setting,
+      meta: {index: 2,}
+    },
+    {
+      path: '/changepassword',
+      component: ChangePassword,
+      meta: {index: 2,}
+    },
+    {
       path: '/mybooking',
       component: MyBooking,
       meta: {index: 1,}
-    }
+    },
+    {
+      path: '/bankcard',
+      component: BankCard,
+      meta: {index: 2,}
+    },
+
   ],
   //跳转页面scrolltop为0
   scrollBehavior(to, from, savedPosition) {
