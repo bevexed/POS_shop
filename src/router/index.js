@@ -75,17 +75,17 @@ export default new Router({
     {
       path: '/mybooking',
       component: MyBooking,
-      meta: {index: 1,}
+      meta: {index: 2,}
     },
     {
       path: '/bookingdetail',
       component: BookingDetail,
-      meta: {index: 1,}
+      meta: {index: 2,}
     },
     {
       path: '/setting',
       component: Setting,
-      meta: {index: 1,}
+      meta: {index: 2,}
     }
   ],
   //跳转页面scrolltop为0

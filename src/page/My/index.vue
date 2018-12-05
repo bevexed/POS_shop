@@ -41,10 +41,10 @@
     </section>
     <footer class="set">
       <ul>
-        <li>
+        <router-link to="/setting" tag="li">
           <img src="../../assets/my/shezhi@3x.png" alt="">
           <p>我的设置</p>
-        </li>
+        </router-link>
         <router-link to="/mybooking" tag="li">
           <img src="../../assets/my/dingdanguanli@3x.png" alt="">
           <p>订单管理</p>
