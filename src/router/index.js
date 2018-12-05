@@ -17,6 +17,8 @@ import BookingDetail from '@/page/BookingDetail/index'
 import Setting from '@/page/Setting/index'
 import ChangePassword from '@/page/ChangePassword/index'
 import BankCard from '@/page/BankCard/index'
+import editAddress from '@/page/address/editAddress'
+import addAddress from '@/page/address/addAddress'
 import PhoneNumber from '@/page/PhoneNumber/index'
 import ManageBankCard from '@/page/ManageBankCard/index'
 import RealName from '@/page/RealName/index'
@@ -112,6 +114,16 @@ export default new Router({
     {
       path:'/bookingSearch',
       component:bookingSearch,
+      meta:{index:3}
+    },
+    {
+      path:'/editAddress',
+      component:editAddress,
+      meta:{index:3}
+    },
+    {
+      path:'/addAddress',
+      component:addAddress,
       meta:{index:3}
     },
     {

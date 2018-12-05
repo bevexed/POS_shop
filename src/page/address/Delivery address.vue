@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="add">
       <headers :title="title" :isBack="true"></headers>
       <ul class="address_list">
         <li>
@@ -10,9 +10,10 @@
             </p>
             <p>浙江省杭州市西湖区1234号哈哈哈哈哈哦哈</p>
           </div>
-          <img src="../../assets/edit.png" alt="">
+          <img @click="editClick" src="../../assets/edit.png" alt="">
         </li>
       </ul>
+      <button class="addBtn" @click="goADD">新增收货地址</button>
     </div>
 </template>
 
@@ -26,11 +27,22 @@
        },
       components:{
          headers
+      },
+      methods:{
+        goADD(){
+          this.$router.push('/addAddress')
+        },
+        editClick(){
+          this.$router.push('/editAddress')
+        }
       }
     }
 </script>
 
 <style scoped lang="less">
+  .add {
+    min-height: 100vh;
+  }
   .address_list {
     padding: 0 14px;
     background: #fff;
@@ -47,5 +59,14 @@
         margin-right: 20px;
       }
     }
+  }
+  .addBtn {
+    height: 44px;
+    width: 100vw;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    color: #fff;
+    background: #ff6d4b;
   }
 </style>
