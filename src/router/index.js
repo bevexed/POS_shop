@@ -11,6 +11,7 @@ import cardInfo from '@/page/CreditCard/cardinfo'
 import productDetail from '@/page/ProductDetail/index'
 import Booking from '@/page/Booking/index'
 import MyBooking from '@/page/MyBooking/index'
+import BookingDetail from '@/page/BookingDetail/index'
 
 Vue.use(Router)
 
@@ -73,6 +74,11 @@ export default new Router({
     {
       path: '/mybooking',
       component: MyBooking,
+      meta: {index: 1,}
+    },
+    {
+      path: '/bookingdetail',
+      component: BookingDetail,
       meta: {index: 1,}
     }
   ],
