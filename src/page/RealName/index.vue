@@ -1,9 +1,6 @@
 <template>
   <section>
     <headers :title="'实名认证'" :isBack="true"></headers>
-    <header>
-      添加一张本人储蓄卡作为您的交易入账卡
-    </header>
     <yd-cell-group>
       <yd-cell-item>
         <span slot="left">姓名： </span>
