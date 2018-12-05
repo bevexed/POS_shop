@@ -134,6 +134,7 @@
 
     footer {
       padding: 20px 0;
+
       ul {
         display: flex;
 
@@ -165,14 +166,16 @@
 
   footer.set {
     width: 96%;
-    margin: 0 auto;
     border-radius: 10px;
     background: white;
     padding: 15px 0;
+    margin: 0 auto 50px;
+
     ul {
       display: flex;
       justify-content: flex-start;
       flex-wrap: wrap;
+
       li {
         display: flex;
         text-align: center;
@@ -181,6 +184,7 @@
         flex-direction: column;
         margin-top: 26px;
         width: 33%;
+
         img {
           width: 25px;
         }
