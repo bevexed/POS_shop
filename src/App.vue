@@ -64,6 +64,7 @@
 }
 img { content: normal !important; }
 ul,li{list-style-type: none}
+button {border: none;outline: none}
 input::-webkit-input-placeholder {
   color: #4d4d4d;
 }
