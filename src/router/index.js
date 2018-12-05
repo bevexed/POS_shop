@@ -101,8 +101,6 @@ export default new Router({
       component: BankCard,
       meta: {index: 2,}
     },
-
-    },
     {
       path:'/DeliveryAddress',
       component:DeliveryAddress,
