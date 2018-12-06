@@ -77,8 +77,9 @@ export default new Router({
       meta: {index: 2}
     },
     {
-      path: '/productdetail',
+      path: '/productdetail/id/:id',
       component: productDetail,
+      name:'productDetail',
       meta: {index: 2}
     },
     {

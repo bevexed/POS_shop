@@ -1,6 +1,6 @@
 <template>
   <section>
-    <header class="user">
+    <header class="user" @click="$router.push('/setting')">
       <img src="" alt="">
       <p><span>HAHAHAHAHAHAHA</span> <br>
         <yd-icon size="20px" name="footmark"></yd-icon>

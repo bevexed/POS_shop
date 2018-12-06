@@ -6,22 +6,22 @@
     </swiper>
 
     <div class="commidity_class">
-      <p class="active">企业POS机</p>
-      <p>个人POS机</p>
+      <p :class="{active:sold_type === 1}" @click="getGoodLists(1,1)">企业POS机</p>
+      <p :class="{active:sold_type === 2}" @click="getGoodLists(2,1)">个人POS机</p>
     </div>
     <div class="commidity_step">
-      <span :class="tabBar==0?'Aspan':''" @click="tabBarClick(0)">综合</span>
-      <span :class="tabBar==1?'Aspan':''" @click="tabBarClick(1)">价格</span>
-      <span :class="tabBar==2?'Aspan':''" @click="tabBarClick(2)">销量</span>
+      <span :class="{Aspan:sort_type === 1}" @click="getGoodLists(sold_type,1)">综合</span>
+      <span :class="{Aspan:sort_type === 2}" @click="getGoodLists(sold_type,2)">价格</span>
+      <span :class="{Aspan:sort_type === 3}" @click="getGoodLists(sold_type,3)">销量</span>
     </div>
     <ul class="commidity_ul">
-      <li v-for="item in 5">
-        <router-link to="/productDetail">
-          <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1722901937,3578003945&fm=27&gp=0.jpg" alt="图片">
-          <p class="cTitle">POS机哈哈哈哈个人哦哈哈活 哈哈哈哈哈哈</p>
+      <li v-for="(v,i) in goodLists" :key="v.id">
+        <router-link :to="{name:'productDetail',params:{id:v.id}}">
+          <img :src="`${IMG_BASE_URL}${v.show_pic}`" alt="图片">
+          <p class="cTitle ellipse">{{v.name}}</p>
           <div>
-            <span>¥268元</span>
-            <span>已售123</span>
+            <span>¥{{v.price}}元</span>
+            <span>已售{{v.sold_out}}</span>
           </div>
         </router-link>
       </li>
@@ -31,7 +31,7 @@
 
 <script>
   import {IMG_BASE_URL} from "../../api/BASE_URL";
-  import {banner} from "../../api/indexPage";
+  import {banner, goodlists} from "../../api/indexPage";
   import headers from '../../components/headers'
 
   export default {
@@ -40,17 +40,20 @@
       return {
         IMG_BASE_URL,
         title: '首页',
+        ad_code: 110100, // 邮编
+        sold_type: 1,    // pos机类别 1:企业 2:个人 若不传，默认为1
+        sort_type: 1,    // 筛选条件 1:综合 2:价格 3:销量 若不传，默认为1
         bannerImg: [],
+        goodLists:[],
         swiperOption: {
           autoplay: {
             delay: 3000,
             disableOnInteraction:false
           },
-          spaceBetween: 10,
-          initialSlide:1,
-          centeredSlides: true,
           loop: true,
-          slidesPerView: "auto"
+          spaceBetween: 10,
+          slidesPerView: "auto",
+          centeredSlides: true,
         },
         tabBar: 0
       }
@@ -70,6 +73,15 @@
       this.getBanner();
     },
     methods: {
+      async getGoodLists(sold_type,sort_type) {
+        this.sold_type = sold_type
+        this.sort_type = sort_type
+        let result = await goodlists(this.ad_code,sold_type,sort_type)
+        console.log(result);
+        if (result.code ===1){
+          this.goodLists = result.data
+        }
+      },
       async getBanner() {
         let result = await banner()
         this.bannerImg = result;
