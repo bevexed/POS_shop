@@ -49,10 +49,10 @@
           <img src="../../assets/my/dingdanguanli@3x.png" alt="">
           <p>订单管理</p>
         </router-link>
-        <li>
+        <router-link tag="li" :to="{path:'vip'}">
           <img src="../../assets/my/huiyuanguanli@3x.png" alt="">
           <p>会员管理</p>
-        </li>
+        </router-link>
         <li>
           <img src="../../assets/my/jiaoyiguanli-2@3x.png" alt="">
           <p>交易管理</p>
