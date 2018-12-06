@@ -100,8 +100,9 @@ export default new Router({
       meta: {index: 2,}
     },
     {
-      path: '/mybooking',
+      path: '/mybooking/type/:type',
       component: MyBooking,
+      name:'myBooking',
       meta: {index: 1,}
     },
     {
