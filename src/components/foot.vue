@@ -51,6 +51,7 @@
       justify-content: center;
       align-items: center;
       color: #fff;
+      cursor: pointer;
       img {
         width: 18px;
         margin-bottom: 5px;

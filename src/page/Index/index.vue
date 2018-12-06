@@ -42,10 +42,14 @@
         title: '首页',
         bannerImg: [],
         swiperOption: {
+          autoplay:'autoplay',
           loop: true,
           spaceBetween: 10,
           slidesPerView: "auto",
           centeredSlides: true,
+          loopedSlides: 3,
+          observer:true,//修改swiper自己或子元素时，自动初始化swiper
+          observeParents:true,//修改swiper的父元素时，自动初始化swiper
         },
         tabBar: 0
       }

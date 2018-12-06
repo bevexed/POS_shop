@@ -70,6 +70,7 @@
     .register_span {
       position: absolute;
       right: 10px;
+      cursor: pointer;
     }
     &>p {
       font-size: 18px;
@@ -78,17 +79,20 @@
       width: 21px;
       position: absolute;
       left: 10px;
+      cursor: pointer;
     }
     .positionImg {
       width: 17px;
       position: absolute;
       left: 18px;
+      cursor: pointer;
     }
     .scanP {
       display: flex;
       align-items: center;
       position: absolute;
       right: 10px;
+      cursor: pointer;
       &>img {
         width: 14px;
         margin-right: 4px;
