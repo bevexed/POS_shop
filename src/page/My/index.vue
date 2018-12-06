@@ -15,26 +15,26 @@
       </header>
       <footer>
         <ul>
-          <li>
+          <router-link tag="li" :to="{name:'myBooking',params:{type:1}}">
             <img src="../../assets/my/daifukuan@3x.png" alt="">
             <p>待付款 <span>1</span></p>
-          </li>
-          <li>
+          </router-link>
+          <router-link tag="li" :to="{name:'myBooking',params:{type:2}}">
             <img src="../../assets/my/daifahuo-2@3x.png" alt="">
             <p>待发货 <span>1</span></p>
-          </li>
-          <li>
+          </router-link>
+          <router-link tag="li" :to="{name:'myBooking',params:{type:3}}">
             <img src="../../assets/my/daishouhuo-2@3x.png" alt="">
             <p>待收货 <span>1</span></p>
-          </li>
-          <li>
+          </router-link>
+          <router-link tag="li" :to="{name:'myBooking',params:{type:4}}">
             <img src="../../assets/my/31daipingjia@3x.png" alt="">
             <p>待评价 <span>1</span></p>
-          </li>
-          <li>
+          </router-link>
+          <router-link tag="li" :to="{name:'myBooking',params:{type:3}}">
             <img src="../../assets/my/tuikuan@3x.png" alt="">
             <p>退款 <span>1</span></p>
-          </li>
+          </router-link>
         </ul>
       </footer>
 

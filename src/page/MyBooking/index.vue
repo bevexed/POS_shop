@@ -52,6 +52,9 @@
       select(i) {
         this.selected = i
       }
+    },
+    mounted(){
+      this.selected = this.$route.params.type - 0
     }
   }
 </script>
