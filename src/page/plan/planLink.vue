@@ -1,6 +1,6 @@
 <template>
     <div class="plan_content">
-      <headers :title="title" :isBack="true"></headers>
+      <headers :title="title" :isBack="true" :isScan="true"></headers>
       <div class="plan_box">
         <p class="plan_title">推广码</p>
         <p class="plan_code">123456</p>

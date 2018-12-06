@@ -8,9 +8,12 @@
         <span v-if="isManage" class="register_span" @click="goManage">管理</span>
         <span v-if="isKeep" class="register_span">保存</span>
         <yd-icon v-if="isSearch" size="20px" name="search" class="register_span"></yd-icon>
-        <div class="scanP">
+        <div v-if="isScan" class="scanP">
           <img src="../assets/scan.png" alt="">
           <span>扫码</span>
+        </div>
+        <div v-if="isSkir" class="scanP">
+          <img src="../assets/scan.png" alt="">
         </div>
       </div>
       <div class="empty"></div>
@@ -31,7 +34,9 @@
         isManage:Boolean,
         isPosition:Boolean,
         isSearch:Boolean,
-        isKeep:Boolean
+        isKeep:Boolean,
+        isScan:Boolean,
+        isSkir:Boolean
       },
       methods:{
         goRegister(){

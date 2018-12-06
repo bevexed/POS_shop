@@ -25,6 +25,7 @@ import RealName from '@/page/RealName/index'
 import Vip from '@/page/Vip/index'
 import incomeManage from '@/page/my/incomeManage'
 import planLink from '@/page/plan/planLink'
+import useBook from '@/page/my/useBook'
 
 Vue.use(Router)
 
@@ -103,7 +104,7 @@ export default new Router({
       path: '/mybooking/type/:type',
       component: MyBooking,
       name:'myBooking',
-      meta: {index: 1,}
+      meta: {index: 2,}
     },
     {
       path: '/bankcard',
@@ -158,7 +159,12 @@ export default new Router({
     {
       path:'/planLink',
       component:planLink,
-      meta:{index:3}
+      meta:{index:2}
+    },
+    {
+      path:'/useBook',
+      component:useBook,
+      meta:{index:2}
     }
   ],
   //跳转页面scrolltop为0

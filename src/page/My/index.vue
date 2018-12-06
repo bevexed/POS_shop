@@ -57,22 +57,22 @@
           <img src="../../assets/my/jiaoyiguanli-2@3x.png" alt="">
           <p>交易管理</p>
         </li>
-        <li>
+        <router-link to="/incomeManage">
           <img src="../../assets/my/shouyiguanli@3x.png" alt="">
           <p>收益管理</p>
-        </li>
-        <li>
+        </router-link>
+        <router-link to="/shoppingCar">
           <img src="../../assets/my/buy-car@3x.png" alt="">
           <p>购物车管理</p>
-        </li>
-        <li>
+        </router-link>
+        <router-link to="/planLink">
           <img src="../../assets/my/tuiguang-@3x.png" alt="">
           <p>推广链接</p>
-        </li>
-        <li>
+        </router-link>
+        <router-link to="/useBook">
           <img src="../../assets/my/shiyongzhinan@3x.png" alt="">
           <p>使用指南</p>
-        </li>
+        </router-link>
       </ul>
     </footer>
   </section>
@@ -176,7 +176,7 @@
       justify-content: flex-start;
       flex-wrap: wrap;
 
-      li {
+      li,a {
         display: flex;
         text-align: center;
         justify-content: flex-end;
