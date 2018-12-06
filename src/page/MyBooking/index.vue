@@ -50,7 +50,8 @@
     },
     methods: {
       select(i) {
-        this.selected = i
+        this.$router.push({name:'myBooking',params:{type:i}})
+        this.selected = this.$route.params.type - 0
       }
     },
     mounted(){

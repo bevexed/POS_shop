@@ -11,7 +11,7 @@
     <section class="booking">
       <header>
         我的订单
-        <span>全部订单 > </span>
+        <span @click="$router.push({name:'myBooking',params:{type:0}})">全部订单 > </span>
       </header>
       <footer>
         <ul>
@@ -31,7 +31,7 @@
             <img src="../../assets/my/31daipingjia@3x.png" alt="">
             <p>待评价 <span>1</span></p>
           </router-link>
-          <router-link tag="li" :to="{name:'myBooking',params:{type:3}}">
+          <router-link tag="li" :to="{name:'myBooking',params:{type:0}}">
             <img src="../../assets/my/tuikuan@3x.png" alt="">
             <p>退款 <span>1</span></p>
           </router-link>
@@ -45,7 +45,7 @@
           <img src="../../assets/my/shezhi@3x.png" alt="">
           <p>我的设置</p>
         </router-link>
-        <router-link to="/mybooking" tag="li">
+        <router-link :to="{name:'myBooking',params:{type:0}}" tag="li">
           <img src="../../assets/my/dingdanguanli@3x.png" alt="">
           <p>订单管理</p>
         </router-link>
