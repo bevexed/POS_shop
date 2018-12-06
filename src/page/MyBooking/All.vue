@@ -4,6 +4,7 @@
       <img src="" alt="">
       <p>
         POS哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈好 <br>
+        <span>通道：1234</span> <br>
         <span>系列：企业POS机</span>
       </p>
       <div>

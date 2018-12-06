@@ -1,4 +1,4 @@
-import fly from 'flyio'
+import axios from 'axios'
 
 export default function ajax(url, data = {}, type = "POST") {
   return new Promise((resolve, reject) => {
@@ -14,9 +14,9 @@ export default function ajax(url, data = {}, type = "POST") {
         url = url + '?' + dataStr
       }
       // 发送get请求
-      promise = fly.get(url)
+      promise = axios.get(url)
     } else {
-      promise = fly.post(url, data)
+      promise = axios.post(url, data)
     }
     promise.then(response => {
       resolve(response.data)

@@ -97,6 +97,21 @@
         }
         if (this.timer === 60) {
           let result = await sendMsg(mobile, type)
+          console.log(result.code);
+          if (result.code === '1'){
+            alert(result)
+            this.$dialog.notify({
+              mes:result.message,
+              timeout:3000
+            })
+          } else {
+            console.log(result)
+            this.$dialog.notify({
+              mes:result.message,
+              timeout:3000
+            })
+            return
+          }
           console.log(result);
           this.T = setInterval(() => {
             this.timer--;

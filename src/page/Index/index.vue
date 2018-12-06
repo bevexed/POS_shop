@@ -1,6 +1,6 @@
 <template>
   <div class="index_content">
-    <headers :title="title" :isPosition="true"></headers>
+    <headers :title="title" :isPosition="true" :scanP="true"></headers>
     <swiper class="wrap" :options="swiperOption">
       <swiper-slide v-for="(val,i) in bannerImg" :key="i"><a :href="val.url"><img :src="`${IMG_BASE_URL}${val.picture}`"></a></swiper-slide>
     </swiper>
