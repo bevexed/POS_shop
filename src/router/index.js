@@ -21,6 +21,8 @@ import editAddress from '@/page/address/editAddress'
 import addAddress from '@/page/address/addAddress'
 import PhoneNumber from '@/page/PhoneNumber/index'
 import ManageBankCard from '@/page/ManageBankCard/index'
+import RealName from '@/page/RealName/index'
+import Vip from '@/page/Vip/index'
 import incomeManage from '@/page/my/incomeManage'
 import planLink from '@/page/plan/planLink'
 
@@ -135,6 +137,16 @@ export default new Router({
     {
       path:'/managebankcard',
       component:ManageBankCard,
+      meta:{index:3}
+    },
+    {
+      path:'/realname',
+      component:RealName,
+      meta:{index:3}
+    },
+    {
+      path:'/vip',
+      component:Vip,
       meta:{index:3}
     },
     {

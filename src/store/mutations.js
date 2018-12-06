@@ -3,7 +3,7 @@ import {
 } from "./mutation-types";
 
 export default {
-  [LOGIN](state,{login}){
-    state.loginShow = loginShow
+  [LOGIN](state,{userInfo}){
+    state.userInfo = userInfo
   }
 }

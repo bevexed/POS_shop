@@ -10,8 +10,11 @@ import {
 export default {
   async login({commit, state},payload) {
     console.log(payload);
-    const userInfo = await doLogin(payload);
-    commit(LOGIN, {userInfo})
+    const result = await doLogin(payload);
+    if (result.code ===1){
+      commit(LOGIN, {userInfo})
+    }
+
   },
 
   async register({commit, state},payload) {
