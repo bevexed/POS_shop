@@ -62,6 +62,7 @@
       headers
     },
     created(){
+      this.getGoodLists(this.sold_type,this.sort_type)
       // this.getBanner()
     },
     computed: {
@@ -172,11 +173,13 @@
 
         a {
           & > img {
+            display: block;
             width: 100%;
             height: 130px;
           }
 
           .cTitle {
+            height: 50px;
             text-align: left;
             padding: 7px;
           }
