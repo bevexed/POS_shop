@@ -31,7 +31,7 @@
 
 <script>
   import {IMG_BASE_URL} from "../../api/BASE_URL";
-  import {banner} from "../../api/indexPage";
+  import {banner, goodlists} from "../../api/indexPage";
   import headers from '../../components/headers'
 
   export default {
@@ -59,13 +59,18 @@
     components: {
       headers
     },
-    created(){
+    created() {
       this.getBanner()
+      this.getGoodLists()
     },
     mounted() {
       console.log(this.$refs.mySwiper.swiper);
     },
     methods: {
+      async getGoodLists() {
+        let result = await goodlists()
+        console.log(result);
+      },
       async getBanner() {
         let result = await banner()
         this.bannerImg = result
