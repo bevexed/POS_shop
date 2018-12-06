@@ -1,7 +1,7 @@
 <template>
   <div class="index_content">
     <headers :title="title" :isPosition="true" :scanP="true"></headers>
-    <swiper class="wrap" :options="swiperOption" ref="mySwiper" v-if="bannerImg">
+    <swiper class="wrap" :options="swiperOption" ref="mySwiper" v-if="bannerImg.length>0">
       <swiper-slide v-for="(val,i) in bannerImg" :key="i"><a :href="val.url"><img :src="`${IMG_BASE_URL}${val.picture}`"></a></swiper-slide>
     </swiper>
 
@@ -43,15 +43,14 @@
         bannerImg: [],
         swiperOption: {
           autoplay: {
-            delay: 3000
+            delay: 3000,
+            disableOnInteraction:false
           },
-          loop: true,
           spaceBetween: 10,
-          slidesPerView: "auto",
+          initialSlide:1,
           centeredSlides: true,
-          loopedSlides: 3,
-          observer: true,//修改swiper自己或子元素时，自动初始化swiper
-          observeParents: true,//修改swiper的父元素时，自动初始化swiper
+          loop: true,
+          slidesPerView: "auto"
         },
         tabBar: 0
       }
@@ -60,19 +59,24 @@
       headers
     },
     created(){
-      this.getBanner()
+      // this.getBanner()
+    },
+    computed: {
+      swiper() {
+        return this.$refs.mySwiper.swiper
+      }
     },
     mounted() {
-      console.log(this.$refs.mySwiper.swiper);
+      this.getBanner();
     },
     methods: {
       async getBanner() {
         let result = await banner()
-        this.bannerImg = result
+        this.bannerImg = result;
       },
       tabBarClick(num) {
         this.tabBar = num;
-      }
+      },
     }
   }
 </script>
