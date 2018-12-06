@@ -26,6 +26,7 @@ import Vip from '@/page/Vip/index'
 import incomeManage from '@/page/my/incomeManage'
 import planLink from '@/page/plan/planLink'
 import useBook from '@/page/my/useBook'
+import trade from '@/page/my/trade'
 
 Vue.use(Router)
 
@@ -164,6 +165,11 @@ export default new Router({
     {
       path:'/useBook',
       component:useBook,
+      meta:{index:2}
+    },
+    {
+      path:'/trade',
+      component:trade,
       meta:{index:2}
     }
   ],

@@ -16,7 +16,7 @@
         </yd-cell-item>
       </yd-cell-group>
 
-      <yd-button class="loginBtn" size="large" type="primary" shape="circle" @click.native="login">登录</yd-button>
+      <yd-button class="loginBtn" size="large" type="primary" shape="circle" @click.native="$router.push('/index')">登录</yd-button>
       <router-link to="/forgetPwd" class="fpwd">忘记密码？</router-link>
     </div>
   </div>
@@ -71,6 +71,7 @@
     margin: -116px auto;
     padding: 26px 34px;
     box-sizing: border-box;
+    text-align: center;
     .yd-cell-item {
       color: #4d4d4d;
     }
@@ -98,6 +99,7 @@
     .fpwd {
       margin-top: 42px;
       font-size: 15px;
+
     }
   }
 </style>

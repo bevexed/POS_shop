@@ -53,10 +53,10 @@
           <img src="../../assets/my/huiyuanguanli@3x.png" alt="">
           <p>会员管理</p>
         </router-link>
-        <li>
+        <router-link to="/trade">
           <img src="../../assets/my/jiaoyiguanli-2@3x.png" alt="">
           <p>交易管理</p>
-        </li>
+        </router-link>
         <router-link to="/incomeManage">
           <img src="../../assets/my/shouyiguanli@3x.png" alt="">
           <p>收益管理</p>
