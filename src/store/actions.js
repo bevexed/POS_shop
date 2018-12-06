@@ -24,8 +24,8 @@ export default {
   },
 
   async register({commit, state},payload) {
-    console.log(payload);
     let result = await doRegister(payload);
+    console.log(result);
     if (result.code === 1){
       let userInfo = result.data
       commit(LOGIN, {userInfo})

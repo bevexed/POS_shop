@@ -97,7 +97,7 @@
         }
         if (this.timer === 60) {
           let result = await sendMsg(mobile, type)
-          if (result.code === '1') {
+          if (result.code === 1) {
             this.$dialog.notify({
               mes: result.message,
               timeout: 3000
