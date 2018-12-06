@@ -40,21 +40,28 @@
     </section>
 
     <aside>
-      <span>加入购物车</span>
+      <span @click="addShoppingCar(uid,1)">加入购物车</span>
       <span>立即购买</span>
     </aside>
   </div>
 </template>
 
 <script>
+  import {addShop} from "../../api/shoppingCar";
+
   export default {
     name: 'productDetail',
     data() {
-      return {}
+      return {
+        uid:localStorage.uid
+      }
     },
     methods: {
       backClick() {
         this.$router.back();
+      },
+      async addShoppingCar(uid,g_sku_id){
+        let res = await addShop(uid,g_sku_id)
       }
     }
   }

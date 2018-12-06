@@ -138,14 +138,14 @@
       ul {
         display: flex;
 
-        li {
+        li,a {
           width: 20%;
           text-align: center;
           display: flex;
           justify-content: flex-end;
           align-items: center;
           flex-direction: column;
-
+          cursor: pointer;
           img {
             width: 20px;
           }
@@ -184,7 +184,7 @@
         flex-direction: column;
         margin-top: 26px;
         width: 33%;
-
+        cursor: pointer;
         img {
           width: 25px;
         }

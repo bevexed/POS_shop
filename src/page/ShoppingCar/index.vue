@@ -9,9 +9,9 @@
             <p>POS机哈哈哈哈个人哦哈哈活哈哈 哈哈哈哈</p>
             <span>系列：企业pos机</span>
             <div>
-              <span>¥286.00</span>
+              <span>¥{{item.shopPrice}}</span>
               <div>
-                <yd-spinner min="1" unit="1" v-model="spinner1"></yd-spinner>
+                <yd-spinner min="1" unit="1" v-model="item.spinner"></yd-spinner>
               </div>
             </div>
           </div>
@@ -25,7 +25,7 @@
         <span class="fontSm colorI">不含运费</span>
         <p>
           <span>合计：</span>
-          <span class="colorT">￥286.00</span>
+          <span class="colorT">￥{{getTotal.totalPrice}}</span>
         </p>
         <button class="account">结算</button>
       </div>
@@ -34,22 +34,33 @@
 
 <script>
   import headers from '../../components/headers'
+  import {shopList} from '../../api/shoppingCar'
     export default {
       data(){
         return{
           title:'购物车',
-          spinner1:0,
           isChecked:false,
-          items:[{name:1,isChecked:false},{name:2,isChecked:false},{name:3,isChecked:false}],
-          itemd:[]
+          items:[{name:1,isChecked:false,spinner:1,shopPrice:'10.35'},{name:2,isChecked:false,spinner:2,shopPrice:'20.00'},{name:3,isChecked:false,spinner:3,shopPrice:'30.00'}],
+          itemd:[],
+          totalPrice:'0.00',
         }
       },
       components:{
         headers
       },
+      computed:{
+        getTotal(){
+          var _choose = this.items.filter(function (val) {
+            return val.isChecked;
+          })
+          var totalPrice = 0;
+          for (var i =0;i < _choose.length;i ++){
+            totalPrice += _choose[i].spinner * _choose[i].shopPrice
+          }
+          return {totalPrice:totalPrice.toFixed(2)}
+        }
+      },
       methods:{
-        chooseThis(){
-        },
       //  全选
         chooseAll(){
           this.isChecked = true;
@@ -68,14 +79,26 @@
           this.items[index].isChecked = !this.items[index].isChecked;
           let select = true;
           for (var i =0;i < this.items.length;i ++){
-            select *= this.items[i].isChecked
+            select *= this.items[i].isChecked;
           }
           if(select==true){
             this.isChecked = true;
           }else{
             this.isChecked = false;
           }
+        },
+        async getShopList(uid){
+          let result = await shopList(uid)
+          if(result.code===0){
+            this.$dialog.notify({
+              mes:result.message,
+              timeout:3000
+            })
+          }
         }
+      },
+      mounted(){
+        this.getShopList(localStorage.uid)
       }
     }
 </script>
