@@ -31,7 +31,7 @@
 
 <script>
   import {sendMsg} from '../../api/sendMsg'
-  import {mapActions} from 'vuex'
+  import {mapActions,mapState} from 'vuex'
   import headers from '../../components/headers'
 
   export default {
@@ -48,6 +48,14 @@
     },
     components: {
       headers
+    },
+    watch:{
+      registered(last,old){
+        this.$router.push('/login')
+      }
+    },
+    computed:{
+      ...mapState(['registered'])
     },
     methods: {
       ...mapActions(['register']),
@@ -97,7 +105,7 @@
         }
         if (this.timer === 60) {
           let result = await sendMsg(mobile, type)
-          if (result.code === '1') {
+          if (result.code === 1) {
             this.$dialog.notify({
               mes: result.message,
               timeout: 3000

@@ -1,6 +1,7 @@
 import { Confirm, Alert, Toast, Notify, Loading } from 'vue-ydui/dist/lib.rem/dialog';
 import {
-  LOGIN
+  LOGIN,
+  REGISTER
 } from "./mutation-types";
 
 import {
@@ -24,11 +25,11 @@ export default {
   },
 
   async register({commit, state},payload) {
-    console.log(payload);
     let result = await doRegister(payload);
+    console.log(result);
     if (result.code === 1){
-      let userInfo = result.data
-      commit(LOGIN, {userInfo})
+      let registered = true
+      commit(REGISTER, {registered})
     } else {
       Notify({
         mes:result.message,

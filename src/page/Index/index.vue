@@ -1,7 +1,7 @@
 <template>
   <div class="index_content">
     <headers :title="title" :isPosition="true" :scanP="true"></headers>
-    <swiper class="wrap" :options="swiperOption">
+    <swiper class="wrap" :options="swiperOption" ref="mySwiper" v-if="bannerImg">
       <swiper-slide v-for="(val,i) in bannerImg" :key="i"><a :href="val.url"><img :src="`${IMG_BASE_URL}${val.picture}`"></a></swiper-slide>
     </swiper>
 
@@ -42,14 +42,16 @@
         title: '首页',
         bannerImg: [],
         swiperOption: {
-          autoplay:'autoplay',
+          autoplay: {
+            delay: 3000
+          },
           loop: true,
           spaceBetween: 10,
           slidesPerView: "auto",
           centeredSlides: true,
           loopedSlides: 3,
-          observer:true,//修改swiper自己或子元素时，自动初始化swiper
-          observeParents:true,//修改swiper的父元素时，自动初始化swiper
+          observer: true,//修改swiper自己或子元素时，自动初始化swiper
+          observeParents: true,//修改swiper的父元素时，自动初始化swiper
         },
         tabBar: 0
       }
@@ -57,8 +59,11 @@
     components: {
       headers
     },
-    mounted() {
+    created(){
       this.getBanner()
+    },
+    mounted() {
+      console.log(this.$refs.mySwiper.swiper);
     },
     methods: {
       async getBanner() {
