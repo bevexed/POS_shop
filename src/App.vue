@@ -125,4 +125,13 @@
     font-size: 12px;
     color: #c5c5ca;
   }
+
+  .ellipse {
+    word-break: break-all;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
 </style>
