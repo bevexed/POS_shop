@@ -1,3 +1,13 @@
+import Vue from 'vue';
+import { Confirm, Alert, Toast, Notify, Loading } from 'vue-ydui/dist/lib.rem/dialog';
+Vue.prototype.$dialog = {
+  confirm: Confirm,
+  alert: Alert,
+  toast: Toast,
+  notify: Notify,
+  loading: Loading,
+};
+
 import {
   LOGIN
 } from "./mutation-types";
@@ -20,7 +30,16 @@ export default {
   async register({commit, state},payload) {
     console.log(payload);
     let result = await doRegister(payload);
-    let userInfo = result.data
-    commit(LOGIN, {userInfo})
+    if (result.code === 1){
+      let userInfo = result.data
+      commit(LOGIN, {userInfo})
+    } else {
+      console.log(this);
+      this.$dialog.notify({
+        mes:result.message,
+        timeout: 3000
+      })
+    }
+
   },
 }
