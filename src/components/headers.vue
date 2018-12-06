@@ -8,6 +8,10 @@
         <span v-if="isManage" class="register_span" @click="goManage">管理</span>
         <span v-if="isKeep" class="register_span">保存</span>
         <yd-icon v-if="isSearch" size="20px" name="search" class="register_span"></yd-icon>
+        <div class="scanP">
+          <img src="../assets/scan.png" alt="">
+          <span>扫码</span>
+        </div>
       </div>
       <div class="empty"></div>
     </div>
@@ -74,6 +78,16 @@
       width: 17px;
       position: absolute;
       left: 18px;
+    }
+    .scanP {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      right: 10px;
+      &>img {
+        width: 14px;
+        margin-right: 4px;
+      }
     }
   }
   .empty {

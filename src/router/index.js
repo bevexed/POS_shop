@@ -21,6 +21,8 @@ import editAddress from '@/page/address/editAddress'
 import addAddress from '@/page/address/addAddress'
 import PhoneNumber from '@/page/PhoneNumber/index'
 import ManageBankCard from '@/page/ManageBankCard/index'
+import incomeManage from '@/page/my/incomeManage'
+import planLink from '@/page/plan/planLink'
 
 Vue.use(Router)
 
@@ -133,6 +135,16 @@ export default new Router({
     {
       path:'/managebankcard',
       component:ManageBankCard,
+      meta:{index:3}
+    },
+    {
+      path:'/incomeManage',
+      component:incomeManage,
+      meta:{index:2}
+    },
+    {
+      path:'/planLink',
+      component:planLink,
       meta:{index:3}
     }
   ],
