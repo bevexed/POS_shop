@@ -10,10 +10,15 @@ import {
 
 export default {
   async login({commit, state},payload) {
-    console.log(payload);
     const result = await doLogin(payload);
-    if (result.code ===1){
+    let userInfo = result.data
+    if (result.code === 1){
       commit(LOGIN, {userInfo})
+    }else {
+      Notify({
+        mes:result.message,
+        timeout: 3000
+      })
     }
 
   },
@@ -25,7 +30,6 @@ export default {
       let userInfo = result.data
       commit(LOGIN, {userInfo})
     } else {
-      console.log(this);
       Notify({
         mes:result.message,
         timeout: 3000

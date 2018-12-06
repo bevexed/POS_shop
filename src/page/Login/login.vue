@@ -9,38 +9,70 @@
     <div class="login_box">
       <yd-cell-group>
         <yd-cell-item>
-          <yd-input regex="mobile" slot="right" required v-model="input1" max="20" placeholder="请输入账户"></yd-input>
+          <yd-input regex="mobile" slot="right" required v-model="mobile" max="20" placeholder="请输入账户"></yd-input>
         </yd-cell-item>
         <yd-cell-item>
-          <yd-input slot="right" type="password" v-model="input2" placeholder="请输入密码"></yd-input>
+          <yd-input slot="right" type="password" v-model="password" placeholder="请输入密码"></yd-input>
         </yd-cell-item>
       </yd-cell-group>
-
-      <yd-button class="loginBtn" size="large" type="primary" shape="circle" @click.native="$router.push('/index')">登录</yd-button>
+      <yd-button class="loginBtn" size="large" type="primary" shape="circle" @click.native="toLogin({mobile,password})">登录</yd-button>
       <router-link to="/forgetPwd" class="fpwd">忘记密码？</router-link>
     </div>
   </div>
 </template>
 
 <script>
-  import {mapActions} from 'vuex'
+  import {mapActions,mapState} from 'vuex'
   import headers from '../../components/headers'
     export default {
       data(){
         return {
-          input1: '',
-          input2: '',
+          mobile: '',
+          password: '',
           isTrue:true
         }
+      },
+      computed:{
+        ...mapState(['userInfo'])
+      },
+      watch:{
+        userInfo(last,old){
+          this.$router.replace('/index')
+        },
       },
       components:{
         headers
       },
       methods:{
         ...mapActions(['login']),
+        async toLogin(user){
+          let {mobile, password} = this
+          let numberPattern = /^[0-9]{11}$/
+          if (!mobile || !numberPattern.test(mobile)) {
+            this.$dialog.notify({
+              mes: '手机号格式不正确',
+              timeout: 3000,
+            });
+            return
+          }
+          if (!password) {
+            this.$dialog.notify({
+              mes: '密码不能为空',
+              timeout: 3000,
+            });
+            return
+          }
+          if (password.length < 6) {
+            this.$dialog.notify({
+              mes: '密码不能小于6位',
+              timeout: 3000,
+            });
+            return
+          }
+          this.login(user)
+        }
       },
       mounted() {
-        this.login()
       }
     }
 </script>

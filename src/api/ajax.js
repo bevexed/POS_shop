@@ -18,6 +18,11 @@ axios.interceptors.response.use(function (response) {
   Loading.close();
   return response;
 }, function (error) {
+  Loading.close();
+  Notify({
+    mes:error.message,
+    timeout:3000
+  })
   // 对响应错误做点什么
   return Promise.reject(error);
 });

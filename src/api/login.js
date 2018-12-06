@@ -16,4 +16,4 @@ export const doRegister = ({mobile,password,code,promote}) => ajax(BASE_URL + '/
 * @param   mobile     用户账号      必传
 * @param   password   用户密码      必传
 * */
-export const doLogin = (mobile,password) => ajax(BASE_URL + '/login/doLogin',{mobile,password})
+export const doLogin = ({mobile,password}) => ajax(BASE_URL + '/login/doLogin',{mobile,password})
