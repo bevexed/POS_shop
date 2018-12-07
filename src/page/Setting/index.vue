@@ -22,7 +22,7 @@
         结算信息
         <span></span>
       </section>
-      <section class="item">
+      <section class="item" @click="$router.push('/changepassword')">
         修改密码
         <span></span>
       </section>

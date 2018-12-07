@@ -73,6 +73,7 @@
         if (result.code === 1) {
           this.$dialog.toast({
             mes: result.message,
+            icon: 'success',
             timeout: 1000,
             callback: () => {
               this.$router.replace('/login')
