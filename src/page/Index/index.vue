@@ -1,7 +1,7 @@
 <template>
   <div class="index_content">
     <headers :title="title" :isPosition="true" :scanP="true"></headers>
-    <swiper class="wrap" :options="swiperOption" ref="mySwiper" v-if="bannerImg">
+    <swiper class="wrap" :options="swiperOption" ref="mySwiper" v-if="bannerImg.length>0">
       <swiper-slide v-for="(val,i) in bannerImg" :key="i"><a :href="val.url"><img :src="`${IMG_BASE_URL}${val.picture}`"></a></swiper-slide>
     </swiper>
 
@@ -47,15 +47,14 @@
         goodLists:[],
         swiperOption: {
           autoplay: {
-            delay: 3000
+            delay: 3000,
+            disableOnInteraction:false
           },
           loop: true,
           spaceBetween: 10,
           slidesPerView: "auto",
           centeredSlides: true,
-          loopedSlides: 3,
-          observer: true,//修改swiper自己或子元素时，自动初始化swiper
-          observeParents: true,//修改swiper的父元素时，自动初始化swiper
+          initialSlide:1
         },
         tabBar: 0
       }
@@ -63,12 +62,17 @@
     components: {
       headers
     },
-    created() {
-      this.getBanner()
+    created(){
       this.getGoodLists(this.sold_type,this.sort_type)
+      // this.getBanner()
+    },
+    computed: {
+      swiper() {
+        return this.$refs.mySwiper.swiper
+      }
     },
     mounted() {
-      console.log(this.$refs.mySwiper.swiper);
+      this.getBanner();
     },
     methods: {
       async getGoodLists(sold_type,sort_type) {
@@ -82,7 +86,10 @@
       },
       async getBanner() {
         let result = await banner()
-        this.bannerImg = result
+        this.bannerImg = result;
+      },
+      tabBarClick(num) {
+        this.tabBar = num;
       },
     }
   }
@@ -173,10 +180,9 @@
           }
 
           .cTitle {
+            height: 50px;
             text-align: left;
             padding: 7px;
-            width: 172px;
-            height: 50px;
           }
 
           & > div {
