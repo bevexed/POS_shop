@@ -8,11 +8,10 @@ import YDUI from 'vue-ydui'
 import 'vue-ydui/dist/ydui.px.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 
+
 Vue.config.productionTip = false
 Vue.use(VueAwesomeSwiper)
 Vue.use(YDUI)
-
-
 
 /* eslint-disable no-new */
 new Vue({

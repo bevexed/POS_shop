@@ -85,7 +85,7 @@ export default new Router({
     {
       path: '/booking',
       component: Booking,
-      meta: {index: 1}
+      meta: {index: 3}
     },
     {
       path: '/bookingdetail',
