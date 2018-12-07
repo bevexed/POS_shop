@@ -31,7 +31,7 @@
 
 <script>
   import {IMG_BASE_URL} from "../../api/BASE_URL";
-  import {banner, goodlists} from "../../api/indexPage";
+  import {banner, goodlists} from "../../api/home";
   import headers from '../../components/headers'
 
   export default {

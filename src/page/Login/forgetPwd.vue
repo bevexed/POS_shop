@@ -24,7 +24,7 @@
 
 <script>
   import headers from '../../components/headers'
-  import {fgPassWord} from "../../api/userOperation";
+  import {fgPassWord} from "../../api/login";
   import {sendMsg} from "../../api/sendMsg";
 
   export default {
@@ -45,9 +45,40 @@
     },
     methods: {
       async changPass() {
-        let result = await fgPassWord(this.mobile,this.new_pwd,this.code)
-        if (result.code === 1) {
+        let {mobile, new_pwd, code} = this
+        let numberPattern = /^[0-9]{11}$/
+        if (!mobile || !numberPattern.test(mobile)) {
+          this.$dialog.notify({
+            mes: '手机号格式不正确',
+            timeout: 3000,
+          });
+          return
+        }
+        if (!new_pwd || new_pwd.length < 6) {
+          this.$dialog.notify({
+            mes: '密码长度不能小于6位',
+            timeout: 3000,
+          });
+          return
+        }
+        if (!code) {
+          this.$dialog.notify({
+            mes: '请输入验证码',
+            timeout: 3000,
+          });
+          return
+        }
 
+        let result = await fgPassWord(mobile, new_pwd, code)
+        if (result.code === 1) {
+          this.$dialog.toast({
+            mes: result.message,
+            icon: 'success',
+            timeout: 1000,
+            callback: () => {
+              this.$router.replace('/login')
+            }
+          })
         } else {
           this.$dialog.notify({
             mes: result.message,

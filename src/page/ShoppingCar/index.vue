@@ -34,7 +34,7 @@
 
 <script>
   import headers from '../../components/headers'
-  import {shopList} from '../../api/shoppingCar'
+  import {shopList} from '../../api/cart'
     export default {
       data(){
         return{

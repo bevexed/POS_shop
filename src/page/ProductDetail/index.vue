@@ -53,7 +53,7 @@
 </template>
 
 <script>
-  import {addShop, detail} from "../../api/shoppingCar";
+  import {addShop, detail} from "../../api/cart";
   import {IMG_BASE_URL} from '../../api/BASE_URL'
 
   export default {

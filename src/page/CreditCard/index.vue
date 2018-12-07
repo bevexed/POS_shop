@@ -25,7 +25,7 @@
 
 <script>
   import {IMG_BASE_URL} from "../../api/BASE_URL";
-  import {banners} from '../../api/creditCard'
+  import {banners} from '../../api/credit'
   import headers from '../../components/headers'
     export default {
       data(){
