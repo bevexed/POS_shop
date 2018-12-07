@@ -45,7 +45,7 @@
     },
     methods: {
       async changPass() {
-        let result = await fgPassWord(this.mobile,this.new_pwd,this.code)
+        let result = await fgPassWord(this.mobile, this.new_pwd, this.code)
         if (result.code === 1) {
 
         } else {
