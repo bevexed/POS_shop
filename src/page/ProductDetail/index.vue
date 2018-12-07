@@ -1,23 +1,23 @@
 <template>
   <div class="product_content">
-    <img class="productImg" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1722901937,3578003945&fm=27&gp=0.jpg" alt="图片">
+    <img class="productImg" :src="`${IMG_BASE_URL}${detailData.show_pic}`" alt="图片">
     <img class="backIcon" src="../../assets/back.png" alt="图片" @click="backClick">
     <div class="product_info">
-      <p class="product_price">¥286</p>
-      <p>POS机哈哈哈哈个人哦哈哈活哈哈哈哈哈哈哈哈哈哈哈 哈</p>
+      <p class="product_price">¥{{detailData.price}}</p>
+      <p>{{detailData.name}}</p>
       <div class="price">
-        <span>运费：10元 </span>
-        <span>已售：123 </span>
-        <span>杭州市</span>
+        <span>运费：{{detailData.courier_fees}}元 </span>
+        <span>已售：{{detailData.sold_out}} </span>
+        <span>{{detailData.vender}}</span>
       </div>
     </div>
 
     <div class="detail">
       <header>
-        系列：<span>企业pos机</span>
+        系列：<span>{{detailData.category === 1 ? '企业pos机': '个人pos机'}}</span>
       </header>
       <footer>
-        通道类别：
+        通道类别：{{detailData.trad_channel}}
       </footer>
     </div>
 
@@ -37,6 +37,7 @@
 
     <section class="real">
       宝贝图文详情
+      <div class="deatail_shop_goods" v-html="detailData.details"></div>
     </section>
 
     <aside>
@@ -47,25 +48,52 @@
 </template>
 
 <script>
-  import {addShop} from "../../api/shoppingCar";
+  import {addShop, detail} from "../../api/shoppingCar";
+  import {IMG_BASE_URL} from '../../api/BASE_URL'
 
   export default {
     name: 'productDetail',
     data() {
       return {
-        uid:localStorage.uid
+        uid: localStorage.uid,
+        detailData: {},
+        IMG_BASE_URL
       }
+    },
+    created() {
+      this.getDetail(this.$route.params.id)
     },
     methods: {
       backClick() {
         this.$router.back();
       },
-      async addShoppingCar(uid,g_sku_id){
-        let res = await addShop(uid,g_sku_id)
+      async addShoppingCar(uid, g_sku_id) {
+        let res = await addShop(uid, g_sku_id)
+      },
+      async getDetail(id) {
+        let result = await detail(id)
+        if (result.code === 1) {
+          this.detailData = result.data
+        } else {
+          this.$dialog.notify({
+            mes: result.message,
+            timeout: 3000
+          })
+        }
       }
     }
   }
 </script>
+
+<style>
+  div.deatail_shop_goods p {
+    text-align: center;
+  }
+
+  div.deatail_shop_goods img {
+    width: 90%;
+  }
+</style>
 
 <style scoped lang="less">
   .product_content {
@@ -172,6 +200,10 @@
     padding: 10px;
     font-size: 15px;
     color: #4d4d4d;
+
+    img {
+      max-width: 375px !important;
+    }
   }
 
   aside {

@@ -8,3 +8,7 @@ export const shopList = (uid) => ajax(BASE_URL + '/cart/list', {uid:uid})
 
 //添加购物车
 export const addShop = (uid,g_sku_id) => ajax(BASE_URL + '/cart/add',{uid:uid,g_sku_id:g_sku_id})
+
+
+//
+export const detail = (id) => ajax(BASE_URL + `/goods/detail/${id}`,{},"GET")
