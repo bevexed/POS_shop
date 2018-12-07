@@ -8,6 +8,11 @@ import YDUI from 'vue-ydui'
 import 'vue-ydui/dist/ydui.px.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 
+import 'vue-area-linkage/dist/index.css'; // v2 or higher
+import VueAreaLinkage from 'vue-area-linkage';
+
+Vue.use(VueAreaLinkage)
+
 Vue.config.productionTip = false
 Vue.use(VueAwesomeSwiper)
 Vue.use(YDUI)
