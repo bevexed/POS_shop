@@ -24,7 +24,7 @@
 
 <script>
   import headers from '../../components/headers'
-  import {fgPassWord} from "../../api/userOperation";
+  import {fgPassWord} from "../../api/login";
   import {sendMsg} from "../../api/sendMsg";
 
   export default {

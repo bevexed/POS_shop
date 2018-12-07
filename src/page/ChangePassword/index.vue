@@ -47,7 +47,7 @@
 
 <script>
   import headers from '../../components/headers'
-  import {upPassWord} from "../../api/userOperation";
+  import {upPassWord} from "../../api/login";
   import {sendMsg} from "../../api/sendMsg";
 
   export default {

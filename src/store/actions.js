@@ -7,7 +7,7 @@ import {
 import {
   doRegister,
   doLogin
-} from '../api/userOperation'
+} from '../api/login'
 
 export default {
   async login({commit, state},payload) {
