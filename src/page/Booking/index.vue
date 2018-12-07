@@ -66,7 +66,7 @@
 
 <script>
   import headers from '../../components/headers'
-
+  import {info} from '../../api/order'
   export default {
     name: "booking",
     components: {
@@ -76,6 +76,15 @@
       return {
         num: 1
       }
+    },
+    methods:{
+      async getInfo(uid,g_id){
+        let res = await info(uid,g_id);
+        console.log(res)
+      }
+    },
+    created(){
+      this.getInfo(localStorage.uid,this.$route.query.id)
     }
   }
 </script>

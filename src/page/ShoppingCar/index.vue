@@ -27,7 +27,7 @@
           <span>合计：</span>
           <span class="colorT">￥{{getTotal.totalPrice}}</span>
         </p>
-        <button class="account">结算</button>
+        <button class="account" @click="account">结算</button>
       </div>
     </div>
 </template>
@@ -41,7 +41,6 @@
           title:'购物车',
           isChecked:false,
           items:[{name:1,isChecked:false,spinner:1,shopPrice:'10.35'},{name:2,isChecked:false,spinner:2,shopPrice:'20.00'},{name:3,isChecked:false,spinner:3,shopPrice:'30.00'}],
-          itemd:[],
           totalPrice:'0.00',
         }
       },
@@ -92,6 +91,19 @@
           if(result.code===0){
             this.$dialog.notify({
               mes:result.message,
+              timeout:3000
+            })
+          }
+        },
+        account(){
+          let select = this.items.filter(val => {
+            return val.isChecked == true
+          });
+          if(select.length!=0){
+            this.$router.push('/Booking')
+          }else{
+            this.$dialog.notify({
+              mes:'至少选择一件宝贝',
               timeout:3000
             })
           }

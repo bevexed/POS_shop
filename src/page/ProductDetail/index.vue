@@ -16,8 +16,13 @@
       <header>
         系列：<span>{{detailData.category === 1 ? '企业pos机': '个人pos机'}}</span>
       </header>
+      <!--<span v-for="(v,i) in detailData.sku">{{v.trad_channel}}</span>-->
       <footer>
-        通道类别：<span v-for="(v,i) in detailData.sku">{{v.trad_channel}}</span>
+        通道类别：
+        <select id="select" v-model="val" @change="selectVal">
+          <option value="">--请选择--</option>
+          <option  v-for="(v,i) in detailData.sku" :value="v.id">{{v.trad_channel}}</option>
+        </select>
       </footer>
     </div>
 
@@ -42,7 +47,7 @@
 
     <aside>
       <span @click="addShoppingCar(uid,1)">加入购物车</span>
-      <span>立即购买</span>
+      <span @click="buy">立即购买</span>
     </aside>
   </div>
 </template>
@@ -57,8 +62,12 @@
       return {
         uid: localStorage.uid,
         detailData: {},
-        IMG_BASE_URL
+        IMG_BASE_URL,
+        val:""
       }
+    },
+    components:{
+
     },
     created() {
       this.getDetail(this.$route.params.id)
@@ -77,6 +86,19 @@
         } else {
           this.$dialog.notify({
             mes: result.message,
+            timeout: 3000
+          })
+        }
+      },
+      selectVal(){
+        console.log(this.val)
+      },
+      buy(){
+        if(this.val!=''){
+          this.$router.push({path:'/Booking',query:{id:this.val}})
+        }else{
+          this.$dialog.notify({
+            mes: '请选择通道类别',
             timeout: 3000
           })
         }
@@ -158,6 +180,9 @@
       span{
         margin-right: 5px;
       }
+      #select {
+        width: 150px;
+      }
     }
   }
 
@@ -210,14 +235,20 @@
   }
 
   aside {
+    width: 100vw;
+    background: #fff;
+    border-top: 1px #e8e9eb solid;
+    padding: 5px 0;
     position: fixed;
     right: 9px;
-    bottom: 13px;
+    bottom: 0;
     text-align: center;
     color: #fff;
     font-size: 18px;
+    display: flex;
+    justify-content: flex-end;
 
-    span {
+    span,a {
       float: left;
       display: inline-block;
       width: 128px;
@@ -230,7 +261,7 @@
       border-radius: 22px 0 0 22px;
     }
 
-    span:last-child {
+    span {
       background: #ff6d48;
       border-radius: 0 22px 22px 0;
     }

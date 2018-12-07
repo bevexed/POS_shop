@@ -13,6 +13,7 @@ import VueAreaLinkage from 'vue-area-linkage';
 
 Vue.use(VueAreaLinkage)
 
+
 Vue.config.productionTip = false
 Vue.use(VueAwesomeSwiper)
 Vue.use(YDUI)
