@@ -54,6 +54,7 @@
           spaceBetween: 10,
           slidesPerView: "auto",
           centeredSlides: true,
+          initialSlide:1
         },
         tabBar: 0
       }
