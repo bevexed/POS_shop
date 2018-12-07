@@ -1,10 +1,8 @@
 <template>
     <div class="xinyongContent">
       <headers :title="title"></headers>
-      <swiper class="wrap" :options="swiperOption">
-        <swiper-slide><img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1159386606,974071300&fm=200&gp=0.jpg" alt="图片"></swiper-slide>
-        <swiper-slide><img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2213670986,2923778817&fm=27&gp=0.jpg" alt="图片"></swiper-slide>
-        <swiper-slide><img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3419264681,2642087292&fm=27&gp=0.jpg" alt="图片"></swiper-slide>
+      <swiper class="wrap" ref="mySwiper" :options="swiperOption" v-if="bannerArr.length>0">
+        <swiper-slide v-for="(item,index) in bannerArr" :key="index"><a :href="item.url"><img :src="`${IMG_BASE_URL}${item.picture}`" alt="图片"></a></swiper-slide>
       </swiper>
       <div class="lineDiv"></div>
 
@@ -26,27 +24,47 @@
 </template>
 
 <script>
+  import {IMG_BASE_URL} from "../../api/BASE_URL";
+  import {banners} from '../../api/creditCard'
   import headers from '../../components/headers'
     export default {
       data(){
         return{
+          IMG_BASE_URL,
           title:'信用卡',
           swiperOption:{
             loop:true,
             spaceBetween: 10,
             slidesPerView: "auto",
-            centeredSlides:true
+            centeredSlides:true,
+            observer:true,//修改swiper自己或子元素时，自动初始化swiper
+            observeParents:true,//修改swiper的父元素时，自动初始化swiper
+            initialSlide:1
           },
-          tabIndex:0
+          tabIndex:0,
+          bannerArr:[]
         }
       },
       components:{
         headers
       },
+      computed: {
+        swiper() {
+          return this.$refs.mySwiper.swiper
+        }
+      },
       methods:{
         tabClick(num){
           this.tabIndex = num;
+        },
+        async bannerLoad(uid){
+          let res = await banners(uid);
+          console.log(res.data)
+          this.bannerArr = res.data;
         }
+      },
+      mounted(){
+        this.bannerLoad(localStorage.uid)
       }
     }
 </script>
@@ -63,8 +81,8 @@
     .swiper-slide {
       width: 335px!important;
     }
-    img {
-      width: 100%;
+    a img {
+      width: 335px;
       height: 100%;
       border-radius:10px;
     }
