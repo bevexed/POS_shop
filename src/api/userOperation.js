@@ -17,3 +17,12 @@ export const doRegister = ({mobile,password,code,promote}) => ajax(BASE_URL + '/
 * @param   password   用户密码      必传
 * */
 export const doLogin = ({mobile,password}) => ajax(BASE_URL + '/login/doLogin',{mobile,password})
+
+/*
+* 忘记密码
+* @param  mobile    手机号
+* @param  new_pwd   新密码
+* @param  code      短信验证码
+* */
+export const fgPassWord = (mobile,new_pwd,code) => ajax(BASE_URL+'/login/fgPassWord',{mobile,new_pwd,code})
+

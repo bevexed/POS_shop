@@ -17,7 +17,7 @@
         系列：<span>{{detailData.category === 1 ? '企业pos机': '个人pos机'}}</span>
       </header>
       <footer>
-        通道类别：{{detailData.trad_channel}}
+        通道类别：<span v-for="(v,i) in detailData.sku">{{v.trad_channel}}</span>
       </footer>
     </div>
 
@@ -155,6 +155,9 @@
 
     footer {
       margin-top: 2px;
+      span{
+        margin-right: 5px;
+      }
     }
   }
 
@@ -207,7 +210,7 @@
   }
 
   aside {
-    position: absolute;
+    position: fixed;
     right: 9px;
     bottom: 13px;
     text-align: center;

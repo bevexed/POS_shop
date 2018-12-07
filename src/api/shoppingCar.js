@@ -11,4 +11,4 @@ export const addShop = (uid,g_sku_id) => ajax(BASE_URL + '/cart/add',{uid:uid,g_
 
 
 //
-export const detail = (id) => ajax(BASE_URL + `/goods/detail/${id}`,{},"GET")
+export const detail = (id) => ajax(BASE_URL + `/goods/detail`,{id},"GET")
