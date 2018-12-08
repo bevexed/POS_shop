@@ -6,7 +6,7 @@
         <p v-if="title">{{title}}</p>
         <span v-if="isRegister" class="register_span" @click="goRegister">注册</span>
         <span v-if="isManage" class="register_span" @click="goManage">管理</span>
-        <span v-if="isKeep" class="register_span">保存</span>
+        <span v-if="isKeep" class="register_span" @click="isKeep">保存</span>
         <yd-icon v-if="isSearch" size="20px" name="search" class="register_span"></yd-icon>
         <div v-if="isScan" class="scanP">
           <img src="../assets/scan.png" alt="">
@@ -34,7 +34,7 @@
         isManage:Boolean,
         isPosition:Boolean,
         isSearch:Boolean,
-        isKeep:Boolean,
+        isKeep:Function,
         isScan:Boolean,
         isSkir:Boolean
       },

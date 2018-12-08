@@ -1,22 +1,22 @@
 <template>
   <div>
-    <headers :title="'新增收货地址'" :isBack="true" :isKeep="true"></headers>
+    <headers :title="'新增收货地址'" :isBack="true" :isKeep="addAddress"></headers>
     <ul class="edit_ul">
       <li>
         <span>收货人</span>
-        <input type="name" placeholder="请输入姓名">
+        <input type="text" v-model="name" placeholder="请输入姓名">
       </li>
       <li>
         <span>手机号</span>
-        <input type="phone" placeholder="请输入手机号">
+        <input type="number" v-model="phone" placeholder="请输入手机号">
       </li>
       <!--{{selected}}-->
-      <li class="address">
+      <li class="address" v-if="pcaa">
         <span>地址</span>
         <area-select v-model="selected" size="small" :level="2" :data="pcaa"></area-select>
       </li>
       <li>
-        <input class="address_dir" type="address" placeholder="详细地址：如道路、门牌号、小区、单元室等等">
+        <input class="address_dir" type="text" v-model="address" placeholder="详细地址：如道路、门牌号、小区、单元室等等">
       </li>
     </ul>
     <div class="deleteAddress">
@@ -37,42 +37,53 @@
     },
     data() {
       return {
-        pcaa,
-        selected: '',
-        show1: false,
-        model1: '',
+        selected: [],
         uid: localStorage.uid,
-        id: null,
-        province_id: '',
-        city_id: '',
-        area_id: '',
+        id: '',
         address: '',
         name: '',
         phone: ''
       }
     },
-    computed: {},
+    computed: {
+      pcaa() {
+        return pcaa
+      }
+    },
     methods: {
       async addAddress() {
-        let {uid, id, province_id, city_id, area_id, address, name, phone} = this
-        let result = addressEdit(uid, id, province_id, city_id, area_id, address, name, phone)
+        let {uid, id, selected, address, name, phone} = this
+        let result = addressEdit(uid, id, address, name, phone, ...selected)
+        if (result.code === 1){
+          
+        } else {
+          this.$dialog.notify({
+            mes:result.message,
+            timeout: 3000
+          })
+        }
       }
+    },
+    mounted() {
+
     }
 
   }
 </script>
 <style lang="less">
-  .area-select-wrap{
+  .area-select-wrap {
     width: 90%;
     display: flex;
     height: 50px !important;
   }
-  .area-select{
+
+  .area-select {
     display: inline-block;
     margin-top: 10px;
   }
-  .area-selected-trigger{
-    padding-top: 5px!important;
+
+  .area-selected-trigger {
+    padding-top: 5px !important;
   }
 </style>
 
@@ -97,6 +108,7 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
+
         span {
           width: 40px;
         }
