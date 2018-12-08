@@ -14,3 +14,4 @@ export const commitOrder = (uid,address_id,g_sku_infos,remark) => ajax(BASE_URL 
 
 //购物车结算订单商品详情
 export const infos = (uid,cart_infos) => ajax(BASE_URL + '/order/goods/buycart',{uid,cart_infos})
+

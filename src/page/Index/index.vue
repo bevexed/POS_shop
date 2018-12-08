@@ -44,17 +44,17 @@
         sold_type: 1,    // pos机类别 1:企业 2:个人 若不传，默认为1
         sort_type: 1,    // 筛选条件 1:综合 2:价格 3:销量 若不传，默认为1
         bannerImg: [],
-        goodLists:[],
+        goodLists: [],
         swiperOption: {
           autoplay: {
             delay: 3000,
-            disableOnInteraction:false
+            disableOnInteraction: false
           },
           loop: true,
           spaceBetween: 10,
           slidesPerView: "auto",
           centeredSlides: true,
-          initialSlide:1
+          initialSlide: 1
         },
         tabBar: 0
       }
@@ -62,8 +62,8 @@
     components: {
       headers
     },
-    created(){
-      this.getGoodLists(this.sold_type,this.sort_type)
+    created() {
+      this.getGoodLists(this.sold_type, this.sort_type)
       // this.getBanner()
     },
     computed: {
@@ -75,18 +75,26 @@
       this.getBanner();
     },
     methods: {
-      async getGoodLists(sold_type,sort_type) {
+      async getGoodLists(sold_type, sort_type) {
         this.sold_type = sold_type
         this.sort_type = sort_type
-        let result = await goodlists(this.ad_code,sold_type,sort_type)
+        let result = await goodlists(this.ad_code, sold_type, sort_type)
         console.log(result);
-        if (result.code ===1){
+        if (result.code === 1) {
           this.goodLists = result.data
         }
       },
       async getBanner() {
         let result = await banner()
-        this.bannerImg = result.data;
+        if (result.code === 1) {
+          this.bannerImg = result.data
+        } else {
+          this.$dialog.notify({
+            mes: result.message,
+            timeout: 3000
+          })
+        }
+
       },
       tabBarClick(num) {
         this.tabBar = num;

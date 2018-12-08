@@ -1,35 +1,33 @@
 <template>
-    <div>
-      <div class="footDiv">
-        <router-link to="/index">
-          <img src="../assets/shouye.png" alt="">
-          <p>首页</p>
-        </router-link>
-        <router-link to="/creditCard">
-          <img src="../assets/xinyongCard.png" alt="">
-          <p>信用卡</p>
-        </router-link>
-        <router-link to="/shoppingCar">
-          <img src="../assets/gouwuche.png" alt="">
-          <p>购物车</p>
-        </router-link>
-        <router-link to="/my">
-          <img src="../assets/wode.png" alt="">
-          <p>我的</p>
-        </router-link>
-      </div>
-      <div class="empty"></div>
+  <div>
+    <div class="footDiv">
+      <router-link to="/index">
+        <img src="../assets/shouye.png" alt="">
+        <p>首页</p>
+      </router-link>
+      <router-link to="/creditCard">
+        <img src="../assets/xinyongCard.png" alt="">
+        <p>信用卡</p>
+      </router-link>
+      <router-link to="/shoppingCar">
+        <img src="../assets/gouwuche.png" alt="">
+        <p>购物车</p>
+      </router-link>
+      <router-link to="/my">
+        <img src="../assets/wode.png" alt="">
+        <p>我的</p>
+      </router-link>
     </div>
+    <div class="empty"></div>
+  </div>
 </template>
 
 <script>
-    export default {
-      data(){
-          return{
-
-          }
-      }
+  export default {
+    data() {
+      return {}
     }
+  }
 </script>
 
 <style scoped lang="less">
@@ -44,7 +42,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 12px;
-    &>a {
+
+    & > a {
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -52,12 +51,14 @@
       align-items: center;
       color: #fff;
       cursor: pointer;
+
       img {
         width: 18px;
         margin-bottom: 5px;
       }
     }
   }
+
   .empty {
     height: 50px;
   }

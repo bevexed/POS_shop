@@ -1,82 +1,178 @@
 <template>
-    <div>
-      <headers :title="title" :isBack="true" :isKeep="true"></headers>
-      <ul class="edit_ul">
-        <li>
-          <span>收货人</span>
-          <input type="text" placeholder="请输入姓名">
-        </li>
-        <li>
-          <span>手机号</span>
-          <input type="text" placeholder="请输入手机号">
-        </li>
-        <li>
-          <span>所在地区</span>
-          <div>
-            <input type="text" placeholder="请选择省市区" readonly>
-            <img src="../../assets/next.png" alt="">
-          </div>
-        </li>
-        <li>
-          <input class="address_dir" type="text" placeholder="详细地址：如道路、门牌号、小区、单元室等等">
-        </li>
-      </ul>
-      <div class="deleteAddress">
-        删除收货地址
-      </div>
-    </div>
+  <div>
+    <headers :title="'新增收货地址'" :isBack="true" :isKeep="addAddress"></headers>
+    <ul class="edit_ul">
+      <li>
+        <span>收货人</span>
+        <input type="text" v-model="name" placeholder="请输入姓名">
+      </li>
+      <li>
+        <span>手机号</span>
+        <input type="number" v-model="phone" placeholder="请输入手机号">
+      </li>
+      <!--{{selected}}-->
+      <li class="address" v-if="pcaa">
+        <span>地址</span>
+        <area-select v-model="selected" size="small" :level="2" :data="pcaa"></area-select>
+      </li>
+      <li>
+        <input class="address_dir" type="text" v-model="address" placeholder="详细地址：如道路、门牌号、小区、单元室等等">
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
+  import {pcaa} from 'area-data'; // v5 or higher
   import headers from '../../components/headers'
-    export default {
-       data(){
-         return{
-           title:'编辑收货地址'
-         }
-       },
-      components:{
-        headers
+  import {addressEdit} from "../../api/users";
+
+  export default {
+    components: {
+      headers
+    },
+    data() {
+      return {
+        selected: [],
+        uid: localStorage.uid,
+        id: '',
+        address: '',
+        name: '',
+        phone: ''
       }
+    },
+    computed: {
+      pcaa() {
+        return pcaa
+      }
+    },
+    methods: {
+      async addAddress() {
+        let {uid, id, selected, address, name, phone} = this
+        let result = await addressEdit(uid, id, address, name, phone, ...selected)
+        if (!name){
+          this.$dialog.notify({
+            mes: '请输入姓名',
+            timeout: 3000
+          })
+          return
+        }
+        if (!phone || !/^[0-9]{11}$/.test(phone)){
+          this.$dialog.notify({
+            mes: '请检查手机号',
+            timeout: 3000
+          })
+          return
+        }
+        if (result.code === 1) {
+          this.$dialog.toast({
+            mes: '新增地址成功',
+            timeout: 1000,
+            icon: 'success',
+            callback: () => {
+              this.$router.replace('/DeliveryAddress')
+            }
+          });
+
+        } else {
+          this.$dialog.notify({
+            mes: result.message,
+            timeout: 3000
+          })
+        }
+      }
+    },
+    mounted() {
+
     }
+
+  }
 </script>
+<style lang="less">
+  .area-select-wrap {
+    width: 90%;
+    display: flex;
+    height: 50px !important;
+  }
+
+  .area-select {
+    display: inline-block;
+    margin-top: 10px;
+  }
+
+  .area-selected-trigger {
+    padding-top: 5px !important;
+  }
+</style>
 
 <style scoped lang="less">
   .edit_ul {
     background: #fff;
     border-bottom: 10px #f5f5f5 solid;
+
+    span {
+      width: 16%;
+      display: inline-block;
+    }
+
     li {
       height: 45px;
       border-bottom: 1px #e8e9eb solid;
-      display: flex;
-      justify-content: space-between;
       align-items: center;
       margin: 0 10px;
+
+      &:last-child {
+        border: none;
+      }
+
+      &.address {
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        span {
+          width: 40px;
+        }
+
+        div {
+          div {
+            width: 30%;
+          }
+        }
+      }
+
       input {
+        margin-left: 10px;
         border: none;
         height: 45px;
       }
-      &>div {
-        &>img {
+
+      & > div {
+        & > img {
           width: 7px;
         }
-        &>input {
+
+        & > input {
           text-indent: 10px;
         }
       }
+
       .address_dir {
         width: 100%;
       }
     }
   }
+
   .deleteAddress {
     height: 42px;
     background: #fff;
     padding: 0 10px;
     line-height: 42px;
     color: #FB1313;
-    font-family: myFont,sans-serif;
+    font-family: myFont, sans-serif;
   }
+
   @font-face {
     font-family: 'myFont';
     src: url("/static/pingfangSC.ttf");

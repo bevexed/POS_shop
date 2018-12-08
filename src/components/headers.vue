@@ -22,39 +22,33 @@
 </template>
 
 <script>
-    export default {
-      data(){
-          return{
+  export default {
+    data() {
+      return {}
+    },
+    props: {
+      isRegister: Boolean,
+      title: String,
+      isBack: Boolean,
+      isManage: Boolean,
+      isPosition: Boolean,
+      isSearch: Boolean,
+      isKeep: Function,
+      isScan: Boolean,
+      isSkir: Boolean
+    },
+    methods: {
+      goRegister() {
+        this.$router.push('/register')
+      },
+      goBack() {
+        this.$router.back()
+      },
+      goManage() {
 
-          }
-      },
-      props:{
-        isRegister:Boolean,
-        title:String,
-        isBack:Boolean,
-        isManage:Boolean,
-        isPosition:Boolean,
-        isSearch:Boolean,
-        isKeep:Boolean,
-        isScan:Boolean,
-        isSkir:Boolean,
-        isMac:Boolean
-      },
-      methods:{
-        goRegister(){
-          this.$router.push('/register')
-        },
-        goBack(){
-          this.$router.back()
-        },
-        manage(){
-          this.$emit('Tab1',false)
-        },
-        finish(){
-          this.$emit('Tab1',true)
-        }
       }
     }
+  }
 </script>
 
 <style scoped lang="less">
@@ -72,6 +66,7 @@
     z-index: 1;
     left: 0;
     top: 0;
+
     .register_span {
       position: absolute;
       right: 10px;
@@ -80,6 +75,7 @@
     &>p {
       font-size: 18px;
     }
+
     .backImg {
       width: 21px;
       position: absolute;

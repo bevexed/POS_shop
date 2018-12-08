@@ -5,7 +5,7 @@
       <img src="" alt="">
       <p>哈哈哈哈</p>
     </header>
-    <section class="item">
+    <section class="item" @click="$router.push('/DeliveryAddress')">
       收货地址
       <span class="address">修改/添加</span>
     </section>

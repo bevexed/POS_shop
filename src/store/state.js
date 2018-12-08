@@ -1,4 +1,4 @@
 export default {
-  userInfo:{},
-  registered:false,
+  userInfo: {},
+  registered: false,
 }

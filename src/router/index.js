@@ -30,11 +30,11 @@ import trade from '@/page/my/trade'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
-      path:'/',
-      redirect:'/login'
+      path: '/',
+      redirect: '/login'
     },
     {
       path: '/Login',
@@ -124,54 +124,56 @@ export default new Router({
       meta:{index:3}
     },
     {
-      path:'/editAddress',
-      component:editAddress,
-      meta:{index:3}
+      path: '/editAddress/id/:id',
+      component: editAddress,
+      name: 'editAddress',
+      meta: {index: 3}
     },
     {
-      path:'/addAddress',
-      component:addAddress,
-      meta:{index:3}
+      path: '/addAddress',
+      component: addAddress,
+      name:'addAddress',
+      meta: {index: 3}
     },
     {
-      path:'/phonenumber',
-      component:PhoneNumber,
-      meta:{index:3}
+      path: '/phonenumber',
+      component: PhoneNumber,
+      meta: {index: 3}
     },
     {
-      path:'/managebankcard',
-      component:ManageBankCard,
-      meta:{index:3}
+      path: '/managebankcard',
+      component: ManageBankCard,
+      meta: {index: 3}
     },
     {
-      path:'/realname',
-      component:RealName,
-      meta:{index:3}
+      path: '/realname',
+      component: RealName,
+      meta: {index: 3}
     },
     {
-      path:'/vip',
-      component:Vip,
-      meta:{index:3}
+      path: '/vip',
+      component: Vip,
+      meta: {index: 3}
     },
     {
-      path:'/incomeManage',
-      component:incomeManage,
-      meta:{index:2}
+      path: '/incomeManage',
+      component: incomeManage,
+      meta: {index: 2}
     },
     {
-      path:'/planLink',
-      component:planLink,
-      meta:{index:2}
+      path: '/planLink',
+      component: planLink,
+      meta: {index: 2}
     },
     {
-      path:'/useBook',
-      component:useBook,
-      meta:{index:2}
+      path: '/useBook',
+      component: useBook,
+      meta: {index: 2}
     },
     {
-      path:'/trade',
-      component:trade,
-      meta:{index:2}
+      path: '/trade',
+      component: trade,
+      meta: {index: 2}
     }
   ],
   //跳转页面scrolltop为0
@@ -183,3 +185,18 @@ export default new Router({
     }
   },
 })
+
+router.beforeEach((to, from, next) => {
+  console.log(!localStorage.uid);
+  if (!localStorage.uid) {
+    if (to.path === '/login' || to.path === '/register' || to.path === '/forgetPwd') {
+      next()
+    } else {
+      next('/login')
+    }
+  } else {
+    next()
+  }
+})
+
+export default router
