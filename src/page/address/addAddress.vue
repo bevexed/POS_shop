@@ -19,10 +19,6 @@
         <input class="address_dir" type="text" v-model="address" placeholder="详细地址：如道路、门牌号、小区、单元室等等">
       </li>
     </ul>
-    <div class="deleteAddress">
-      删除收货地址
-    </div>
-
   </div>
 </template>
 

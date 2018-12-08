@@ -1,17 +1,18 @@
 <template>
   <div class="add">
     <headers :title="title" :isBack="true"></headers>
-    <ul class="address_list">
-      <li>
+    <ul class="address_list" >
+      <router-link tag="li" :to="{name:'editAddress',params:{id:v.id}}"  v-for="(v,i) in addressDate" :key="v.id">
         <div>
           <p>
-            <span>哈哈</span>
-            <span>12345678901</span>
+            <span>{{v.name}}</span>
+            <span>{{v.phone}}</span>
           </p>
-          <p>浙江省杭州市西湖区1234号哈哈哈哈哈哦哈</p>
+          <p>{{v.address}}</p>
         </div>
         <img @click="$router.push('/editAddress')" src="../../assets/edit.png" alt="">
-      </li>
+      </router-link>
+     <div style="height: 44px"></div>
     </ul>
     <button class="addBtn" @click="$router.push('/addAddress')">新增收货地址</button>
   </div>
@@ -26,6 +27,7 @@
     data() {
       return {
         title: '我的收货地址',
+        addressDate:[]
       }
     },
     components: {
@@ -35,7 +37,7 @@
       async getAddress() {
         let result = await address(localStorage.uid)
         if (result.code === 1) {
-
+          this.addressDate = result.data
         } else {
           this.$dialog.notify({
             mes: result.message,

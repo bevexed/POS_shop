@@ -22,4 +22,11 @@ export const addressEdit = (uid, id, address, name, phone, province_id, city_id,
 * */
 export const address = (uid) => ajax(BASE_URL + '/users/address', {uid})
 
+/*
+* 删除用户收货地址
+* @param   uid          用户ID        必传
+* @param   id           地址ID        必传
+* */
+export const addressDel = (uid,id) => ajax(BASE_URL + '/users/addressDel', {uid,id})
+
 

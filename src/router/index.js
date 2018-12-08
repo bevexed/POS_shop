@@ -124,13 +124,15 @@ const router = new Router({
       meta: {index: 3}
     },
     {
-      path: '/editAddress',
+      path: '/editAddress/id/:id',
       component: editAddress,
+      name: 'editAddress',
       meta: {index: 3}
     },
     {
       path: '/addAddress',
       component: addAddress,
+      name:'addAddress',
       meta: {index: 3}
     },
     {
