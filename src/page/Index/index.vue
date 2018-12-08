@@ -1,7 +1,7 @@
 <template>
   <div class="index_content">
     <headers :title="title" :isPosition="true" :scanP="true"></headers>
-    <swiper class="wrap" :options="swiperOption" ref="mySwiper">
+    <swiper class="wrap" :options="swiperOption" ref="mySwiper" v-if="bannerImg.length">
       <swiper-slide v-for="(val,i) in bannerImg" :key="i"><a :href="val.url"><img :src="`${IMG_BASE_URL}${val.picture}`"></a></swiper-slide>
     </swiper>
 
@@ -90,7 +90,7 @@
           this.bannerImg = result.data
         } else {
           this.$dialog.notify({
-            mes: message,
+            mes: result.message,
             timeout: 3000
           })
         }
