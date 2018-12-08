@@ -31,7 +31,7 @@
 
 <script>
   import {sendMsg} from '../../api/sendMsg'
-  import {mapActions,mapState} from 'vuex'
+  import {mapActions, mapState} from 'vuex'
   import headers from '../../components/headers'
 
   export default {
@@ -49,12 +49,12 @@
     components: {
       headers
     },
-    watch:{
-      registered(last,old){
+    watch: {
+      registered(last, old) {
         this.$router.push('/login')
       }
     },
-    computed:{
+    computed: {
       ...mapState(['registered'])
     },
     methods: {
