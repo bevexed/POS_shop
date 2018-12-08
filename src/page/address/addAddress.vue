@@ -53,12 +53,34 @@
     methods: {
       async addAddress() {
         let {uid, id, selected, address, name, phone} = this
-        let result = addressEdit(uid, id, address, name, phone, ...selected)
-        if (result.code === 1){
+        let result = await addressEdit(uid, id, address, name, phone, ...selected)
+        if (!name){
+          this.$dialog.notify({
+            mes: '请输入姓名',
+            timeout: 3000
+          })
+          return
+        }
+        if (!phone || !/^[0-9]{11}$/.test(phone)){
+          this.$dialog.notify({
+            mes: '请检查手机号',
+            timeout: 3000
+          })
+          return
+        }
+        if (result.code === 1) {
+          this.$dialog.toast({
+            mes: '新增地址成功',
+            timeout: 1000,
+            icon: 'success',
+            callback: () => {
+              this.$router.replace('/DeliveryAddress')
+            }
+          });
 
         } else {
           this.$dialog.notify({
-            mes:result.message,
+            mes: result.message,
             timeout: 3000
           })
         }
@@ -102,9 +124,11 @@
       border-bottom: 1px #e8e9eb solid;
       align-items: center;
       margin: 0 10px;
-      &:last-child{
+
+      &:last-child {
         border: none;
       }
+
       &.address {
         height: 60px;
         display: flex;
