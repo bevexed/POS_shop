@@ -115,7 +115,7 @@
             this.timer--;
             if (this.timer === 0) {
               this.timer = 60
-              this.T = null
+              clearInterval(this.T)
             }
           }, 1000)
         } else {
