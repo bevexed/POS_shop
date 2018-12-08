@@ -5,7 +5,8 @@
         <img v-if="isPosition" class="positionImg" src="../assets/dingwei.png" alt="">
         <p v-if="title">{{title}}</p>
         <span v-if="isRegister" class="register_span" @click="goRegister">注册</span>
-        <span v-if="isManage" class="register_span" @click="goManage">管理</span>
+        <span v-if="isManage&&isMac" class="register_span" @click="manage">管理</span>
+        <span v-if="isManage&&!isMac" class="register_span" @click="finish">完成</span>
         <span v-if="isKeep" class="register_span">保存</span>
         <yd-icon v-if="isSearch" size="20px" name="search" class="register_span"></yd-icon>
         <div v-if="isScan" class="scanP">
@@ -36,7 +37,8 @@
         isSearch:Boolean,
         isKeep:Boolean,
         isScan:Boolean,
-        isSkir:Boolean
+        isSkir:Boolean,
+        isMac:Boolean
       },
       methods:{
         goRegister(){
@@ -45,8 +47,11 @@
         goBack(){
           this.$router.back()
         },
-        goManage(){
-
+        manage(){
+          this.$emit('Tab1',false)
+        },
+        finish(){
+          this.$emit('Tab1',true)
         }
       }
     }

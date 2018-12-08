@@ -1,72 +1,121 @@
 <template>
   <section style="min-height: 100vh">
     <headers :title="'确认订单'" :isBack="true"></headers>
-    <section class="address">
+    <section class="address" v-if="addressObj!=''">
       <header>
-        收货人：哈哈哈哈 <span>12345678913</span>
+        收货人：{{addressObj.name}} <span>{{addressObj.phone}}</span>
       </header>
       <footer>
         <yd-icon size="22px" name="location"></yd-icon>
         <p>
-          收货地址：浙江省杭州市西湖区1234号哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+          收货地址：{{addressObj.province}}{{addressObj.city}}{{addressObj.area}}{{addressObj.address}}
         </p>
         <p>></p>
       </footer>
     </section>
-    <section class="detail">
-      <img src="" alt="">
-      <section>
-        <header>
-          POS机哈哈哈哈哈哈哈哈哈
-        </header>
-        <p>
-          系列：企业pos机
-        </p>
-        <p>
-          通道类别：123
-        </p>
-        <div class="price">
-          ￥286.<i>00</i> <span>x1</span>
+    <section class="address" v-else>添加收货地址</section>
+    <div v-if="fenlei == 1">
+      <section class="detail">
+        <div>
+          <img :src="`${IMG_BASE_URL}${shopInfo.show_pic}`" alt="商品图片">
+          <section>
+            <header>
+              {{shopInfo.name}}
+            </header>
+            <p>
+              系列：{{shopInfo.category==1?'企业pos机':'个人pos机'}}
+            </p>
+            <p>
+              通道类别：{{shopInfo.trad_channel}}
+            </p>
+            <div class="price">
+              ￥{{shopInfo.price}} <span>x{{num}}</span>
+            </div>
+          </section>
         </div>
-      </section>
-
-      <section class="num">
-        购买数量
-        <div class="x">
-          <yd-spinner width="90px" height="24px" max="99" unit="1" v-model="num"></yd-spinner>
-        </div>
-      </section>
-      <section class="num">
-        配送方式
-        <p>
-          快递：￥10.00
-        </p>
-      </section>
-      <section class="num">
-        买家留言
-        <textarea name="" id="" cols="38" rows="1" placeholder="选填：填写内容已和卖家协商确认"></textarea>
-      </section>
-      <footer>
-        共{{num}}件商品
-        <span>
+        <section class="num">
+          配送方式
+          <p>
+            快递：￥{{shopInfo.courier_fees}}
+          </p>
+        </section>
+        <section class="num">
+          买家留言
+          <textarea name="" id="" cols="38" rows="1" placeholder="选填：填写内容已和卖家协商确认" v-model="remarkVal"></textarea>
+        </section>
+        <footer>
+          共{{num}}件商品
+          <span>
           小计：
-          <i>￥286.<span>00</span></i>
+          <i>￥{{countPrice.toFixed(2)}}</i>
         </span>
-      </footer>
-    </section>
-    <footer class="bottom">
-      <p>
-        合计金额：<span>￥286.<i>00</i></span>
-      </p>
-      <a>提交订单</a>
+        </footer>
+      </section>
+      <footer class="bottom">
+        <p>
+          合计金额：<span>￥{{(countPrice + parseInt(this.shopInfo.courier_fees)).toFixed(2)}}</span>
+        </p>
+        <a @click="commitTo">提交订单</a>
 
-    </footer>
+      </footer>
+    </div>
+
+
+    <div v-if="fenlei == 2">
+      <section class="detail">
+        <div v-for="(item,index) in items" :key="index">
+          <img :src="`${IMG_BASE_URL}${item.show_pic}`" alt="商品图片">
+          <section>
+            <header>
+              {{item.name}}
+            </header>
+            <p>
+              系列：{{item.category==1?'企业pos机':'个人pos机'}}
+            </p>
+            <p>
+              通道类别：{{item.trad_channel}}
+            </p>
+            <div class="price">
+              ￥{{item.price}} <span>x{{item.amount}}</span>
+            </div>
+          </section>
+        </div>
+        <section class="num">
+          配送方式
+          <p>
+            快递：￥11
+          </p>
+        </section>
+        <section class="num">
+          买家留言
+          <textarea name="" id="" cols="38" rows="1" placeholder="选填：填写内容已和卖家协商确认" v-model="remarkVal"></textarea>
+        </section>
+        <footer>
+          共{{items.length}}件商品
+          <span>
+          小计：
+          <i>￥{{countTotal}}</i>
+        </span>
+        </footer>
+      </section>
+      <footer class="bottom">
+        <p>
+          合计金额：<span>￥111</span>
+        </p>
+        <a @click="commitO">提交订单</a>
+
+      </footer>
+    </div>
+
+
   </section>
 </template>
 
 <script>
   import headers from '../../components/headers'
-  import {info} from '../../api/order'
+  import {info,defaultAddress,commitOrder,infos} from '../../api/order'
+  import {IMG_BASE_URL} from "../../api/BASE_URL";
+
   export default {
     name: "booking",
     components: {
@@ -74,17 +123,83 @@
     },
     data() {
       return {
-        num: 1
+        num: 1,
+        shopInfo:{},
+        IMG_BASE_URL,
+        addressObj:{},
+        remarkVal:"",
+        fenlei:0,
+        items:[]
+      }
+    },
+    computed:{
+      countPrice(){
+        return this.num * this.shopInfo.price
+      },
+      countTotal(){
+        let price = 0;
+        for(var i = 0; i < this.items.length;i ++){
+          price += this.items[i].amount * this.items[i].price
+        }
+        return price.toFixed(2)
       }
     },
     methods:{
       async getInfo(uid,g_id){
         let res = await info(uid,g_id);
-        console.log(res)
+        this.shopInfo = res.data;
+        this.fenlei = 1;
+      },
+      async getInfos(uid,cart_infos){
+        let data = await infos(uid,cart_infos);
+        this.fenlei = 2;
+        this.items = data.data;
+      },
+      async getDefalutAddress(uid){
+        let res = await defaultAddress(uid);
+        this.addressObj = res.data;
+      },
+      async commit(uid,address_id,g_sku_infos,remark){
+        let result = await commitOrder(uid,address_id,g_sku_infos,remark)
+        if(result.code==1){
+          this.$dialog.notify({
+            mes: result.message,
+            timeout: 3000
+          })
+        }
+      },
+      commitTo(){
+        let g_sku_infos = JSON.stringify([{'g_id':this.shopInfo.g_id,'g_sku_id':this.shopInfo.g_sku_id,'amount':this.num}]);
+        if(this.addressObj.id==undefined){
+          this.$dialog.notify({
+            mes: '请填写收货地址',
+            timeout: 3000
+          })
+        }
+        this.commit(localStorage.uid,this.addressObj.id,g_sku_infos,this.remarkVal)
+      },
+      commitO(){
+        let arr=[];
+        for (var i = 0 ; i < this.items.length;i ++){
+          arr.push({'g_id':this.items[i].g_id,'g_sku_id':this.items[i].g_sku_id,'amount':this.items[i].amount})
+        }
+        let g_sku_infos = JSON.stringify(arr)
+        if(this.addressObj.id==undefined){
+          this.$dialog.notify({
+            mes: '请填写收货地址',
+            timeout: 3000
+          })
+        }
+        this.commit(localStorage.uid,this.addressObj.id,g_sku_infos,this.remarkVal)
       }
     },
     created(){
-      this.getInfo(localStorage.uid,this.$route.query.id)
+      if(this.$route.query.id){
+        this.getInfo(localStorage.uid,this.$route.query.id);
+      }else{
+        this.getInfos(localStorage.uid,this.$route.query.cart_infos)
+      }
+      this.getDefalutAddress(localStorage.uid);
     }
   }
 </script>
@@ -125,7 +240,7 @@
       display: inline-block;
       width: 100px;
       height: 100px;
-      background: #808080;
+      /*background: #808080;*/
     }
 
     section {

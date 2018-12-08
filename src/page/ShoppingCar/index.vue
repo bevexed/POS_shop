@@ -1,17 +1,17 @@
 <template>
     <div>
-      <headers :title="title" :isManage="true"></headers>
+      <headers :title="title" :isManage="true" :isMac="isMac" @Tab1="getBool"></headers>
       <ul class="shopList">
         <li v-for="(item,index) in items" :key="index">
           <div class="circle_div" :class="item.isChecked?'checked':''" @click="select(index)"></div>
-          <img class="shopImg" src="http://img1.shikee.com/try/2016/06/23/14381920926024616259.jpg" alt="">
+          <img class="shopImg" :src="IMG_BASE_URL + item.show_pic" alt="">
           <div class="shopContent">
-            <p>POS机哈哈哈哈个人哦哈哈活哈哈 哈哈哈哈</p>
-            <span>系列：企业pos机</span>
+            <p>{{item.name}}</p>
+            <span>系列：{{item.trad_channel}}</span>
             <div>
-              <span>¥{{item.shopPrice}}</span>
+              <span>¥{{item.price}}</span>
               <div>
-                <yd-spinner min="1" unit="1" v-model="item.spinner"></yd-spinner>
+                <yd-spinner min="1" unit="1" v-model="item.amount"></yd-spinner>
               </div>
             </div>
           </div>
@@ -19,15 +19,20 @@
       </ul>
 
       <div class="shop_bottom">
-        <div v-show="!isChecked" class="circle_div" @click="chooseAll"></div>
-        <div v-show="isChecked" class="circle_div checked" @click="cancelAll"></div>
-        <span class="fontSm">全选</span>
-        <span class="fontSm colorI">不含运费</span>
-        <p>
-          <span>合计：</span>
-          <span class="colorT">￥{{getTotal.totalPrice}}</span>
-        </p>
-        <button class="account" @click="account">结算</button>
+        <div>
+          <div v-show="!isChecked" class="circle_div" @click="chooseAll"></div>
+          <div v-show="isChecked" class="circle_div checked" @click="cancelAll"></div>
+          <span class="fontSm">全选</span>
+        </div>
+        <div v-show="isMac">
+          <span class="fontSm colorI">不含运费</span>
+          <p>
+            <span>合计：</span>
+            <span class="colorT">￥{{getTotal.totalPrice}}</span>
+          </p>
+          <button class="account" @click="account">结算</button>
+        </div>
+        <button class="delete" v-show="!isMac">删除</button>
       </div>
     </div>
 </template>
@@ -35,13 +40,17 @@
 <script>
   import headers from '../../components/headers'
   import {shopList} from '../../api/cart'
-    export default {
+  import {IMG_BASE_URL} from "../../api/BASE_URL";
+
+  export default {
       data(){
         return{
+          IMG_BASE_URL,
           title:'购物车',
           isChecked:false,
-          items:[{name:1,isChecked:false,spinner:1,shopPrice:'10.35'},{name:2,isChecked:false,spinner:2,shopPrice:'20.00'},{name:3,isChecked:false,spinner:3,shopPrice:'30.00'}],
+          items:[],
           totalPrice:'0.00',
+          isMac:true
         }
       },
       components:{
@@ -54,7 +63,7 @@
           })
           var totalPrice = 0;
           for (var i =0;i < _choose.length;i ++){
-            totalPrice += _choose[i].spinner * _choose[i].shopPrice
+            totalPrice += _choose[i].amount * _choose[i].price
           }
           return {totalPrice:totalPrice.toFixed(2)}
         }
@@ -86,12 +95,17 @@
             this.isChecked = false;
           }
         },
+        //购物车数据列表
         async getShopList(uid){
-          let result = await shopList(uid)
+          let result = await shopList(uid);
+          for (var i = 0; i < result.data.length;i++){
+            result.data[i].isChecked = false; //设置初始是否选中
+          }
+          this.items = result.data;
           if(result.code===0){
             this.$dialog.notify({
               mes:result.message,
-              timeout:3000
+              timeout:1000
             })
           }
         },
@@ -99,14 +113,22 @@
           let select = this.items.filter(val => {
             return val.isChecked == true
           });
+          let cart_infos,arr=[];
+          for (var i = 0 ; i < select.length;i ++){
+            arr.push({'cart_id':select[i].id,'amount':select[i].amount})
+            cart_infos = JSON.stringify(arr);
+          }
           if(select.length!=0){
-            this.$router.push('/Booking')
+            this.$router.push({path:'/Booking',query:{cart_infos:cart_infos}})
           }else{
             this.$dialog.notify({
               mes:'至少选择一件宝贝',
-              timeout:3000
+              timeout:1000
             })
           }
+        },
+        getBool(e){
+          this.isMac = e;
         }
       },
       mounted(){
@@ -122,6 +144,7 @@
     border-radius: 50%;
     border: 1px #979797 solid;
     cursor: pointer;
+    margin-right: 5px;
   }
   .checked {
     background-image: url("../../assets/circleChecked.png");
@@ -144,7 +167,7 @@
       .shopImg {
         width: 100px;
         height: 83px;
-        margin: 0 5px;
+        margin: 0 5px 0 0;
         border-radius: 5px;
       }
       .shopContent {
@@ -153,6 +176,7 @@
         justify-content: space-between;
         align-items: flex-start;
         height: 83px;
+        flex: 1;
         &>P {
           font-size: 12px;
         }
@@ -193,12 +217,27 @@
     padding: 0 11px 0 19px;
     background: #E8E9EB;
     border-top: 1px #E8E9EB solid;
+    &>div {
+      display: flex;
+      align-items: center;
+      &>p {
+        margin: 0 5px;
+      }
+    }
     .account {
       width:116px;
       height:44px;
       background:rgba(255,109,75,1);
       border-radius:20px;
       color: #fff;
+    }
+    .delete {
+      width:116px;
+      height:44px;
+      border: 1px rgba(255,109,75,1) solid;
+      background: #fff;
+      border-radius:20px;
+      color: rgba(255,109,75,1);
     }
   }
   .fontSm {

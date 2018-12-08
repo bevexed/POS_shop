@@ -80,7 +80,7 @@ export default new Router({
       path: '/productdetail/id/:id',
       component: productDetail,
       name:'productDetail',
-      meta: {index: 2}
+      meta: {index: 1}
     },
     {
       path: '/booking',

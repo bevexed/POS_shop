@@ -2,6 +2,7 @@
   <div class="product_content">
     <img class="productImg" :src="`${IMG_BASE_URL}${detailData.show_pic}`" alt="图片">
     <img class="backIcon" src="../../assets/back.png" alt="图片" @click="backClick">
+    <img class="shopCar" src="../../assets/gouwuche.png" alt="图片" @click="goCar">
     <div class="product_info">
       <p class="product_price">¥{{detailData.price}}</p>
       <p>{{detailData.name}}</p>
@@ -46,7 +47,7 @@
     </section>
 
     <aside>
-      <span @click="addShoppingCar(uid,1)">加入购物车</span>
+      <span @click="addShoppingCar(uid,detailData.sku[0].id)">加入购物车</span>
       <span @click="buy">立即购买</span>
     </aside>
   </div>
@@ -76,6 +77,9 @@
       backClick() {
         this.$router.back();
       },
+      goCar(){
+        this.$router.push('/shoppingCar')
+      },
       async addShoppingCar(uid, g_sku_id) {
         let res = await addShop(uid, g_sku_id)
       },
@@ -95,7 +99,7 @@
       },
       buy(){
         if(this.val!=''){
-          this.$router.push({path:'/Booking',query:{id:this.val}})
+          this.$router.push({path:'/booking',query:{id:this.val}})
         }else{
           this.$dialog.notify({
             mes: '请选择通道类别',
@@ -132,6 +136,12 @@
       position: absolute;
       top: 33px;
       left: 11px;
+    }
+    .shopCar {
+      width: 20px;
+      position: absolute;
+      top: 33px;
+      right: 11px;
     }
 
     .product_info {

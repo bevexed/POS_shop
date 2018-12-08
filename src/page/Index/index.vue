@@ -86,7 +86,7 @@
       },
       async getBanner() {
         let result = await banner()
-        this.bannerImg = result;
+        this.bannerImg = result.data;
       },
       tabBarClick(num) {
         this.tabBar = num;
