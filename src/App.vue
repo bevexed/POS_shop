@@ -121,7 +121,7 @@
     transition: opacity .3s;
   }
 
-  input::placeholder{
+  input::placeholder {
     font-size: 12px;
     color: #c5c5ca;
   }

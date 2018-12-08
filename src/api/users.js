@@ -14,6 +14,12 @@ import {BASE_URL} from './BASE_URL'
 * @param   name	        收货人姓名      必传
 * @param   phone	      收货人联系方式   必传
 * */
-export const addressEdit = (uid, id,  address, name, phone,province_id, city_id, area_id) => ajax(BASE_URL + '/users/addressEdit', {uid, id, address, name, phone, province_id, city_id, area_id})
+export const addressEdit = (uid, id, address, name, phone, province_id, city_id, area_id) => ajax(BASE_URL + '/users/addressEdit', {uid, id, address, name, phone, province_id, city_id, area_id})
+
+/*
+* 获取用户收货地址
+* @param   uid          用户ID        必传
+* */
+export const address = (uid) => ajax(BASE_URL + '/users/address', {uid})
 
 

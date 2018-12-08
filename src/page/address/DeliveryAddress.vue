@@ -19,6 +19,7 @@
 
 <script>
   import headers from '../../components/headers'
+  import {address} from "../../api/users";
 
 
   export default {
@@ -30,7 +31,22 @@
     components: {
       headers
     },
-    methods: {}
+    methods: {
+      async getAddress() {
+        let result = await address(localStorage.uid)
+        if (result.code === 1) {
+
+        } else {
+          this.$dialog.notify({
+            mes: result.message,
+            timeout: 3000
+          })
+        }
+      }
+    },
+    mounted() {
+      this.getAddress()
+    }
   }
 </script>
 

@@ -55,7 +55,7 @@
         let {uid, id, selected, address, name, phone} = this
         let result = addressEdit(uid, id, address, name, phone, ...selected)
         if (result.code === 1){
-          
+
         } else {
           this.$dialog.notify({
             mes:result.message,
@@ -102,7 +102,9 @@
       border-bottom: 1px #e8e9eb solid;
       align-items: center;
       margin: 0 10px;
-
+      &:last-child{
+        border: none;
+      }
       &.address {
         height: 60px;
         display: flex;

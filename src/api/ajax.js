@@ -1,6 +1,6 @@
 import axios from 'axios'
 import qs from 'qs'
-import { Confirm, Alert, Toast, Notify, Loading } from 'vue-ydui/dist/lib.rem/dialog';
+import {Confirm, Alert, Toast, Notify, Loading} from 'vue-ydui/dist/lib.rem/dialog';
 
 // 添加请求拦截器
 axios.interceptors.request.use(function (config) {
@@ -20,8 +20,8 @@ axios.interceptors.response.use(function (response) {
 }, function (error) {
   Loading.close();
   Notify({
-    mes:error.message,
-    timeout:3000
+    mes: error.message,
+    timeout: 3000
   })
   // 对响应错误做点什么
   return Promise.reject(error);

@@ -187,12 +187,12 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   console.log(!localStorage.uid);
   if (!localStorage.uid) {
-    if (to.path === '/login' || to.path === '/register' || to.path === '/forgetPwd'){
+    if (to.path === '/login' || to.path === '/register' || to.path === '/forgetPwd') {
       next()
-    }else{
+    } else {
       next('/login')
     }
-  }else {
+  } else {
     next()
   }
 })
