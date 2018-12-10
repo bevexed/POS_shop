@@ -1,7 +1,7 @@
 <template>
     <div class="cardInfo_content">
       <headers :title="title" :isBack="true"></headers>
-      <div class="cardDiv"></div>
+      <div class="cardDiv" v-html="content_info"></div>
 
       <div class="customDynamic">
         <div>
@@ -9,12 +9,12 @@
           <p>查看全部</p>
         </div>
         <div class="dynamic_list">
-          <div v-for="item in 3">
+          <div v-for="(item,index) in dynamicUL" :key="index">
             <div>
-              <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=4248898548,559247520&fm=27&gp=0.jpg" alt="图片">
-              <p>13546421451</p>
+              <img :src="`${IMG_BASE_URL}${item.consumer.avatar}`" alt="图片">
+              <p>{{item.consumer.nick_name}}</p>
             </div>
-            <p>好好哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈，嗯嗯嗯嗯额 哈哈啊哈哈哈哈哈</p>
+            <p>{{item.content}}</p>
           </div>
         </div>
       </div>
@@ -23,14 +23,49 @@
 
 <script>
   import headers from '../../components/headers'
-    export default {
+  import {info,dynamic} from "../../api/credit"
+  import {IMG_BASE_URL} from "../../api/BASE_URL"
+
+  export default {
       data(){
         return{
+          IMG_BASE_URL,
           title:'信用卡详情',
+          content_info:'',
+          dynamicUL:[]
         }
       },
       components:{
         headers
+      },
+      methods:{
+        async getInfo(id){
+          let data = await info(id);
+          if(data.code==1){
+            this.content_info = data.data.content;
+          }else{
+            this.$dialog.notify({
+              mes: data.message,
+              timeout: 1000
+            })
+          }
+        },
+        async dynamicList(id){
+          let data = await dynamic(id);
+          if(data.code==1){
+            this.dynamicUL = data.data;
+          }else{
+            this.$dialog.notify({
+              mes: data.message,
+              timeout: 1000
+            })
+          }
+        }
+      },
+      created(){
+        let id = this.$route.query.id
+        this.getInfo(id);
+        this.dynamicList(id);
       }
     }
 </script>

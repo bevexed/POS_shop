@@ -10,13 +10,23 @@
       <p :class="tabIndex==0?'pActive':''" @click="tabClick(0)">热卡推荐</p>
       <p :class="tabIndex==1?'pActive':''" @click="tabClick(1)">新卡推荐</p>
     </div>
-    <div class="xinyongList">
-      <router-link v-for="item in 4" to="/cardInfo" :key="item">
-        <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=371772476,1548437417&fm=27&gp=0.jpg" alt="图片">
+    <div class="xinyongList" v-show="tabIndex==0">
+      <router-link v-for="(item,index) in list1" :to="{path:'/cardInfo',query:{id:item.id}}" :key="index">
+        <img :src="`${IMG_BASE_URL}${item.picture}`" alt="图片">
         <div>
-          <div>交通银行标准信用卡</div>
-          <span>新用户5积分轻松购</span>
-          <p>已有<span class="colorRed">198.3</span>万人申请</p>
+          <div>{{item.name}}</div>
+          <span>{{item.blurb}}</span>
+          <p>已有<span class="colorRed">{{item.apply_num}}</span>人申请</p>
+        </div>
+      </router-link>
+    </div>
+    <div class="xinyongList" v-show="tabIndex==1">
+      <router-link v-for="(item,index) in list2" :to="{path:'/cardInfo',query:{id:item.id}}" :key="index">
+        <img :src="`${IMG_BASE_URL}${item.picture}`" alt="图片">
+        <div>
+          <div>{{item.name}}</div>
+          <span>{{item.blurb}}</span>
+          <p>已有<span class="colorRed">{{item.apply_num}}</span>人申请</p>
         </div>
       </router-link>
     </div>
@@ -25,7 +35,7 @@
 
 <script>
   import {IMG_BASE_URL} from "../../api/BASE_URL";
-  import {banners} from '../../api/credit'
+  import {banners,list} from '../../api/credit'
   import headers from '../../components/headers'
 
   export default {
@@ -43,7 +53,9 @@
           initialSlide: 1
         },
         tabIndex: 0,
-        bannerArr: []
+        bannerArr: [],
+        list1:[],
+        list2:[]
       }
     },
     components: {
@@ -60,7 +72,6 @@
       },
       async bannerLoad(uid) {
         let res = await banners(uid);
-        console.log(res);
         if (res.code === 1) {
           this.bannerArr = res.data;
         } else {
@@ -69,10 +80,35 @@
             timeout: 3000
           })
         }
+      },
+      async creditList(){
+        let data = await list();
+        if (data.code === 1) {
+          this.list1 = data.data;
+        } else {
+          this.$dialog.notify({
+            mes: data.message,
+            timeout: 3000
+          })
+        }
+      },
+      async newList(type){
+        let data = await list(type);
+        console.log(data);
+        if (data.code === 1) {
+          this.list2 = data.data;
+        } else {
+          this.$dialog.notify({
+            mes: data.message,
+            timeout: 3000
+          })
+        }
       }
     },
     mounted() {
-      this.bannerLoad(localStorage.uid)
+      this.bannerLoad(localStorage.uid);
+      this.creditList();
+      this.newList('new');
     }
   }
 </script>
