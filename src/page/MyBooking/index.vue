@@ -9,10 +9,10 @@
     <All
       v-for="(val,i) in allData"
       :key="i"
-      :waitPay="val.state"
-      :waitPost="val.state"
-      :waitGet="val.state"
-      :waitElva="val.state"
+      :waitPay="val.status"
+      :waitPost="val.status"
+      :waitGet="val.status"
+      :waitElva="val.status"
     />
   </section>
 </template>

@@ -37,9 +37,24 @@
 </template>
 
 <script>
+  import {orderList} from '../../api/userOrderList'
   export default {
     name: "all",
-    props: ['waitPay', 'waitPost', 'waitGet', 'waitElva']
+    data(){
+      return{
+
+      }
+    },
+    props: ['waitPay', 'waitPost', 'waitGet', 'waitElva'],
+    methods:{
+      async getList(page,uid,status){
+        let data = await orderList(page,uid,status);
+        console.log(data)
+      }
+    },
+    created(){
+      this.getList(1,localStorage.uid,'all')
+    }
   }
 </script>
 
