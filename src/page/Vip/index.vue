@@ -55,6 +55,7 @@
     methods: {
       async doListsUser(level) {
         this.level = level
+        this.loadingState = true
         let result = await listsUser(1, localStorage.uid, level)
         if (result.code === 1) {
           this.listsUserDate = result.data.data
