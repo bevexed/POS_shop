@@ -56,7 +56,7 @@
         if (result.code === 1) {
           this.$dialog.toast({
             mes: '删除地址成功',
-            timeout: 1000,
+            timeout: 500,
             icon: 'success',
             callback: () => {
               this.$router.replace('/DeliveryAddress')

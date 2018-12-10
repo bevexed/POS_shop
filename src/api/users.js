@@ -4,6 +4,29 @@ import ajax from './ajax'
 import {BASE_URL} from './BASE_URL'
 
 /*
+* 个人中心登陆用户相关信息
+* @param   uid          用户ID        必传
+* */
+export const home = (uid) => ajax(BASE_URL + '/users/home', {uid})
+
+/*
+* 用户实名认证
+* @param   uid          用户ID        必传
+* @param   real_name    真实姓名       必传
+* @param   idCard       身份证号       必传
+* */
+export const realName = (uid,real_name,idCard) => ajax(BASE_URL + '/users/realName', {uid,real_name,idCard})
+
+/*
+* 会员列表接口
+* @param   page     页数                                必传
+* @param   uid      用户ID                              必传
+* @param   level    等级（1：一级；2：二级；3：三级）       必传
+* */
+export const listsUser = (page,uid,level) => ajax(BASE_URL + '/users/listsUser', {page,uid,level},"GET")
+
+
+/*
 * 新增/编辑用户收获地址接口
 * @param   uid          用户ID        必传
 * @param   id           地址ID        修改时必传，新增是不必传

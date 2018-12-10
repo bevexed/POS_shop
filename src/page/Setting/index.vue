@@ -2,21 +2,21 @@
   <section class="setting">
     <headers :title="'我的设置'" :isBack="true"></headers>
     <header>
-      <img src="" alt="">
-      <p>哈哈哈哈</p>
+      <img :src="homeData.avatars" alt="">
+      <p>{{homeData.nick_name}}</p>
     </header>
     <section class="item" @click="$router.push('/DeliveryAddress')">
       收货地址
       <span class="address">修改/添加</span>
     </section>
     <footer>
-      <section class="item">
+      <section class="item" @click="$router.push('/realname')">
         实名认证
-        <span>已认证</span>
+        <span>{{homeData.id_numbers? '已认证' : '未实名'}}</span>
       </section>
       <section class="item">
         手机号
-        <span>13111111111</span>
+        <span>{{homeData.mobiles}}</span>
       </section>
       <section class="item">
         结算信息
@@ -26,16 +26,16 @@
         修改密码
         <span></span>
       </section>
-      <section class="item">
+      <section class="item" @click="$router.push('/managebankcard')">
         银行卡管理
         <span></span>
       </section>
       <section class="item">
         账号激活
         <span>
-          <img v-if="ed" width="12" src="../../assets/setting/ed@3x.png" alt="">
+          <img v-if="homeData.is_actives" width="12" src="../../assets/setting/ed@3x.png" alt="">
           <img v-else width="12" src="../../assets/setting/none@3x.png" alt="">
-          {{ed === 1?'已激活':'未激活'}}
+          {{homeData.is_actives === 1?'已激活':'未激活'}}
         </span>
       </section>
     </footer>
@@ -44,6 +44,7 @@
 
 <script>
   import headers from '../../components/headers'
+  import {home} from "../../api/users";
 
   export default {
     name: "setting",
@@ -52,8 +53,20 @@
     },
     data() {
       return {
-        ed: 0
+        homeData: {}
       }
+    },
+    methods: {
+      async getHome() {
+        let result = await home(localStorage.uid)
+        if (result.code === 1) {
+          this.homeData = result.data
+
+        }
+      },
+    },
+    mounted() {
+      this.getHome()
     }
   }
 </script>
