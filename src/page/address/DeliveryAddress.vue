@@ -12,8 +12,8 @@
         </div>
         <img @click="$router.push('/editAddress')" src="../../assets/edit.png" alt="">
       </router-link>
-     <div style="height: 44px"></div>
     </ul>
+    <div style="height: 44px"></div>
     <button class="addBtn" @click="$router.push('/addAddress')">新增收货地址</button>
   </div>
 </template>
@@ -67,6 +67,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      &:last-child{
+        border: none;
+      }
 
       & > img {
         width: 20px;

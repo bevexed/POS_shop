@@ -5,7 +5,9 @@ import {BASE_URL} from './BASE_URL'
 export const info = (uid,g_sku_id) => ajax(BASE_URL + '/order/goods/buynow',{uid,g_sku_id});
 
 
-//默认收货地址
+/* 默认收货地址
+ * @param  uid  用户id
+ */
 export const defaultAddress = (uid) => ajax(BASE_URL + '/order/address',{uid});
 
 //提交订单
