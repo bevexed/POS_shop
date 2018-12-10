@@ -6,8 +6,8 @@
     </header>
     <yd-cell-group>
       <!--<yd-cell-item>-->
-        <!--<span slot="left">持卡人： </span>-->
-        <!--<yd-input slot="right" required v-model="user" max="20" placeholder="请输入持卡人姓名"></yd-input>-->
+      <!--<span slot="left">持卡人： </span>-->
+      <!--<yd-input slot="right" required v-model="user" max="20" placeholder="请输入持卡人姓名"></yd-input>-->
       <!--</yd-cell-item>-->
       <yd-cell-item>
         <span slot="left">银行卡卡号： </span>
@@ -33,6 +33,11 @@
         <yd-input slot="right" required max="6" v-model="code" placeholder="请输入验证码"></yd-input>
       </yd-cell-item>
     </yd-cell-group>
+    <yd-cell-group style="margin-top: 20px">
+      <yd-cell-item @click.native="doBankDel" v-if="id">
+        <span slot="left" style="color: #ff0000">删除账户信息 </span>
+      </yd-cell-item>
+    </yd-cell-group>
     <footer>
       <yd-button bgcolor="#ff6d48" color="#fff" size="large" type="primary" shape="circle" @click.native="addBnakcard">确定</yd-button>
     </footer>
@@ -42,7 +47,7 @@
 
 <script>
   import headers from '../../components/headers'
-  import {bankEdit} from "../../api/users";
+  import {bankEdit, bankDel} from "../../api/users";
   import {sendMsg} from "../../api/sendMsg";
 
   export default {
@@ -137,10 +142,30 @@
             timeout: 1500
           });
         }
+      },
+
+      async doBankDel() {
+        let result = await bankDel(localStorage.uid, this.id)
+        if (result.code === 1) {
+          this.$dialog.toast({
+            mes: '删除成功',
+            icon: 'success',
+            timeout: 500,
+            callback: () => {
+              this.$router.replace('/managebankcard')
+            }
+          })
+        } else {
+          this.$dialog.toast({
+            mes: result.message,
+            icon: 'error',
+            timeout: 1500
+          });
+        }
       }
     },
-    mounted(){
-      if  (this.$route.query.id){
+    mounted() {
+      if (this.$route.query.id) {
         this.id = this.$route.query.id
       }
     }
