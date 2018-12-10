@@ -8,22 +8,28 @@
         <li :class="{active:level === 3}" @click="doListsUser(3)">三级会员(3)</li>
       </ul>
     </nav>
-    <section class="detail" v-for="i in 10">
-      <img src="" alt="">
+    <section class="detail" v-for="(v,i) in listsUserDate">
+      <img :src="v.avatar" alt="">
       <section>
-        <p>小妹去 <span>VIP1</span></p>
-        <p>123****1234</p>
-        <p>注册时间：2018-11-11</p>
+        <p>{{v.nick_name}} <span>VIP1</span></p>
+        <p>{{v.mobile}}</p>
+        <p>注册时间：{{v.create_time | Time}}</p>
       </section>
       <div>
-        <img v-if="jihuo" src="../../assets/setting/ed@3x.png" alt="">
+        <img v-if="v.is_active" src="../../assets/setting/ed@3x.png" alt="">
         <img v-else src="../../assets/setting/none@3x.png" alt="">
-        <span>{{jihuo === 1? '已激活':'未激活'}}</span>
+        <span>{{v.is_active === 1? '已激活':'未激活'}}</span>
       </div>
     </section>
-    <div class="loading-more">
-      <p v-if="loading">下拉或点击加载更多</p>
-      <p v-else-if="loading === 'loading'"></p>
+    <div class="loading-more" @click="loadingMore">
+      <p v-if="loadingState === true">下拉或点击加载更多</p>
+      <p v-else-if="loadingState === 'loading'" class="loading">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </p>
       <p v-else>没有更多了</p>
     </div>
   </section>
@@ -40,10 +46,9 @@
     },
     data() {
       return {
-        jihuo: 1,
         level: 1,
         page: 1,
-        loading: true,
+        loadingState: true,
         listsUserDate: [],
       }
     },
@@ -52,14 +57,18 @@
         this.level = level
         let result = await listsUser(this.page, localStorage.uid, level)
         if (result.code === 1) {
-
+          this.listsUserDate = result.data.data
         } else {
-
+          this.$dialog.notify({
+            mes: result.message,
+            timeout: 3000
+          })
         }
       },
       async loadingMore() {
+        this.loadingState = 'loading'
         if (document.querySelector('#app').clientHeight + document.querySelector('#app').scrollTop > document.querySelector('#app').clientHeight) {
-
+          // let result = await listsUser()
         }
       }
     },
@@ -134,9 +143,59 @@
   }
 
   div.loading-more {
-      p{
-        padding: 1rem 0;
-        text-align: center;
+    padding: 1rem 0;
+
+    p {
+      text-align: center;
+    }
+
+    .loading {
+      width: 150px;
+      height: 15px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .loading span {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      margin-right: 5px;
+      background: #ff6d48;
+      -webkit-animation: load 1.04s ease infinite;
+    }
+
+    .loading span:last-child {
+      margin-right: 0px;
+    }
+
+    @-webkit-keyframes load {
+      0% {
+        opacity: 1;
       }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    .loading span:nth-child(1) {
+      -webkit-animation-delay: 0.13s;
+    }
+
+    .loading span:nth-child(2) {
+      -webkit-animation-delay: 0.26s;
+    }
+
+    .loading span:nth-child(3) {
+      -webkit-animation-delay: 0.39s;
+    }
+
+    .loading span:nth-child(4) {
+      -webkit-animation-delay: 0.52s;
+    }
+
+    .loading span:nth-child(5) {
+      -webkit-animation-delay: 0.65s;
+    }
   }
 </style>
