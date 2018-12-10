@@ -46,7 +46,6 @@
     font-family: myFont, sans-serif;
     height: 100vh;
     overflow-y: scroll;
-    position: relative;
   }
 
   @font-face {

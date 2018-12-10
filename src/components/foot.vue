@@ -42,6 +42,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 12px;
+    z-index: 10;
 
     & > a {
       height: 100%;

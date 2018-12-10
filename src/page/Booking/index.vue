@@ -1,114 +1,115 @@
 <template>
-  <section style="min-height: 100vh">
-    <headers :title="'确认订单'" :isBack="true"></headers>
-    <section class="address" v-if="addressObj!=''">
-      <header>
-        收货人：{{addressObj.name}} <span>{{addressObj.phone}}</span>
-      </header>
-      <footer>
-        <yd-icon size="22px" name="location"></yd-icon>
-        <p>
-          收货地址：{{addressObj.province}}{{addressObj.city}}{{addressObj.area}}{{addressObj.address}}
-        </p>
-        <p>></p>
-      </footer>
-    </section>
-    <section class="address" v-else>添加收货地址</section>
-    <div v-if="fenlei == 1">
-      <section class="detail">
-        <div>
-          <img :src="`${IMG_BASE_URL}${shopInfo.show_pic}`" alt="商品图片">
-          <section>
-            <header>
-              {{shopInfo.name}}
-            </header>
-            <p>
-              系列：{{shopInfo.category==1?'企业pos机':'个人pos机'}}
-            </p>
-            <p>
-              通道类别：{{shopInfo.trad_channel}}
-            </p>
-            <div class="price">
-              ￥{{shopInfo.price}} <span>x{{num}}</span>
-            </div>
-          </section>
-        </div>
-        <section class="num">
-          配送方式
-          <p>
-            快递：￥{{shopInfo.courier_fees}}
-          </p>
-        </section>
-        <section class="num">
-          买家留言
-          <textarea name="" id="" cols="38" rows="1" placeholder="选填：填写内容已和卖家协商确认" v-model="remarkVal"></textarea>
-        </section>
+  <div style="max-height: 100vh;overflow-y: scroll">
+    <section>
+      <headers :title="'确认订单'" :isBack="true"></headers>
+      <section class="address" v-if="addressObj!=''">
+        <header>
+          收货人：{{addressObj.name}} <span>{{addressObj.phone}}</span>
+        </header>
         <footer>
-          共{{num}}件商品
-          <span>
+          <yd-icon size="22px" name="location"></yd-icon>
+          <p>
+            收货地址：{{addressObj.province}}{{addressObj.city}}{{addressObj.area}}{{addressObj.address}}
+          </p>
+          <p>></p>
+        </footer>
+      </section>
+      <section class="address" v-else>添加收货地址</section>
+      <div v-if="fenlei == 1">
+        <section class="detail">
+          <div>
+            <img :src="`${IMG_BASE_URL}${shopInfo.show_pic}`" alt="商品图片">
+            <section>
+              <header>
+                {{shopInfo.name}}
+              </header>
+              <p>
+                系列：{{shopInfo.category==1?'企业pos机':'个人pos机'}}
+              </p>
+              <p>
+                通道类别：{{shopInfo.trad_channel}}
+              </p>
+              <div class="price">
+                ￥{{shopInfo.price}} <span>x{{num}}</span>
+              </div>
+            </section>
+          </div>
+          <section class="num">
+            配送方式
+            <p>
+              快递：￥{{shopInfo.courier_fees}}
+            </p>
+          </section>
+          <section class="num">
+            买家留言
+            <textarea name="" id="" cols="38" rows="1" placeholder="选填：填写内容已和卖家协商确认" v-model="remarkVal"></textarea>
+          </section>
+          <footer>
+            共{{num}}件商品
+            <span>
           小计：
           <i>￥{{countPrice.toFixed(2)}}</i>
         </span>
-        </footer>
-      </section>
-      <footer class="bottom">
-        <p>
-          合计金额：<span>￥{{(countPrice + parseInt(this.shopInfo.courier_fees)).toFixed(2)}}</span>
-        </p>
-        <a @click="commitTo">提交订单</a>
-
-      </footer>
-    </div>
-
-
-    <div v-if="fenlei == 2">
-      <section class="detail">
-        <div v-for="(item,index) in items" :key="index">
-          <img :src="`${IMG_BASE_URL}${item.show_pic}`" alt="商品图片">
-          <section>
-            <header>
-              {{item.name}}
-            </header>
-            <p>
-              系列：{{item.category==1?'企业pos机':'个人pos机'}}
-            </p>
-            <p>
-              通道类别：{{item.trad_channel}}
-            </p>
-            <div class="price">
-              ￥{{item.price}} <span>x{{item.amount}}</span>
-            </div>
-          </section>
-        </div>
-        <section class="num">
-          配送方式
+          </footer>
+        </section>
+        <footer class="bottom">
           <p>
-            快递：￥11
+            合计金额：<span>￥{{(countPrice + parseInt(this.shopInfo.courier_fees)).toFixed(2)}}</span>
           </p>
-        </section>
-        <section class="num">
-          买家留言
-          <textarea name="" id="" cols="38" rows="1" placeholder="选填：填写内容已和卖家协商确认" v-model="remarkVal"></textarea>
-        </section>
-        <footer>
-          共{{items.length}}件商品
-          <span>
-          小计：
-          <i>￥{{countTotal}}</i>
-        </span>
+          <a @click="commitTo">提交订单</a>
         </footer>
-      </section>
-      <footer class="bottom">
-        <p>
-          合计金额：<span>￥111</span>
-        </p>
-        <a @click="commitO">提交订单</a>
-
-      </footer>
-    </div>
+      </div>
 
 
-  </section>
+      <div v-if="fenlei == 2" v-for="(item,index) in items" :key="index">
+        <section class="detail">
+          <div v-for="(v,i) in item.g_sku" :key="i">
+            <img :src="`${IMG_BASE_URL}${item.show_pic}`" alt="商品图片">
+            <section>
+              <header>
+                {{item.name}}
+              </header>
+              <p>
+                系列：{{item.category==1?'企业pos机':'个人pos机'}}
+              </p>
+              <p>
+                通道类别：{{v.trad_channel}}
+              </p>
+              <div class="price">
+                ￥{{v.price}} <span>x{{v.amount}}</span>
+              </div>
+            </section>
+          </div>
+          <section class="num">
+            配送方式
+            <p>
+              快递：￥{{courier_fees}}
+            </p>
+          </section>
+          <section class="num">
+            买家留言
+            <textarea name="" cols="38" rows="1" placeholder="选填：填写内容已和卖家协商确认" v-model="remarkVal"></textarea>
+          </section>
+          <footer>
+            共{{items.length}}件商品
+            <span>
+          小计：
+          <i>￥{{item.total}}</i>
+        </span>
+          </footer>
+        </section>
+
+        <div class="empty"></div>
+        <footer class="bottom">
+          <p>
+            合计金额：<span>￥{{(parseInt(courier_fees) + parseInt(countTotal)).toFixed(2)}}</span>
+          </p>
+          <a @click="commitO">提交订单</a>
+        </footer>
+      </div>
+    </section>
+
+  </div>
 </template>
 
 <script>
@@ -129,7 +130,8 @@
         addressObj:{},
         remarkVal:"",
         fenlei:0,
-        items:[]
+        items:[],
+        courier_fees:0
       }
     },
     computed:{
@@ -139,9 +141,16 @@
       countTotal(){
         let price = 0;
         for(var i = 0; i < this.items.length;i ++){
-          price += this.items[i].amount * this.items[i].price
+          for(var j = 0;j < this.items[i].g_sku.length;j++){
+            price += this.items[i].g_sku[j].amount * this.items[i].g_sku[j].price
+          }
         }
-        return price.toFixed(2)
+        return price
+      },
+      countOne(){
+        for (var i = 0 ;i < this.items.length;i ++){
+
+        }
       }
     },
     methods:{
@@ -154,6 +163,7 @@
         let data = await infos(uid,cart_infos);
         this.fenlei = 2;
         this.items = data.data;
+        this.courier_fees = data.courier_fees;
       },
       async getDefalutAddress(uid){
         let res = await defaultAddress(uid);
@@ -325,12 +335,17 @@
     }
   }
 
+  .empty {
+    height: 50px;
+  }
   footer.bottom {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     background: white;
     height: 50px;
-    width: 100%;
+    width: 100vw;
+    left: 0;
+    z-index: 10;
 
     > p {
       position: absolute;

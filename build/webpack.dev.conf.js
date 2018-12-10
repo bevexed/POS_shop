@@ -10,6 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const portfinder = require('portfinder')
+var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -55,6 +56,15 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       // codesplit chunks into this main css file as well.
       // This will result in *all* of your app's CSS being loaded upfront.
       allChunks: false,
+    }),
+    new OptimizeCSSPlugin({
+      cssProcessor: require('cssnano'),
+      cssProcessorOptions: {
+        discardComments: {removeAll: true},
+        // 避免 cssnano 重新计算 z-index
+        safe: true
+      },
+      canPrint: false
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.

@@ -35,7 +35,8 @@
       isSearch: Boolean,
       isKeep: Function,
       isScan: Boolean,
-      isSkir: Boolean
+      isSkir: Boolean,
+      isMac:Boolean
     },
     methods: {
       goRegister() {
@@ -44,8 +45,11 @@
       goBack() {
         this.$router.back()
       },
-      goManage() {
-
+      manage() {
+        this.$emit('Tab1',false);
+      },
+      finish(){
+        this.$emit('Tab1',true)
       }
     }
   }
@@ -63,9 +67,9 @@
     background: #ff6d48;
     height: 60px;
     position: fixed;
-    z-index: 1;
     left: 0;
     top: 0;
+    z-index: 99 !important;
 
     .register_span {
       position: absolute;

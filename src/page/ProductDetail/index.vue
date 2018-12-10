@@ -47,7 +47,7 @@
     </section>
 
     <aside>
-      <span @click="addShoppingCar(uid,detailData.sku[0].id)">加入购物车</span>
+      <span @click="addShoppingCar(uid,val)">加入购物车</span>
       <span @click="buy">立即购买</span>
     </aside>
   </div>
