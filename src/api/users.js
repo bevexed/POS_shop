@@ -29,6 +29,12 @@ export const realName = (uid,real_name,idCard) => ajax(BASE_URL + '/users/realNa
 export const bankEdit = (uid,bank_card,mobile,is_default,code,id) => ajax(BASE_URL + '/users/bankEdit', {uid,bank_card,mobile,is_default,code,id})
 
 /*
+* 用户绑定银行卡信息
+* @param   uid          用户ID             必传
+* */
+export const listsBank = (uid) => ajax(BASE_URL + '/users/listsBank', {uid})
+
+/*
 * 会员列表接口
 * @param   page     页数                                必传
 * @param   uid      用户ID                              必传
