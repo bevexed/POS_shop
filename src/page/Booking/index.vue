@@ -2,7 +2,7 @@
   <div style="max-height: 100vh;overflow-y: scroll">
     <section>
       <headers :title="'确认订单'" :isBack="true"></headers>
-      <section class="address" v-if="addressObj!=''">
+      <section class="address" v-if="addressObj!=''" @click="$router.push('/addaddress')">
         <header>
           收货人：{{addressObj.name}} <span>{{addressObj.phone}}</span>
         </header>
@@ -14,7 +14,7 @@
           <p>></p>
         </footer>
       </section>
-      <section class="address" v-else>添加收货地址</section>
+      <section class="address" v-else @click="$router.push('/addaddress')">添加收货地址</section>
       <div v-if="fenlei == 1">
         <section class="detail">
           <div>
@@ -114,7 +114,7 @@
 
 <script>
   import headers from '../../components/headers'
-  import {info,defaultAddress,commitOrder,infos} from '../../api/order'
+  import {info, defaultAddress, commitOrder, infos} from '../../api/order'
   import {IMG_BASE_URL} from "../../api/BASE_URL";
 
   export default {
@@ -125,91 +125,91 @@
     data() {
       return {
         num: 1,
-        shopInfo:{},
+        shopInfo: {},
         IMG_BASE_URL,
-        addressObj:{},
-        remarkVal:"",
-        fenlei:0,
-        items:[],
-        courier_fees:0
+        addressObj: {},
+        remarkVal: "",
+        fenlei: 0,
+        items: [],
+        courier_fees: 0
       }
     },
-    computed:{
-      countPrice(){
+    computed: {
+      countPrice() {
         return this.num * this.shopInfo.price
       },
-      countTotal(){
+      countTotal() {
         let price = 0;
-        for(var i = 0; i < this.items.length;i ++){
-          for(var j = 0;j < this.items[i].g_sku.length;j++){
+        for (var i = 0; i < this.items.length; i++) {
+          for (var j = 0; j < this.items[i].g_sku.length; j++) {
             price += this.items[i].g_sku[j].amount * this.items[i].g_sku[j].price
           }
         }
         return price
       },
-      countOne(){
-        for (var i = 0 ;i < this.items.length;i ++){
+      countOne() {
+        for (var i = 0; i < this.items.length; i++) {
 
         }
       }
     },
-    methods:{
-      async getInfo(uid,g_id){
-        let res = await info(uid,g_id);
+    methods: {
+      async getInfo(uid, g_id) {
+        let res = await info(uid, g_id);
         this.shopInfo = res.data;
         this.fenlei = 1;
       },
-      async getInfos(uid,cart_infos){
-        let data = await infos(uid,cart_infos);
+      async getInfos(uid, cart_infos) {
+        let data = await infos(uid, cart_infos);
         this.fenlei = 2;
         this.items = data.data;
         this.courier_fees = data.courier_fees;
       },
-      async getDefalutAddress(uid){
-        let res = await defaultAddress(uid);
+      async getDefalutAddress() {
+        let res = await defaultAddress(localStorage.uid);
         this.addressObj = res.data;
       },
-      async commit(uid,address_id,g_sku_infos,remark){
-        let result = await commitOrder(uid,address_id,g_sku_infos,remark)
-        if(result.code==1){
+      async commit(uid, address_id, g_sku_infos, remark) {
+        let result = await commitOrder(uid, address_id, g_sku_infos, remark)
+        if (result.code == 1) {
           this.$dialog.notify({
             mes: result.message,
             timeout: 3000
           })
         }
       },
-      commitTo(){
-        let g_sku_infos = JSON.stringify([{'g_id':this.shopInfo.g_id,'g_sku_id':this.shopInfo.g_sku_id,'amount':this.num}]);
-        if(this.addressObj.id==undefined){
+      commitTo() {
+        let g_sku_infos = JSON.stringify([{'g_id': this.shopInfo.g_id, 'g_sku_id': this.shopInfo.g_sku_id, 'amount': this.num}]);
+        if (this.addressObj.id == undefined) {
           this.$dialog.notify({
             mes: '请填写收货地址',
             timeout: 3000
           })
         }
-        this.commit(localStorage.uid,this.addressObj.id,g_sku_infos,this.remarkVal)
+        this.commit(localStorage.uid, this.addressObj.id, g_sku_infos, this.remarkVal)
       },
-      commitO(){
-        let arr=[];
-        for (var i = 0 ; i < this.items.length;i ++){
-          arr.push({'g_id':this.items[i].g_id,'g_sku_id':this.items[i].g_sku_id,'amount':this.items[i].amount})
+      commitO() {
+        let arr = [];
+        for (var i = 0; i < this.items.length; i++) {
+          arr.push({'g_id': this.items[i].g_id, 'g_sku_id': this.items[i].g_sku_id, 'amount': this.items[i].amount})
         }
         let g_sku_infos = JSON.stringify(arr)
-        if(this.addressObj.id==undefined){
+        if (this.addressObj.id == undefined) {
           this.$dialog.notify({
             mes: '请填写收货地址',
             timeout: 3000
           })
         }
-        this.commit(localStorage.uid,this.addressObj.id,g_sku_infos,this.remarkVal)
+        this.commit(localStorage.uid, this.addressObj.id, g_sku_infos, this.remarkVal)
       }
     },
-    created(){
-      if(this.$route.query.id){
-        this.getInfo(localStorage.uid,this.$route.query.id);
-      }else{
-        this.getInfos(localStorage.uid,this.$route.query.cart_infos)
+    created() {
+      if (this.$route.query.id) {
+        this.getInfo(localStorage.uid, this.$route.query.id);
+      } else {
+        this.getInfos(localStorage.uid, this.$route.query.cart_infos)
       }
-      this.getDefalutAddress(localStorage.uid);
+      this.getDefalutAddress();
     }
   }
 </script>
@@ -338,6 +338,7 @@
   .empty {
     height: 50px;
   }
+
   footer.bottom {
     position: fixed;
     bottom: 0;
@@ -351,6 +352,7 @@
       position: absolute;
       bottom: 0;
       right: 134px;
+
       span {
         line-height: 36px;
         font-size: 18px;
