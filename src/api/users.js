@@ -18,6 +18,17 @@ export const home = (uid) => ajax(BASE_URL + '/users/home', {uid})
 export const realName = (uid,real_name,idCard) => ajax(BASE_URL + '/users/realName', {uid,real_name,idCard})
 
 /*
+* 用户新增/修改银行卡信息
+* @param   uid          用户ID             必传
+* @param   bank_card    银行卡号            必传
+* @param   mobile       银行卡绑定卡号       必传
+* @param   is_default   是否默认            必传
+* @param   code         短信验证码          必传
+* @param   id           银行卡ID(编辑时必传，增加时不传)       必传
+* */
+export const bankEdit = (uid,bank_card,mobile,is_default,code,id) => ajax(BASE_URL + '/users/bankEdit', {uid,bank_card,mobile,is_default,code,id})
+
+/*
 * 会员列表接口
 * @param   page     页数                                必传
 * @param   uid      用户ID                              必传
