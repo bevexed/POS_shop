@@ -4,6 +4,13 @@ import ajax from './ajax'
 import {BASE_URL} from './BASE_URL'
 
 /*
+* 个人中心登陆用户相关信息
+* @param   uid          用户ID        必传
+* */
+export const home = (uid) => ajax(BASE_URL + '/users/home', {uid})
+
+
+/*
 * 新增/编辑用户收获地址接口
 * @param   uid          用户ID        必传
 * @param   id           地址ID        修改时必传，新增是不必传
