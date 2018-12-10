@@ -48,6 +48,7 @@
       return {
         level: 1,
         page: 1,
+        current_page: '',
         loadingState: true,
         listsUserDate: [],
       }
@@ -55,9 +56,10 @@
     methods: {
       async doListsUser(level) {
         this.level = level
-        let result = await listsUser(this.page, localStorage.uid, level)
+        let result = await listsUser(1, localStorage.uid, level)
         if (result.code === 1) {
           this.listsUserDate = result.data.data
+          this.current_page = result.current_page
         } else {
           this.$dialog.notify({
             mes: result.message,
@@ -66,9 +68,24 @@
         }
       },
       async loadingMore() {
-        this.loadingState = 'loading'
-        if (document.querySelector('#app').clientHeight + document.querySelector('#app').scrollTop > document.querySelector('#app').clientHeight) {
-          // let result = await listsUser()
+        if (this.page < this.current_page) {
+          this.loadingState = 'loading'
+          if (document.querySelector('#app').clientHeight + document.querySelector('#app').scrollTop > document.querySelector('#app').clientHeight) {
+            this.page++
+            let result = await listsUser(this.page, localStorage.uid, this.level)
+            if (result.code === 1) {
+              this.listsUserDate = [...this.loadingState, ...result.data.data]
+              this.loadingState = true
+            } else {
+              this.$dialog.notify({
+                mes: result.message,
+                timeout: 3000
+              })
+              this.loadingState = true
+            }
+          }
+        } else {
+          this.loadingState = false
         }
       }
     },
