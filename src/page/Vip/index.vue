@@ -86,9 +86,11 @@
           } else {
             this.$dialog.notify({
               mes: result.message,
-              timeout: 3000
+              timeout: 3000,
+              callback: () => {
+                this.loadingState = true
+              }
             })
-            this.loadingState = true
           }
         }
       }
