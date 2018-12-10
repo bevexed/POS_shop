@@ -67,31 +67,28 @@
           })
         }
       },
-      async loadingMore() {
+      loadingMore: async function () {
         let screenHight = document.documentElement.clientHeight
         let scrollTop = document.querySelector('#app').scrollTop
         let documentHeight = document.querySelector('#vip').scrollHeight
-        if (scrollTop + screenHight + 30 > documentHeight) {
-          if (this.loadingState === true) {
-            this.loadingState = 'loading'
-            this.current_page++
-            let result = await listsUser(this.current_page, localStorage.uid, this.level)
-            if (result.code === 1) {
-              this.current_page = result.data.current_page
-              this.listsUserDate = [...this.listsUserDate, ...result.data.data];
-              if (result.data.data.length === 10) {
-                this.loadingState = true
-              } else {
-                this.loadingState = false
-              }
-
-            } else {
-              this.$dialog.notify({
-                mes: result.message,
-                timeout: 3000
-              })
+        if (scrollTop + screenHight + 30 > documentHeight && this.loadingState === true) {
+          this.loadingState = 'loading'
+          this.current_page++
+          let result = await listsUser(this.current_page, localStorage.uid, this.level)
+          if (result.code === 1) {
+            this.current_page = result.data.current_page
+            this.listsUserDate = [...this.listsUserDate, ...result.data.data];
+            if (result.data.data.length === 10) {
               this.loadingState = true
+            } else {
+              this.loadingState = false
             }
+          } else {
+            this.$dialog.notify({
+              mes: result.message,
+              timeout: 3000
+            })
+            this.loadingState = true
           }
         }
       }
