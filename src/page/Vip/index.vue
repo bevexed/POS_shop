@@ -1,5 +1,5 @@
 <template>
-  <section @wheel="loadingMore" @touchmove="loadingMore">
+  <section @wheel="loadingMore" @touchmove="loadingMore" id="vip">
     <headers :title="'会员列表'" :isBack="true"></headers>
     <nav>
       <ul>
@@ -47,8 +47,7 @@
     data() {
       return {
         level: 1,
-        page: 1,
-        current_page: '',
+        current_page: 1,
         loadingState: true,
         listsUserDate: [],
       }
@@ -59,7 +58,7 @@
         let result = await listsUser(1, localStorage.uid, level)
         if (result.code === 1) {
           this.listsUserDate = result.data.data
-          this.current_page = result.current_page
+          this.current_page = result.data.current_page
         } else {
           this.$dialog.notify({
             mes: result.message,
@@ -68,14 +67,23 @@
         }
       },
       async loadingMore() {
-        if (this.page < this.current_page) {
-          this.loadingState = 'loading'
-          if (document.querySelector('#app').clientHeight + document.querySelector('#app').scrollTop > document.querySelector('#app').clientHeight) {
-            this.page++
-            let result = await listsUser(this.page, localStorage.uid, this.level)
+        let screenHight = document.documentElement.clientHeight
+        let scrollTop = document.querySelector('#app').scrollTop
+        let documentHeight = document.querySelector('#vip').scrollHeight
+        if (scrollTop + screenHight + 30 > documentHeight) {
+          if (this.loadingState === true) {
+            this.loadingState = 'loading'
+            this.current_page++
+            let result = await listsUser(this.current_page, localStorage.uid, this.level)
             if (result.code === 1) {
-              this.listsUserDate = [...this.loadingState, ...result.data.data]
-              this.loadingState = true
+              this.current_page = result.data.current_page
+              this.listsUserDate = [...this.listsUserDate, ...result.data.data];
+              if (result.data.data.length === 10) {
+                this.loadingState = true
+              } else {
+                this.loadingState = false
+              }
+
             } else {
               this.$dialog.notify({
                 mes: result.message,
@@ -84,8 +92,6 @@
               this.loadingState = true
             }
           }
-        } else {
-          this.loadingState = false
         }
       }
     },
