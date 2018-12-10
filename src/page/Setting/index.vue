@@ -33,7 +33,7 @@
       <section class="item">
         账号激活
         <span>
-          <img v-if="homeData.is_actives" width="12" src="../../assets/setting/ed@3x.png" alt="">
+          <img v-if="homeData.is_actives === 0" width="12" src="../../assets/setting/ed@3x.png" alt="">
           <img v-else width="12" src="../../assets/setting/none@3x.png" alt="">
           {{homeData.is_actives === 1?'已激活':'未激活'}}
         </span>

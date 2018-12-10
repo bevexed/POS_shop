@@ -1,20 +1,25 @@
 <template>
   <section>
     <headers :title="'银行卡管理'" :isBack="true"></headers>
-    <section class="card" :style="{background:line[i]}" v-for="(v,i) in card">
-      <img class="logo" src="" alt="">
+    <section class="card" :style="{background:line[i]}" v-for="(v,i) in listsBankData" :key="v.id"
+             @click="$router.push({path:'/bankcard',query:{id:v.id}})">
+      <img class="logo" :src="v.bank_logo" alt="">
       <p>
-        <span>中国光大银行</span>
+        <span>{{v.bank_name}}</span>
         <span>储蓄卡</span>
-        <span>*** *** *** 1234</span>
+        <span>{{v.bank_card}}</span>
       </p>
       <img class="edit" src="../../assets/managebankcard/ceshi@3x.png" alt="">
     </section>
+    <footer @click="$router.push('/bankcard')">
+      添加银行卡
+    </footer>
   </section>
 </template>
 
 <script>
   import headers from '../../components/headers'
+  import {listsBank} from "../../api/users";
 
   export default {
     name: "ManageBankCard",
@@ -23,20 +28,31 @@
     },
     data() {
       return {
-        card: [
-          1, 2, 3
-        ]
+        listsBankData:[]
       }
     },
     computed: {
       line() {
-        let arr = this.card.map(item => {
-          let a = Math.random() * 250 + 100
+        let arr = this.listsBankData.map(item => {
+          // let a = Math.random() * 250 + 100
+          let a = 250
+          // let background = `linear-gradient(270deg, hsla(${a - 10}, 91%, 69%, 1), hsla(${a}, 91%, 69%, 1))`
           let background = `linear-gradient(270deg, hsla(${a - 10}, 91%, 69%, 1), hsla(${a}, 91%, 69%, 1))`
           return background
         })
         return arr
       }
+    },
+    methods:{
+      async getListsBank(){
+        let result = await listsBank(localStorage.uid)
+        if (result.code === 1){
+          this.listsBankData = result.data
+        }
+      }
+    },
+    mounted(){
+      this.getListsBank()
     }
   }
 </script>
@@ -82,5 +98,17 @@
       height: 21px;
       /*filter: invert(0%);*/
     }
+  }
+
+  footer {
+    position: fixed;
+    background: #ff6d4B;
+    bottom: 0;
+    width: 100vw;
+    height: 44px;
+    line-height: 44px;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
   }
 </style>
