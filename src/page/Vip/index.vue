@@ -1,11 +1,11 @@
 <template>
-  <section>
+  <section @wheel="loadingMore" @touchmove="loadingMore">
     <headers :title="'会员列表'" :isBack="true"></headers>
     <nav>
       <ul>
-        <li :class="{active:selected === 1}" @click="change(1)">一级会员(1)</li>
-        <li :class="{active:selected === 2}" @click="change(2)">二级会员(2)</li>
-        <li :class="{active:selected === 3}" @click="change(3)">三级会员(3)</li>
+        <li :class="{active:level === 1}" @click="doListsUser(1)">一级会员(1)</li>
+        <li :class="{active:level === 2}" @click="doListsUser(2)">二级会员(2)</li>
+        <li :class="{active:level === 3}" @click="doListsUser(3)">三级会员(3)</li>
       </ul>
     </nav>
     <section class="detail" v-for="i in 10">
@@ -21,11 +21,17 @@
         <span>{{jihuo === 1? '已激活':'未激活'}}</span>
       </div>
     </section>
+    <div class="loading-more">
+      <p v-if="loading">下拉或点击加载更多</p>
+      <p v-else-if="loading === 'loading'"></p>
+      <p v-else>没有更多了</p>
+    </div>
   </section>
 </template>
 
 <script>
   import headers from '../../components/headers'
+  import {listsUser} from "../../api/users";
 
   export default {
     name: "Vip",
@@ -34,14 +40,31 @@
     },
     data() {
       return {
-        jihuo:1,
-        selected: 1
+        jihuo: 1,
+        level: 1,
+        page: 1,
+        loading: true,
+        listsUserDate: [],
       }
     },
     methods: {
-      change(i) {
-        this.selected = i
+      async doListsUser(level) {
+        this.level = level
+        let result = await listsUser(this.page, localStorage.uid, level)
+        if (result.code === 1) {
+
+        } else {
+
+        }
+      },
+      async loadingMore() {
+        if (document.querySelector('#app').clientHeight + document.querySelector('#app').scrollTop > document.querySelector('#app').clientHeight) {
+
+        }
       }
+    },
+    mounted() {
+      this.doListsUser(1)
     }
   }
 </script>
@@ -49,6 +72,7 @@
 <style scoped lang="less">
   nav {
     margin-bottom: 10px;
+
     ul {
       background: white;
       padding: 10px 15px;
@@ -73,16 +97,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    >img{
+
+    > img {
       display: inline-block;
       width: 55px;
       height: 55px;
-      border:1px solid #979797;
+      border: 1px solid #979797;
       border-radius: 50%;
     }
-    section{
+
+    section {
       width: 60%;
-      span{
+
+      span {
         display: inline-block;
         width: 34px;
         height: 14px;
@@ -94,13 +121,22 @@
         text-align: center;
       }
     }
-    div{
+
+    div {
       display: flex;
       flex-direction: column;
       align-items: center;
-      img{
+
+      img {
         width: 16px;
       }
     }
+  }
+
+  div.loading-more {
+      p{
+        padding: 1rem 0;
+        text-align: center;
+      }
   }
 </style>
