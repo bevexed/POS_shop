@@ -10,7 +10,7 @@
       <span class="address">修改/添加</span>
     </section>
     <footer>
-      <section class="item">
+      <section class="item" @click="$router.push('/realname')">
         实名认证
         <span>{{homeData.id_numbers? '已认证' : '未实名'}}</span>
       </section>
@@ -26,7 +26,7 @@
         修改密码
         <span></span>
       </section>
-      <section class="item">
+      <section class="item" @click="$router.push('/managebankcard')">
         银行卡管理
         <span></span>
       </section>

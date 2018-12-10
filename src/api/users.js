@@ -9,6 +9,14 @@ import {BASE_URL} from './BASE_URL'
 * */
 export const home = (uid) => ajax(BASE_URL + '/users/home', {uid})
 
+/*
+* 用户实名认证
+* @param   uid          用户ID        必传
+* @param   real_name    真实姓名       必传
+* @param   idCard       身份证号       必传
+* */
+export const realName = (uid,real_name,idCard) => ajax(BASE_URL + '/users/realName', {uid,real_name,idCard})
+
 
 /*
 * 新增/编辑用户收获地址接口
