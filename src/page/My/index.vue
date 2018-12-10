@@ -11,27 +11,27 @@
     <section class="booking">
       <header>
         我的订单
-        <span @click="$router.push({name:'myBooking',params:{type:0}})">全部订单 > </span>
+        <span @click="$router.push({name:'myBooking',params:{type:'all'}})">全部订单 > </span>
       </header>
       <footer>
         <ul>
-          <router-link tag="li" :to="{name:'myBooking',params:{type:1}}">
+          <router-link tag="li" :to="{name:'myBooking',params:{type:0}}">
             <img src="../../assets/my/daifukuan@3x.png" alt="">
             <p>待付款 <span>1</span></p>
           </router-link>
-          <router-link tag="li" :to="{name:'myBooking',params:{type:2}}">
+          <router-link tag="li" :to="{name:'myBooking',params:{type:1}}">
             <img src="../../assets/my/daifahuo-2@3x.png" alt="">
             <p>待发货 <span>1</span></p>
           </router-link>
-          <router-link tag="li" :to="{name:'myBooking',params:{type:3}}">
+          <router-link tag="li" :to="{name:'myBooking',params:{type:2}}">
             <img src="../../assets/my/daishouhuo-2@3x.png" alt="">
             <p>待收货 <span>1</span></p>
           </router-link>
-          <router-link tag="li" :to="{name:'myBooking',params:{type:4}}">
+          <router-link tag="li" :to="{name:'myBooking',params:{type:3}}">
             <img src="../../assets/my/31daipingjia@3x.png" alt="">
             <p>待评价 <span>1</span></p>
           </router-link>
-          <router-link tag="li" :to="{name:'myBooking',params:{type:0}}">
+          <router-link tag="li" :to="{name:'myBooking',params:{type:4}}">
             <img src="../../assets/my/tuikuan@3x.png" alt="">
             <p>退款 <span>1</span></p>
           </router-link>

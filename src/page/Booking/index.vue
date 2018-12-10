@@ -2,7 +2,7 @@
   <div style="max-height: 100vh;overflow-y: scroll">
     <section>
       <headers :title="'确认订单'" :isBack="true"></headers>
-      <section class="address" v-if="addressObj!=''" @click="$router.push('/addaddress')">
+      <section class="address" v-if="addressObj!=''" @click="$router.push('/DeliveryAddress')">
         <header>
           收货人：{{addressObj.name}} <span>{{addressObj.phone}}</span>
         </header>
