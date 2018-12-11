@@ -9,6 +9,7 @@
     <All
       v-for="(val,i) in allData"
       :key="i"
+      :data="orderListData"
       :waitPay="val.status"
       :waitPost="val.status"
       :waitGet="val.status"
@@ -35,7 +36,7 @@
         isSearch: false,
         selected: 0,
         title: '我的订单',
-        orderList: [],
+        orderListData: [],
         selectComponent: [
           {type: '全部'},
           {type: '待付款'},
@@ -68,6 +69,15 @@
       },
       async getOrderList() {
         let result = await orderList(this.page, localStorage.uid, this.$route.params.type)
+        if (result.code === 1) {
+          this.orderListData = result.data.items
+        } else {
+          this.$dialog.notify({
+            mes: result.message,
+            timeout: 3000
+          })
+        }
+
       }
     },
     mounted() {
