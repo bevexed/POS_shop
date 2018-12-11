@@ -8,11 +8,13 @@ import './filter'
 import YDUI from 'vue-ydui'
 import 'vue-ydui/dist/ydui.px.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import Mui from 'vue-awesome-mui'
 
 import 'vue-area-linkage/dist/index.css'; // v2 or higher
 import VueAreaLinkage from 'vue-area-linkage';
 
-Vue.use(VueAreaLinkage)
+Vue.use(VueAreaLinkage);
+Vue.use(Mui)
 
 
 Vue.config.productionTip = false
