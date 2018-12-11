@@ -67,7 +67,7 @@
           })
         }
       },
-      loadingMore: async function () {
+      async loadingMore() {
         let screenHight = document.documentElement.clientHeight
         let scrollTop = document.querySelector('#app').scrollTop
         let documentHeight = document.querySelector('#vip').scrollHeight

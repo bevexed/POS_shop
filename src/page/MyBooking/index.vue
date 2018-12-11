@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section @wheel="loadingMore" @touchmove="loadingMore" id="vip">
     <headers :title="selectComponent[selected].type" :is-search="isSearch" :is-back="true"/>
     <nav>
       <ul>
@@ -8,7 +8,19 @@
     </nav>
     <All
       :data="orderListData"
+      style="margin-top: 60px"
     />
+    <div class="loading-more" @click="loadingMore">
+      <p v-if="loadingState === true">下拉或点击加载更多</p>
+      <p v-else-if="loadingState === 'loading'" class="loading">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </p>
+      <p v-else>没有更多了</p>
+    </div>
   </section>
 </template>
 
@@ -26,6 +38,7 @@
     },
     data() {
       return {
+        loadingState: true,
         page: 1,
         isSearch: false,
         selected: 0,
@@ -44,10 +57,12 @@
     computed: {},
     methods: {
       async select(i) {
+        this.loadingState = true
+        this.page = 1
         if (i === 0) {
           this.$router.replace({name: 'myBooking', params: {type: 'all'}})
         } else {
-          this.$router.replace({name: 'myBooking', params: {type: i-1}})
+          this.$router.replace({name: 'myBooking', params: {type: i - 1}})
         }
         this.selected = i
 
@@ -64,6 +79,32 @@
           })
         }
 
+      },
+      async loadingMore() {
+        let screenHight = document.documentElement.clientHeight
+        let scrollTop = document.querySelector('#app').scrollTop
+        let documentHeight = document.querySelector('#vip').scrollHeight
+        if (scrollTop + screenHight + 30 > documentHeight && this.loadingState === true) {
+          this.loadingState = 'loading'
+          this.page++
+          let result = await orderList(this.page, localStorage.uid, this.$route.params.type)
+          if (result.code === 1) {
+            this.orderListData = [...this.orderListData, ...result.data.items];
+            if (result.data.items.length === 10) {
+              this.loadingState = true
+            } else {
+              this.loadingState = false
+            }
+          } else {
+            this.$dialog.notify({
+              mes: result.message,
+              timeout: 3000,
+              callback: () => {
+                this.loadingState = true
+              }
+            })
+          }
+        }
       }
     },
     mounted() {
@@ -80,8 +121,9 @@
 
 <style scoped lang="less">
   nav {
+    width: 100%;
+    position: fixed;
     background: white;
-
     ul {
       display: flex;
       justify-content: space-around;
@@ -96,6 +138,63 @@
         }
       }
 
+    }
+  }
+
+  div.loading-more {
+    padding: 1rem 0;
+
+    p {
+      text-align: center;
+    }
+
+    .loading {
+      width: 150px;
+      height: 15px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .loading span {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      margin-right: 5px;
+      background: #ff6d48;
+      -webkit-animation: load 1.04s ease infinite;
+    }
+
+    .loading span:last-child {
+      margin-right: 0px;
+    }
+
+    @-webkit-keyframes load {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    .loading span:nth-child(1) {
+      -webkit-animation-delay: 0.13s;
+    }
+
+    .loading span:nth-child(2) {
+      -webkit-animation-delay: 0.26s;
+    }
+
+    .loading span:nth-child(3) {
+      -webkit-animation-delay: 0.39s;
+    }
+
+    .loading span:nth-child(4) {
+      -webkit-animation-delay: 0.52s;
+    }
+
+    .loading span:nth-child(5) {
+      -webkit-animation-delay: 0.65s;
     }
   }
 </style>
