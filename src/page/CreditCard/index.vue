@@ -35,7 +35,7 @@
 
 <script>
   import {IMG_BASE_URL} from "../../api/BASE_URL";
-  import {banners,list} from '../../api/credit'
+  import {banners, list} from '../../api/credit'
   import headers from '../../components/headers'
 
   export default {
@@ -54,8 +54,8 @@
         },
         tabIndex: 0,
         bannerArr: [],
-        list1:[],
-        list2:[]
+        list1: [],
+        list2: []
       }
     },
     components: {
@@ -81,7 +81,7 @@
           })
         }
       },
-      async creditList(){
+      async creditList() {
         let data = await list();
         if (data.code === 1) {
           this.list1 = data.data;
@@ -92,7 +92,7 @@
           })
         }
       },
-      async newList(type){
+      async newList(type) {
         let data = await list(type);
         console.log(data);
         if (data.code === 1) {

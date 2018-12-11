@@ -1,6 +1,6 @@
 <template>
   <section>
-    <section class="card" v-for="(v,i) in data" :key="i">
+    <section class="card" v-for="(v,i) in data" :key="i" @click="$router.push({name:'BookingDetail',params:{id:v.id}})">
       <header v-for="(value,index) in v.goods_sku" :key="value.goods_id">
         <img :src="IMG_BASE_URL + value.show_pic" alt="">
         <p>
@@ -10,7 +10,7 @@
         </p>
         <div>
           ￥{{value.price}}
-          <p>x1</p>
+          <p>x{{value.amount}}</p>
         </div>
       </header>
       <section class="price">
@@ -18,30 +18,30 @@
       </section>
       <!--待付款-->
       <footer v-if="v.status === 0">
-        <span class="cancel>">取消订单</span>
+        <span class="cancel" @click="doOrdersCancel(v.id)">取消订单</span>
         <span class="pay>">付款</span>
       </footer>
       <!--待发货-->
       <footer v-if="v.status === 1">
-        <span class="del>">删除订单</span>
+        <span class="del" @click="doOrdersDel(v.id)">删除订单</span>
         <span class="elva">待发货</span>
       </footer>
       <!--待收货-->
       <footer v-if="v.status === 2">
-        <span class="del>">删除订单</span>
+        <span class="del" @click="doOrdersDel(v.id)">删除订单</span>
         <span class="post>">查看物流</span>
-        <span class="elva">确认发货</span>
+        <span class="elva" @click="doOrderConfirm(v.id)">确认收货</span>
       </footer>
       <!--待评价-->
       <footer v-if="v.status === 3">
-        <span class="del>">删除订单</span>
-        <span class="post>">查看物流</span>
+        <span class="del" @click="doOrdersDel(v.id)">删除订单</span>
+        <span class="post">查看物流</span>
         <span class="elva">评价</span>
       </footer>
       <!--带退款-->
       <footer v-if="v.status === 4">
-        <span class="del>">删除订单</span>
-        <span class="post>">查看物流</span>
+        <span class="del" @click="doOrdersDel(v.id)">删除订单</span>
+        <span class="post">查看物流</span>
         <span class="elva">评价</span>
       </footer>
     </section>
@@ -50,6 +50,7 @@
 
 <script>
   import {IMG_BASE_URL} from "../../api/BASE_URL";
+  import {orderConfirm, ordersCancel, ordersDel} from "../../api/orders";
 
   export default {
     name: "all",
@@ -59,7 +60,62 @@
       }
     },
     props: ['data'],
-    methods: {},
+    methods: {
+      // 确认收货
+      async doOrderConfirm(id) {
+        let result = await orderConfirm(id, localStorage.uid)
+        if (result.code === 1) {
+          this.$dialog.notify({
+            mes: result.message,
+            timeout: 500,
+            callback: () => {
+              this.$router.go(0)
+            }
+          })
+        } else {
+          this.$dialog.notify({
+            mes: result.message,
+            timeout: 1500,
+          })
+        }
+      },
+      // 取消订单
+      async doOrdersCancel(id) {
+        let result = await ordersCancel(id, localStorage.uid)
+        if (result.code === 1) {
+          this.$dialog.notify({
+            mes: result.message,
+            timeout: 500,
+            callback: () => {
+              this.$router.go(0)
+            }
+          })
+        } else {
+          this.$dialog.notify({
+            mes: result.message,
+            timeout: 1500,
+          })
+        }
+      },
+      // 删除订单
+      async doOrdersDel(id) {
+        let result = await ordersDel(id, localStorage.uid)
+        if (result.code === 1) {
+          this.$dialog.notify({
+            mes: result.message,
+            timeout: 500,
+            callback: () => {
+              this.$router.go(0)
+            }
+          })
+        } else {
+          this.$dialog.notify({
+            mes: result.message,
+            timeout: 1500,
+          })
+        }
+      }
+    },
     created() {
 
     }

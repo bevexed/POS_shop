@@ -124,6 +124,7 @@
     width: 100%;
     position: fixed;
     background: white;
+
     ul {
       display: flex;
       justify-content: space-around;

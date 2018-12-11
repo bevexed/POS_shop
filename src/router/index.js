@@ -93,8 +93,9 @@ const router = new Router({
       meta: {index: 3}
     },
     {
-      path: '/bookingdetail',
+      path: '/bookingdetail/id/:id',
       component: BookingDetail,
+      name:'BookingDetail',
       meta: {index: 2,}
     },
     {

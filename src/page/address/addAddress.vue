@@ -50,14 +50,14 @@
       async addAddress() {
         let {uid, id, selected, address, name, phone} = this
         let result = await addressEdit(uid, id, address, name, phone, ...selected)
-        if (!name){
+        if (!name) {
           this.$dialog.notify({
             mes: '请输入姓名',
             timeout: 3000
           })
           return
         }
-        if (!phone || !/^[0-9]{11}$/.test(phone)){
+        if (!phone || !/^[0-9]{11}$/.test(phone)) {
           this.$dialog.notify({
             mes: '请检查手机号',
             timeout: 3000

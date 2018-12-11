@@ -22,7 +22,7 @@
         通道类别：
         <select id="select" v-model="val" @change="selectVal">
           <option value="">--请选择--</option>
-          <option  v-for="(v,i) in detailData.sku" :value="v.id">{{v.trad_channel}}</option>
+          <option v-for="(v,i) in detailData.sku" :value="v.id">{{v.trad_channel}}</option>
         </select>
       </footer>
     </div>
@@ -64,12 +64,10 @@
         uid: localStorage.uid,
         detailData: {},
         IMG_BASE_URL,
-        val:""
+        val: ""
       }
     },
-    components:{
-
-    },
+    components: {},
     created() {
       this.getDetail(this.$route.params.id)
     },
@@ -77,7 +75,7 @@
       backClick() {
         this.$router.back();
       },
-      goCar(){
+      goCar() {
         this.$router.push('/shoppingCar')
       },
       async addShoppingCar(uid, g_sku_id) {
@@ -94,13 +92,13 @@
           })
         }
       },
-      selectVal(){
+      selectVal() {
         console.log(this.val)
       },
-      buy(){
-        if(this.val!=''){
-          this.$router.push({path:'/booking',query:{id:this.val}})
-        }else{
+      buy() {
+        if (this.val != '') {
+          this.$router.push({path: '/booking', query: {id: this.val}})
+        } else {
           this.$dialog.notify({
             mes: '请选择通道类别',
             timeout: 3000
@@ -137,6 +135,7 @@
       top: 33px;
       left: 11px;
     }
+
     .shopCar {
       width: 20px;
       position: absolute;
@@ -187,9 +186,11 @@
 
     footer {
       margin-top: 2px;
-      span{
+
+      span {
         margin-right: 5px;
       }
+
       #select {
         width: 150px;
       }
@@ -258,7 +259,7 @@
     display: flex;
     justify-content: flex-end;
 
-    span,a {
+    span, a {
       float: left;
       display: inline-block;
       width: 128px;
