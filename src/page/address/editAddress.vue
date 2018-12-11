@@ -19,9 +19,18 @@
         <input class="address_dir" type="text" v-model="address" placeholder="详细地址：如道路、门牌号、小区、单元室等等">
       </li>
     </ul>
-    <div class="deleteAddress" @click="delAddress">
-      删除收货地址
-    </div>
+    <yd-cell-group>
+      <yd-cell-item>
+        <span slot="left">设置默认地址</span>
+        <yd-switch slot="right" v-model="is_default"></yd-switch>
+      </yd-cell-item>
+      <yd-cell-item>
+        <div class="deleteAddress" slot="left" @click="delAddress">
+          删除收货地址
+        </div>
+      </yd-cell-item>
+    </yd-cell-group>
+
 
   </div>
 </template>
@@ -37,6 +46,7 @@
     },
     data() {
       return {
+        is_default: false,
         selected: [],
         uid: localStorage.uid,
         id: '',
@@ -71,9 +81,10 @@
         }
       },
       async addAddress() {
+        let isDefault = this.is_default ? 1 : 0
         this.id = this.$route.params.id
         let {uid, id, selected, address, name, phone} = this
-        let result = await addressEdit(uid, id, address, name, phone, ...selected)
+        let result = await addressEdit(uid, id, address, name, phone, ...selected, isDefault)
         if (!name) {
           this.$dialog.notify({
             mes: '请输入姓名',
@@ -125,6 +136,10 @@
 
   .area-selected-trigger {
     padding-top: 5px !important;
+  }
+
+  .yd-cell {
+    z-index: 0;
   }
 </style>
 
@@ -190,7 +205,6 @@
   .deleteAddress {
     height: 42px;
     background: #fff;
-    padding: 0 10px;
     line-height: 42px;
     color: #FB1313;
     font-family: myFont, sans-serif;

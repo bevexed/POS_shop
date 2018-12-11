@@ -19,6 +19,12 @@
         <input class="address_dir" type="text" v-model="address" placeholder="详细地址：如道路、门牌号、小区、单元室等等">
       </li>
     </ul>
+    <yd-cell-group>
+      <yd-cell-item>
+        <span slot="left">设置默认地址</span>
+        <yd-switch slot="right" v-model="is_default"></yd-switch>
+      </yd-cell-item>
+    </yd-cell-group>
   </div>
 </template>
 
@@ -33,6 +39,7 @@
     },
     data() {
       return {
+        is_default: false,
         selected: [],
         uid: localStorage.uid,
         id: '',
@@ -48,8 +55,9 @@
     },
     methods: {
       async addAddress() {
+        let isDefault = this.is_default ? 1 : 0
         let {uid, id, selected, address, name, phone} = this
-        let result = await addressEdit(uid, id, address, name, phone, ...selected)
+        let result = await addressEdit(uid, id, address, name, phone, ...selected, isDefault)
         if (!name) {
           this.$dialog.notify({
             mes: '请输入姓名',
@@ -89,6 +97,10 @@
   }
 </script>
 <style lang="less">
+  .yd-cell {
+    z-index: 0;
+  }
+
   .area-select-wrap {
     width: 90%;
     display: flex;
