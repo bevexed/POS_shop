@@ -13,7 +13,7 @@
         <p></p>
       </footer>
     </section>
-    <section class="detail" v-for="(v,i) in ordersDetailData.goods_sku">
+    <section class="detail" v-for="(v,i) in ordersDetailData.goods_sku" @click="$router.push({name:'productDetail',params:{id:v.goods_id}})">
       <img :src="IMG_BASE_URL+v.show_pic" alt="">
       <section>
         <header>
