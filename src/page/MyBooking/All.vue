@@ -30,7 +30,7 @@
       <footer v-if="v.status === 2">
         <span class="del>">删除订单</span>
         <span class="post>">查看物流</span>
-        <span class="elva">确认发货</span>
+        <span class="elva" @click="doOrderConfirm(v.id)">确认收货</span>
       </footer>
       <!--待评价-->
       <footer v-if="v.status === 3">
@@ -50,6 +50,7 @@
 
 <script>
   import {IMG_BASE_URL} from "../../api/BASE_URL";
+  import {orderConfirm} from "../../api/orders";
 
   export default {
     name: "all",
@@ -59,7 +60,28 @@
       }
     },
     props: ['data'],
-    methods: {},
+    methods: {
+      async doOrderConfirm (id){
+        let result = await orderConfirm(id,localStorage.uid)
+        if (result.code === 1){
+          this.$dialog.notify({
+            mes:result.message,
+            timeout:500,
+            callback:()=>{
+              this.$router.go(0)
+            }
+          })
+        } else {
+          this.$dialog.notify({
+            mes:result.message,
+            timeout:500,
+            callback:()=>{
+              this.$router.go(0)
+            }
+          })
+        }
+      }
+    },
     created() {
 
     }
