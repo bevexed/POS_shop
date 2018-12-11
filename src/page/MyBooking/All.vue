@@ -1,45 +1,45 @@
 <template>
   <section>
     <section class="card" v-for="(v,i) in data" :key="i">
-      <header>
-        <img src="" alt="">
+      <header v-for="(value,index) in v.goods_sku" :key="value.goods_id">
+        <img :src="IMG_BASE_URL + value.show_pic" alt="">
         <p>
-          POS哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈好 <br>
-          <span>通道：1234</span> <br>
-          <span>系列：企业POS机</span>
+          {{value.goods_name}} <br>
+          <span>通道：{{value.trad_channel}}</span> <br>
+          <span>系列：{{value.category}}</span>
         </p>
         <div>
-          ￥286.00
+          ￥{{value.price}}
           <p>x1</p>
         </div>
       </header>
       <section class="price">
-        共一件商品 合计：<span>￥268.00</span>
+        共一件商品 合计：<span>￥{{v.total_amount}}</span>
       </section>
       <!--待付款-->
-      <footer v-if="v.status === 1">
+      <footer v-if="v.status === 0">
         <span class="cancel>">取消订单</span>
         <span class="pay>">付款</span>
       </footer>
       <!--待发货-->
-      <footer v-if="v.status === 2">
+      <footer v-if="v.status === 1">
         <span class="del>">删除订单</span>
         <span class="elva">待发货</span>
       </footer>
       <!--待收货-->
-      <footer v-if="v.status === 3">
+      <footer v-if="v.status === 2">
         <span class="del>">删除订单</span>
         <span class="post>">查看物流</span>
         <span class="elva">确认发货</span>
       </footer>
       <!--待评价-->
-      <footer v-if="v.status === 4">
+      <footer v-if="v.status === 3">
         <span class="del>">删除订单</span>
         <span class="post>">查看物流</span>
         <span class="elva">评价</span>
       </footer>
       <!--带退款-->
-      <footer v-if="v.status === 5">
+      <footer v-if="v.status === 4">
         <span class="del>">删除订单</span>
         <span class="post>">查看物流</span>
         <span class="elva">评价</span>
@@ -49,11 +49,14 @@
 </template>
 
 <script>
+  import {IMG_BASE_URL} from "../../api/BASE_URL";
 
   export default {
     name: "all",
     data() {
-      return {}
+      return {
+        IMG_BASE_URL
+      }
     },
     props: ['data'],
     methods: {},
@@ -73,6 +76,7 @@
 
     header {
       display: flex;
+      margin-bottom: 10px;
       justify-content: space-between;
 
       > img {

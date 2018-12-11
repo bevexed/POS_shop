@@ -47,7 +47,7 @@
         if (i === 0) {
           this.$router.replace({name: 'myBooking', params: {type: 'all'}})
         } else {
-          this.$router.replace({name: 'myBooking', params: {type: i}})
+          this.$router.replace({name: 'myBooking', params: {type: i-1}})
         }
         this.selected = i
 
