@@ -5,8 +5,8 @@
 
       <div class="customDynamic">
         <div>
-          <p>用户评论（8）</p>
-          <p>查看全部</p>
+          <p>用户评论（{{dynamicUL.length}}）</p>
+          <!--<p>查看全部</p>-->
         </div>
         <div class="dynamic_list">
           <div v-for="(item,index) in dynamicUL" :key="index">
