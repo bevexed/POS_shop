@@ -8,7 +8,7 @@
         <li :class="{active:level === 3}" @click="doListsUser(3)">三级会员(3)</li>
       </ul>
     </nav>
-    <section class="detail" v-for="(v,i) in listsUserDate">
+    <section class="detail" v-for="(v,i) in listsUserDate" :key="i">
       <img :src="v.avatar" alt="">
       <section>
         <p>{{v.nick_name}} <span>VIP1</span></p>

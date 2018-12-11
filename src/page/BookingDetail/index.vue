@@ -3,12 +3,12 @@
     <headers :title="'订单详情'" :isBack="true"></headers>
     <section class="address">
       <header>
-        收货人：哈哈哈哈 <span>12345678913</span>
+        收货人：{{ordersDetailData.contact_name}} <span>{{ordersDetailData.contact_phone}}</span>
       </header>
       <footer>
         <yd-icon size="22px" name="location"></yd-icon>
         <p>
-          收货地址：浙江省杭州市西湖区1234号哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+          收货地址：{{ordersDetailData.address}}
         </p>
         <p></p>
       </footer>
@@ -45,16 +45,16 @@
           订单编号：{{ordersDetailData.no}}
         </li>
         <li>
-          创建时间：2018-11-23 14:00:09
+          创建时间：{{ordersDetailData.create_time | TimeDate}}
         </li>
         <li>
-          付款时间：2018-11-23 14:00:09
+          付款时间：{{ordersDetailData.paid_time | TimeDate}}
         </li>
         <li>
-          发货时间：2018-11-23 14:00:09
+          发货时间：{{ordersDetailData.delivery_time | TimeDate}}
         </li>
         <li>
-          成交时间：2018-11-23 14:00:09
+          成交时间：{{ordersDetailData.clinch_time | TimeDate}}
         </li>
 
 
