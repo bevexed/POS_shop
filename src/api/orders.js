@@ -13,3 +13,15 @@ export const orderList = (page, uid, status) => ajax(BASE_URL + '/orders/index',
 *  @param    uid     用户ID
 */
 export const orderConfirm = (id, uid) => ajax(BASE_URL + '/orders/orderConfirm', {id, uid})
+
+/* 用户取消订单
+*  @param    id      订单ID
+*  @param    uid     用户ID
+*/
+export const ordersCancel = (id, uid) => ajax(BASE_URL + '/orders/ordersCancel', {id, uid})
+
+/* 用户删除订单
+*  @param    id      订单ID
+*  @param    uid     用户ID
+*/
+export const ordersDel = (id, uid) => ajax(BASE_URL + '/orders/ordersDel', {id, uid})
