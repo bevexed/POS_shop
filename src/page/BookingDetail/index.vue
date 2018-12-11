@@ -17,7 +17,7 @@
       <img :src="IMG_BASE_URL+v.show_pic" alt="">
       <section>
         <header>
-         {{v.goods_name}}
+          {{v.goods_name}}
         </header>
         <p>
           系列：{{v.category}}
@@ -106,6 +106,7 @@
     font-size: 14px;
     color: #4d4d4d;
     margin-bottom: 10px;
+
     header {
       margin-left: 27px;
 
@@ -173,12 +174,12 @@
     }
 
 
-
   }
 
-  .total_money{
+  .total_money {
     background: white;
     padding: 10px;
+
     footer {
       padding: 10px 0 0 0;
       display: flex;

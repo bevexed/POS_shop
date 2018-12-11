@@ -157,6 +157,7 @@
 
   .shopList {
     padding: 12px 10px;
+
     li {
       width: 355px;
       height: 109px;
@@ -166,12 +167,14 @@
       display: flex;
       align-items: center;
       margin-bottom: 10px;
+
       .shopImg {
         width: 100px;
         height: 83px;
         margin: 0 5px 0 0;
         border-radius: 5px;
       }
+
       .shopContent {
         display: flex;
         flex-direction: column;
@@ -179,25 +182,31 @@
         align-items: flex-start;
         height: 83px;
         flex: 1;
+
         & > P {
           font-size: 12px;
         }
+
         & > span {
           font-size: 12px;
           color: #909090;
         }
+
         & > div {
           width: 100%;
           display: flex;
           justify-content: space-between;
           align-items: center;
+
           & > span {
             color: #FB1313;
             font-size: 13px;
           }
+
           & > div {
             width: 87px;
             height: 20px;
+
             & > span {
               width: 87px !important;
               height: 20px !important;
@@ -224,13 +233,16 @@
     padding: 0 11px 0 19px;
     background: #E8E9EB;
     border-top: 1px #E8E9EB solid;
+
     & > div {
       display: flex;
       align-items: center;
+
       & > p {
         margin: 0 5px;
       }
     }
+
     .account {
       width: 116px;
       height: 44px;
@@ -238,6 +250,7 @@
       border-radius: 20px;
       color: #fff;
     }
+
     .delete {
       width: 116px;
       height: 44px;
@@ -263,7 +276,7 @@
 
 </style>
 <style lang="less">
-  .shopList{
+  .shopList {
     .yd-spinner-square:after, .yd-spinner-square:before {
       content: "";
       position: absolute;
@@ -273,6 +286,7 @@
       height: 1px;
       background-image: none !important;
     }
+
     .yd-spinner-square > span:first-child:before {
       content: "";
       position: absolute;

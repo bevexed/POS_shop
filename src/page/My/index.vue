@@ -138,7 +138,7 @@
       ul {
         display: flex;
 
-        li,a {
+        li, a {
           width: 20%;
           text-align: center;
           display: flex;
@@ -146,6 +146,7 @@
           align-items: center;
           flex-direction: column;
           cursor: pointer;
+
           img {
             width: 20px;
           }
@@ -176,7 +177,7 @@
       justify-content: flex-start;
       flex-wrap: wrap;
 
-      li,a {
+      li, a {
         display: flex;
         text-align: center;
         justify-content: flex-end;
@@ -185,6 +186,7 @@
         margin-top: 26px;
         width: 33%;
         cursor: pointer;
+
         img {
           width: 25px;
         }

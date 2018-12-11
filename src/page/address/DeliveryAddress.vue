@@ -1,8 +1,8 @@
 <template>
   <div class="add">
     <headers :title="title" :isBack="true"></headers>
-    <ul class="address_list" >
-      <router-link tag="li" :to="{name:'editAddress',params:{id:v.id}}"  v-for="(v,i) in addressDate" :key="v.id">
+    <ul class="address_list">
+      <router-link tag="li" :to="{name:'editAddress',params:{id:v.id}}" v-for="(v,i) in addressDate" :key="v.id">
         <div>
           <p>
             <span>{{v.name}}</span>
@@ -27,7 +27,7 @@
     data() {
       return {
         title: '我的收货地址',
-        addressDate:[]
+        addressDate: []
       }
     },
     components: {
@@ -67,7 +67,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      &:last-child{
+
+      &:last-child {
         border: none;
       }
 

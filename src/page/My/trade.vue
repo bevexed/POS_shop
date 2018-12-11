@@ -34,7 +34,7 @@
     },
     data() {
       return {
-        jihuo:1,
+        jihuo: 1,
         selected: 1
       }
     },
@@ -49,6 +49,7 @@
 <style scoped lang="less">
   nav {
     margin-bottom: 10px;
+
     ul {
       background: white;
       padding: 10px 15px;
@@ -73,16 +74,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    >img{
+
+    > img {
       display: inline-block;
       width: 55px;
       height: 55px;
-      border:1px solid #979797;
+      border: 1px solid #979797;
       border-radius: 50%;
     }
-    section{
+
+    section {
       width: 60%;
-      span{
+
+      span {
         display: inline-block;
         width: 34px;
         height: 14px;
@@ -94,11 +98,13 @@
         text-align: center;
       }
     }
-    div{
+
+    div {
       display: flex;
       flex-direction: column;
       align-items: center;
-      img{
+
+      img {
         width: 16px;
       }
     }

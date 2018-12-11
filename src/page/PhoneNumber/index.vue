@@ -31,15 +31,17 @@
 </script>
 
 <style scoped lang="less">
-  p.title{
+  p.title {
     font-size: 12px;
     color: #4d4d4d;
     padding: 6px 13px 13px;
   }
-  footer{
+
+  footer {
     display: flex;
     background: white;
     padding: 13px;
+
     img {
       display: inline-block;
       width: 70px;
