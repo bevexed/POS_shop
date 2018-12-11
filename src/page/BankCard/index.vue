@@ -34,7 +34,11 @@
       </yd-cell-item>
     </yd-cell-group>
     <yd-cell-group style="margin-top: 20px">
-      <yd-cell-item @click.native="doBankDel" v-if="id">
+      <yd-cell-item>
+        <span slot="left">设置默认账户</span>
+        <yd-switch slot="right" v-model="is_default"></yd-switch>
+      </yd-cell-item>
+      <yd-cell-item @click.native="doBankDel" v-show="id">
         <span slot="left" style="color: #ff0000">删除账户信息 </span>
       </yd-cell-item>
     </yd-cell-group>
@@ -61,7 +65,7 @@
         type: 2,
         mobile: '',
         bank_card: '',
-        is_default: 0,
+        is_default: false,
         code: '',
         id: ''
       }
@@ -100,6 +104,7 @@
       },
 
       async addBnakcard() {
+        let isDefault = this.is_default ? 1 : 0
         let {bank_card, mobile, is_default, code, id} = this
         let numberPattern = /^[0-9]{11}$/
         if (!mobile || !numberPattern.test(mobile)) {
@@ -124,7 +129,7 @@
           return
         }
 
-        let result = await bankEdit(localStorage.uid, bank_card, mobile, is_default, code, id)
+        let result = await bankEdit(localStorage.uid, bank_card, mobile, isDefault, code, id)
         if (result.code === 1) {
           this.$dialog.toast({
             mes: '绑定成功',
