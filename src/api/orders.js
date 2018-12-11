@@ -31,3 +31,16 @@ export const ordersDel = (id, uid) => ajax(BASE_URL + '/orders/ordersDel', {id, 
 *  @param    uid     用户ID
 */
 export const ordersDetail = (id, uid) => ajax(BASE_URL + '/orders/ordersDetail', {id, uid})
+
+/* 用户订单详情接口
+*  @param    id      订单ID
+*/
+export const aliPay = (id) => ajax(BASE_URL + '/pay/aliPay', {id},"GET")
+
+/*
+* let res = await aliPay(this.$route.params.id)
+        const div = document.createElement('div');
+        div.innerHTML = res; // html code
+        document.body.appendChild(div);
+        document.forms.alipaysubmit.submit();
+* */

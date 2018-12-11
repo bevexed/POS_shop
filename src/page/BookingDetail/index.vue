@@ -66,7 +66,7 @@
 <script>
   import headers from '../../components/headers'
   import {IMG_BASE_URL} from "../../api/BASE_URL";
-  import {ordersDetail} from "../../api/orders";
+  import {ordersDetail,aliPay} from "../../api/orders";
 
   export default {
     name: "BookingDetail",
