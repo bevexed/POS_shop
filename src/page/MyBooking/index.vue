@@ -7,13 +7,7 @@
       </ul>
     </nav>
     <All
-      v-for="(val,i) in allData"
-      :key="i"
       :data="orderListData"
-      :waitPay="val.status"
-      :waitPost="val.status"
-      :waitGet="val.status"
-      :waitElva="val.status"
     />
   </section>
 </template>
@@ -45,14 +39,6 @@
           {type: '待评价'},
           {type: '退款'}
         ],
-        allData: [
-          {status: 'all'},
-          {status: 0},
-          {status: 1},
-          {status: 2},
-          {status: 3},
-          {status: 4}
-        ]
       }
     },
     computed: {},

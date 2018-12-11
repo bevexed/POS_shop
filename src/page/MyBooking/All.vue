@@ -1,38 +1,50 @@
 <template>
-  <section class="card">
-    <header>
-      <img src="" alt="">
-      <p>
-        POS哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈好 <br>
-        <span>通道：1234</span> <br>
-        <span>系列：企业POS机</span>
-      </p>
-      <div>
-        ￥286.00
-        <p>x1</p>
-      </div>
-    </header>
-    <section class="price">
-      共一件商品 合计：<span>￥268.00</span>
+  <section>
+    <section class="card" v-for="(v,i) in data" :key="i">
+      <header>
+        <img src="" alt="">
+        <p>
+          POS哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈好 <br>
+          <span>通道：1234</span> <br>
+          <span>系列：企业POS机</span>
+        </p>
+        <div>
+          ￥286.00
+          <p>x1</p>
+        </div>
+      </header>
+      <section class="price">
+        共一件商品 合计：<span>￥268.00</span>
+      </section>
+      <!--待付款-->
+      <footer v-if="v.status === 1">
+        <span class="cancel>">取消订单</span>
+        <span class="pay>">付款</span>
+      </footer>
+      <!--待发货-->
+      <footer v-if="v.status === 2">
+        <span class="del>">删除订单</span>
+        <span class="elva">待发货</span>
+      </footer>
+      <!--待收货-->
+      <footer v-if="v.status === 3">
+        <span class="del>">删除订单</span>
+        <span class="post>">查看物流</span>
+        <span class="elva">确认发货</span>
+      </footer>
+      <!--待评价-->
+      <footer v-if="v.status === 4">
+        <span class="del>">删除订单</span>
+        <span class="post>">查看物流</span>
+        <span class="elva">评价</span>
+      </footer>
+      <!--带退款-->
+      <footer v-if="v.status === 5">
+        <span class="del>">删除订单</span>
+        <span class="post>">查看物流</span>
+        <span class="elva">评价</span>
+      </footer>
     </section>
-    <footer v-if="waitPay === 0">
-      <span class="cancel>">取消订单</span>
-      <span class="pay>">付款</span>
-    </footer>
-    <footer v-if="waitPost === 1">
-      <span class="del>">删除订单</span>
-      <span class="elva">待发货</span>
-    </footer>
-    <footer v-if="waitGet === 2">
-      <span class="del>">删除订单</span>
-      <span class="post>">查看物流</span>
-      <span class="elva">确认发货</span>
-    </footer>
-    <footer v-if="waitElva === 3">
-      <span class="del>">删除订单</span>
-      <span class="post>">查看物流</span>
-      <span class="elva">评价</span>
-    </footer>
   </section>
 </template>
 
@@ -40,16 +52,12 @@
 
   export default {
     name: "all",
-    data(){
-      return{
-
-      }
+    data() {
+      return {}
     },
-    props: ['waitPay', 'waitPost', 'waitGet', 'waitElva'],
-    methods:{
-
-    },
-    created(){
+    props: ['data'],
+    methods: {},
+    created() {
 
     }
   }
