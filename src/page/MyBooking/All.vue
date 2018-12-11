@@ -1,6 +1,6 @@
 <template>
   <section>
-    <section class="card" v-for="(v,i) in data" :key="i">
+    <section class="card" v-for="(v,i) in data" :key="i" @click="$router.push({name:'BookingDetail',params:{id:v.id}})">
       <header v-for="(value,index) in v.goods_sku" :key="value.goods_id">
         <img :src="IMG_BASE_URL + value.show_pic" alt="">
         <p>
@@ -10,7 +10,7 @@
         </p>
         <div>
           ￥{{value.price}}
-          <p>x1</p>
+          <p>x{{value.amount}}</p>
         </div>
       </header>
       <section class="price">
