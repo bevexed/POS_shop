@@ -28,10 +28,10 @@ import PhoneNumber from '../page/PhoneNumber/index'
 import ManageBankCard from '../page/ManageBankCard/index'
 
 
-import incomeManage from '../page/my/incomeManage'
+import incomeManage from '../page/IncomeManage'
 import planLink from '../page/Promotion'
-import useBook from '../page/my/useBook'
-import trade from '../page/my/trade'
+import useBook from '../page/Guide/guide'
+import trade from '../page/Trade'
 
 Vue.use(Router)
 
