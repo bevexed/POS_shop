@@ -3,22 +3,25 @@
     <headers :title="title" :isBack="true"></headers>
     <div class="cardDiv" v-html="content_info"></div>
 
-      <div class="customDynamic">
-        <div>
-          <p>用户评论（{{dynamicUL.length}}）</p>
-          <!--<p>查看全部</p>-->
-        </div>
-        <div class="dynamic_list">
-          <div v-for="(item,index) in dynamicUL" :key="index">
-            <div>
-              <img :src="`${IMG_BASE_URL}${item.consumer.avatar}`" alt="图片">
-              <p>{{item.consumer.nick_name}}</p>
-            </div>
-            <p>{{item.content}}</p>
+    <div class="customDynamic">
+      <div>
+        <p>用户评论（{{dynamicUL.length}}）</p>
+        <!--<p>查看全部</p>-->
+      </div>
+      <div class="dynamic_list">
+        <div v-for="(item,index) in dynamicUL" :key="index">
+          <div>
+            <img :src="IMG_BASE_URL+item.consumer.avatar" alt="图片">
+            <p>{{item.consumer.nick_name}}</p>
           </div>
+          <p>{{item.content}}</p>
         </div>
       </div>
     </div>
+    <footer>
+
+    </footer>
+  </div>
 </template>
 
 <script>

@@ -1,7 +1,7 @@
 import {Confirm, Alert, Toast, Notify, Loading} from 'vue-ydui/dist/lib.rem/dialog';
 import {
   LOGIN,
-  REGISTER
+  REGISTER,
 } from "./mutation-types";
 
 import {
@@ -9,10 +9,15 @@ import {
   doLogin
 } from '../api/login'
 
+import {
+  home
+} from "../api/users";
+
 export default {
   async login({commit, state}, payload) {
     const result = await doLogin(payload);
-    let userInfo = result.data
+    const res = await home(result.data.uid)
+    let userInfo = {...result.data,...res.data}
     if (result.code === 1) {
       commit(LOGIN, {userInfo})
     } else {

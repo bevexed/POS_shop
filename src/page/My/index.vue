@@ -1,11 +1,13 @@
 <template>
   <section>
     <header class="user" @click="$router.push('/setting')">
-      <img src="" alt="">
-      <p><span>HAHAHAHAHAHAHA</span> <br>
-        <yd-icon size="20px" name="footmark"></yd-icon>
+      <img :src="IMG_BASE_URL+homeData.avatars" alt="">
+      <p><span>{{homeData.nick_name}}</span> <br>
+        <!--<yd-icon size="20px" name="footmark"></yd-icon>-->
+        {{homeData.is_actives === 1 ? '会员已激活':'会员未激活'}}
       </p>
-      <span>></span>
+      <span class="vip" v-if="homeData.is_actives === 0 ">会员激活</span>
+      <span v-else>></span>
     </header>
 
     <section class="booking">
@@ -17,23 +19,23 @@
         <ul>
           <router-link tag="li" :to="{name:'myBooking',params:{type:0}}">
             <img src="../../assets/my/daifukuan@3x.png" alt="">
-            <p>待付款 <span>1</span></p>
+            <p>待付款 <span>{{homeData.obligation}}</span></p>
           </router-link>
           <router-link tag="li" :to="{name:'myBooking',params:{type:1}}">
             <img src="../../assets/my/daifahuo-2@3x.png" alt="">
-            <p>待发货 <span>1</span></p>
+            <p>待发货 <span>{{homeData.accountPaid}}</span></p>
           </router-link>
           <router-link tag="li" :to="{name:'myBooking',params:{type:2}}">
             <img src="../../assets/my/daishouhuo-2@3x.png" alt="">
-            <p>待收货 <span>1</span></p>
+            <p>待收货 <span>{{homeData.waitReceive}}</span></p>
           </router-link>
           <router-link tag="li" :to="{name:'myBooking',params:{type:3}}">
             <img src="../../assets/my/31daipingjia@3x.png" alt="">
-            <p>待评价 <span>1</span></p>
+            <p>待评价 <span>{{homeData.toEvaluate}}</span></p>
           </router-link>
           <router-link tag="li" :to="{name:'myBooking',params:{type:4}}">
             <img src="../../assets/my/tuikuan@3x.png" alt="">
-            <p>退款 <span>1</span></p>
+            <p>退款 <span>{{homeData.refunded}}</span></p>
           </router-link>
         </ul>
       </footer>
@@ -50,7 +52,7 @@
           <p>订单管理</p>
         </router-link>
         <router-link tag="li" :to="{path:'vip'}">
-          <img src="../../assets/my/huiyuanguanli@3x.png" alt="">
+          <img :class="{vip:homeData.is_actives === 0}" src="../../assets/my/huiyuanguanli@3x.png" alt="">
           <p>会员管理</p>
         </router-link>
         <router-link to="/trade">
@@ -58,15 +60,19 @@
           <p>交易管理</p>
         </router-link>
         <router-link to="/incomeManage">
-          <img src="../../assets/my/shouyiguanli@3x.png" alt="">
+          <img :class="{vip:homeData.is_actives === 0}" src="../../assets/my/shouyiguanli@3x.png" alt="">
           <p>收益管理</p>
         </router-link>
         <router-link to="/shoppingCar">
           <img src="../../assets/my/buy-car@3x.png" alt="">
           <p>购物车管理</p>
         </router-link>
-        <router-link to="/planLink">
-          <img src="../../assets/my/tuiguang-@3x.png" alt="">
+        <router-link to="/shoppingCar">
+          <img src="../../assets/my/123.png" alt="">
+          <p>我的商品</p>
+        </router-link>
+        <router-link :to="{path:'/planLink',query:{promotes:homeData.promotes}}">
+          <img :class="{vip:homeData.is_actives === 0}" src="../../assets/my/tuiguang-@3x.png" alt="">
           <p>推广链接</p>
         </router-link>
         <router-link to="/useBook">
@@ -79,8 +85,29 @@
 </template>
 
 <script>
+  import {home} from "../../api/users";
+  import {IMG_BASE_URL} from "../../api/BASE_URL";
+
   export default {
-    name: "my"
+    name: "my",
+    data() {
+      return {
+        IMG_BASE_URL,
+        homeData: {}
+      }
+    },
+    methods: {
+      async getHome() {
+        let result = await home(localStorage.uid)
+        if (result.code === 1) {
+          this.homeData = result.data
+          localStorage.is_actives = result.data.is_actives
+        }
+      },
+    },
+    mounted() {
+      this.getHome()
+    }
   }
 </script>
 
@@ -101,6 +128,7 @@
     }
 
     > p {
+      flex: 1;
       margin-left: 10px;
       font-size: 18px;
       color: white;
@@ -111,6 +139,18 @@
       text-align: right;
       font-size: 18px;
       color: white;
+      &.vip{
+        position: absolute;
+        right: 0;
+        background: white;
+        width: 82px;
+        height: 35px;
+        line-height: 35px;
+        border-radius: 18px 0 0 18px;
+        text-align: center;
+        font-size: 14px;
+        color: black;
+      }
     }
   }
 
@@ -189,6 +229,9 @@
 
         img {
           width: 25px;
+          &.vip{
+            -webkit-filter: grayscale(100%);
+          }
         }
 
         p {

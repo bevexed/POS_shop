@@ -1,5 +1,4 @@
-// const moment = require('moment');
-import moment from 'moment/min/moment.min'
+const moment = require('moment');
 import Vue from 'vue'
 
 Vue.filter('Time', function (time) {

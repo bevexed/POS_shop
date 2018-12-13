@@ -3,7 +3,7 @@
     <headers :title="title" :isBack="true" :isScan="true"></headers>
     <div class="plan_box">
       <p class="plan_title">推广码</p>
-      <p class="plan_code">123456</p>
+      <p class="plan_code">{{$route.query.promotes}}</p>
       <span>您的好友在注册时也可可以填写哦</span>
       <div class="dotSpan"></div>
       <img class="qrCode" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=847853172,894993951&fm=27&gp=0.jpg" alt="二维码图片">
