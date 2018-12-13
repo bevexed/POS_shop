@@ -19,7 +19,10 @@
       </div>
     </div>
     <footer>
-
+      <div>
+        <yd-icon name="compose" size="12px"></yd-icon>
+        <input type="text" placeholder="写写你的看法">
+      </div>
     </footer>
   </div>
 </template>
@@ -129,4 +132,25 @@
     }
   }
 
+  footer {
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+    padding: 10px 0;
+    box-shadow: black 3px 3px 20px;
+
+    div {
+      padding: 0 20px;
+      margin: 0 auto;
+      border-radius: 17px;
+      background: #f3f3f3;
+      width: 355px;
+      height: 34px;
+      line-height: 34px;
+
+      input {
+        border: none;
+      }
+    }
+  }
 </style>
