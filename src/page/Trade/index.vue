@@ -16,16 +16,16 @@
         <p>注册时间：2018-11-11</p>
       </section>
       <div>
-        <img v-if="jihuo" src="../../assets/setting/ed@3x.png" alt="">
+        <img v-if="is_actives === 1" src="../../assets/setting/ed@3x.png" alt="">
         <img v-else src="../../assets/setting/none@3x.png" alt="">
-        <span>{{jihuo === 1? '已激活':'未激活'}}</span>
+        <span>{{is_actives === 1? '已激活':'未激活'}}</span>
       </div>
     </section>
   </section>
 </template>
 
 <script>
-  import headers from '../../components/headers'
+  import headers from '../../components/Headers'
 
   export default {
     name: "Vip",
@@ -34,7 +34,7 @@
     },
     data() {
       return {
-        jihuo: 1,
+        is_actives: localStorage.is_actives - 0,
         selected: 1
       }
     },

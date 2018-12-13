@@ -50,7 +50,7 @@
 </template>
 
 <script>
-  import headers from '../../components/headers'
+  import headers from '../../components/Headers'
   import {bankEdit, bankDel} from "../../api/users";
   import {sendMsg} from "../../api/sendMsg";
 

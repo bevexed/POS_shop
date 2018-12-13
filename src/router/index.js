@@ -24,7 +24,7 @@ import MyBooking from '../page/MyBooking/index'
 import DeliveryAddress from '../page/Address/Deliveryaddress'
 import bookingSearch from '../page/BookingSearch'
 import BookingDetail from '../page/BookingDetail/index'
-import PhoneNumber from '../page/PhoneNumber/index'
+import MyGoods from '../page/MyGoods/index'
 import ManageBankCard from '../page/ManageBankCard/index'
 
 
@@ -32,6 +32,7 @@ import incomeManage from '../page/IncomeManage'
 import planLink from '../page/Promotion'
 import useBook from '../page/Guide/guide'
 import trade from '../page/Trade'
+import ActiveMember from '../page/ActiveMember'
 
 Vue.use(Router)
 
@@ -142,8 +143,8 @@ const router = new Router({
       meta: {index: 3}
     },
     {
-      path: '/phonenumber',
-      component: PhoneNumber,
+      path: '/mygoods',
+      component: MyGoods,
       meta: {index: 3}
     },
     {
@@ -179,6 +180,12 @@ const router = new Router({
     {
       path: '/trade',
       component: trade,
+      meta: {index: 2}
+    },
+    {
+      path: '/activemember',
+      component: ActiveMember,
+      name:'ActiveMember',
       meta: {index: 2}
     }
   ],

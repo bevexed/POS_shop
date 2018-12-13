@@ -19,7 +19,7 @@
 </template>
 
 <script>
-  import headers from '../../components/headers'
+  import headers from '../../components/Headers'
   import {realName} from "../../api/users";
 
   export default {

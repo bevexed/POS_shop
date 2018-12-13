@@ -67,8 +67,8 @@
           <img src="../../assets/my/buy-car@3x.png" alt="">
           <p>购物车管理</p>
         </router-link>
-        <router-link to="/shoppingCar">
-          <img src="../../assets/my/123.png" alt="">
+        <router-link to="/mygoods">
+          <img src="../../assets/my/123.svg" alt="">
           <p>我的商品</p>
         </router-link>
         <router-link :to="{path:'/planLink',query:{promotes:homeData.promotes}}">

@@ -64,7 +64,7 @@
 </template>
 
 <script>
-  import headers from '../../components/headers'
+  import headers from '../../components/Headers'
   import {IMG_BASE_URL} from "../../api/BASE_URL";
   import {ordersDetail,aliPay} from "../../api/orders";
 

@@ -23,7 +23,7 @@
 
 <script>
   import {mapActions, mapState} from 'vuex'
-  import headers from '../../components/headers'
+  import headers from '../../components/Headers'
 
   export default {
     data() {

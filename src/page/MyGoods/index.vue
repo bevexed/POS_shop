@@ -1,11 +1,11 @@
 <template>
   <section>
-    <headers :title="'手机号'" :isBack="true"></headers>
-    <yd-cell-group>
-      <yd-cell-item>
-        <span slot="left">手机号 <i>123123123123131</i></span>
-      </yd-cell-item>
-    </yd-cell-group>
+    <headers :title="'我的商品'" :isBack="true"></headers>
+    <!--<yd-cell-group>-->
+      <!--<yd-cell-item>-->
+        <!--<span slot="left">手机号 <i>123123123123131</i></span>-->
+      <!--</yd-cell-item>-->
+    <!--</yd-cell-group>-->
     <p class="title">
       所使用产品列表
     </p>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  import headers from '../../components/headers'
+  import headers from '../../components/Headers'
 
   export default {
     name: "PhoneNumber",

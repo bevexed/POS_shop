@@ -18,7 +18,7 @@
 </template>
 
 <script>
-  import headers from '../../components/headers'
+  import headers from '../../components/Headers'
   import {listsBank} from "../../api/users";
 
   export default {

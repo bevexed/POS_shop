@@ -43,7 +43,7 @@
 </template>
 
 <script>
-  import headers from '../../components/headers'
+  import headers from '../../components/Headers'
   import {home} from "../../api/users";
 
   export default {

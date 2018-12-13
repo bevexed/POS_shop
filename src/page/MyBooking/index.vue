@@ -25,7 +25,7 @@
 </template>
 
 <script>
-  import headers from '../../components/headers'
+  import headers from '../../components/Headers'
   import All from './All'
 
   import {orderList} from '../../api/orders'

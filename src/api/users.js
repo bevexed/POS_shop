@@ -68,7 +68,7 @@ export const addressEdit = (uid, id, address, name, phone, province_id, city_id,
 * 获取用户收货地址
 * @param   uid          用户ID        必传
 * */
-export const address = (uid) => ajax(BASE_URL + '/users/Address', {uid})
+export const address = (uid) => ajax(BASE_URL + '/users/address', {uid})
 
 /*
 * 删除用户收货地址

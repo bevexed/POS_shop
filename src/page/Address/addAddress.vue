@@ -30,7 +30,7 @@
 
 <script>
   import {pcaa} from 'area-data'; // v5 or higher
-  import headers from '../../components/headers'
+  import headers from '../../components/Headers'
   import {addressEdit} from "../../api/users";
 
   export default {

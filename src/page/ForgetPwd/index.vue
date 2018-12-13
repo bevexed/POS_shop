@@ -23,7 +23,7 @@
 </template>
 
 <script>
-  import headers from '../../components/headers'
+  import headers from '../../components/Headers'
   import {fgPassWord} from "../../api/login";
   import {sendMsg} from "../../api/sendMsg";
 

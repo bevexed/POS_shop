@@ -9,7 +9,7 @@
 </template>
 
 <script>
-  import footers from './components/foot'
+  import footers from './components/Foot'
 
   export default {
     data() {
