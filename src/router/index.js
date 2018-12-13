@@ -42,7 +42,7 @@ const router = new Router({
       redirect: '/login'
     },
     {
-      path: '/Login',
+      path: '/login',
       component: login,
       meta: {index: 0}
     },
@@ -120,23 +120,23 @@ const router = new Router({
       meta: {index: 2,}
     },
     {
-      path:'/DeliveryAddress',
+      path:'/Deliveryaddress',
       component:DeliveryAddress,
       meta: {index:2}
     },
     {
-      path:'/bookingSearch',
+      path:'/bookingsearch',
       component:bookingSearch,
       meta:{index:3}
     },
     {
-      path: '/editAddress/id/:id',
+      path: '/editaddress/id/:id',
       component: editAddress,
       name: 'editAddress',
       meta: {index: 3}
     },
     {
-      path: '/addAddress',
+      path: '/addaddress',
       component: addAddress,
       name:'addAddress',
       meta: {index: 3}
