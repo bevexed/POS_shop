@@ -8,7 +8,7 @@ export const info = (uid,g_sku_id) => ajax(BASE_URL + '/order/goods/buynow',{uid
 /* 默认收货地址
  * @param  uid  用户id
  */
-export const defaultAddress = (uid) => ajax(BASE_URL + '/order/address',{uid});
+export const defaultAddress = (uid) => ajax(BASE_URL + '/order/Address',{uid});
 
 //提交订单
 export const commitOrder = (uid,address_id,g_sku_infos,remark) => ajax(BASE_URL + '/order/submit',{uid,address_id,g_sku_infos,remark});

@@ -57,7 +57,7 @@ export const listsUser = (page, uid, level) => ajax(BASE_URL + '/users/listsUser
 * @param   province_id	省ID          必传
 * @param   city_id      市ID          必传
 * @param   area_id	    区ID          必传
-* @param   address	    用户详细地址    必传
+* @param   Address	    用户详细地址    必传
 * @param   name	        收货人姓名      必传
 * @param   phone	      收货人联系方式   必传
 * @param   is_default	  设置默认地址（1:默认地址）   必传
@@ -68,7 +68,7 @@ export const addressEdit = (uid, id, address, name, phone, province_id, city_id,
 * 获取用户收货地址
 * @param   uid          用户ID        必传
 * */
-export const address = (uid) => ajax(BASE_URL + '/users/address', {uid})
+export const address = (uid) => ajax(BASE_URL + '/users/Address', {uid})
 
 /*
 * 删除用户收货地址
