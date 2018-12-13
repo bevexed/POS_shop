@@ -81,15 +81,20 @@
         </router-link>
       </ul>
     </footer>
+    <Alert/>
   </section>
 </template>
 
 <script>
+  import Alert from '../../components/AlertVip'
   import {home} from "../../api/users";
   import {IMG_BASE_URL} from "../../api/BASE_URL";
 
   export default {
     name: "my",
+    components:{
+      Alert
+    },
     data() {
       return {
         IMG_BASE_URL,
