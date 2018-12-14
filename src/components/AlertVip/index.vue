@@ -2,9 +2,9 @@
   <div class="zxadasdsada">
     <yd-button size="large" type="primary" @click.native="show = true">中间弹出</yd-button>
 
-    <yd-popup v-model="show" position="center" width="90%" style="z-index: 0">
-      <img src="./alert.svg" alt="">
-      <div style="background:#fff;z-index: 9999999999999999;padding: 17px;border-radius: 20px;padding-top: 79px">
+    <yd-popup v-model="show" position="center" width="90%" style="z-index: 999999999999999999999;overflow: visible">
+
+      <div style="background:#fff;z-index: 99;padding: 17px;border-radius: 20px;padding-top: 79px">
         <p>
           仅限激活会员
         </p>
@@ -16,6 +16,7 @@
           <a>激活</a>
         </p>
       </div>
+      <img src="./alert.svg" alt="">
     </yd-popup>
   </div>
 </template>
@@ -43,7 +44,7 @@
     width: 232px;
     height: 232px;
     position: fixed;
-    top: -65%;
+    top: -60%;
     left: 20%;
     z-index: 99999999999999999999999;
   }
