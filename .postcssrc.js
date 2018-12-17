@@ -20,10 +20,10 @@ module.exports = {
       exclude: /(\/|\\)(node_modules)(\/|\\)/
     },
     "postcss-viewport-units": {},
-    "cssnano": {
-      preset: "advanced",
-      autoprefixer: false, // 和cssnext同样具有autoprefixer，保留一个
-      "postcss-zindex": false
-    }
+    // "cssnano": {
+    //   preset: "advanced",
+    //   autoprefixer: false, // 和cssnext同样具有autoprefixer，保留一个
+    //   "postcss-zindex": false
+    // }
   }
 }

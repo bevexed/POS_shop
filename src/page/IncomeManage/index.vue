@@ -3,51 +3,65 @@
     <headers :title="title" :isBack="true"></headers>
     <div class="income_top">
       <span>总资产（元）</span>
-      <p>1234.09</p>
+      <p>{{earningsData.account.total}}</p>
       <button>立即提现</button>
     </div>
     <div class="income_box">
       <div>
         <span>总收益（元）</span>
-        <p>1234.09</p>
+        <p>{{earningsData.total_volume}}</p>
       </div>
       <div>
         <span>已提现金额（元）</span>
-        <p>1234.09</p>
+        <p>{{earningsData.account.withdraw}}</p>
       </div>
     </div>
-
-    <ul class="income_list">
-      <li>
-        <img src="http://img1.shikee.com/try/2016/06/21/10172020923917672923.jpg" alt="图片">
-        <div>
-          <p>
-            <span>小妹去</span>
-            <span>VIP1</span>
-          </p>
-          <span>总交易数据：1234</span>
-          <span>昨天总交易量：234</span>
-          <span>本月累计交易量：467</span>
-        </div>
-        <img class="iconTab" src="../../assets/jihuo.png" alt="">
-      </li>
-    </ul>
+    <nav>
+      <ul>
+        <li :class="{active:selected === 1}" @click="change(1)">昨天交易总数({{earningsData.yesterday_volume -0}})</li>
+        <li :class="{active:selected === 2}" @click="change(2)">本月交易总数({{earningsData.this_month_volume -0}})</li>
+        <li :class="{active:selected === 3}" @click="change(3)">近三个月交易总数({{earningsData.three_month_volume -0}})</li>
+      </ul>
+    </nav>
   </div>
 </template>
 
 <script>
   import headers from '../../components/Headers'
+  import {earnings} from "../../api/members";
 
   export default {
     name: "incomeManage",
     data() {
       return {
-        title: '收益管理'
+        selected: 1,
+        title: '收益管理',
+        earningsData: ''
       }
     },
     components: {
-      headers
+      headers,
+    },
+    created() {
+      this.getEarnings()
+    },
+    methods: {
+      change(i) {
+        this.selected = i
+      },
+      async getEarnings() {
+        let res = await earnings(localStorage.uid)
+        if (res.code === 1) {
+          this.earningsData = res.data
+        } else {
+          this.$dialog.notify({
+            res: res.message,
+            type: 'error'
+          })
+        }
+      }
     }
+
   }
 </script>
 
@@ -89,11 +103,12 @@
     width: 330px;
     height: 81px;
     background: rgba(255, 255, 255, 1);
-    box-shadow: 0px 2px 11px 0px rgba(156, 156, 156, 0.5);
+    box-shadow: 2px 2px 11px 0px rgba(156, 156, 156, 0.5);
     border-radius: 4px;
     margin: -41px auto 0;
     display: flex;
     align-items: center;
+    z-index: 999;
 
     & > div {
       width: 50%;
@@ -164,6 +179,28 @@
         height: 22px;
         position: absolute;
         right: 24px;
+      }
+    }
+  }
+
+  nav {
+    margin-bottom: 10px;
+
+    ul {
+      margin-top: 20px;
+      background: white;
+      padding: 10px 15px;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 4px solid #e1e1e1;
+
+      li {
+        font-size: 12px;
+        color: #4d4d4d;
+
+        &.active {
+          color: #ff6d4b;
+        }
       }
     }
   }

@@ -8,7 +8,7 @@
       <span v-if="isManage&&isMac" class="register_span" @click="manage">管理</span>
       <span v-if="isManage&&!isMac" class="register_span" @click="finish">完成</span>
       <span v-if="isKeep" class="register_span" @click="isKeep">保存</span>
-      <yd-icon v-if="isSearch" size="20px" name="search" class="register_span"></yd-icon>
+      <yd-icon v-if="isSearch" size="20px" name="search" @click.native="isSearch" class="register_span"></yd-icon>
       <div v-if="isScan" class="scanP">
         <img src="../assets/scan.png" alt="">
         <span>扫码</span>
@@ -32,7 +32,7 @@
       isBack: Boolean,
       isManage: Boolean,
       isPosition: Boolean,
-      isSearch: Boolean,
+      isSearch: Function,
       isKeep: Function,
       isScan: Boolean,
       isSkir: Boolean,

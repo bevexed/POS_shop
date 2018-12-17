@@ -1,6 +1,12 @@
 <template>
   <section @wheel="loadingMore" @touchmove="loadingMore" id="vip">
     <headers :title="'会员列表'" :isBack="true"></headers>
+    <header class="header">
+      <p>
+        会员总数（人）
+        <span>{{statistic.total_users}}</span>
+      </p>
+    </header>
     <nav>
       <ul>
         <li :class="{active:level === 1}" @click="doListsUser(1)">一级会员({{statistic.membership_a}})</li>
@@ -104,6 +110,19 @@
 </script>
 
 <style scoped lang="less">
+  .header {
+    height: 150px;
+    background: #ff6d4b;
+    color: white;
+    padding-top: 40px;
+    text-align: center;
+    font-size: 15px;
+
+    span {
+      display: block;
+      font-size: 35px;
+    }
+  }
   nav {
     margin-bottom: 10px;
 

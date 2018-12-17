@@ -15,12 +15,12 @@
       <span slot="left">上传证件材料： </span>
     </yd-cell-item>
     <div class="upload">
-      <input type="file" ref="front_identity" hidden name="front_identity" @change="getImgData($event)">
+      <input type="file" ref="front_identity" hidden name="front_identity" accept="image/*" formenctype="multipart/form-data" @change="getImgData($event)">
       <span @click="getImg('front_identity')" v-if="!front_identity_url">身份证正面</span>
       <img :src="front_identity_url" @click="getImg('front_identity')" alt="" v-else>
     </div>
     <div class="upload">
-      <input type="file" ref="reverse_identity" hidden name="reverse_identity" @change="getImgData($event)">
+      <input type="file" ref="reverse_identity" hidden name="reverse_identity" accept="image/*" formenctype="multipart/form-data" @change="getImgData($event)">
       <span @click="getImg('reverse_identity')" v-if="!reverse_identity">身份证背面</span>
       <img :src="reverse_identity_url" @click="getImg('reverse_identity')" alt="" v-else>
     </div>
@@ -59,8 +59,8 @@
       },
       getImgData(e) {
         console.log(e);
-        console.log(e.target.files[0]);
         this[e.target.name] = e.target.files[0]
+        console.log(this[e.target.name]);
         this[e.target.name + '_url'] = window.URL.createObjectURL(e.target.files[0])
       },
       async doRealName() {

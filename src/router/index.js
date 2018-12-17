@@ -32,6 +32,8 @@ import incomeManage from '../page/IncomeManage'
 import planLink from '../page/Promotion'
 import useBook from '../page/Guide/guide'
 import trade from '../page/Trade'
+import TradeSearch from '../page/TradeSearch'
+import TradeSearchResult from '../page/TradeSearchResult'
 import ActiveMember from '../page/ActiveMember'
 
 Vue.use(Router)
@@ -180,6 +182,17 @@ const router = new Router({
     {
       path: '/trade',
       component: trade,
+      meta: {index: 2}
+    },
+    {
+      path: '/tradesearch',
+      component: TradeSearch,
+      meta: {index: 2}
+    },
+    {
+      path: '/tradesearchresult/form/:form',
+      component: TradeSearchResult,
+      name:'TradeSearchResult',
       meta: {index: 2}
     },
     {
