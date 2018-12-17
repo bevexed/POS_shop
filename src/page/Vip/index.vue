@@ -3,15 +3,15 @@
     <headers :title="'会员列表'" :isBack="true"></headers>
     <nav>
       <ul>
-        <li :class="{active:level === 1}" @click="doListsUser(1)">一级会员(1)</li>
-        <li :class="{active:level === 2}" @click="doListsUser(2)">二级会员(2)</li>
-        <li :class="{active:level === 3}" @click="doListsUser(3)">三级会员(3)</li>
+        <li :class="{active:level === 1}" @click="doListsUser(1)">一级会员({{statistic.membership_a}})</li>
+        <li :class="{active:level === 2}" @click="doListsUser(2)">二级会员({{statistic.membership_b}})</li>
+        <li :class="{active:level === 3}" @click="doListsUser(3)">三级会员({{statistic.membership_c}})</li>
       </ul>
     </nav>
     <section class="detail" v-for="(v,i) in listsUserDate" :key="i">
       <img :src="v.avatar" alt="">
       <section>
-        <p>{{v.nick_name}} <span>VIP1</span></p>
+        <p>{{v.nick_name}} <span>VIP{{level}}</span></p>
         <p>{{v.mobile}}</p>
         <p>注册时间：{{v.create_time | Time}}</p>
       </section>
@@ -37,7 +37,7 @@
 
 <script>
   import headers from '../../components/Headers'
-  import {listsUser} from "../../api/users";
+  import {listsUser} from "../../api/members";
 
   export default {
     name: "Vip",
@@ -46,6 +46,7 @@
     },
     data() {
       return {
+        statistic: '',
         level: 1,
         current_page: 1,
         loadingState: true,
@@ -58,7 +59,8 @@
         this.loadingState = true
         let result = await listsUser(1, localStorage.uid, level)
         if (result.code === 1) {
-          this.listsUserDate = result.data.data
+          this.listsUserDate = result.data.list
+          this.statistic = result.data.statistic
           this.current_page = result.data.current_page
         } else {
           this.$dialog.notify({
@@ -77,8 +79,8 @@
           let result = await listsUser(this.current_page, localStorage.uid, this.level)
           if (result.code === 1) {
             this.current_page = result.data.current_page
-            this.listsUserDate = [...this.listsUserDate, ...result.data.data];
-            if (result.data.data.length === 10) {
+            this.listsUserDate = [...this.listsUserDate, ...result.data.list];
+            if (result.data.list.length === 10) {
               this.loadingState = true
             } else {
               this.loadingState = false

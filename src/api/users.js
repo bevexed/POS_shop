@@ -11,11 +11,13 @@ export const home = (uid) => ajax(BASE_URL + '/users/home', {uid})
 
 /*
 * 用户实名认证
-* @param   uid          用户ID        必传
-* @param   real_name    真实姓名       必传
-* @param   idCard       身份证号       必传
+* @param   uid              用户ID        必传
+* @param   real_name        真实姓名       必传
+* @param   idCard           身份证号       必传
+* @param   front_identity   身份证正面     必传
+* @param   reverse_identity 身份证背面     必传
 * */
-export const realName = (uid, real_name, idCard) => ajax(BASE_URL + '/users/realName', {uid, real_name, idCard})
+export const realName = (uid, real_name, idCard,front_identity,reverse_identity) => ajax(BASE_URL + '/users/realName', {uid, real_name, idCard,front_identity,reverse_identity})
 
 /*
 * 用户新增/修改银行卡信息
@@ -40,15 +42,6 @@ export const listsBank = (uid) => ajax(BASE_URL + '/users/listsBank', {uid})
 * @param   id      银行卡ID   必传
 * */
 export const bankDel = (uid, id) => ajax(BASE_URL + '/users/bankDel', {uid, id})
-
-/*
-* 会员列表接口
-* @param   page     页数                                必传
-* @param   uid      用户ID                              必传
-* @param   level    等级（1：一级；2：二级；3：三级）       必传
-* */
-export const listsUser = (page, uid, level) => ajax(BASE_URL + '/users/listsUser', {page, uid, level}, "GET")
-
 
 /*
 * 新增/编辑用户收获地址接口
