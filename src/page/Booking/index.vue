@@ -109,18 +109,20 @@
       </div>
     </section>
 
+    <pay :isShow="bol" @close="closeBox" :price="totalPuch" :orderNo="orderNo"></pay>
   </div>
 </template>
 
 <script>
   import headers from '../../components/Headers'
+  import pay from '../../components/pay'
   import {info, defaultAddress, commitOrder, infos} from '../../api/order'
   import {IMG_BASE_URL} from "../../api/BASE_URL";
 
   export default {
     name: "booking",
     components: {
-      headers
+      headers,pay
     },
     data() {
       return {
@@ -131,7 +133,10 @@
         remarkVal: "",
         fenlei: 0,
         items: [],
-        courier_fees: 0
+        courier_fees: 0,
+        bol:false,
+        totalPuch:'',
+        orderNo:''
       }
     },
     computed: {
@@ -146,11 +151,6 @@
           }
         }
         return price
-      },
-      countOne() {
-        for (var i = 0; i < this.items.length; i++) {
-
-        }
       }
     },
     methods: {
@@ -172,10 +172,9 @@
       async commit(uid, address_id, g_sku_infos, remark) {
         let result = await commitOrder(uid, address_id, g_sku_infos, remark)
         if (result.code == 1) {
-          this.$dialog.notify({
-            mes: result.message,
-            timeout: 3000
-          })
+          console.log(result)
+          this.bol = true;
+          this.orderNo = result.out_trade_no;
         }
       },
       commitTo() {
@@ -185,13 +184,16 @@
             mes: '请填写收货地址',
             timeout: 3000
           })
-        }
+        };
+        this.totalPuch = (this.countPrice + parseInt(this.shopInfo.courier_fees)).toFixed(2)
         this.commit(localStorage.uid, this.addressObj.id, g_sku_infos, this.remarkVal)
       },
       commitO() {
         let arr = [];
         for (var i = 0; i < this.items.length; i++) {
-          arr.push({'g_id': this.items[i].g_id, 'g_sku_id': this.items[i].g_sku_id, 'amount': this.items[i].amount})
+          for(var j = 0; j < this.items[i].g_sku.length;j ++){
+            arr.push({'g_id': this.items[i].g_id, 'g_sku_id': this.items[i].g_sku[j].g_sku_id, 'amount': this.items[i].g_sku[j].amount})
+          }
         }
         let g_sku_infos = JSON.stringify(arr)
         if (this.addressObj.id == undefined) {
@@ -199,8 +201,12 @@
             mes: '请填写收货地址',
             timeout: 3000
           })
-        }
+        };
+        this.totalPuch = (parseInt(this.courier_fees) + parseInt(this.countTotal)).toFixed(2);
         this.commit(localStorage.uid, this.addressObj.id, g_sku_infos, this.remarkVal)
+      },
+      closeBox(e){
+        this.bol = e;
       }
     },
     created() {
