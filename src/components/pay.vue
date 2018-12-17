@@ -28,7 +28,7 @@
 </template>
 
 <script>
-  import {alipay} from '../api/pay'
+  import {aliPay} from '../api/pay'
     export default {
       data(){
         return{
@@ -48,11 +48,15 @@
           this.$emit('close',false);
         },
         async payMoney(uid,order_no){
-          let data = await alipay(uid,order_no);
-          console.log(data)
+          let res = await aliPay(uid,order_no);
+          const div = document.createElement('div');
+          div.innerHTML = res; // html code
+          document.body.appendChild(div);
+          document.forms.alipaysubmit.submit();
+          console.log(res)
         },
         payClick(){
-          if(this.isCheck==1){
+          if(this.isCheck === 1){
             this.payMoney(localStorage.uid,this.orderNo)
           }else{
             console.log('wechat')
