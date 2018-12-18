@@ -2,9 +2,9 @@
   <div>
     <headers :title="title" :isManage="true" :isMac="isMac" @Tab1="getBool"></headers>
     <ul class="shopList">
-      <li v-for="(item,index) in items" :key="index" @click="$router.push({name:'productDetail',params:{id:item.g_id}})">
+      <li v-for="(item,index) in items" :key="index">
         <div class="circle_div" :class="item.isChecked?'checked':''" @click="select(index)"></div>
-        <img class="shopImg" :src="IMG_BASE_URL + item.show_pic" alt="">
+        <img class="shopImg" @click.self="$router.push({name:'productDetail',params:{id:item.g_id}})" :src="IMG_BASE_URL + item.show_pic" alt="">
         <div class="shopContent">
           <p>{{item.name}}</p>
           <span>系列：{{item.trad_channel}}</span>
@@ -32,14 +32,14 @@
         </p>
         <button class="account" @click="account">结算</button>
       </div>
-      <button class="delete" v-show="!isMac">删除</button>
+      <button class="delete" v-show="!isMac" @click="deleteItem">删除</button>
     </div>
   </div>
 </template>
 
 <script>
   import headers from '../../components/Headers'
-  import {shopList} from '../../api/cart'
+  import {shopList, destroy} from '../../api/cart'
   import {IMG_BASE_URL} from "../../api/BASE_URL";
 
   export default {
@@ -120,6 +120,23 @@
           this.$dialog.notify({
             mes: '至少选择一件宝贝',
             timeout: 1000
+          })
+        }
+      },
+      async deleteItem() {
+        let select = this.items.filter(val => val.isChecked === true);
+        let cart_infos, arr = [];
+        for (let i = 0; i < select.length; i++) {
+          arr.push({'cart_id': select[i].id})
+          cart_infos = JSON.stringify(arr);
+        }
+        let res = await destroy(localStorage.uid, cart_infos)
+        if (res.code === 1) {
+          this.$router.go(0)
+        } else {
+          this.$dialog.notify({
+            mes: res.message,
+            type: 'error'
           })
         }
       },
