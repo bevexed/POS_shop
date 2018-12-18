@@ -1,7 +1,7 @@
 <template>
   <section>
-    <section class="card" v-for="(v,i) in data" :key="i" @click="$router.push({name:'BookingDetail',params:{id:v.id}})">
-      <header v-for="(value,index) in v.goods_sku" :key="value.goods_id">
+    <section class="card" v-for="(v,i) in data" :key="i">
+      <header v-for="(value,index) in v.goods_sku" :key="value.goods_id"  @click="$router.push({name:'BookingDetail',params:{id:v.id}})">
         <img :src="IMG_BASE_URL + value.show_pic" alt="">
         <p>
           {{value.goods_name}} <br>

@@ -109,7 +109,7 @@ const router = new Router({
     {
       path: '/changepassword',
       component: ChangePassword,
-      meta: {index: 2,}
+      meta: {index: 3,}
     },
     {
       path: '/mybooking/type/:type',
