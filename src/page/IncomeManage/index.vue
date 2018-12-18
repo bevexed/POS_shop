@@ -18,9 +18,9 @@
     </div>
     <nav>
       <ul>
-        <li :class="{active:selected === 1}" @click="change(1)">昨天交易总数({{earningsData.yesterday_volume -0}})</li>
-        <li :class="{active:selected === 2}" @click="change(2)">本月交易总数({{earningsData.this_month_volume -0}})</li>
-        <li :class="{active:selected === 3}" @click="change(3)">近三个月交易总数({{earningsData.three_month_volume -0}})</li>
+        <li>昨天交易总数({{earningsData.yesterday_volume -0}})</li>
+        <li>本月交易总数({{earningsData.this_month_volume -0}})</li>
+        <li>近三个月交易总数({{earningsData.three_month_volume -0}})</li>
       </ul>
     </nav>
   </div>

@@ -9,9 +9,9 @@
     </header>
     <nav>
       <ul>
-        <li :class="{active:selected === 1}" @click="change(1)">昨天交易总数({{tradeData.yesterday_volume}})</li>
-        <li :class="{active:selected === 2}" @click="change(2)">本月交易总数({{tradeData.this_month_volume}})</li>
-        <li :class="{active:selected === 3}" @click="change(3)">近三个月交易总数({{tradeData.three_month_volume}})</li>
+        <li>昨天交易总数({{tradeData.yesterday_volume}})</li>
+        <li>本月交易总数({{tradeData.this_month_volume}})</li>
+        <li>近三个月交易总数({{tradeData.three_month_volume}})</li>
       </ul>
     </nav>
     <!--<section class="detail" v-for="i in 10">-->

@@ -2,7 +2,7 @@
   <div>
     <headers :title="title" :isManage="true" :isMac="isMac" @Tab1="getBool"></headers>
     <ul class="shopList">
-      <li v-for="(item,index) in items" :key="index">
+      <li v-for="(item,index) in items" :key="index" @click="$router.push({name:'productDetail',params:{id:item.g_id}})">
         <div class="circle_div" :class="item.isChecked?'checked':''" @click="select(index)"></div>
         <img class="shopImg" :src="IMG_BASE_URL + item.show_pic" alt="">
         <div class="shopContent">
@@ -58,11 +58,11 @@
     },
     computed: {
       getTotal() {
-        var _choose = this.items.filter(function (val) {
+        let _choose = this.items.filter(function (val) {
           return val.isChecked;
         })
-        var totalPrice = 0;
-        for (var i = 0; i < _choose.length; i++) {
+        let totalPrice = 0;
+        for (let i = 0; i < _choose.length; i++) {
           totalPrice += _choose[i].amount * _choose[i].price
         }
         return {totalPrice: totalPrice.toFixed(2)}
@@ -72,33 +72,29 @@
       //  全选
       chooseAll() {
         this.isChecked = true;
-        for (var i = 0; i < this.items.length; i++) {
+        for (let i = 0; i < this.items.length; i++) {
           this.items[i].isChecked = true;
         }
       },
       //  取消全选
       cancelAll() {
         this.isChecked = false;
-        for (var i = 0; i < this.items.length; i++) {
+        for (let i = 0; i < this.items.length; i++) {
           this.items[i].isChecked = false;
         }
       },
       select(index) {
         this.items[index].isChecked = !this.items[index].isChecked;
         let select = true;
-        for (var i = 0; i < this.items.length; i++) {
+        for (let i = 0; i < this.items.length; i++) {
           select *= this.items[i].isChecked;
         }
-        if (select == true) {
-          this.isChecked = true;
-        } else {
-          this.isChecked = false;
-        }
+        this.isChecked = select
       },
       //购物车数据列表
       async getShopList(uid) {
         let result = await shopList(uid);
-        for (var i = 0; i < result.data.length; i++) {
+        for (let i = 0; i < result.data.length; i++) {
           result.data[i].isChecked = false; //设置初始是否选中
         }
         this.items = result.data;
@@ -111,14 +107,14 @@
       },
       account() {
         let select = this.items.filter(val => {
-          return val.isChecked == true;
+          return val.isChecked === true;
         });
         let cart_infos, arr = [];
-        for (var i = 0; i < select.length; i++) {
+        for (let i = 0; i < select.length; i++) {
           arr.push({'cart_id': select[i].id, 'amount': select[i].amount})
           cart_infos = JSON.stringify(arr);
         }
-        if (select.length != 0) {
+        if (select.length !== 0) {
           this.$router.push({path: '/Booking', query: {cart_infos: cart_infos}})
         } else {
           this.$dialog.notify({
