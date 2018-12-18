@@ -1,33 +1,27 @@
 <template>
-  <div class="zxadasdsada">
-    <yd-button size="large" type="primary" @click.native="show = true">中间弹出</yd-button>
-
-    <yd-popup v-model="show" position="center" width="90%" style="z-index: 999999999999999999999;overflow: visible">
-
-      <div style="background:#fff;z-index: 99;padding: 17px;border-radius: 20px;padding-top: 79px">
-        <p>
-          仅限激活会员
-        </p>
-        <p style="margin-bottom: 34px">
-          请点击激活
-        </p>
-        <p style="text-align: center;">
-          <a @click="show = false">取消</a>
-          <a>激活</a>
-        </p>
-      </div>
-      <img src="./alert.svg" alt="">
-    </yd-popup>
+  <div class="pop" v-show="show">
+    <div style="background:#fff;z-index: 99;padding: 17px;border-radius: 20px;padding-top: 79px">
+      <p>
+        仅限激活会员
+      </p>
+      <p style="margin-bottom: 34px">
+        请点击激活
+      </p>
+      <p style="text-align: center;">
+        <a @click="$emit('hidden',false)">取消</a>
+        <a>激活</a>
+      </p>
+    </div>
+    <img src="./alert.svg" alt="">
   </div>
 </template>
 
 <script>
   export default {
     name: "AlertVip",
+    props: ['show'],
     data() {
-      return {
-        show: false,
-      }
+      return {}
     }
   }
 </script>
@@ -40,11 +34,22 @@
 </style>
 
 <style scoped lang="less">
+  .pop{
+    height: 200px;
+    width: 90%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 999;
+    margin: auto;
+  }
   img {
+    position: absolute;
     width: 232px;
     height: 232px;
-    position: fixed;
-    top: -60%;
+    top: 60%;
     left: 20%;
     z-index: 99999999999999999999999;
   }

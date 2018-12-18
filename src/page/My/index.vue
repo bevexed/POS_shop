@@ -51,10 +51,10 @@
           <img src="../../assets/my/dingdanguanli@3x.png" alt="">
           <p>订单管理</p>
         </router-link>
-        <router-link tag="li" :to="{path:'vip'}">
+        <li @click="vipGo('vip')">
           <img :class="{vip:homeData.is_actives === 0}" src="../../assets/my/huiyuanguanli@3x.png" alt="">
           <p>会员管理</p>
-        </router-link>
+        </li>
         <router-link to="/trade">
           <img src="../../assets/my/jiaoyiguanli-2@3x.png" alt="">
           <p>交易管理</p>
@@ -81,7 +81,7 @@
         </router-link>
       </ul>
     </footer>
-    <Alert/>
+    <Alert :show="show" @hidden="show = false"/>
   </section>
 </template>
 
@@ -97,11 +97,19 @@
     },
     data() {
       return {
+        show:false,
         IMG_BASE_URL,
         homeData: {}
       }
     },
     methods: {
+      vipGo(path){
+        if (this.homeData.is_actives === 1){
+          this.$router.push({path:path})
+        }else{
+          this.show = true
+        }
+      },
       async getHome() {
         let result = await home(localStorage.uid)
         if (result.code === 1) {
@@ -118,6 +126,7 @@
 
 <style scoped lang="less">
   header.user {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
