@@ -79,7 +79,25 @@
         this.$router.push('/shoppingCar')
       },
       async addShoppingCar(uid, g_sku_id) {
+        if (!this.val) {
+          this.$dialog.notify({
+            mes: '请选择通道类别',
+            timeout: 3000
+          })
+          return
+        }
         let res = await addShop(uid, g_sku_id)
+        if (res.code === 1) {
+          this.$dialog.notify({
+            mes: '商品加入购物车成功',
+            timeout: 3000,
+          })
+        } else {
+          this.$dialog.notify({
+            mes: res.message,
+            timeout: 3000,
+          })
+        }
       },
       async getDetail(id) {
         let result = await detail(id)
