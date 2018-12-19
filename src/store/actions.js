@@ -16,9 +16,9 @@ import {
 export default {
   async login({commit, state}, payload) {
     const result = await doLogin(payload);
-    const res = await home(result.data.uid)
-    let userInfo = {...result.data,...res.data}
     if (result.code === 1) {
+      const res = await home(result.data.uid)
+      let userInfo = {...result.data, ...res.data}
       commit(LOGIN, {userInfo})
     } else {
       Notify({

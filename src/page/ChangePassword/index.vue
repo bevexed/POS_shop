@@ -77,9 +77,9 @@
           });
           return
         }
-        if (!new_pwd || new_pwd.length < 6) {
+        if (!new_pwd || new_pwd.length < 8) {
           this.$dialog.notify({
-            mes: '密码长度不能小于6位',
+            mes: '密码长度不能小于8位',
             timeout: 3000,
           });
           return

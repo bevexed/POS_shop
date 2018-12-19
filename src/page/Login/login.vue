@@ -63,9 +63,9 @@
           });
           return
         }
-        if (password.length < 6) {
+        if (password.length < 8) {
           this.$dialog.notify({
-            mes: '密码不能小于6位',
+            mes: '密码不能小于8位',
             timeout: 3000,
           });
           return
