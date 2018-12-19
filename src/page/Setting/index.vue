@@ -39,6 +39,8 @@
         </span>
       </section>
     </footer>
+    <yd-button style="width: 90%;margin: 30px auto" bgcolor="#ff6d48" color="#fff" size="large" type="primary" shape="circle" @click.native="loginOut">退出</yd-button>
+
   </section>
 </template>
 
@@ -57,6 +59,17 @@
       }
     },
     methods: {
+      loginOut() {
+        localStorage.uid = ''
+        this.$dialog.toast({
+          mes: '退出成功',
+          timeout: 500,
+          error: 'success',
+          callback: () => {
+            this.$router.replace('/login')
+          }
+        })
+      },
       async getHome() {
         let result = await home(localStorage.uid)
         if (result.code === 1) {

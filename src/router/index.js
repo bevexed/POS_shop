@@ -87,7 +87,7 @@ const router = new Router({
     {
       path: '/productdetail/id/:id',
       component: productDetail,
-      name:'productDetail',
+      name: 'productDetail',
       meta: {index: 1}
     },
     {
@@ -98,7 +98,7 @@ const router = new Router({
     {
       path: '/bookingdetail/id/:id',
       component: BookingDetail,
-      name:'BookingDetail',
+      name: 'BookingDetail',
       meta: {index: 2,}
     },
     {
@@ -114,7 +114,7 @@ const router = new Router({
     {
       path: '/mybooking/type/:type',
       component: MyBooking,
-      name:'myBooking',
+      name: 'myBooking',
       meta: {index: 2,}
     },
     {
@@ -123,14 +123,14 @@ const router = new Router({
       meta: {index: 2,}
     },
     {
-      path:'/Deliveryaddress',
-      component:DeliveryAddress,
-      meta: {index:2}
+      path: '/Deliveryaddress',
+      component: DeliveryAddress,
+      meta: {index: 2}
     },
     {
-      path:'/bookingsearch',
-      component:bookingSearch,
-      meta:{index:3}
+      path: '/bookingsearch',
+      component: bookingSearch,
+      meta: {index: 3}
     },
     {
       path: '/editaddress/id/:id',
@@ -141,7 +141,7 @@ const router = new Router({
     {
       path: '/addaddress',
       component: addAddress,
-      name:'addAddress',
+      name: 'addAddress',
       meta: {index: 3}
     },
     {
@@ -192,13 +192,13 @@ const router = new Router({
     {
       path: '/tradesearchresult/form/:form',
       component: TradeSearchResult,
-      name:'TradeSearchResult',
+      name: 'TradeSearchResult',
       meta: {index: 2}
     },
     {
       path: '/activemember',
       component: ActiveMember,
-      name:'ActiveMember',
+      name: 'ActiveMember',
       meta: {index: 2}
     }
   ],
@@ -213,7 +213,6 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  // console.log(!localStorage.uid);
   if (!localStorage.uid) {
     if (to.path === '/login' || to.path === '/register' || to.path === '/forgetPwd') {
       next()
