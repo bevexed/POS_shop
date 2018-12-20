@@ -9,8 +9,8 @@
       <span v-if="isManage&&!isMac" class="register_span" @click="finish">完成</span>
       <span v-if="isKeep" class="register_span" @click="isKeep">保存</span>
       <yd-icon v-if="isSearch" size="20px" name="search" @click.native="isSearch" class="register_span"></yd-icon>
-      <div v-if="isScan" class="scanP">
-        <img src="../assets/scan.png" alt="">
+      <div v-if="isScan" class="scanP" @click="scanClick">
+        <img src="../assets/scan.png" alt="图片">
         <span>扫码</span>
       </div>
       <div v-if="isSkir" class="scanP">
@@ -34,7 +34,7 @@
       isBack: Boolean,
       isManage: Boolean,
       isPosition: Boolean,
-      isSearch: Function,
+      isSearch: Boolean,
       isKeep: Function,
       isScan: Boolean,
       isSkir: Boolean,
@@ -55,6 +55,9 @@
       },
       finish() {
         this.$emit('Tab1', true)
+      },
+      scanClick(){
+        this.$emit('scanResult')
       }
     }
   }

@@ -36,6 +36,8 @@ import TradeSearch from '../page/TradeSearch'
 import TradeSearchResult from '../page/TradeSearchResult'
 import ActiveMember from '../page/ActiveMember'
 
+import scan from '../page/scan/scan'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -43,6 +45,10 @@ const router = new Router({
     {
       path: '/',
       redirect: '/login'
+    },
+    {
+      path:'/scan',
+      component:scan
     },
     {
       path: '/login',

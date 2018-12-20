@@ -1,6 +1,6 @@
 <template>
   <div class="plan_content">
-    <headers :title="title" :isBack="true" :isScan="true"></headers>
+    <headers :title="title" :isBack="true" :isScan="true" @scanResult="scanResult"></headers>
     <div class="plan_box">
       <p class="plan_title">推广码</p>
       <p class="plan_code">{{$route.query.promotes}}</p>
@@ -23,6 +23,11 @@
     },
     components: {
       headers
+    },
+    methods:{
+      scanResult(){
+        this.$router.push('/scan');
+      }
     }
   }
 </script>
