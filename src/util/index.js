@@ -26,10 +26,12 @@ Vue.prototype.$getLocation = function getLocation() {
     function onComplete(obj) {
       // alert(JSON.stringify(obj));
       console.log(obj.addressComponent.citycode);
-      console.log(obj.addressComponent.city);
+      console.log(obj.addressComponent);
       that.$store.state.city = obj.addressComponent.city
+      that.$store.state.ad_code = obj.addressComponent.adcode
       that.$store.state.cityCode = obj.addressComponent.citycode
       localStorage.cityCode = obj.addressComponent.citycode
+      localStorage.ad_code = obj.addressComponent.adcode
       localStorage.city = obj.addressComponent.city
     }
 

@@ -1,6 +1,7 @@
 export default {
-  city:'',
-  cityCode:'',
+  ad_code: '',
+  city: '',
+  cityCode: '',
   userInfo: {},
   registered: false,
 }
