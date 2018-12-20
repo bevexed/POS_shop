@@ -14,11 +14,11 @@
         <li :class="{active:level === 3}" @click="doListsUser(3)">三级会员({{statistic.membership_c}})</li>
       </ul>
     </nav>
-    <section class="detail" v-for="(v,i) in listsUserDate" :key="i">
+    <section class="detail" v-for="(v,i) in listsUserDate" :key="i" v-if="listsUserDate">
       <img :src="v.avatar" alt="">
       <section>
         <p>{{v.nick_name}} <span>VIP{{level}}</span></p>
-        <p>{{v.mobile}}</p>
+        <p>{{v.mobile.toString().slice(0,7)}}****</p>
         <p>注册时间：{{v.create_time | Time}}</p>
       </section>
       <div>
@@ -59,6 +59,7 @@
         listsUserDate: [],
       }
     },
+    computed: {},
     methods: {
       async doListsUser(level) {
         this.level = level
@@ -123,6 +124,7 @@
       font-size: 35px;
     }
   }
+
   nav {
     margin-bottom: 10px;
 

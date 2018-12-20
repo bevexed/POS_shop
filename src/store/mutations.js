@@ -1,6 +1,7 @@
 import {
   LOGIN,
-  REGISTER
+  REGISTER,
+  CITY
 } from "./mutation-types";
 
 export default {
@@ -11,5 +12,8 @@ export default {
   },
   [REGISTER](state, {registered}) {
     state.registered = registered
+  },
+  [CITY](state, {city}) {
+    state.city = city
   }
 }

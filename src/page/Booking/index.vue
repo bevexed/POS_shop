@@ -169,8 +169,8 @@
         let res = await defaultAddress(localStorage.uid);
         this.addressObj = res.data;
       },
-      async commit(uid, address_id, g_sku_infos, remark) {
-        let result = await commitOrder(uid, address_id, g_sku_infos, remark)
+      async commit(uid,address_id,g_sku_infos,cart_ids,remark) {
+        let result = await commitOrder(uid,address_id,g_sku_infos,cart_ids,remark)
         if (result.code == 1) {
           console.log(result)
           this.bol = true;

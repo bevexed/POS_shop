@@ -1,8 +1,8 @@
 <template>
-  <section>
+  <section v-if="homeData">
     <header class="user" @click="$router.push('/setting')">
       <img :src="IMG_BASE_URL+homeData.avatars" alt="">
-      <p><span>{{homeData.nick_name}}</span> <br>
+      <p><span>{{homeData.nick_name?homeData.nick_name:homeData.mobiles}}</span> <br>
         <!--<yd-icon size="20px" name="footmark"></yd-icon>-->
         {{homeData.is_actives === 1 ? '会员已激活':'会员未激活'}}
       </p>

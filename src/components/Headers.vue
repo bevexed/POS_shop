@@ -2,7 +2,7 @@
   <div class="head_content">
     <div class="head_top">
       <img class="backImg" v-if="isBack" @click="goBack" src="../assets/back.png" alt="">
-      <img v-if="isPosition" class="positionImg" src="../assets/dingwei.png" alt="">
+      <img v-if="isPosition" class="positionImg" src="../assets/dingwei.png" alt=""><span class="positionSpan" v-if="isPosition">{{city?city:'定位中...' }}</span>
       <p v-if="title">{{title}}</p>
       <span v-if="isRegister" class="register_span" @click="goRegister">注册</span>
       <span v-if="isManage&&isMac" class="register_span" @click="manage">管理</span>
@@ -22,6 +22,8 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex'
+
   export default {
     data() {
       return {}
@@ -37,6 +39,9 @@
       isScan: Boolean,
       isSkir: Boolean,
       isMac: Boolean
+    },
+    computed:{
+      ...mapState(['city'])
     },
     methods: {
       goRegister() {
@@ -92,6 +97,13 @@
       width: 17px;
       position: absolute;
       left: 18px;
+      cursor: pointer;
+    }
+
+    .positionSpan {
+      width: 60px;
+      position: absolute;
+      left: 40px;
       cursor: pointer;
     }
 

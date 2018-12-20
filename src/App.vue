@@ -14,8 +14,8 @@
   export default {
     data() {
       return {
-        transitionName: ''
-      }
+        transitionName: '',
+      };
     },
     components: {
       footers
@@ -32,6 +32,9 @@
           this.transitionName = 'slide-mid'
         }
       }
+    },
+    mounted() {
+      this.$getLocation()
     }
   }
 </script>

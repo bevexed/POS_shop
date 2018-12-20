@@ -2,8 +2,8 @@
   <section class="setting">
     <headers :title="'我的设置'" :isBack="true"></headers>
     <header>
-      <img :src="homeData.avatars" alt="">
-      <p>{{homeData.nick_name}}</p>
+      <img :src="IMG_URL+homeData.avatars" alt="">
+      <p>{{homeData.nick_name ? homeData.nick_name :homeData.mobiles}}</p>
     </header>
     <section class="item" @click="$router.push('/DeliveryAddress')">
       收货地址
@@ -33,8 +33,8 @@
       <section class="item">
         账号激活
         <span>
-          <img v-if="homeData.is_actives === 0" width="12" src="../../assets/setting/ed@3x.png" alt="">
-          <img v-else width="12" src="../../assets/setting/none@3x.png" alt="">
+          <!--<img v-if="homeData.is_actives === 0" width="12" src="../../assets/setting/ed@3x.png" alt="">-->
+          <!--<img v-else width="12" src="../../assets/setting/none@3x.png" alt="">-->
           {{homeData.is_actives === 1?'已激活':'未激活'}}
         </span>
       </section>
@@ -46,6 +46,7 @@
 
 <script>
   import headers from '../../components/Headers'
+  import {IMG_URL} from "../../api/BASE_URL";
   import {home} from "../../api/users";
 
   export default {
@@ -55,6 +56,7 @@
     },
     data() {
       return {
+        IMG_URL,
         homeData: {}
       }
     },

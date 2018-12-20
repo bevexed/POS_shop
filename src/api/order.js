@@ -11,7 +11,7 @@ export const info = (uid,g_sku_id) => ajax(BASE_URL + '/order/goods/buynow',{uid
 export const defaultAddress = (uid) => ajax(BASE_URL + '/order/address',{uid});
 
 //提交订单
-export const commitOrder = (uid,address_id,g_sku_infos,remark) => ajax(BASE_URL + '/order/submit',{uid,address_id,g_sku_infos,remark});
+export const commitOrder = (uid,address_id,g_sku_infos,cart_ids,remark) => ajax(BASE_URL + '/order/submit',{uid,address_id,g_sku_infos,cart_ids,remark});
 
 
 //购物车结算订单商品详情

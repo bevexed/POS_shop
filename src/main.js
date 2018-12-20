@@ -5,6 +5,8 @@ import App from './App'
 import router from './router'
 import store from './store'
 import './filter'
+import './util'
+
 import YDUI from 'vue-ydui'
 import 'vue-ydui/dist/ydui.px.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
