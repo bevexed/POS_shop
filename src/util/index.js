@@ -26,29 +26,21 @@ Vue.prototype.$getLocation = function getLocation() {
     function onComplete(obj) {
       // alert(JSON.stringify(obj));
       console.log(obj.addressComponent.citycode);
-      console.log(obj.addressComponent);
+      console.log(obj);
       that.$store.state.city = obj.addressComponent.city
       that.$store.state.ad_code = obj.addressComponent.adcode
       that.$store.state.cityCode = obj.addressComponent.citycode
       localStorage.cityCode = obj.addressComponent.citycode
-      localStorage.ad_code = obj.addressComponent.adcode
+      localStorage.ad_code = obj.addressComponent.adcode.toString().slice(0,-2)+'00'
       localStorage.city = obj.addressComponent.city
+
+      return obj
     }
 
     function onError(obj) {
       console.log(obj);
+      return obj
     }
-
-    // let geolocation = new BMap.Geolocation();
-    // geolocation.enableSDKLocation();
-    // geolocation.getCurrentPosition(function (r) {
-    //   if (this.getStatus() === BMAP_STATUS_SUCCESS) {
-    //     alert('您的位置：' + r.point.lng + ',' + r.point.lat);
-    //     alert(JSON.stringify(r))
-    //   } else {
-    //     alert('failed' + this.getStatus());
-    //   }
-    // },true);
 
   })
 }

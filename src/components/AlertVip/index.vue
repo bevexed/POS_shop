@@ -10,7 +10,7 @@
         </p>
         <p style="text-align: center;">
           <a @click="$emit('hidden',false)">取消</a>
-          <a>激活</a>
+          <a @click="$router.push('/activevip')">激活</a>
         </p>
       </div>
       <img src="./alert.svg" alt="">

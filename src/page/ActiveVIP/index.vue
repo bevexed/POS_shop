@@ -28,7 +28,7 @@
   import Headers from '../../components/Headers'
 
   export default {
-    name: "ActiveMember",
+    name: "ActiveVip",
     components: {
       Headers
     }

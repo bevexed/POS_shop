@@ -12,4 +12,4 @@ export const banner = () => ajax(BASE_URL + '/home/banner', {}, 'GET')
 * @param    sold_type   pos机类别 1:企业 2:个人 若不传，默认为1
 * @param    sort_type   筛选条件 1:综合 2:价格 3:销量 若不传，默认为1
 * */
-export const goodlists = (ad_code, sold_type, sort_type) => ajax(BASE_URL + '/home/goodlists', {ad_code, sold_type, sort_type}, "GET")
+export const goodlists = (ad_code = 110100, sold_type, sort_type) => ajax(BASE_URL + '/home/goodlists', {ad_code, sold_type, sort_type}, "GET")
