@@ -20,17 +20,43 @@
         <img src="../../assets/vip/3@3x.png" alt=""> <span>高级交易管理功能</span>
       </li>
     </ul>
-    <a>加入会员</a>
+    <a @click="addMember">加入会员</a>
+    <Pay :isShow="bol" @close="closeBox" :price="totalPuch" :orderNo="orderNo"/>
   </article>
 </template>
 
 <script>
   import Headers from '../../components/Headers'
+  import Pay from '../../components/pay'
+  import {member} from "../../api/order";
 
   export default {
     name: "ActiveVip",
     components: {
-      Headers
+      Headers,
+      Pay
+    },
+    data() {
+      return {
+        bol: false,
+        totalPuch: '',
+        orderNo: ''
+      }
+    },
+    methods: {
+      closeBox(e) {
+        this.bol = e;
+      },
+      // 激活会员
+      async addMember() {
+        let res = await member(localStorage.uid)
+        if (res.code === 1) {
+          // mes: res.message,
+          this.bol = true
+          this.totalPuch = 999
+          this.orderNo = res.out_trade_no
+        }
+      }
     }
   }
 </script>
