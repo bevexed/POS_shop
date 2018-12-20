@@ -1,27 +1,18 @@
 <template>
   <section>
-    <headers :title="'实名认证'" :isBack="true"></headers>
+    <headers :title="'头像昵称'" :isBack="true"></headers>
     <yd-cell-group>
       <yd-cell-item>
-        <span slot="left">姓名： </span>
-        <yd-input slot="right" required v-model="real_name" max="20" placeholder="请输入姓名"></yd-input>
-      </yd-cell-item>
-      <yd-cell-item>
-        <span slot="left">身份证号： </span>
-        <yd-input slot="right" required v-model="idCard" placeholder="请输入身份证号"></yd-input>
+        <span slot="left">昵称： </span>
+        <yd-input slot="right" required v-model="real_name" max="20" placeholder="请输入昵称"></yd-input>
       </yd-cell-item>
     </yd-cell-group>
     <yd-cell-item>
-      <span slot="left">上传证件材料： </span>
+      <span slot="left">上传头像： </span>
     </yd-cell-item>
     <div class="upload">
-      <input type="file" ref="front_identity" hidden name="front_identity" accept="image/*" formenctype="multipart/form-data" @change="getImgData($event)">
-      <span @click="getImg('front_identity')" v-if="!front_identity_url">身份证正面</span>
-      <img :src="front_identity_url" @click="getImg('front_identity')" alt="" v-else>
-    </div>
-    <div class="upload">
       <input type="file" ref="reverse_identity" hidden name="reverse_identity" accept="image/*" formenctype="multipart/form-data" @change="getImgData($event)">
-      <span @click="getImg('reverse_identity')" v-if="!reverse_identity">身份证背面</span>
+      <span @click="getImg('reverse_identity')" v-if="!reverse_identity">请上传头像</span>
       <img :src="reverse_identity_url" @click="getImg('reverse_identity')" alt="" v-else>
     </div>
     <footer>
@@ -36,7 +27,7 @@
   import {realName} from "../../api/users";
 
   export default {
-    name: "RealName",
+    name: "InfoEdit",
     components: {
       headers,
     },

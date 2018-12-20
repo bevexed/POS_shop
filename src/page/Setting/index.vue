@@ -1,7 +1,7 @@
 <template>
   <section class="setting">
     <headers :title="'我的设置'" :isBack="true"></headers>
-    <header>
+    <header @click="$router.push('./InfoEdit')">
       <img :src="IMG_URL+homeData.avatars" alt="">
       <p>{{homeData.nick_name ? homeData.nick_name :homeData.mobiles}}</p>
     </header>

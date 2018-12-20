@@ -16,7 +16,8 @@ import ChangePassword from '../page/ChangePassword/index'
 import indexPage from '../page/Index/index'
 import CreditCard from '../page/CreditCard/index'
 import shoppingCar from '../page/ShoppingCar/index'
-import my from '../page/My/index'
+import My from '../page/My/index'
+import InfoEdit from '../page/InfoEdit'
 import cardInfo from '../page/CardInfo'
 import productDetail from '../page/ProductDetail/index'
 import Booking from '../page/Booking/index'
@@ -81,9 +82,14 @@ const router = new Router({
       meta: {index: 1, navShow: true}
     },
     {
-      path: '/My',
-      component: my,
+      path: '/my',
+      component: My,
       meta: {index: 1, navShow: true}
+    },
+    {
+      path: '/InfoEdit',
+      component: InfoEdit,
+      meta: {index: 2, navShow: true}
     },
     {
       path: '/cardInfo',
