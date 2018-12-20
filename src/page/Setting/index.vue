@@ -89,6 +89,13 @@
 <style scoped lang="less">
   .setting {
     > header {
+      &:after {
+        content: '>';
+        position: absolute;
+        font-size: 18px;
+        right: 18px;
+      }
+
       background: white;
       padding: 10px 15px;
       display: flex;

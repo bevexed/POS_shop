@@ -2,11 +2,10 @@
   <section v-if="homeData">
     <header class="user" @click="$router.push('/setting')">
       <img :src="IMG_BASE_URL+homeData.avatars" alt="">
-      <p><span>{{homeData.nick_name?homeData.nick_name:homeData.mobiles}}</span> <br>
-        <!--<yd-icon size="20px" name="footmark"></yd-icon>-->
+      <p ><span>{{homeData.nick_name?homeData.nick_name:homeData.mobiles}}</span> <br>
         {{homeData.is_actives === 1 ? '会员已激活':'会员未激活'}}
       </p>
-      <span class="vip" v-if="homeData.is_actives === 0 ">会员激活</span>
+      <span class="vip" v-if="homeData.is_actives === 0 " @click.self.stop="$router.push('/activevip')">会员激活</span>
       <span v-else>></span>
     </header>
 
@@ -59,10 +58,10 @@
           <img src="../../assets/my/jiaoyiguanli-2@3x.png" alt="">
           <p>交易管理</p>
         </router-link>
-        <router-link to="/incomeManage">
+        <li @click="vipGo('incomeManage')">
           <img :class="{vip:homeData.is_actives === 0}" src="../../assets/my/shouyiguanli@3x.png" alt="">
           <p>收益管理</p>
-        </router-link>
+        </li>
         <router-link to="/shoppingCar">
           <img src="../../assets/my/buy-car@3x.png" alt="">
           <p>购物车管理</p>
@@ -71,10 +70,10 @@
           <img src="../../assets/my/123.svg" alt="">
           <p>我的商品</p>
         </router-link>
-        <router-link :to="{path:'/planLink',query:{promotes:homeData.promotes}}">
+        <li @click="vipGo('planLink')">
           <img :class="{vip:homeData.is_actives === 0}" src="../../assets/my/tuiguang-@3x.png" alt="">
           <p>推广链接</p>
-        </router-link>
+        </li>
         <router-link to="/useBook">
           <img src="../../assets/my/shiyongzhinan@3x.png" alt="">
           <p>使用指南</p>
@@ -105,7 +104,7 @@
     methods: {
       vipGo(path){
         if (this.homeData.is_actives === 1){
-          this.$router.push({path:path})
+          this.$router.push({path:path,query:{promotes:this.homeData.promotes}})
         }else{
           this.show = true
         }

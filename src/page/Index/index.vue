@@ -40,7 +40,7 @@
       return {
         IMG_BASE_URL,
         title: '首页',
-        ad_code: 110100, // 邮编
+        ad_code: localStorage.ad_code, // 邮编
         sold_type: 1,    // pos机类别 1:企业 2:个人 若不传，默认为1
         sort_type: 1,    // 筛选条件 1:综合 2:价格 3:销量 若不传，默认为1
         bannerImg: [],

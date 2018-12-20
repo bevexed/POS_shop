@@ -1,6 +1,8 @@
 import axios from 'axios'
 import qs from 'qs'
 import {Confirm, Alert, Toast, Notify, Loading} from 'vue-ydui/dist/lib.rem/dialog';
+import Vue from 'vue'
+import '../util'
 
 // 添加请求拦截器
 axios.interceptors.request.use(function (config) {

@@ -17,3 +17,10 @@ export const commitOrder = (uid,address_id,g_sku_infos,cart_ids,remark) => ajax(
 //购物车结算订单商品详情
 export const infos = (uid,cart_infos) => ajax(BASE_URL + '/order/goods/buycart',{uid,cart_infos})
 
+/*
+* 加入会员 - 直接跳到选择支付方式页面
+* @param uid 用户id
+* */
+
+export const member = (uid) => ajax(BASE_URL + '/order/add/member',{uid})
+

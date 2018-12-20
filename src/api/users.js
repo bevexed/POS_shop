@@ -10,6 +10,14 @@ import {BASE_URL} from './BASE_URL'
 export const home = (uid) => ajax(BASE_URL + '/users/home', {uid})
 
 /*
+* 用户修改头像和昵称 NEW
+* @param   uid          用户ID        必传
+* @param   avatar       用户头像       必传
+* @param   nick_name    用户名称       必传
+* */
+export const infoEdit = (uid, avatar, nick_name) => ajax(BASE_URL + '/users/infoEdit', {uid, avatar, nick_name})
+
+/*
 * 用户实名认证
 * @param   uid              用户ID        必传
 * @param   real_name        真实姓名       必传
@@ -17,7 +25,7 @@ export const home = (uid) => ajax(BASE_URL + '/users/home', {uid})
 * @param   front_identity   身份证正面     必传
 * @param   reverse_identity 身份证背面     必传
 * */
-export const realName = (uid, real_name, idCard,front_identity,reverse_identity) => ajax(BASE_URL + '/users/realName', {uid, real_name, idCard,front_identity,reverse_identity})
+export const realName = (uid, real_name, idCard, front_identity, reverse_identity) => ajax(BASE_URL + '/users/realName', {uid, real_name, idCard, front_identity, reverse_identity})
 
 /*
 * 用户新增/修改银行卡信息

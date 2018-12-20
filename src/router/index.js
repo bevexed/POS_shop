@@ -34,7 +34,7 @@ import useBook from '../page/Guide/guide'
 import trade from '../page/Trade'
 import TradeSearch from '../page/TradeSearch'
 import TradeSearchResult from '../page/TradeSearchResult'
-import ActiveMember from '../page/ActiveMember'
+import ActiveVip from '../page/ActiveVip'
 
 import scan from '../page/scan/scan'
 
@@ -202,9 +202,9 @@ const router = new Router({
       meta: {index: 2}
     },
     {
-      path: '/activemember',
-      component: ActiveMember,
-      name: 'ActiveMember',
+      path: '/activevip',
+      component: ActiveVip,
+      name: 'ActiveVip',
       meta: {index: 2}
     }
   ],
