@@ -23,7 +23,6 @@
 </template>
 
 <script>
-  import axios from 'axios'
   import headers from '../../components/Headers'
   import {infoEdit} from "../../api/users";
 
@@ -62,20 +61,30 @@
         }
         const {reverse_identity} = this
         console.log(reverse_identity);
+        if (!reverse_identity) {
+          this.$dialog.notify({
+            mes: '请选择图片',
+            timeout: 3000,
+          })
+          return
+        }
         // let url = 'http://lzxprogrammer.com/users/infoEdit'
         // let data = new FormData()
         // data.append('uid',localStorage.uid)
         // data.append('avatar',reverse_identity)
         // data.append('nick_name',this.real_name)
-        let result = await infoEdit(localStorage.uid,reverse_identity, this.real_name)
+        let result = await infoEdit(localStorage.uid, reverse_identity, this.real_name)
         // let result = await axios.post(url, data)
         // result = result.data
         console.log(result);
         if (result.code === 1) {
           this.$dialog.toast({
             mes: result.message,
-            timeout: 3000,
-            icon: 'success'
+            timeout: 500,
+            icon: 'success',
+            callback: () => {
+              this.$router.replace('/setting')
+            }
           })
         } else {
           this.$dialog.notify({

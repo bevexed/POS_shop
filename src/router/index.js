@@ -1,43 +1,43 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 // users
-import editAddress from '../page/Address/editAddress'
-import addAddress from '../page/Address/addAddress'
+import EditAddress from '../page/Address/editAddress'
+import AddAddress from '../page/Address/addAddress'
 import Setting from '../page/Setting/index'
 import RealName from '../page/RealName/index'
 import BankCard from '../page/BankCard/index'
 import Vip from '../page/Vip/index'
 // login
-import login from '../page/Login/login'
-import register from '../page/Register/register'
-import forgetPwd from '../page/ForgetPwd'
+import Login from '../page/Login'
+import Register from '../page/Register'
+import ForgetPwd from '../page/ForgetPwd'
 import ChangePassword from '../page/ChangePassword/index'
 
-import indexPage from '../page/Index/index'
+import IndexPage from '../page/Index/index'
 import CreditCard from '../page/CreditCard/index'
-import shoppingCar from '../page/ShoppingCar/index'
+import ShoppingCar from '../page/ShoppingCar/index'
 import My from '../page/My/index'
 import InfoEdit from '../page/InfoEdit'
-import cardInfo from '../page/CardInfo'
+import CardInfo from '../page/CardInfo'
 import productDetail from '../page/ProductDetail/index'
 import Booking from '../page/Booking/index'
 import MyBooking from '../page/MyBooking/index'
 import DeliveryAddress from '../page/Address/Deliveryaddress'
-import bookingSearch from '../page/BookingSearch'
+import BookingSearch from '../page/BookingSearch'
 import BookingDetail from '../page/BookingDetail/index'
 import MyGoods from '../page/MyGoods/index'
 import ManageBankCard from '../page/ManageBankCard/index'
 
 
-import incomeManage from '../page/IncomeManage'
-import planLink from '../page/Promotion'
-import useBook from '../page/Guide/guide'
-import trade from '../page/Trade'
+import IncomeManage from '../page/IncomeManage'
+import PlanLink from '../page/Promotion'
+import UseBook from '../page/Guide/guide'
+import Trade from '../page/Trade'
 import TradeSearch from '../page/TradeSearch'
 import TradeSearchResult from '../page/TradeSearchResult'
 import ActiveVip from '../page/ActiveVip'
 
-import scan from '../page/scan/scan'
+import Scan from '../page/scan/scan'
 
 Vue.use(Router)
 
@@ -48,37 +48,37 @@ const router = new Router({
       redirect: '/login'
     },
     {
-      path:'/scan',
-      component:scan
+      path: '/scan',
+      component: Scan
     },
     {
       path: '/login',
-      component: login,
+      component: Login,
       meta: {index: 0}
     },
     {
       path: '/register',
-      component: register,
+      component: Register,
       meta: {index: 1}
     },
     {
-      path: '/forgetpwd',
-      component: forgetPwd,
+      path: '/forgetPwd',
+      component: ForgetPwd,
       meta: {index: 1}
     },
     {
       path: '/index',
-      component: indexPage,
+      component: IndexPage,
       meta: {index: 1, navShow: true}
     },
     {
-      path: '/creditcard',
+      path: '/creditCard',
       component: CreditCard,
       meta: {index: 1, navShow: true}
     },
     {
-      path: '/shoppingcar',
-      component: shoppingCar,
+      path: '/shoppingCar',
+      component: ShoppingCar,
       meta: {index: 1, navShow: true}
     },
     {
@@ -87,17 +87,17 @@ const router = new Router({
       meta: {index: 1, navShow: true}
     },
     {
-      path: '/InfoEdit',
+      path: '/infoEdit',
       component: InfoEdit,
       meta: {index: 2, navShow: true}
     },
     {
       path: '/cardInfo',
-      component: cardInfo,
+      component: CardInfo,
       meta: {index: 2}
     },
     {
-      path: '/productdetail/id/:id',
+      path: '/productDetail/id/:id',
       component: productDetail,
       name: 'productDetail',
       meta: {index: 1}
@@ -108,7 +108,7 @@ const router = new Router({
       meta: {index: 3}
     },
     {
-      path: '/bookingdetail/id/:id',
+      path: '/bookingDetail/id/:id',
       component: BookingDetail,
       name: 'BookingDetail',
       meta: {index: 2,}
@@ -119,55 +119,55 @@ const router = new Router({
       meta: {index: 2,}
     },
     {
-      path: '/changepassword',
+      path: '/changePassword',
       component: ChangePassword,
       meta: {index: 3,}
     },
     {
-      path: '/mybooking/type/:type',
+      path: '/myBooking/type/:type',
       component: MyBooking,
       name: 'myBooking',
       meta: {index: 2,}
     },
     {
-      path: '/bankcard',
+      path: '/bankCard',
       component: BankCard,
       meta: {index: 2,}
     },
     {
-      path: '/Deliveryaddress',
+      path: '/deliveryAddress',
       component: DeliveryAddress,
       meta: {index: 2}
     },
     {
-      path: '/bookingsearch',
-      component: bookingSearch,
+      path: '/bookingSearch',
+      component: BookingSearch,
       meta: {index: 3}
     },
     {
-      path: '/editaddress/id/:id',
-      component: editAddress,
+      path: '/editAddress/id/:id',
+      component: EditAddress,
       name: 'editAddress',
       meta: {index: 3}
     },
     {
-      path: '/addaddress',
-      component: addAddress,
+      path: '/addAddress',
+      component: AddAddress,
       name: 'addAddress',
       meta: {index: 3}
     },
     {
-      path: '/mygoods',
+      path: '/myGoods',
       component: MyGoods,
       meta: {index: 3}
     },
     {
-      path: '/managebankcard',
+      path: '/manageBankcard',
       component: ManageBankCard,
       meta: {index: 3}
     },
     {
-      path: '/realname',
+      path: '/realName',
       component: RealName,
       meta: {index: 3}
     },
@@ -178,43 +178,43 @@ const router = new Router({
     },
     {
       path: '/incomeManage',
-      component: incomeManage,
+      component: IncomeManage,
       meta: {index: 2}
     },
     {
       path: '/planLink',
-      component: planLink,
+      component: PlanLink,
       meta: {index: 2}
     },
     {
       path: '/useBook',
-      component: useBook,
+      component: UseBook,
       meta: {index: 2}
     },
     {
       path: '/trade',
-      component: trade,
+      component: Trade,
       meta: {index: 2}
     },
     {
-      path: '/tradesearch',
+      path: '/tradeSearch',
       component: TradeSearch,
       meta: {index: 2}
     },
     {
-      path: '/tradesearchresult/form/:form',
+      path: '/tradeSearchResult/form/:form',
       component: TradeSearchResult,
       name: 'TradeSearchResult',
       meta: {index: 2}
     },
     {
-      path: '/activevip',
+      path: '/activeVip',
       component: ActiveVip,
       name: 'ActiveVip',
       meta: {index: 2}
     }
   ],
-  //跳转页面scrolltop为0
+  //跳转页面scrollTop为0
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition

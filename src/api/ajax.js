@@ -1,7 +1,5 @@
 import axios from 'axios'
-import qs from 'qs'
 import {Confirm, Alert, Toast, Notify, Loading} from 'vue-ydui/dist/lib.rem/dialog';
-import Vue from 'vue'
 import '../util'
 
 let config = {
@@ -56,7 +54,7 @@ export default function ajax(url, data = {}, type = "POST") {
       for (let [key,value] of Object.entries(data)){
         formdata.append(key,value)
       }
-      promise = axios.post(url,formdata,{headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
+      promise = axios.post(url,formdata,config)
       // promise = axios.post(url, data)
       // promise = axios.post(url, data)
     }
