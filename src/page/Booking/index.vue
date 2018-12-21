@@ -145,8 +145,8 @@
       },
       countTotal() {
         let price = 0;
-        for (var i = 0; i < this.items.length; i++) {
-          for (var j = 0; j < this.items[i].g_sku.length; j++) {
+        for (let i = 0; i < this.items.length; i++) {
+          for (let j = 0; j < this.items[i].g_sku.length; j++) {
             price += this.items[i].g_sku[j].amount * this.items[i].g_sku[j].price
           }
         }
@@ -171,7 +171,7 @@
       },
       async commit(uid,address_id,g_sku_infos,cart_ids,remark) {
         let result = await commitOrder(uid,address_id,g_sku_infos,cart_ids,remark)
-        if (result.code == 1) {
+        if (result.code === 1) {
           console.log(result)
           this.bol = true;
           this.orderNo = result.out_trade_no;
@@ -179,7 +179,7 @@
       },
       commitTo() {
         let g_sku_infos = JSON.stringify([{'g_id': this.shopInfo.g_id, 'g_sku_id': this.shopInfo.g_sku_id, 'amount': this.num}]);
-        if (this.addressObj.id == undefined) {
+        if (this.addressObj.id === undefined) {
           this.$dialog.notify({
             mes: '请填写收货地址',
             timeout: 3000
@@ -190,13 +190,13 @@
       },
       commitO() {
         let arr = [];
-        for (var i = 0; i < this.items.length; i++) {
-          for(var j = 0; j < this.items[i].g_sku.length;j ++){
+        for (let i = 0; i < this.items.length; i++) {
+          for(let j = 0; j < this.items[i].g_sku.length;j ++){
             arr.push({'g_id': this.items[i].g_id, 'g_sku_id': this.items[i].g_sku[j].g_sku_id, 'amount': this.items[i].g_sku[j].amount})
           }
         }
         let g_sku_infos = JSON.stringify(arr)
-        if (this.addressObj.id == undefined) {
+        if (this.addressObj.id === undefined) {
           this.$dialog.notify({
             mes: '请填写收货地址',
             timeout: 3000

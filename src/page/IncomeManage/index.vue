@@ -1,5 +1,5 @@
 <template>
-  <div class="income_content">
+  <div class="income_content" v-if="earningsData">
     <headers :title="title" :isBack="true"></headers>
     <div class="income_top">
       <span>总资产（元）</span>

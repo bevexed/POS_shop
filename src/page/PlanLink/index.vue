@@ -6,27 +6,44 @@
       <p class="plan_code">{{$route.query.promotes}}</p>
       <span>您的好友在注册时也可可以填写哦</span>
       <div class="dotSpan"></div>
-      <img class="qrCode" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=847853172,894993951&fm=27&gp=0.jpg" alt="二维码图片">
-      <button class="keepCode">保存二维码</button>
+      <VueQArt :config="config" :downloadButton="downloadButton"></VueQArt>
+      <button class="keepCode" @click="saveCode">保存二维码</button>
     </div>
   </div>
 </template>
 
 <script>
+  import VueQArt from 'vue-qart'
   import headers from '../../components/Headers'
 
   export default {
     data() {
       return {
+        downloadButton: true,
+        config: {
+          value: 'https://baidu.com',
+          imagePath: require('../../assets/edit.png'),
+          filter: 'color'
+        },
         title: '推广链接'
       }
     },
     components: {
-      headers
+      headers,
+      VueQArt
     },
-    methods:{
-      scanResult(){
-        this.$router.push('/scan');
+    methods: {
+      saveCode(){
+        // const myCanvas = this.$refs.qart.children[0];
+        // const myCanvas = this.$refs.qart
+        const myCanvas = document.querySelector('canvas')
+        console.log(myCanvas);
+        const type = 'image/png';
+        let image = myCanvas.toDataURL(type).replace(type, "image/octet-stream");
+        window.location.href = image; // it will save locally
+      },
+      scanResult() {
+        this.$router.push('/Scan');
       }
     }
   }
@@ -39,7 +56,7 @@
 
     .plan_box {
       width: 272px;
-      height: 355px;
+      height: 410px;
       background: rgba(255, 255, 255, 1);
       border-radius: 10px;
       text-align: center;

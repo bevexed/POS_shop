@@ -51,7 +51,7 @@
     },
     methods: {
       search(){
-        this.$router.push('/tradesearch')
+        this.$router.push('/tradeSearch')
       },
       async getTrades(){
         let res = await trades(localStorage.uid)

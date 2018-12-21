@@ -30,7 +30,7 @@ import ManageBankCard from '../page/ManageBankCard'
 
 
 import IncomeManage from '../page/IncomeManage'
-import PlanLink from '../page/Promotion'
+import PlanLink from '../page/PlanLink'
 import UseBook from '../page/Guide'
 import Trade from '../page/Trade'
 import TradeSearch from '../page/TradeSearch'
@@ -48,7 +48,7 @@ const router = new Router({
       redirect: '/login'
     },
     {
-      path: '/scan',
+      path: '/Scan',
       component: Scan
     },
     {
@@ -89,7 +89,7 @@ const router = new Router({
     {
       path: '/infoEdit',
       component: InfoEdit,
-      meta: {index: 2, navShow: true}
+      meta: {index: 3, navShow: true}
     },
     {
       path: '/cardInfo',
@@ -137,7 +137,7 @@ const router = new Router({
     {
       path: '/deliveryAddress',
       component: DeliveryAddress,
-      meta: {index: 2}
+      meta: {index: 3}
     },
     {
       path: '/bookingSearch',
@@ -211,7 +211,7 @@ const router = new Router({
       path: '/activeVip',
       component: ActiveVip,
       name: 'ActiveVip',
-      meta: {index: 2}
+      meta: {index: 3}
     }
   ],
   //跳转页面scrollTop为0
