@@ -44,3 +44,4 @@ Vue.prototype.$getLocation = function getLocation() {
 
   })
 }
+

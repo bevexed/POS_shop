@@ -15,13 +15,13 @@
 <script>
   import VueQArt from 'vue-qart'
   import headers from '../../components/Headers'
-  
+
   export default {
     data() {
       return {
         downloadButton: true,
         config: {
-          value: 'https://baidu.com',
+          value: 'http://192.168.1.24:8081',
           imagePath: require('../../assets/sousuo.png'),
           filter: 'color'
         },
@@ -40,14 +40,31 @@
         console.log(myCanvas);
         const type = 'image/png';
         let image = myCanvas.toDataURL(type).replace(type, "image/octet-stream");
-        const download = document.createElement('a')
-        download.href = image
-        download.download = "img.png"
-        download.click()
+
+        // const download = document.createElement('a')
+        // download.href = image
+        // download.download = "img.png"
+        // download.click()
         // window.location.href = image; // it will save locally
+
+        this.saveFile(image,"img.png")
       },
       scanResult() {
         this.$router.push('/Scan');
+      },
+      /**
+       * 在本地进行文件保存
+       * @param  {String} data     要保存到本地的图片数据
+       * @param  {String} filename 文件名
+       */
+      saveFile(data, filename) {
+        const save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
+        save_link.href = data;
+        save_link.download = filename;
+
+        const event = document.createEvent('MouseEvents');
+        event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        save_link.dispatchEvent(event);
       }
     }
   }
