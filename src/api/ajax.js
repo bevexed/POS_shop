@@ -4,6 +4,10 @@ import {Confirm, Alert, Toast, Notify, Loading} from 'vue-ydui/dist/lib.rem/dial
 import Vue from 'vue'
 import '../util'
 
+let config = {
+  headers: {'Content-Type': 'multipart/form-data'}
+};
+
 // 添加请求拦截器
 axios.interceptors.request.use(function (config) {
   // 在发送请求之前做些什么
@@ -17,7 +21,10 @@ axios.interceptors.request.use(function (config) {
 // 添加响应拦截器
 axios.interceptors.response.use(function (response) {
   // 对响应数据做点什么
-  Loading.close();
+  if (response.status === 200) {
+    Loading.close();
+  }
+
   return response;
 }, function (error) {
   Loading.close();
@@ -45,7 +52,12 @@ export default function ajax(url, data = {}, type = "POST") {
       // 发送get请求
       promise = axios.get(url)
     } else {
-      promise = axios.post(url, qs.stringify(data))
+      let formdata = new FormData()
+      for (let [key,value] of Object.entries(data)){
+        formdata.append(key,value)
+      }
+      promise = axios.post(url,formdata,{headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
+      // promise = axios.post(url, data)
       // promise = axios.post(url, data)
     }
     promise.then(response => {

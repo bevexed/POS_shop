@@ -2,7 +2,7 @@
   <section class="setting">
     <headers :title="'我的设置'" :isBack="true"></headers>
     <header @click="$router.push('./InfoEdit')">
-      <img :src="IMG_URL+homeData.avatars" alt="">
+      <img :src="IMG_BASE_URL+homeData.avatars" alt="">
       <p>{{homeData.nick_name ? homeData.nick_name :homeData.mobiles}}</p>
     </header>
     <section class="item" @click="$router.push('/DeliveryAddress')">
@@ -46,7 +46,7 @@
 
 <script>
   import headers from '../../components/Headers'
-  import {IMG_URL} from "../../api/BASE_URL";
+  import {IMG_URL,IMG_BASE_URL} from "../../api/BASE_URL";
   import {home} from "../../api/users";
 
   export default {
@@ -57,6 +57,7 @@
     data() {
       return {
         IMG_URL,
+        IMG_BASE_URL,
         homeData: {}
       }
     },

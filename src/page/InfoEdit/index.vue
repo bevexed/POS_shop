@@ -11,7 +11,7 @@
       <span slot="left">上传头像： </span>
     </yd-cell-item>
     <div class="upload">
-      <input type="file" ref="reverse_identity" hidden name="reverse_identity" accept="image/*" formenctype="multipart/form-data" @change="getImgData($event)">
+      <input type="file" ref="reverse_identity" id="img" hidden name="reverse_identity" accept="image/*" formenctype="multipart/form-data" @change="getImgData($event)">
       <span @click="getImg('reverse_identity')" v-if="!reverse_identity">请上传头像</span>
       <img :src="reverse_identity_url" @click="getImg('reverse_identity')" alt="" v-else>
     </div>
@@ -23,8 +23,9 @@
 </template>
 
 <script>
+  import axios from 'axios'
   import headers from '../../components/Headers'
-  import {realName} from "../../api/users";
+  import {infoEdit} from "../../api/users";
 
   export default {
     name: "InfoEdit",
@@ -33,13 +34,10 @@
     },
     data() {
       return {
-        front_identity: '',
-        front_identity_url: '',
         reverse_identity: '',
         reverse_identity_url: '',
         imgUrl: '',
         real_name: '',
-        idCard: ''
       }
     },
     created() {
@@ -57,21 +55,22 @@
       async doRealName() {
         if (!this.real_name) {
           this.$dialog.notify({
-            mes: '请填写用户名',
+            mes: '请填写昵称',
             timeout: 3000,
           })
           return
         }
-        if (!this.idCard) {
-          this.$dialog.notify({
-            mes: '请填写银行卡号',
-            timeout: 3000,
-          })
-          return
-        }
-        const {front_identity, reverse_identity} = this
-        console.log(front_identity, reverse_identity);
-        let result = await realName(localStorage.uid, this.real_name, this.idCard, front_identity, reverse_identity)
+        const {reverse_identity} = this
+        console.log(reverse_identity);
+        // let url = 'http://lzxprogrammer.com/users/infoEdit'
+        // let data = new FormData()
+        // data.append('uid',localStorage.uid)
+        // data.append('avatar',reverse_identity)
+        // data.append('nick_name',this.real_name)
+        let result = await infoEdit(localStorage.uid,reverse_identity, this.real_name)
+        // let result = await axios.post(url, data)
+        // result = result.data
+        console.log(result);
         if (result.code === 1) {
           this.$dialog.toast({
             mes: result.message,
@@ -110,13 +109,14 @@
     padding: 20px;
 
     > img, > span {
+      margin: 0 auto;
       display: block;
-      width: 330px;
+      width: 164px;
       height: 164px;
       text-align: center;
       line-height: 164px;
       background: white;
-      border-radius: 6px;
+      border-radius: 50%;
     }
   }
 
