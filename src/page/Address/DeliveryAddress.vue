@@ -23,7 +23,6 @@
   import headers from '../../components/Headers'
   import {address} from "../../api/users";
 
-
   export default {
     data() {
       return {

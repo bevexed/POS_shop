@@ -5,12 +5,12 @@
       <img :src="IMG_BASE_URL+homeData.avatars" alt="">
       <p>{{homeData.nick_name ? homeData.nick_name :homeData.mobiles}}</p>
     </header>
-    <section class="item" @click="$router.push('/DeliveryAddress')">
+    <section class="item" @click="$router.push('/deliveryAddress')">
       收货地址
       <span class="address">修改/添加</span>
     </section>
     <footer>
-      <section class="item" @click="$router.push('/realname')">
+      <section class="item" @click="$router.push('/realName')">
         实名认证
         <span>{{homeData.id_numbers? '已认证' : '未实名'}}</span>
       </section>
@@ -22,17 +22,17 @@
         结算信息
         <span></span>
       </section>
-      <section class="item" @click="$router.push('/changepassword')">
+      <section class="item" @click="$router.push('/changePassword')">
         修改密码
         <span></span>
       </section>
-      <section class="item" @click="$router.push('/managebankcard')">
+      <section class="item" @click="$router.push('/manageBankcard')">
         银行卡管理
         <span></span>
       </section>
       <section class="item">
-        账号激活
-        <span>
+        会员激活
+        <span @click="goVip(homeData.is_actives)">
           <!--<img v-if="homeData.is_actives === 0" width="12" src="../../assets/setting/ed@3x.png" alt="">-->
           <!--<img v-else width="12" src="../../assets/setting/none@3x.png" alt="">-->
           {{homeData.is_actives === 1?'已激活':'未激活'}}
@@ -46,7 +46,7 @@
 
 <script>
   import headers from '../../components/Headers'
-  import {IMG_URL,IMG_BASE_URL} from "../../api/BASE_URL";
+  import {IMG_URL, IMG_BASE_URL} from "../../api/BASE_URL";
   import {home} from "../../api/users";
 
   export default {
@@ -62,6 +62,16 @@
       }
     },
     methods: {
+      goVip(vip_status) {
+        if (vip_status === 1)
+          this.$dialog.notify({
+            mes: '您已激活会员',
+            timeout: 3000
+          })
+        else
+          this.$router.push('/activeVip')
+      },
+
       loginOut() {
         localStorage.uid = ''
         this.$dialog.toast({
