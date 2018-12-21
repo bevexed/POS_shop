@@ -34,8 +34,8 @@
       startRecognize() {
         let that = this;
         if (!window.plus) return;
-        scan = new plus.barcode.Barcode('bcid');
-        scan.onmarked = onmarked;
+        index = new plus.barcode.Barcode('bcid');
+        index.onmarked = onmarked;
 
         function onmarked(type, result, file) {
           switch (type) {
@@ -64,17 +64,17 @@
       startScan() {
         if (!window.plus) return;
         this.startRecognize();
-        scan.start();
+        index.start();
       },
       //关闭扫描
       cancelScan() {
         if (!window.plus) return;
-        scan.cancel();
+        index.cancel();
       },
       //关闭条码识别控件
       closeScan() {
         if (!window.plus) return;
-        scan.close();
+        index.close();
       }
     },
     mounted(){
