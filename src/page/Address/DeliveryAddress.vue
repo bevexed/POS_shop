@@ -7,6 +7,7 @@
           <p>
             <span>{{v.name}}</span>
             <span>{{v.phone}}</span>
+            <span v-if="v.is_default === 1" style="float:right;color: #ff6d48;margin: 0">当前默认地址</span>
           </p>
           <p>{{v.address}}</p>
         </div>
@@ -62,7 +63,8 @@
     background: #fff;
 
     li {
-      height: 62px;
+      padding: 10px 0;
+      min-height: 62px;
       border-bottom: 1px #e8e9eb solid;
       display: flex;
       align-items: center;
@@ -72,11 +74,16 @@
         border: none;
       }
 
-      & > img {
+      > img {
         width: 20px;
       }
 
-      & > div > p > span {
+      p{
+        width: 300px;
+        word-break: break-all;
+      }
+
+      > div > p > span {
         margin-right: 20px;
       }
     }

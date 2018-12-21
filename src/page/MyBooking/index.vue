@@ -1,6 +1,6 @@
 <template>
   <section @wheel="loadingMore" @touchmove="loadingMore" id="vip">
-    <headers :title="selectComponent[selected].type" :is-search="isSearch" :is-back="true"/>
+    <headers :title="selectComponent[selected].type" :is-back="true"/>
     <nav>
       <ul>
         <li v-for="(v,i) in selectComponent" @click="select(i)" :class="{active:selected === i}">{{v.type}}</li>
@@ -40,7 +40,6 @@
       return {
         loadingState: true,
         page: 1,
-        isSearch: false,
         selected: 0,
         title: '我的订单',
         orderListData: [],

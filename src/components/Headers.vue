@@ -34,7 +34,7 @@
       isBack: Boolean,
       isManage: Boolean,
       isPosition: Boolean,
-      isSearch: Boolean,
+      isSearch: Function,
       isKeep: Function,
       isScan: Boolean,
       isSkir: Boolean,

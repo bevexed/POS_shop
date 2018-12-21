@@ -78,7 +78,7 @@
             timeout: 1000,
             icon: 'success',
             callback: () => {
-              this.$router.replace('/DeliveryAddress')
+              this.$router.replace('/deliveryAddress')
             }
           });
 

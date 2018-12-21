@@ -226,7 +226,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (!localStorage.uid) {
-    if (to.path === '/login' || to.path === '/register' || to.path === '/forgetPwd') {
+    if (to.path === '/login' || to.path === '/register' || to.path === '/forgetPwd' || to.path === 'index') {
       next()
     } else {
       next('/login')
