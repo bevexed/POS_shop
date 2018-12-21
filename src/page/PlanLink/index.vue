@@ -15,14 +15,14 @@
 <script>
   import VueQArt from 'vue-qart'
   import headers from '../../components/Headers'
-
+  
   export default {
     data() {
       return {
         downloadButton: true,
         config: {
           value: 'https://baidu.com',
-          imagePath: require('../../assets/edit.png'),
+          imagePath: require('../../assets/sousuo.png'),
           filter: 'color'
         },
         title: '推广链接'
@@ -33,7 +33,7 @@
       VueQArt
     },
     methods: {
-      saveCode(){
+      saveCode() {
         // const myCanvas = this.$refs.qart.children[0];
         // const myCanvas = this.$refs.qart
         const myCanvas = document.querySelector('canvas')
@@ -42,7 +42,7 @@
         let image = myCanvas.toDataURL(type).replace(type, "image/octet-stream");
         const download = document.createElement('a')
         download.href = image
-        download.download="img.png"
+        download.download = "img.png"
         download.click()
         // window.location.href = image; // it will save locally
       },
