@@ -40,7 +40,11 @@
         console.log(myCanvas);
         const type = 'image/png';
         let image = myCanvas.toDataURL(type).replace(type, "image/octet-stream");
-        window.location.href = image; // it will save locally
+        const download = document.createElement('a')
+        download.href = image
+        download.download="img.png"
+        download.click()
+        // window.location.href = image; // it will save locally
       },
       scanResult() {
         this.$router.push('/Scan');
