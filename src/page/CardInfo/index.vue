@@ -11,7 +11,7 @@
     </p>
 
     <h6>信用卡详情</h6>
-    <i>{{content_info.blurb}}</i>
+    <i class="blurb">{{content_info.blurb}}</i>
     <div class="cardDiv" v-html="content_info.content"></div>
 
     <div class="customDynamic">
@@ -31,7 +31,7 @@
     </div>
     <div style="height: 70px"></div>
     <footer>
-      <div>
+      <div class="back">
         <yd-icon name="compose" size="12px"></yd-icon>
         <input type="text" v-model="content" placeholder="写写你的看法">
       </div>
@@ -139,7 +139,7 @@
       padding: 20px;
     }
 
-    i {
+    i.blurb {
       font-size: 12px;
       display: block;
       text-align: right;
@@ -148,7 +148,7 @@
     }
 
     .customDynamic {
-      padding:10px 20px 20px;
+      padding: 10px 20px 20px;
     }
 
     .customDynamic > div:nth-child(1) {
@@ -203,7 +203,8 @@
     box-shadow: black 3px 3px 20px;
     background: white;
 
-    div {
+    > div.back {
+      text-align: left;
       display: inline-block;
       padding: 0 20px;
       width: 70%;
@@ -214,7 +215,7 @@
       height: 34px;
       line-height: 34px;
 
-      input {
+      > input {
         border: none;
         width: 70%;
       }
