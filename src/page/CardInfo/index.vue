@@ -1,15 +1,26 @@
 <template>
   <div class="cardInfo_content">
     <headers :title="title" :isBack="true"></headers>
-    <div class="cardDiv" v-html="content_info"></div>
+
+    <div class="num">
+      信用卡申请人数：<span>{{content_info.apply_num}}人</span>
+    </div>
+    <img :src="IMG_BASE_URL+content_info.picture" alt="">
+    <p class="bank_name">
+      {{content_info.name}}({{content_info.type}})
+    </p>
+
+    <h6>信用卡详情</h6>
+    <i>{{content_info.blurb}}</i>
+    <div class="cardDiv" v-html="content_info.content"></div>
 
     <div class="customDynamic">
       <div>
-        <p>用户评论（{{dynamicUL.length}}）</p>
+        <p>用户评论（{{commentsData.length}}）</p>
         <!--<p>查看全部</p>-->
       </div>
       <div class="dynamic_list">
-        <div v-for="(item,index) in dynamicUL" :key="index">
+        <div v-for="(item,index) in commentsData" :key="index">
           <div>
             <img :src="IMG_BASE_URL+item.consumer.avatar" alt="图片">
             <p>{{item.consumer.nick_name}}</p>
@@ -18,6 +29,7 @@
         </div>
       </div>
     </div>
+    <div style="height: 70px"></div>
     <footer>
       <div>
         <yd-icon name="compose" size="12px"></yd-icon>
@@ -41,7 +53,7 @@
         title: '信用卡详情',
         content: '',
         content_info: '',
-        dynamicUL: [],
+        commentsData: [],
         id: '', // 信用卡ID
       }
     },
@@ -60,23 +72,23 @@
         }
       },
       async getInfo(id) {
-        let data = await info(id);
-        if (data.code === 1) {
-          this.content_info = data.data.content;
+        let res = await info(id);
+        if (res.code === 1) {
+          this.content_info = res.data;
         } else {
           this.$dialog.notify({
-            mes: data.message,
+            mes: res.message,
             timeout: 1000
           })
         }
       },
       async dynamicList(id) {
-        let data = await dynamic(id);
-        if (data.code === 1) {
-          this.dynamicUL = data.data;
+        let res = await dynamic(id);
+        if (res.code === 1) {
+          this.commentsData = res.data;
         } else {
           this.$dialog.notify({
-            mes: data.message,
+            mes: res.message,
             timeout: 1000
           })
         }
@@ -93,14 +105,50 @@
 
 <style scoped lang="less">
   .cardInfo_content {
-    background: #fff !important;
+    background: #fff;
+    text-align: center;
+
+    img {
+      display: inline-block;
+      width: 335px;
+      height: 180px;
+      border-radius: 10px;
+    }
+
+    p.bank_name {
+      font-weight: bold;
+      margin-top: 10px;
+      margin-left: 20px;
+      text-align: left;
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+
+    div.num {
+      text-align: right;
+      padding: 10px 20px;
+      font-size: 12px;
+
+      span {
+        color: #FF6D4B;
+      }
+    }
 
     .cardDiv {
-      padding: 10px;
+      text-align: left;
+      padding: 20px;
+    }
+
+    i {
+      font-size: 12px;
+      display: block;
+      text-align: right;
+      padding: 10px 10px 0;
+      color: red;
     }
 
     .customDynamic {
-      padding: 0 10px;
+      padding:10px 20px 20px;
     }
 
     .customDynamic > div:nth-child(1) {
@@ -153,6 +201,7 @@
     bottom: 0;
     padding: 10px 0;
     box-shadow: black 3px 3px 20px;
+    background: white;
 
     div {
       display: inline-block;
