@@ -1,4 +1,4 @@
-<template>
+ss<template>
   <section v-if="ordersDetailData">
     <headers :title="'订单详情'" :isBack="true"></headers>
     <section class="address">
@@ -45,45 +45,59 @@
           订单编号：{{ordersDetailData.no}}
         </li>
         <li>
-          创建时间：{{ordersDetailData.create_time | TimeDate}}
+          创建时间：{{ordersDetailData.create_time}}
         </li>
-        <li>
-          付款时间：{{ordersDetailData.paid_time | TimeDate}}
+        <li v-if="ordersDetailData.paid_time">
+          付款时间：{{ordersDetailData.paid_time}}
         </li>
-        <li>
+        <li v-if="ordersDetailData.delivery_time">
           发货时间：{{ordersDetailData.delivery_time | TimeDate}}
         </li>
-        <li>
+        <li v-if="ordersDetailData.clinch_time">
           成交时间：{{ordersDetailData.clinch_time | TimeDate}}
         </li>
-
-
       </ul>
+
     </footer>
+    <yd-button style="width: 90%;margin: 30px auto" bgcolor="#ff6d48" color="#fff" size="large" type="primary" shape="circle" @click.native="toPay">支付</yd-button>
+    <pay :isShow="show" @close="closeBox" :price="totalPuch" :orderNo="orderNo"></pay>
   </section>
 </template>
 
 <script>
   import headers from '../../components/Headers'
+  import pay from '../../components/pay'
   import {IMG_BASE_URL} from "../../api/BASE_URL";
-  import {ordersDetail,aliPay} from "../../api/orders";
+  import {ordersDetail} from "../../api/orders";
 
   export default {
     name: "BookingDetail",
     components: {
-      headers
+      headers,
+      pay
     },
     data() {
       return {
+        show:false,
         IMG_BASE_URL,
-        ordersDetailData: ''
+        ordersDetailData: '',
+        totalPuch:'',
+        orderNo:''
       }
     },
     methods: {
+      toPay(){
+        this.show = true;
+      },
+      closeBox(e) {
+        this.show = e;
+      },
       async getOrdersDetail() {
         let result = await ordersDetail(this.$route.params.id, localStorage.uid)
         if (result.code === 1) {
           this.ordersDetailData = result.data
+          this.totalPuch = result.data.total_amount
+          this.totalNo = result.data.no
         } else {
           this.$dialog.notify({
             mes: result.message,
