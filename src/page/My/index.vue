@@ -2,7 +2,7 @@
   <section v-if="homeData">
     <header class="user" @click="$router.push('/setting')">
       <img :src="IMG_BASE_URL+homeData.avatars" alt="">
-      <p ><span>{{homeData.nick_name?homeData.nick_name:homeData.mobiles}}</span> <br>
+      <p><span>{{homeData.nick_name?homeData.nick_name:homeData.mobiles}}</span> <br>
         {{homeData.is_actives === 1 ? '会员已激活':'会员未激活'}}
       </p>
       <span class="vip" v-if="homeData.is_actives === 0 " @click.self.stop="$router.push('/activevip')">会员激活</span>
@@ -91,21 +91,21 @@
 
   export default {
     name: "my",
-    components:{
+    components: {
       Alert
     },
     data() {
       return {
-        show:false,
+        show: false,
         IMG_BASE_URL,
         homeData: {}
       }
     },
     methods: {
-      vipGo(path){
-        if (this.homeData.is_actives === 1){
-          this.$router.push({path:path,query:{promotes:this.homeData.promotes}})
-        }else{
+      vipGo(path) {
+        if (this.homeData.is_actives === 1) {
+          this.$router.push({path: path, query: {promotes: this.homeData.promotes}})
+        } else {
           this.show = true
         }
       },
@@ -114,6 +114,8 @@
         if (result.code === 1) {
           this.homeData = result.data
           localStorage.is_actives = result.data.is_actives
+        } else {
+          this.$router.replace('./login')
         }
       },
     },
@@ -152,7 +154,8 @@
       text-align: right;
       font-size: 18px;
       color: white;
-      &.vip{
+
+      &.vip {
         position: absolute;
         right: 0;
         background: white;
@@ -242,7 +245,8 @@
 
         img {
           width: 25px;
-          &.vip{
+
+          &.vip {
             -webkit-filter: grayscale(100%);
           }
         }

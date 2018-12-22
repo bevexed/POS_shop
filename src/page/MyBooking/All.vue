@@ -1,7 +1,7 @@
 <template>
   <section>
     <section class="card" v-for="(v,i) in data" :key="i">
-      <header v-for="(value,index) in v.goods_sku" :key="value.goods_id"  @click="$router.push({name:'BookingDetail',params:{id:v.id}})">
+      <header v-for="(value,index) in v.goods_sku" :key="value.goods_id" @click="$router.push({name:'BookingDetail',params:{id:v.id}})">
         <img :src="IMG_BASE_URL + value.show_pic" alt="">
         <p>
           {{value.goods_name}} <br>
@@ -16,8 +16,12 @@
       <section class="price">
         共一件商品 合计：<span>￥{{v.total_amount}}</span>
       </section>
+      <!--已取消-->
+      <footer v-if="v.closed === 1">
+        <span class="pay>">已取消</span>
+      </footer>
       <!--待付款-->
-      <footer v-if="v.status === 0">
+      <footer v-if="v.status === 0 && v.closed === 0">
         <span class="cancel" @click="doOrdersCancel(v.id)">取消订单</span>
         <span class="pay>">付款</span>
       </footer>

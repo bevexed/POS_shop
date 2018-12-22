@@ -58,14 +58,18 @@
     },
     computed: {
       getTotal() {
-        let _choose = this.items.filter(function (val) {
-          return val.isChecked;
-        })
-        let totalPrice = 0;
-        for (let i = 0; i < _choose.length; i++) {
-          totalPrice += _choose[i].amount * _choose[i].price
+        if (this.items.length) {
+          let _choose = this.items.filter(function (val) {
+            return val.isChecked;
+          })
+          let totalPrice = 0;
+          for (let i = 0; i < _choose.length; i++) {
+            totalPrice += _choose[i].amount * _choose[i].price
+          }
+          return {totalPrice: totalPrice.toFixed(2)}
+        } else {
+          return {totalPrice: 0}
         }
-        return {totalPrice: totalPrice.toFixed(2)}
       }
     },
     methods: {
@@ -106,38 +110,45 @@
         }
       },
       account() {
-        let select = this.items.filter(val => {
-          return val.isChecked === true;
-        });
-        let cart_infos, arr = [];
-        for (let i = 0; i < select.length; i++) {
-          arr.push({'cart_id': select[i].id, 'amount': select[i].amount})
-          cart_infos = JSON.stringify(arr);
-        }
-        if (select.length !== 0) {
-          this.$router.push({path: '/Booking', query: {cart_infos: cart_infos}})
-        } else {
-          this.$dialog.notify({
-            mes: '至少选择一件宝贝',
-            timeout: 1000
-          })
+        if (this.items.length) {
+          let select = this.items.filter(val => {
+            return val.isChecked === true;
+          });
+
+
+          let cart_infos, arr = [];
+          for (let i = 0; i < select.length; i++) {
+            arr.push({'cart_id': select[i].id, 'amount': select[i].amount})
+            cart_infos = JSON.stringify(arr);
+          }
+          if (select.length !== 0) {
+            this.$router.push({path: '/Booking', query: {cart_infos: cart_infos}})
+          } else {
+            this.$dialog.notify({
+              mes: '至少选择一件宝贝',
+              timeout: 1000
+            })
+          }
         }
       },
       async deleteItem() {
-        let select = this.items.filter(val => val.isChecked === true);
-        let cart_infos, arr = [];
-        for (let i = 0; i < select.length; i++) {
-          arr.push({'cart_id': select[i].id})
-          cart_infos = JSON.stringify(arr);
-        }
-        let res = await destroy(localStorage.uid, cart_infos)
-        if (res.code === 1) {
-          this.$router.go(0)
-        } else {
-          this.$dialog.notify({
-            mes: res.message,
-            type: 'error'
-          })
+        if (this.items.length) {
+          let select = this.items.filter(val => val.isChecked === true);
+
+          let cart_infos, arr = [];
+          for (let i = 0; i < select.length; i++) {
+            arr.push({'cart_id': select[i].id})
+            cart_infos = JSON.stringify(arr);
+          }
+          let res = await destroy(localStorage.uid, cart_infos)
+          if (res.code === 1) {
+            this.$router.go(0)
+          } else {
+            this.$dialog.notify({
+              mes: res.message,
+              type: 'error'
+            })
+          }
         }
       },
       getBool(e) {

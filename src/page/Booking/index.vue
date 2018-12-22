@@ -59,8 +59,7 @@
           <a @click="commitTo">提交订单</a>
         </footer>
       </div>
-
-
+      <!--购物车入口-->
       <div v-if="fenlei == 2" v-for="(item,index) in items" :key="index">
         <section class="detail">
           <div v-for="(v,i) in item.g_sku" :key="i">
@@ -170,8 +169,12 @@
         this.addressObj = res.data;
       },
       async commit(uid, address_id, g_sku_infos, remark) {
-        let cart_ids = JSON.stringify(JSON.parse(this.$route.query.cart_infos).map(item => {return {'cart_id':item.cart_id}}))
-
+        let cart_ids = '[]'
+        if (this.$route.query.cart_infos) {
+          cart_ids = JSON.stringify(JSON.parse(this.$route.query.cart_infos).map(item => {
+            return {'cart_id': item.cart_id}
+          }))
+        }
         let result = await commitOrder(uid, address_id, g_sku_infos, cart_ids, remark)
         if (result.code === 1) {
           console.log(result)

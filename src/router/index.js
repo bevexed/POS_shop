@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import store from '../store'
 import Router from 'vue-router'
 // users
 import EditAddress from '../page/Address/editAddress'
@@ -225,14 +226,15 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if (!localStorage.uid) {
-    if (to.path === '/login' || to.path === '/register' || to.path === '/forgetPwd' || to.path === 'index') {
+  if (to.path === '/login' || to.path === '/register' || to.path === '/forgetPwd') { // 不需要登录权限的页面
+    next()
+  } else {
+    if (localStorage.uid) {
+      console.log(store);
       next()
     } else {
       next('/login')
     }
-  } else {
-    next()
   }
 })
 

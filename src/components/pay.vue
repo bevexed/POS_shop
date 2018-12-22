@@ -2,7 +2,7 @@
     <div class="payContent" v-show="isShow">
       <div class="pay_box">
         <div class="pay_top">
-          <img @click="closeBox" src="../assets/error.png" alt="">
+          <img @click="$router.go(-1)" src="../assets/error.png" alt="">
           <span>确认付款</span>
         </div>
         <p class="totalMuch">￥{{price}}</p>
