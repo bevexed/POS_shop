@@ -21,8 +21,9 @@
     <footer>
       <div>
         <yd-icon name="compose" size="12px"></yd-icon>
-        <input type="text" placeholder="写写你的看法">
+        <input type="text" v-model="content" placeholder="写写你的看法">
       </div>
+      <yd-button size="small" type="primary" shape="circle" style="padding: 0 25px" bgcolor="#ff6d48" color="#fff" @click.native="addComment">评论</yd-button>
     </footer>
   </div>
 </template>
@@ -30,6 +31,7 @@
 <script>
   import headers from '../../components/Headers'
   import {info, dynamic} from "../../api/credit"
+  import {add} from "../../api/users";
   import {IMG_BASE_URL} from "../../api/BASE_URL"
 
   export default {
@@ -37,17 +39,29 @@
       return {
         IMG_BASE_URL,
         title: '信用卡详情',
+        content: '',
         content_info: '',
-        dynamicUL: []
+        dynamicUL: [],
+        id: '', // 信用卡ID
       }
     },
     components: {
       headers
     },
     methods: {
+      async addComment() {
+        let res = await add(localStorage.uid, this.id, 0, this.content)
+        this.$dialog.notify({
+          mes: res.message,
+          type: res.code === 1 ? "success" : "error"
+        })
+        if (res.code === 1) {
+          this.$router.go(0)
+        }
+      },
       async getInfo(id) {
         let data = await info(id);
-        if (data.code == 1) {
+        if (data.code === 1) {
           this.content_info = data.data.content;
         } else {
           this.$dialog.notify({
@@ -58,7 +72,7 @@
       },
       async dynamicList(id) {
         let data = await dynamic(id);
-        if (data.code == 1) {
+        if (data.code === 1) {
           this.dynamicUL = data.data;
         } else {
           this.$dialog.notify({
@@ -70,6 +84,7 @@
     },
     created() {
       let id = this.$route.query.id
+      this.id = this.$route.query.id
       this.getInfo(id);
       this.dynamicList(id);
     }
@@ -140,16 +155,19 @@
     box-shadow: black 3px 3px 20px;
 
     div {
+      display: inline-block;
       padding: 0 20px;
-      margin: 0 auto;
+      width: 70%;
       border-radius: 17px;
       background: #f3f3f3;
-      width: 355px;
+      margin-left: 3%;
+      margin-right: 3%;
       height: 34px;
       line-height: 34px;
 
       input {
         border: none;
+        width: 70%;
       }
     }
   }
