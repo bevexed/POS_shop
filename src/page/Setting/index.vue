@@ -2,7 +2,7 @@
   <section class="setting">
     <headers :title="'我的设置'" :isBack="true"></headers>
     <header @click="$router.push('./InfoEdit')">
-      <img :src="IMG_BASE_URL+homeData.avatars" alt="">
+      <img :src="IMG_BASE_URL+homeData.avatars" alt="" v-if="homeData.avatars">
       <p>{{homeData.nick_name ? homeData.nick_name :homeData.mobiles}}</p>
     </header>
     <section class="item" @click="$router.push('/deliveryAddress')">

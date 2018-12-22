@@ -122,7 +122,7 @@
   export default {
     name: "booking",
     components: {
-      headers,pay
+      headers, pay
     },
     data() {
       return {
@@ -134,9 +134,9 @@
         fenlei: 0,
         items: [],
         courier_fees: 0,
-        bol:false,
-        totalPuch:'',
-        orderNo:''
+        bol: false,
+        totalPuch: '',
+        orderNo: ''
       }
     },
     computed: {
@@ -169,8 +169,10 @@
         let res = await defaultAddress(localStorage.uid);
         this.addressObj = res.data;
       },
-      async commit(uid,address_id,g_sku_infos,cart_ids,remark) {
-        let result = await commitOrder(uid,address_id,g_sku_infos,cart_ids,remark)
+      async commit(uid, address_id, g_sku_infos, remark) {
+        let cart_ids = JSON.stringify(JSON.parse(this.$route.query.cart_infos).map(item => {return {'cart_id':item.cart_id}}))
+
+        let result = await commitOrder(uid, address_id, g_sku_infos, cart_ids, remark)
         if (result.code === 1) {
           console.log(result)
           this.bol = true;
@@ -184,14 +186,15 @@
             mes: '请填写收货地址',
             timeout: 3000
           })
-        };
+        }
+        ;
         this.totalPuch = (this.countPrice + parseInt(this.shopInfo.courier_fees)).toFixed(2)
         this.commit(localStorage.uid, this.addressObj.id, g_sku_infos, this.remarkVal)
       },
       commitO() {
         let arr = [];
         for (let i = 0; i < this.items.length; i++) {
-          for(let j = 0; j < this.items[i].g_sku.length;j ++){
+          for (let j = 0; j < this.items[i].g_sku.length; j++) {
             arr.push({'g_id': this.items[i].g_id, 'g_sku_id': this.items[i].g_sku[j].g_sku_id, 'amount': this.items[i].g_sku[j].amount})
           }
         }
@@ -201,11 +204,12 @@
             mes: '请填写收货地址',
             timeout: 3000
           })
-        };
+        }
+        ;
         this.totalPuch = (parseInt(this.courier_fees) + parseInt(this.countTotal)).toFixed(2);
         this.commit(localStorage.uid, this.addressObj.id, g_sku_infos, this.remarkVal)
       },
-      closeBox(e){
+      closeBox(e) {
         this.bol = e;
       }
     },
