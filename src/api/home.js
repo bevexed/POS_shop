@@ -7,6 +7,11 @@ import {BASE_URL} from './BASE_URL'
 export const banner = () => ajax(BASE_URL + '/home/banner', {}, 'GET')
 
 /*
+* 手动定位城市
+* */
+export const position = () => ajax(BASE_URL + '/home/position', {}, 'GET')
+
+/*
 * 获取 商品列表
 * @param    ad_code     城市邮编
 * @param    sold_type   pos机类别 1:企业 2:个人 若不传，默认为1

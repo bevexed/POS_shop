@@ -22,16 +22,17 @@
       </div>
     </section>
     <section class="address" v-show="!search_key">
-      <div v-for="v in citySelectLists" @click="changeAddress(v.lat_lng,v.area_id,v.area)">{{v.area}}</div>
+      <div v-for="v in citySelectLists" @click="changeAddress(v.ad_code,v.name)">{{v.name}}</div>
     </section>
     <section class="address" v-show="search_key">
-      <div v-for="v in citySearchSelectList" @click="changeAddress(v.lat_lng,v.area_id,v.area)">{{v.area}}</div>
+      <div v-for="v in citySearchSelectList" @click="changeAddress(v.ad_code,v.name)">{{v.name}}</div>
     </section>
   </div>
 </template>
 
 <script>
   import Headers from '../../components/Headers'
+  import {position} from "../../api/home";
 
   export default {
     name: "selectAddress",
@@ -54,33 +55,20 @@
       back() {
         history.go(-1)
       },
-      changeAddress(lat_lng, area_id, area) {
-        // localStorage.longitude_latitude = lat_lng
-        localStorage.area_id = area_id
-        localStorage.area = area
+      changeAddress(ad_code,city) {
+        localStorage.ad_code = ad_code
+        localStorage.city = city
+        this.$store.state.city = city
         this.$router.push({path: '/index'})
       },
       async getCitySelectList() {
-        let result
-        console.log(result)
+        let result = await position()
         if (result.code === 1) {
           this.citySelectLists = result.data
         }
       },
       async getCitySearchSelectList(search_key) {
-        let result
-        if (result.code === 1) {
-          if (!result.data) {
-            this.$message({
-              message: "暂不支持此地址",
-              type: 'error',
-              duration: 1000
-            })
-            return
-          }
-          this.citySearchSelectList = result.data
-          console.log(result);
-        }
+        this.citySearchSelectList = this.citySelectLists.filter(item => item.name.indexOf(search_key) > -1)
       }
     },
     mounted() {
@@ -109,6 +97,7 @@
   }
 
   section.address {
+    font-size: 12px;
     padding: 2%;
     display: flex;
     justify-content: flex-start;
