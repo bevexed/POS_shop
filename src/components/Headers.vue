@@ -104,7 +104,10 @@
     }
 
     .positionSpan {
-      width: 60px;
+      max-width: 100px;
+      overflow: hidden;
+      word-break: keep-all;
+      text-overflow: ellipsis;
       position: absolute;
       left: 40px;
       cursor: pointer;

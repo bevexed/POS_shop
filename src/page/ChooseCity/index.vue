@@ -105,6 +105,9 @@
   }
 
   section.address div {
+    overflow: hidden;
+    word-break: keep-all;
+    text-overflow: ellipsis;
     margin-top: 10px;
     margin-left: 10px;
     width: 30%;
