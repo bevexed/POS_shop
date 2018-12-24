@@ -55,7 +55,7 @@
       back() {
         history.go(-1)
       },
-      changeAddress(ad_code,city) {
+      changeAddress(ad_code, city) {
         localStorage.ad_code = ad_code
         localStorage.city = city
         this.$store.state.city = city

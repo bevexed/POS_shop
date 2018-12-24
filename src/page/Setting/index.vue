@@ -100,6 +100,12 @@
 <style scoped lang="less">
   .setting {
     > header {
+      min-height: 50px;
+      background: white;
+      padding: 10px 15px;
+      display: flex;
+      align-items: center;
+
       &:after {
         content: '>';
         position: absolute;
@@ -107,21 +113,17 @@
         right: 18px;
       }
 
-      background: white;
-      padding: 10px 15px;
-      display: flex;
-      align-items: center;
-
       > img {
         display: inline-block;
         border-radius: 50%;
         width: 50px;
         height: 50px;
         background: #808080;
+        margin-right: 10px;
       }
 
       > p {
-        margin: -15px 0 0 15px;
+        /*margin: -15px 0 0 15px;*/
       }
 
     }

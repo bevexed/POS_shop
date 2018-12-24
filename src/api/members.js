@@ -29,6 +29,14 @@ export const queryTrade = (uid, page, begin_time, end_time, sku_id, level, mobil
 export const trades = (uid) => ajax(BASE_URL + '/members/trades', {uid}, "GET")
 
 /*
+* 获取(订单/通道)通道ID，名称
+* 当此接口不传参数时，获取order_id
+* @param   order_id      用户ID
+* */
+export const dropDown_order_id = (uid, order_id) => ajax(BASE_URL + '/members/dropDown', {uid, order_id}, "GET")
+export const dropDown = (uid) => ajax(BASE_URL + '/members/dropDown', {uid}, "GET")
+
+/*
 * 用户收益信息接口
 * @param   uid      用户ID         必传
 * */
