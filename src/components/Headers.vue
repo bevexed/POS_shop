@@ -2,7 +2,7 @@
   <div class="head_content">
     <div class="head_top">
       <img class="backImg" v-if="isBack" @click="goBack" src="../assets/back.png" alt="">
-      <img v-if="isPosition" class="positionImg" src="../assets/dingwei.png" alt=""><span class="positionSpan" v-if="isPosition">{{city?city:'定位中...' }}</span>
+      <img v-if="isPosition" class="positionImg" @click="$goTo('chooseCity')" src="../assets/dingwei.png" alt=""><span @click="$goTo('chooseCity')" class="positionSpan" v-if="isPosition">{{city?city:'定位中...' }}</span>
       <p v-if="title">{{title}}</p>
       <span v-if="isRegister" class="register_span" @click="goRegister">注册</span>
       <span v-if="isManage&&isMac" class="register_span" @click="manage">管理</span>

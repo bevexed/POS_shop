@@ -41,7 +41,7 @@
         password: '',
         code: '',
         promote: '',
-        type: '',
+        type: 1,
         timer: 60,
         T: '',
       }

@@ -15,6 +15,7 @@ import ForgetPwd from '../page/ForgetPwd'
 import ChangePassword from '../page/ChangePassword'
 
 import IndexPage from '../page/Index'
+import ChooseCity from '../page/ChooseCity'
 import CreditCard from '../page/CreditCard'
 import ShoppingCar from '../page/ShoppingCar'
 import My from '../page/My/index'
@@ -213,6 +214,12 @@ const router = new Router({
       component: ActiveVip,
       name: 'ActiveVip',
       meta: {index: 3}
+    },
+    {
+      path: '/chooseCity',
+      component: ChooseCity,
+      name: 'ChooseCity',
+      meta: {index: 3}
     }
   ],
   //跳转页面scrollTop为0
@@ -232,7 +239,6 @@ router.beforeEach((to, from, next) => {
     if (localStorage.uid) {
       next()
     } else {
-      alert(1)
       next('/login')
     }
   }

@@ -1,4 +1,5 @@
 import Vue from 'vue'
+
 Vue.prototype.$getLocation = function getLocation() {
   setTimeout(() => {
     var that = this
@@ -29,9 +30,7 @@ Vue.prototype.$getLocation = function getLocation() {
       console.log(obj);
       that.$store.state.city = obj.addressComponent.city
       that.$store.state.ad_code = obj.addressComponent.adcode
-      that.$store.state.cityCode = obj.addressComponent.citycode
-      localStorage.cityCode = obj.addressComponent.citycode
-      localStorage.ad_code = obj.addressComponent.adcode.toString().slice(0,-2)+'00'
+      localStorage.ad_code = obj.addressComponent.adcode.toString().slice(0, -2) + '00'
       localStorage.city = obj.addressComponent.city
 
       return obj
@@ -45,3 +44,6 @@ Vue.prototype.$getLocation = function getLocation() {
   })
 }
 
+Vue.prototype.$goTo = function goTo(path) {
+    this.$router.push('./'+path)
+}

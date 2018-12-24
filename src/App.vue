@@ -34,7 +34,11 @@
       }
     },
     mounted() {
-      this.$getLocation()
+      if (!localStorage.ad_code) {
+        this.$getLocation()
+      } else {
+        this.$store.state.city = localStorage.city
+      }
     }
   }
 </script>
