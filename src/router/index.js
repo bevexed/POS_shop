@@ -230,9 +230,9 @@ router.beforeEach((to, from, next) => {
     next()
   } else {
     if (localStorage.uid) {
-      console.log(store);
       next()
     } else {
+      alert(1)
       next('/login')
     }
   }

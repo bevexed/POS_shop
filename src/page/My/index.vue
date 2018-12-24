@@ -114,8 +114,6 @@
         if (result.code === 1) {
           this.homeData = result.data
           localStorage.is_actives = result.data.is_actives
-        } else {
-          this.$router.replace('./login')
         }
       },
     },
