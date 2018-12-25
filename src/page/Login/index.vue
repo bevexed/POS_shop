@@ -74,6 +74,13 @@
       }
     },
     mounted() {
+    },
+    beforeRouteEnter(to,from,next){
+      if (localStorage.uid){
+        next('/index')
+      }else{
+        next()
+      }
     }
   }
 </script>

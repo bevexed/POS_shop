@@ -49,7 +49,7 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: '/login'
+      redirect: '/index'
     },
     {
       path: '/Scan',
@@ -245,7 +245,7 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.path === '/login' || to.path === '/register' || to.path === '/forgetPwd') { // 不需要登录权限的页面
+  if (to.path === '/login' || to.path === '/register' || to.path === '/forgetPwd' || to.path === '/index') { // 不需要登录权限的页面
     next()
   } else {
     if (localStorage.uid) {
