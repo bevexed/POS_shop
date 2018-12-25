@@ -119,7 +119,7 @@
             mes: '请检查手机号'
           })
         } else if (begin_time <= end_time) {
-          this.$router.push({name: 'TradeSearchResult', params: {form: JSON.stringify(form)}})
+          this.$router.push({path: '/tradeSearchResult', query: {form: JSON.stringify(form)}})
         } else {
           this.$dialog.notify({
             mes: '请检查输入时间'

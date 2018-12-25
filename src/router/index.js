@@ -204,7 +204,7 @@ const router = new Router({
       meta: {index: 2}
     },
     {
-      path: '/tradeSearchResult/form/:form',
+      path: '/tradeSearchResult',
       component: TradeSearchResult,
       name: 'TradeSearchResult',
       meta: {index: 2}
