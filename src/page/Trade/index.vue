@@ -96,7 +96,7 @@
       justify-content: space-between;
 
       li {
-        font-size: 14px;
+        font-size: 12px;
         color: #4d4d4d;
 
         &.active {

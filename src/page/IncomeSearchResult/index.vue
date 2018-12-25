@@ -17,7 +17,7 @@
 
 <script>
   import Headers from '../../components/Headers'
-  import {queryTrade} from "../../api/members";
+  import {queryEarnings} from "../../api/members";
 
   export default {
     name: "IncomeSearchResult",
@@ -42,7 +42,7 @@
         if (level === 0) {
           level = ''
         }
-        let res = await queryTrade(localStorage.uid, page, begin_time, end_time, sku_id, level, mobile);
+        let res = await queryEarnings(localStorage.uid, page, begin_time, end_time, sku_id, level, mobile);
 
         if (res.code === 1) {
           this.listData = res.data.list
