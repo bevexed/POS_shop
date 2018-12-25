@@ -6,27 +6,29 @@
       <p class="tip">...载入中...</p>
     </div>
     <!--<footer>-->
-      <!--<button @click="startRecognize">1.创建控件</button>-->
-      <!--<button @click="startScan">2.开始扫描</button>-->
-      <!--<button @click="cancelScan">3.结束扫描</button>-->
+    <!--<button @click="startRecognize">1.创建控件</button>-->
+    <!--<button @click="startScan">2.开始扫描</button>-->
+    <!--<button @click="cancelScan">3.结束扫描</button>-->
 
-      <!--<button @click="closeScan">4.关闭控件</button>-->
+    <!--<button @click="closeScan">4.关闭控件</button>-->
     <!--</footer>-->
   </div>
 </template>
 
 <script>
   import headers from '../../components/Headers'
+
   let scan = null;
 
   export default {
+    name: 'Scan',
     data() {
       return {
         codeUrl: '',
-        title:'扫一扫'
+        title: '扫一扫'
       }
     },
-    components:{
+    components: {
       headers
     },
     methods: {
@@ -77,10 +79,10 @@
         index.close();
       }
     },
-    mounted(){
+    mounted() {
       this.startScan();
     },
-    destroyed(){
+    destroyed() {
       this.cancelScan();
       this.closeScan();
     }
@@ -89,17 +91,19 @@
 <style lang="less">
   .scan {
     height: 100%;
+
     #bcid {
       width: 100%;
       position: absolute;
       left: 0;
       right: 0;
       top: 0;
-      bottom:3rem;
+      bottom: 3rem;
       text-align: center;
       color: #fff;
       background: #ccc;
     }
+
     footer {
       position: absolute;
       left: 0;

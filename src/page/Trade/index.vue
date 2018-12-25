@@ -3,7 +3,7 @@
     <headers :title="'交易管理'" :isBack="true" :is-search="search"></headers>
     <header class="header">
       <p>
-          会数（条）
+        会数（条）
         <span>{{tradeData.total_volume}}</span>
       </p>
     </header>
@@ -15,17 +15,17 @@
       </ul>
     </nav>
     <!--<section class="detail" v-for="i in 10">-->
-      <!--<img src="" alt="">-->
-      <!--<section>-->
-        <!--<p>小妹去 <span>VIP1</span></p>-->
-        <!--<p>123****1234</p>-->
-        <!--<p>注册时间：2018-11-11</p>-->
-      <!--</section>-->
-      <!--<div>-->
-        <!--<img v-if="is_actives === 1" src="../../assets/setting/ed@3x.png" alt="">-->
-        <!--<img v-else src="../../assets/setting/none@3x.png" alt="">-->
-        <!--<span>{{is_actives === 1? '已激活':'未激活'}}</span>-->
-      <!--</div>-->
+    <!--<img src="" alt="">-->
+    <!--<section>-->
+    <!--<p>小妹去 <span>VIP1</span></p>-->
+    <!--<p>123****1234</p>-->
+    <!--<p>注册时间：2018-11-11</p>-->
+    <!--</section>-->
+    <!--<div>-->
+    <!--<img v-if="is_actives === 1" src="../../assets/setting/ed@3x.png" alt="">-->
+    <!--<img v-else src="../../assets/setting/none@3x.png" alt="">-->
+    <!--<span>{{is_actives === 1? '已激活':'未激活'}}</span>-->
+    <!--</div>-->
     <!--</section>-->
   </section>
 </template>
@@ -35,7 +35,7 @@
   import {trades} from "../../api/members";
 
   export default {
-    name: "Vip",
+    name: "Trade",
     components: {
       headers
     },
@@ -43,24 +43,24 @@
       return {
         is_actives: localStorage.is_actives - 0,
         selected: 1,
-        tradeData:{}
+        tradeData: {}
       }
     },
-    created(){
+    created() {
       this.getTrades()
     },
     methods: {
-      search(){
+      search() {
         this.$router.push('/tradeSearch')
       },
-      async getTrades(){
+      async getTrades() {
         let res = await trades(localStorage.uid)
-        if (res.code === 1){
+        if (res.code === 1) {
           this.tradeData = res.data
-        }else{
+        } else {
           this.$dialog.notify({
-            mes:res.message,
-            type:'error'
+            mes: res.message,
+            type: 'error'
           })
         }
       },

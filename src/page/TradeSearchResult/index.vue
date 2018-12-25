@@ -34,8 +34,8 @@
       async getQueryTrade(page) {
         let moment = require('moment')
         let {begin_time, end_time, sku_id, level, mobile} = JSON.parse(this.$route.query.form);
-        begin_time = moment(begin_time, 'YYYY-MM-DD HH:mm:ss').valueOf()/1000;
-        end_time = moment(end_time, 'YYYY-MM-DD HH:mm:ss').valueOf()/1000;
+        begin_time = moment(begin_time, 'YYYY-MM-DD HH:mm:ss').valueOf() / 1000;
+        end_time = moment(end_time, 'YYYY-MM-DD HH:mm:ss').valueOf() / 1000;
         if (sku_id === 0) {
           sku_id = ''
         }
@@ -58,8 +58,8 @@
 </script>
 
 <style scoped>
-i{
-  font-size: 10px;
-  color: #a5a2ae;
-}
+  i {
+    font-size: 10px;
+    color: #a5a2ae;
+  }
 </style>

@@ -177,7 +177,6 @@
         }
         let result = await commitOrder(uid, address_id, g_sku_infos, cart_ids, remark)
         if (result.code === 1) {
-          console.log(result)
           this.bol = true;
           this.orderNo = result.out_trade_no;
         }

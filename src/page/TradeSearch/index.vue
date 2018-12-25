@@ -77,7 +77,7 @@
         return this.dropDownData2.filter(item => item.id === this.form.sku_id).length ? this.dropDownData2.filter(item => item.id === this.form.sku_id)[0].name : '产品通道'
       },
       level() {
-        let arr = ['全选','一级会员','二级会员','三级会员']
+        let arr = ['全选', '一级会员', '二级会员', '三级会员']
         return arr[this.form.level]
       }
     },

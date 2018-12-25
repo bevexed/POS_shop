@@ -46,9 +46,7 @@
         this.$refs[name].click()
       },
       getImgData(e) {
-        console.log(e);
         this[e.target.name] = e.target.files[0]
-        console.log(this[e.target.name]);
         this[e.target.name + '_url'] = window.URL.createObjectURL(e.target.files[0])
       },
       async doRealName() {
@@ -60,7 +58,6 @@
           return
         }
         const {reverse_identity} = this
-        console.log(reverse_identity);
         if (!reverse_identity) {
           this.$dialog.notify({
             mes: '请选择图片',
@@ -76,7 +73,6 @@
         let result = await infoEdit(localStorage.uid, reverse_identity, this.real_name)
         // let result = await axios.post(url, data)
         // result = result.data
-        console.log(result);
         if (result.code === 1) {
           this.$dialog.toast({
             mes: result.message,

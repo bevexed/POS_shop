@@ -94,7 +94,6 @@
       },
       async newList(type) {
         let data = await list(type);
-        console.log(data);
         if (data.code === 1) {
           this.list2 = data.data;
         } else {

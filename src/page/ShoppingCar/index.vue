@@ -43,6 +43,7 @@
   import {IMG_BASE_URL} from "../../api/BASE_URL";
 
   export default {
+    name: 'ShoppingCar',
     data() {
       return {
         IMG_BASE_URL,

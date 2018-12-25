@@ -58,9 +58,7 @@
         this.$refs[name].click()
       },
       getImgData(e) {
-        console.log(e);
         this[e.target.name] = e.target.files[0]
-        console.log(this[e.target.name]);
         this[e.target.name + '_url'] = window.URL.createObjectURL(e.target.files[0])
       },
       async doRealName() {
@@ -79,7 +77,6 @@
           return
         }
         const {front_identity, reverse_identity} = this
-        console.log(front_identity, reverse_identity);
         let result = await realName(localStorage.uid, this.real_name, this.idCard, front_identity, reverse_identity)
         if (result.code === 1) {
           this.$dialog.toast({

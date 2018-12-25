@@ -58,7 +58,7 @@
   import {IMG_BASE_URL} from '../../api/BASE_URL'
 
   export default {
-    name: 'productDetail',
+    name: 'ProductDetail',
     data() {
       return {
         uid: localStorage.uid,
@@ -111,7 +111,7 @@
         }
       },
       selectVal() {
-        console.log(this.val)
+
       },
       buy() {
         if (this.val != '') {

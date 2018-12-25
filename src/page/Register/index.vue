@@ -35,6 +35,7 @@
   import headers from '../../components/Headers'
 
   export default {
+    name: 'Register',
     data() {
       return {
         mobile: '',
@@ -117,7 +118,6 @@
             })
             return
           }
-          console.log(result);
           this.T = setInterval(() => {
             this.timer--;
             if (this.timer === 0) {

@@ -50,7 +50,7 @@
   import {home} from "../../api/users";
 
   export default {
-    name: "setting",
+    name: "Setting",
     components: {
       headers
     },
@@ -118,7 +118,6 @@
         border-radius: 50%;
         width: 50px;
         height: 50px;
-        background: #808080;
         margin-right: 10px;
       }
 

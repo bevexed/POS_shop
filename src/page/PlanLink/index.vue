@@ -37,7 +37,6 @@
         // const myCanvas = this.$refs.qart.children[0];
         // const myCanvas = this.$refs.qart
         const myCanvas = document.querySelector('canvas')
-        console.log(myCanvas);
         const type = 'image/png';
         let image = myCanvas.toDataURL(type).replace(type, "image/octet-stream");
 

@@ -110,7 +110,6 @@
             })
             return
           }
-          console.log(result);
           this.T = setInterval(() => {
             this.timer--;
             if (this.timer === 0) {
