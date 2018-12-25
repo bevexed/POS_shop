@@ -17,18 +17,18 @@
         <yd-cell-item arrow type="label">
           <select slot="right" v-model="a" @change="getDropDown2(dropDownData[a-1]?dropDownData[a-1]['id']:'产品型号')">
             <option value="0">&nbsp; 产品型号</option>
-            <option :value="v.id" v-for="(v,i) in dropDownData">&nbsp; {{v.name}}</option>
+            <option :value="v.id" v-for="v in dropDownData">&nbsp; {{v.name}}</option>
           </select>
         </yd-cell-item>
         <yd-cell-item arrow type="label">
-          <select slot="right" v-model="b">
+          <select slot="right" v-model="form.sku_id">
             <option value="0">&nbsp; 产品通道</option>
-            <option :value="v.id" v-for="(v,i) in dropDownData2">&nbsp; {{v.name}}</option>
+            <option :value="v.id" v-for="v in dropDownData2">&nbsp; {{v.name}}</option>
           </select>
         </yd-cell-item>
       </yd-accordion-item>
 
-      <yd-accordion-item title="下拉选择会员级别">
+      <yd-accordion-item :title="'下拉选择会员级别：'+level">
         <yd-cell-group>
           <yd-cell-item type="radio">
             <span slot="left">一级会员</span>
@@ -48,10 +48,10 @@
     <yd-cell-group>
       <yd-cell-item>
         <span slot="left">会员查询：</span>
-        <yd-input slot="right" required v-model="form.count" max="20" placeholder="请输入账户"></yd-input>
+        <yd-input slot="right" required v-model="form.mobile" max="20" placeholder="请输入账户 (手机号)"></yd-input>
       </yd-cell-item>
     </yd-cell-group>
-    <yd-button size="small" bgcolor="#ff6d4b" color="#fff" style="float: right;margin-right: 20px" @click.native="$router.push({name:'TradeSearchResult',params:{form:JSON.stringify(form)}})"> &nbsp;&nbsp; 查询 &nbsp;&nbsp;</yd-button>
+    <yd-button size="small" bgcolor="#ff6d4b" color="#fff" style="float: right;margin-right: 20px" @click.native="goTo(form)"> &nbsp;&nbsp; 查询 &nbsp;&nbsp;</yd-button>
   </div>
 </template>
 
@@ -67,10 +67,13 @@
     },
     computed: {
       goodType() {
-        return this.dropDownData.filter(item => item.id === this.a).length? this.dropDownData.filter(item => item.id === this.a)[0].name: '产品型号'
+        return this.dropDownData.filter(item => item.id === this.a).length ? this.dropDownData.filter(item => item.id === this.a)[0].name : '产品型号'
       },
-      goodList(){
-        return this.dropDownData2.filter(item => item.id === this.b).length? this.dropDownData2.filter(item => item.id === this.b)[0].name: '产品通道'
+      goodList() {
+        return this.dropDownData2.filter(item => item.id === this.form.sku_id).length ? this.dropDownData2.filter(item => item.id === this.form.sku_id)[0].name : '产品通道'
+      },
+      level() {
+
       }
     },
     data() {
@@ -79,26 +82,44 @@
           begin_time: '2017-05-11',
           end_time: '2017-05-11',
           level: '2',
-          count: '',
+          mobile: '',
+          sku_id: 0, // 产品通道
         },
         a: 0, // 产品型号
-        b: 0, // 产品通道
         dropDownData: [],    // 产品型号
         dropDownData2: []    // 产品通道
       }
     },
     methods: {
       async getDropDown() {
-        let res = await dropDown(localStorage.uid)
+        let res = await dropDown(localStorage.uid);
         if (res.code === 1) {
           this.dropDownData = res.data
         }
       },
       async getDropDown2(order_id) {
-        this.b = 0
-        let res = await dropDown_order_id(localStorage.uid, order_id)
+        this.form.sku_id = 0;
+        let res = await dropDown_order_id(localStorage.uid, order_id);
         if (res.code === 1) {
           this.dropDownData2 = res.data
+        }
+      },
+      goTo(form) {
+        let moment = require("moment")
+        let {begin_time, end_time, sku_id, level, mobile} = form
+        begin_time = moment(begin_time, 'YYYY-MM-DD HH:mm:ss').valueOf();
+        end_time = moment(end_time, 'YYYY-MM-DD HH:mm:ss').valueOf();
+        if (mobile && mobile.length !== 11) {
+          this.$dialog.notify({
+            mes: '请检查手机号'
+          })
+        } else if (begin_time <= end_time) {
+          this.$router.push({name: 'TradeSearchResult', params: {form: JSON.stringify(form)}})
+        } else {
+          this.$dialog.notify({
+            mes: '请检查输入时间'
+          })
+
         }
       }
     },

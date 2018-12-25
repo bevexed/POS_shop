@@ -25,7 +25,7 @@
 
 <script>
   import Headers from '../../components/Headers'
-
+  import {queryTrade} from "../../api/members";
   export default {
     name: "TradeSearchResult",
     components: {
@@ -38,8 +38,20 @@
         begin_time: '2017-05-11',
         end_time: '2017-05-11',
         level: '2',
-        mobile:''
+        mobile: ''
       }
+    },
+    methods: {
+      async getQueryTrade(page) {
+        let moment = require('moment')
+        let {begin_time, end_time, sku_id, level, mobile} = JSON.parse(this.$route.params.form)
+        begin_time = moment(begin_time, 'YYYY-MM-DD HH:mm:ss').valueOf();
+        end_time = moment(end_time, 'YYYY-MM-DD HH:mm:ss').valueOf();
+        let res = await queryTrade(localStorage.uid, page, begin_time, end_time, sku_id, level, mobile)
+      },
+    },
+    mounted() {
+      this.getQueryTrade(1)
     }
   }
 </script>
