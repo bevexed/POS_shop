@@ -45,7 +45,6 @@
       宝贝图文详情
       <div class="deatail_shop_goods" v-html="detailData.details"></div>
     </section>
-
     <aside>
       <span @click="addShoppingCar(uid,val)">加入购物车</span>
       <span @click="buy">立即购买</span>

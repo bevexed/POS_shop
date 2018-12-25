@@ -7,11 +7,12 @@
           收货人：{{addressObj.name}} <span>{{addressObj.phone}}</span>
         </header>
         <footer>
-          <yd-icon size="22px" name="location"></yd-icon>
           <p>
+            <yd-icon size="22px" name="location">
             收货地址：{{addressObj.province}}{{addressObj.city}}{{addressObj.area}}{{addressObj.address}}
+            </yd-icon>
           </p>
-          <p>></p>
+          <span>></span>
         </footer>
       </section>
       <section class="address" v-else @click="$router.push('/addaddress')">添加收货地址</section>
@@ -234,7 +235,7 @@
     color: #4d4d4d;
 
     header {
-      margin-left: 27px;
+      /*margin-left: 27px;*/
 
       span {
         float: right;
@@ -244,11 +245,14 @@
     footer {
       margin-top: 4px;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
 
       p {
         margin: 0 4px;
+      }
+      span{
+        align-self: flex-end;
       }
     }
   }

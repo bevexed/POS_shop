@@ -4,6 +4,7 @@
     <transition :name="transitionName">
       <router-view></router-view>
     </transition>
+    <yd-backtop></yd-backtop>
     <footers v-show="$route.meta.navShow"></footers>
   </div>
 </template>
