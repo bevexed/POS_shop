@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Headers :is-back="true" :title="`交易查询结果`"></Headers>
+    <Headers :is-back="true" :title="`收益查询结果`"></Headers>
     <!--<yd-accordion>-->
     <!--<yd-accordion-item>-->
     <yd-cell-group>
@@ -20,10 +20,9 @@
   import {queryTrade} from "../../api/members";
 
   export default {
-    name: "TradeSearchResult",
+    name: "IncomeSearchResult",
     components: {
       Headers,
-
     },
     data() {
       return {

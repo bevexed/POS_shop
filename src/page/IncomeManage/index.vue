@@ -1,6 +1,6 @@
 <template>
   <div class="income_content" v-if="earningsData">
-    <headers :title="title" :isBack="true"></headers>
+    <headers :title="title" :isBack="true" :is-search="goTo"></headers>
     <div class="income_top">
       <span>总资产（元）</span>
       <p>{{earningsData.account.total}}</p>
@@ -46,6 +46,9 @@
       this.getEarnings()
     },
     methods: {
+      goTo() {
+        this.$router.push('/incomeSearch')
+      },
       change(i) {
         this.selected = i
       },

@@ -32,6 +32,8 @@ import ManageBankCard from '../page/ManageBankCard'
 
 
 import IncomeManage from '../page/IncomeManage'
+import IncomeSearch from '../page/IncomeSearch'
+import IncomeSearchResult from '../page/IncomeSearchResult'
 import PlanLink from '../page/PlanLink'
 import UseBook from '../page/Guide'
 import Trade from '../page/Trade'
@@ -182,6 +184,16 @@ const router = new Router({
       path: '/incomeManage',
       component: IncomeManage,
       meta: {index: 2}
+    },
+    {
+      path: '/incomeSearch',
+      component: IncomeSearch,
+      meta: {index: 3}
+    },
+    {
+      path: '/incomeSearchResult',
+      component: IncomeSearchResult,
+      meta: {index: 3}
     },
     {
       path: '/planLink',

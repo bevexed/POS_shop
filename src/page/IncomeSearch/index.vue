@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Headers :is-back="true" :title="`交易查询`"></Headers>
+    <Headers :is-back="true" :title="`收益查询`"></Headers>
     <yd-accordion>
       <yd-accordion-item :title="'下拉选择时间：' + form.begin_time + '--' + form.end_time">
         <yd-cell-item arrow>
@@ -64,10 +64,9 @@
   import {dropDown, dropDown_order_id} from "../../api/members";
 
   export default {
-    name: "TradeSearch",
+    name: "IncomeSearch",
     components: {
       Headers,
-
     },
     computed: {
       goodType() {
@@ -119,7 +118,7 @@
             mes: '请检查手机号'
           })
         } else if (begin_time <= end_time) {
-          this.$router.push({path: '/tradeSearchResult', query: {form: JSON.stringify(form)}})
+          this.$router.push({path: '/incomeSearchResult', query: {form: JSON.stringify(form)}})
         } else {
           this.$dialog.notify({
             mes: '请检查输入时间'
