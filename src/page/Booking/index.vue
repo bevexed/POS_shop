@@ -8,9 +8,8 @@
         </header>
         <footer>
           <p>
-            <yd-icon size="22px" name="location">
+            <yd-icon size="22px" name="location"></yd-icon>
             收货地址：{{addressObj.province}}{{addressObj.city}}{{addressObj.area}}{{addressObj.address}}
-            </yd-icon>
           </p>
           <span>></span>
         </footer>
@@ -170,7 +169,7 @@
         this.addressObj = res.data;
       },
       async commit(uid, address_id, g_sku_infos, remark) {
-        let cart_ids = '[]'
+        let cart_ids = ''
         if (this.$route.query.cart_infos) {
           cart_ids = JSON.stringify(JSON.parse(this.$route.query.cart_infos).map(item => {
             return {'cart_id': item.cart_id}
@@ -251,7 +250,8 @@
       p {
         margin: 0 4px;
       }
-      span{
+
+      span {
         align-self: flex-end;
       }
     }
