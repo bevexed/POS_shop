@@ -75,13 +75,13 @@
     },
     mounted() {
     },
-    beforeRouteEnter(to,from,next){
-      if (localStorage.uid){
-        next('/index')
-      }else{
-        next()
-      }
-    }
+    // beforeRouteEnter(to,from,next){
+    //   if (localStorage.uid){
+    //     next('/index')
+    //   }else{
+    //     next()
+    //   }
+    // }
   }
 </script>
 <style scoped lang="less">

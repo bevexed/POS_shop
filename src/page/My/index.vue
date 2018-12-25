@@ -67,7 +67,7 @@
           <p>购物车管理</p>
         </router-link>
         <router-link to="/mygoods">
-          <img src="../../assets/my/123.svg" alt="">
+          <img src="../../assets/my/123.png" alt="">
           <p>我的商品</p>
         </router-link>
         <li @click="vipGo('planLink')">
@@ -142,8 +142,13 @@
     > p {
       flex: 1;
       margin-left: 10px;
-      font-size: 18px;
+      font-size: 12px;
       color: white;
+      >span{
+        display: inline-block;
+        margin-bottom: 5px;
+        font-size: 18px;
+      }
     }
 
     > span {
@@ -241,7 +246,7 @@
         cursor: pointer;
 
         img {
-          width: 25px;
+          width: 40px;
 
           &.vip {
             -webkit-filter: grayscale(100%);
