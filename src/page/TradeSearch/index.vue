@@ -31,6 +31,10 @@
       <yd-accordion-item :title="'下拉选择会员级别：'+level">
         <yd-cell-group>
           <yd-cell-item type="radio">
+            <span slot="left">全选</span>
+            <input type="radio" name="level" slot="right" value="0" v-model="form.level">
+          </yd-cell-item>
+          <yd-cell-item type="radio">
             <span slot="left">一级会员</span>
             <input type="radio" name="level" slot="right" value="1" v-model="form.level">
           </yd-cell-item>
@@ -73,7 +77,8 @@
         return this.dropDownData2.filter(item => item.id === this.form.sku_id).length ? this.dropDownData2.filter(item => item.id === this.form.sku_id)[0].name : '产品通道'
       },
       level() {
-
+        let arr = ['全选','一级会员','二级会员','三级会员']
+        return arr[this.form.level]
       }
     },
     data() {
@@ -81,7 +86,7 @@
         form: {
           begin_time: '2017-05-11',
           end_time: '2017-05-11',
-          level: '2',
+          level: 0,
           mobile: '',
           sku_id: 0, // 产品通道
         },

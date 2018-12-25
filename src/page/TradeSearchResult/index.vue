@@ -1,24 +1,16 @@
 <template>
   <div>
     <Headers :is-back="true" :title="`查询`"></Headers>
-    <yd-cell-group>
-      <yd-cell-item>
-        <span slot="left">产品名称通道1</span>
-        <span slot="right">500条</span>
-      </yd-cell-item>
-      <yd-cell-item>
-        <span slot="left">产品名称通道1</span>
-        <span slot="right">500条</span>
-      </yd-cell-item>
-      <yd-cell-item>
-        <span slot="left">产品名称通道1</span>
-        <span slot="right">500条</span>
-      </yd-cell-item>
-      <yd-cell-item>
-        <span slot="left">产品名称通道1</span>
-        <span slot="right">500条</span>
-      </yd-cell-item>
-    </yd-cell-group>
+    <yd-accordion>
+      <yd-accordion-item v-for="(v,i) in listData" :title="v.sku.name + '：' + v.total" :key="i">
+        <yd-cell-group>
+          <yd-cell-item>
+            <span slot="left">{{v.sku.name}}</span>
+            <span slot="right">{{v.total}}条</span>
+          </yd-cell-item>
+        </yd-cell-group>
+      </yd-accordion-item>
+    </yd-accordion>
 
   </div>
 </template>
@@ -26,6 +18,7 @@
 <script>
   import Headers from '../../components/Headers'
   import {queryTrade} from "../../api/members";
+
   export default {
     name: "TradeSearchResult",
     components: {
@@ -34,11 +27,7 @@
     },
     data() {
       return {
-        count: '',
-        begin_time: '2017-05-11',
-        end_time: '2017-05-11',
-        level: '2',
-        mobile: ''
+        listData: []
       }
     },
     methods: {
@@ -47,7 +36,18 @@
         let {begin_time, end_time, sku_id, level, mobile} = JSON.parse(this.$route.params.form)
         begin_time = moment(begin_time, 'YYYY-MM-DD HH:mm:ss').valueOf();
         end_time = moment(end_time, 'YYYY-MM-DD HH:mm:ss').valueOf();
+        if (sku_id === 0) {
+          sku_id = ''
+        }
+
+        if (level === 0) {
+          level = ''
+        }
         let res = await queryTrade(localStorage.uid, page, begin_time, end_time, sku_id, level, mobile)
+
+        if (res.code === 1) {
+          this.listData = res.data.list
+        }
       },
     },
     mounted() {
