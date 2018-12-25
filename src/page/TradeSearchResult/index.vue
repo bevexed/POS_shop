@@ -5,7 +5,7 @@
     <!--<yd-accordion-item>-->
     <yd-cell-group>
       <yd-cell-item v-for="(v,i) in listData" :key="i">
-        <span slot="left">{{v.sku_name}}</span>
+        <span slot="left">商品名称：<i>{{v.good_name}}</i> 通道：<i>{{v.sku_name}}</i></span>
         <span slot="right">{{v.total}}条</span>
       </yd-cell-item>
     </yd-cell-group>
@@ -34,8 +34,8 @@
       async getQueryTrade(page) {
         let moment = require('moment')
         let {begin_time, end_time, sku_id, level, mobile} = JSON.parse(this.$route.query.form);
-        begin_time = moment(begin_time, 'YYYY-MM-DD HH:mm:ss').valueOf();
-        end_time = moment(end_time, 'YYYY-MM-DD HH:mm:ss').valueOf();
+        begin_time = moment(begin_time, 'YYYY-MM-DD HH:mm:ss').valueOf()/1000;
+        end_time = moment(end_time, 'YYYY-MM-DD HH:mm:ss').valueOf()/1000;
         if (sku_id === 0) {
           sku_id = ''
         }
@@ -58,5 +58,8 @@
 </script>
 
 <style scoped>
-
+i{
+  font-size: 10px;
+  color: #a5a2ae;
+}
 </style>
