@@ -82,7 +82,7 @@
           return
         }
         this.$dialog.loading.open('发送中...');
-        let result = await sendMsg(mobile, type)
+        let result = await sendMsg(mobile, type,localStorage.uid)
         if (result.code === 1) {
           this.start = true;
           this.$dialog.loading.close();

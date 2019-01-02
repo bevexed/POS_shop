@@ -7,4 +7,4 @@ import {BASE_URL} from "./BASE_URL";
 * @param   type       模板类型      必传  注册 => 1
 * */
 
-export const sendMsg = (mobile, type) => ajax(BASE_URL + '/sendSms', {mobile, type})
+export const sendMsg = (mobile, type,uid) => ajax(BASE_URL + '/sendSms', {mobile, type,uid})

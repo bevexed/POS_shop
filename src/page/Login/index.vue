@@ -2,8 +2,8 @@
   <div>
     <div class="login_head">
       <headers :isRegister="isTrue"></headers>
-      <img class="logoPng" src="http://img1.imgtn.bdimg.com/it/u=2635567029,1174386628&fm=11&gp=0.jpg" alt="">
-      <p>logo</p>
+      <img class="logoPng" src="../../assets/logoName.png" alt="">
+      <!--<p>信用妈妈</p>-->
       <p class="loginSkr">登录</p>
     </div>
     <div class="login_box">

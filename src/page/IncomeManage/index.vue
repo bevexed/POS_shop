@@ -1,10 +1,12 @@
 <template>
   <div class="income_content" v-if="earningsData">
-    <headers :title="title" :isBack="true" :is-search="goTo"></headers>
+    <headers :title="title" :isBack="true" :isSearch="goTo"></headers>
     <div class="income_top">
       <span>总资产（元）</span>
       <p>{{earningsData.account.total}}</p>
-      <button>立即提现</button>
+      <button v-if="earningsData.account.total<100" class="buttonT">立即提现</button>
+      <button v-else class="buttonO" @click="withdraw(earningsData.account.total)">立即提现</button>
+      <span>满100元可提现</span>
     </div>
     <div class="income_box">
       <div>
@@ -28,7 +30,7 @@
 
 <script>
   import headers from '../../components/Headers'
-  import {earnings} from "../../api/members";
+  import {earnings,bank} from "../../api/members";
 
   export default {
     name: "incomeManage",
@@ -36,14 +38,16 @@
       return {
         selected: 1,
         title: '收益管理',
-        earningsData: ''
+        earningsData: '',
+        list:''
       }
     },
     components: {
       headers,
     },
     created() {
-      this.getEarnings()
+      this.getEarnings();
+      this.getBank();
     },
     methods: {
       goTo() {
@@ -61,6 +65,17 @@
             res: res.message,
             type: 'error'
           })
+        }
+      },
+      async getBank(){
+        let result = await bank(localStorage.uid);
+        this.list = result.data;
+      },
+      withdraw(e){
+        if(this.list.length>0){
+          this.$router.push({path:'/Withdraw',query:{much:e}});
+        }else{
+          this.$router.push('/ManageBankCard')
         }
       }
     }
@@ -95,10 +110,15 @@
     & > button {
       width: 160px;
       height: 44px;
-      background: rgba(255, 206, 75, 1);
       border-radius: 22px;
-      color: #fff;
       font-size: 18px;
+      color: #fff;
+    }
+    .buttonO {
+      background: rgba(255, 206, 75, 1);
+    }
+    .buttonT {
+      background: gray;
     }
   }
 

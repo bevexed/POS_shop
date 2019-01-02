@@ -18,7 +18,7 @@
       </li>
     </ul>
     <div class="empty"></div>
-    <div class="shop_bottom">
+    <div class="shop_bottom" v-show="items.length>0">
       <div>
         <div v-show="!isChecked" class="circle_div" @click="chooseAll"></div>
         <div v-show="isChecked" class="circle_div checked" @click="cancelAll"></div>

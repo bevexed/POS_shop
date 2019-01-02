@@ -50,27 +50,27 @@
         this[e.target.name + '_url'] = window.URL.createObjectURL(e.target.files[0])
       },
       async doRealName() {
-        if (!this.real_name) {
-          this.$dialog.notify({
-            mes: '请填写昵称',
-            timeout: 3000,
-          })
-          return
-        }
-        const {reverse_identity} = this
-        if (!reverse_identity) {
-          this.$dialog.notify({
-            mes: '请选择图片',
-            timeout: 3000,
-          })
-          return
-        }
+        // if (!this.real_name) {
+        //   this.$dialog.notify({
+        //     mes: '请填写昵称',
+        //     timeout: 3000,
+        //   })
+        //   return
+        // }
+        const {reverse_identity} = this;
+        // if (!reverse_identity) {
+        //   this.$dialog.notify({
+        //     mes: '请选择图片',
+        //     timeout: 3000,
+        //   })
+        //   return
+        // }
         // let url = 'http://lzxprogrammer.com/users/infoEdit'
         // let data = new FormData()
         // data.append('uid',localStorage.uid)
         // data.append('avatar',reverse_identity)
         // data.append('nick_name',this.real_name)
-        let result = await infoEdit(localStorage.uid, reverse_identity, this.real_name)
+        let result = await infoEdit(localStorage.uid,reverse_identity,this.real_name);
         // let result = await axios.post(url, data)
         // result = result.data
         if (result.code === 1) {

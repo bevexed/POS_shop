@@ -1,7 +1,7 @@
 <template>
-  <section v-if="homeData">
+  <section>
     <header class="user" @click="$router.push('/setting')">
-      <img :src="IMG_BASE_URL+homeData.avatars" alt="">
+      <img :src="IMG_BASE_URL + homeData.avatars" alt="图片" />
       <p><span>{{homeData.nick_name?homeData.nick_name:homeData.mobiles}}</span> <br>
         {{homeData.is_actives === 1 ? '会员已激活':'会员未激活'}}
       </p>
@@ -112,12 +112,12 @@
       async getHome() {
         let result = await home(localStorage.uid)
         if (result.code === 1) {
-          this.homeData = result.data
+          this.homeData = result.data;
           localStorage.is_actives = result.data.is_actives
         }
       },
     },
-    mounted() {
+    created() {
       this.getHome()
     }
   }
@@ -144,7 +144,7 @@
       margin-left: 10px;
       font-size: 12px;
       color: white;
-      >span{
+      > span {
         display: inline-block;
         margin-bottom: 5px;
         font-size: 18px;

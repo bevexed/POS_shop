@@ -1,6 +1,6 @@
 <template>
   <div>
-    <headers :isBack="true" :title="title" :isSkir="true"></headers>
+    <headers :isBack="true" :title="title" :isSkir="true" @scanResult="scanResult"></headers>
   </div>
 </template>
 
@@ -15,6 +15,11 @@
     },
     components: {
       headers
+    },
+    methods:{
+      scanResult(){
+        this.$router.push('/Scan');
+      }
     }
   }
 </script>

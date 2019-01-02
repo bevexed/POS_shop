@@ -42,6 +42,7 @@ import TradeSearchResult from '../page/TradeSearchResult'
 import ActiveVip from '../page/ActiveVip'
 
 import Scan from '../page/scan'
+import Withdraw from '../page/withdraw'
 
 Vue.use(Router)
 
@@ -136,7 +137,7 @@ const router = new Router({
     {
       path: '/bankCard',
       component: BankCard,
-      meta: {index: 2,}
+      meta: {index: 4,}
     },
     {
       path: '/deliveryAddress',
@@ -232,6 +233,11 @@ const router = new Router({
       component: ChooseCity,
       name: 'ChooseCity',
       meta: {index: 3}
+    },
+    {
+      path: '/Withdraw',
+      component: Withdraw,
+      meta: {index:4}
     }
   ],
   //跳转页面scrollTop为0

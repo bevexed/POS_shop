@@ -5,20 +5,16 @@
       <div style="height:40%"></div>
       <p class="tip">...载入中...</p>
     </div>
-    <!--<footer>-->
-    <!--<button @click="startRecognize">1.创建控件</button>-->
-    <!--<button @click="startScan">2.开始扫描</button>-->
-    <!--<button @click="cancelScan">3.结束扫描</button>-->
-
-    <!--<button @click="closeScan">4.关闭控件</button>-->
-    <!--</footer>-->
+    <footer>
+      <button @click="cancelClick">取消扫描</button>
+    </footer>
   </div>
 </template>
 
 <script>
-  import headers from '../../components/Headers'
+  import headers from '../../components/Headers';
 
-  let scan = null;
+  let index = null;
 
   export default {
     name: 'Scan',
@@ -56,10 +52,8 @@
           }
           result = result.replace(/\n/g, '');
           that.codeUrl = result;
-          // alert(result);
           window.location.href = result;
           that.closeScan();
-
         }
       },
       //开始扫描
@@ -77,14 +71,21 @@
       closeScan() {
         if (!window.plus) return;
         index.close();
+      },
+      closeAll(){
+        this.closeScan();
+        this.cancelScan();
+      },
+      cancelClick(){
+        this.$router.back();
       }
     },
     mounted() {
       this.startScan();
     },
-    destroyed() {
+    destroyed(){
       this.cancelScan();
-      this.closeScan();
+      this.closeAll();
     }
   }
 </script>
@@ -107,10 +108,16 @@
     footer {
       position: absolute;
       left: 0;
-      bottom: 1rem;
-      height: 2rem;
-      line-height: 2rem;
+      bottom: 0;
+      height: 3rem;
+      line-height: 3rem;
       z-index: 2;
+      button {
+        width: 100vw;
+        background: #FF6D4B;
+        color: #fff;
+        height: 3rem;
+      }
     }
   }
 </style>

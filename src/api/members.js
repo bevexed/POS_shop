@@ -51,4 +51,11 @@ export const earnings = (uid) => ajax(BASE_URL + '/members/earnings', {uid}, "GE
 * @param   level           等级（1：一级；2：二级；3：三级）       必传
 * @param   mobile          电话号                               必传
 * */
-export const queryEarnings = (uid, page, begin_time, end_time, sku_id, level, mobile) => ajax(BASE_URL + '/members/queryEarnings', {uid, page, begin_time, end_time, sku_id, level, mobile}, "GET")
+export const queryEarnings = (uid, page, begin_time, end_time, sku_id, level, mobile) => ajax(BASE_URL + '/members/queryEarnings', {uid, page, begin_time, end_time, sku_id, level, mobile}, "GET");
+
+
+//查询用户已绑定的银行卡
+export const bank = (uid) => ajax(BASE_URL + '/members/withdrawal/bank',{uid},"GET");
+
+//提现
+export const withdrawMoney = (uid,bank_id) => ajax(BASE_URL + '/members/cash/withdrawal',{uid,bank_id},'GET');

@@ -2,7 +2,9 @@
   <div class="head_content">
     <div class="head_top">
       <img class="backImg" v-if="isBack" @click="goBack" src="../assets/back.png" alt="">
-      <img v-if="isPosition" class="positionImg" @click="$goTo('chooseCity')" src="../assets/dingwei.png" alt=""><span @click="$goTo('chooseCity')" class="positionSpan" v-if="isPosition">{{city?city:'定位中...' }}</span>
+      <div class="positionDiv">
+        <img v-if="isPosition" class="positionImg" @click="$goTo('chooseCity')" src="../assets/dingwei.png" alt=""><span @click="$goTo('chooseCity')" class="positionSpan" v-if="isPosition">{{city?city:'定位中...' }}</span>
+      </div>
       <p v-if="title">{{title}}</p>
       <span v-if="isRegister" class="register_span" @click="goRegister">注册</span>
       <span v-if="isManage&&isMac" class="register_span" @click="manage">管理</span>
@@ -13,7 +15,7 @@
         <img src="../assets/scan.png" alt="图片">
         <span>扫码</span>
       </div>
-      <div v-if="isSkir" class="scanP">
+      <div v-if="isSkir" class="scanP" @click="scanClick">
         <img src="../assets/scan.png" alt="">
       </div>
     </div>
@@ -48,7 +50,7 @@
         this.$router.push('/register')
       },
       goBack() {
-        this.$router.back()
+        this.$router.back();
       },
       manage() {
         this.$emit('Tab1', false);
@@ -74,6 +76,7 @@
     color: #fff;
     background: #ff6d48;
     height: 60px;
+    line-height: 60px;
     position: fixed;
     left: 0;
     top: 0;
@@ -96,11 +99,15 @@
       cursor: pointer;
     }
 
-    .positionImg {
-      width: 17px;
+    .positionDiv {
       position: absolute;
       left: 18px;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      .positionImg {
+        width: 17px;
+      }
     }
 
     .positionSpan {
@@ -108,8 +115,7 @@
       overflow: hidden;
       word-break: keep-all;
       text-overflow: ellipsis;
-      position: absolute;
-      left: 40px;
+      margin-left: 10px;
       cursor: pointer;
     }
 

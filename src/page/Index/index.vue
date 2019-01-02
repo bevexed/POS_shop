@@ -76,18 +76,18 @@
     },
     methods: {
       async getGoodLists(sold_type, sort_type) {
-        this.sold_type = sold_type
-        this.sort_type = sort_type
-        let result = await goodlists(this.ad_code, sold_type, sort_type)
-        console.log(result);
+        this.sold_type = sold_type;
+        this.sort_type = sort_type;
+        let result = await goodlists(this.ad_code, sold_type, sort_type);
+        // console.log(result);
         if (result.code === 1) {
-          this.goodLists = result.data
+          this.goodLists = result.data;
         }
       },
       async getBanner() {
-        let result = await banner()
+        let result = await banner();
         if (result.code === 1) {
-          this.bannerImg = result.data
+          this.bannerImg = result.data;
         } else {
           this.$dialog.notify({
             mes: result.message,
