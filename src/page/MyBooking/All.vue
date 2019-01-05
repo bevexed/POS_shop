@@ -2,7 +2,8 @@
   <section>
     <section class="card" v-for="(v,i) in data" :key="i">
       <header v-for="(value,index) in v.goods_sku" :key="value.goods_id" @click="$router.push({name:'productDetail',params:{id:value.goods_id}})">
-        <img :src="IMG_BASE_URL + value.show_pic" alt="">
+        <img src="../../assets/vip/831E3766A296D552A66A12405D6111F2.png" alt="" v-if="v.is_member_order === 1">
+        <img :src="IMG_BASE_URL + value.show_pic" alt="" v-else>
         <p>
           {{value.goods_name}} <br>
           <span>通道：{{value.trad_channel}}</span> <br>
@@ -39,8 +40,8 @@
       <!--待评价-->
       <footer v-if="v.status === 3">
         <span class="del" @click="doOrdersDel(v.id)">删除订单</span>
-        <span class="post">查看物流</span>
-        <span class="elva">评价</span>
+        <span class="post" v-if="v.is_member_order !== 1">查看物流</span>
+        <span class="elva"v-if="v.is_member_order !== 1">评价</span>
       </footer>
       <!--带退款-->
       <footer v-if="v.status === 4">
