@@ -70,7 +70,9 @@
       async getOrderList() {
         let result = await orderList(this.page, localStorage.uid, this.$route.params.type)
         if (result.code === 1) {
-          this.orderListData = result.data.items
+          this.orderListData = result.data.items;
+          // this.orderListData = result.data.items.filter(item => item.is_member_order===1);
+
         } else {
           this.$dialog.notify({
             mes: result.message,
