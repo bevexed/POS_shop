@@ -41,7 +41,7 @@
         mobile: '',
         password: '',
         code: '',
-        promote: '',
+        promote: this.$GetQueryString('promote'),
         type: 1,
         timer: 60,
         T: '',
@@ -62,8 +62,8 @@
       ...mapActions(['register']),
       // 注册
       async doRegister() {
-        let {mobile, password, code, promote} = this
-        let numberPattern = /^[0-9]{11}$/
+        let {mobile, password, code, promote} = this;
+        let numberPattern = /^[0-9]{11}$/;
         if (!mobile || !numberPattern.test(mobile)) {
           this.$dialog.notify({
             mes: '手机号格式不正确',
@@ -89,14 +89,14 @@
           this.$dialog.notify({
             mes: '请输入验证码',
             timeout: 3000
-          })
+          });
           return
         }
 
         this.register({mobile, password, code, promote})
       },
       async getCode(mobile, type) {
-        let numberPattern = /^[0-9]{11}$/
+        let numberPattern = /^[0-9]{11}$/;
         if (!mobile || !numberPattern.test(mobile)) {
           this.$dialog.notify({
             mes: '手机号格式不正确',
@@ -105,7 +105,7 @@
           return
         }
         if (this.timer === 60) {
-          let result = await sendMsg(mobile, type)
+          let result = await sendMsg(mobile, type);
           if (result.code === 1) {
             this.$dialog.notify({
               mes: result.message,
@@ -115,13 +115,13 @@
             this.$dialog.notify({
               mes: result.message,
               timeout: 3000
-            })
+            });
             return
           }
           this.T = setInterval(() => {
             this.timer--;
             if (this.timer === 0) {
-              this.timer = 60
+              this.timer = 60;
               this.T = null
             }
           }, 1000)

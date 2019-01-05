@@ -21,7 +21,7 @@
       return {
         downloadButton: true,
         config: {
-          value: 'http://192.168.1.24:8081',
+          value: `http://192.168.1.27:8082/index.html?promote=${this.$route.query.promotes}#register`,
           imagePath: require('../../assets/sousuo.png'),
           filter: 'color'
         },
@@ -46,7 +46,7 @@
         // download.click()
         // window.location.href = image; // it will save locally
 
-        this.saveFile(image,"img.png")
+        this.saveFile(image, "img.png")
       },
       scanResult() {
         this.$router.push('/Scan');

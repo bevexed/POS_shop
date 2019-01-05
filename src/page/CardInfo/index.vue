@@ -200,7 +200,7 @@
     position: fixed;
     bottom: 0;
     padding: 10px 0;
-    box-shadow: rgba(0,0,0,.2) 3px 3px 20px;
+    box-shadow: rgba(0, 0, 0, .2) 3px 3px 20px;
     background: white;
 
     > div.back {
