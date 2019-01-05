@@ -24,7 +24,7 @@ import CardInfo from '../page/CardInfo'
 import productDetail from '../page/ProductDetail/index'
 import Booking from '../page/Booking'
 import MyBooking from '../page/MyBooking'
-import DeliveryAddress from '../page/Address/Deliveryaddress'
+import DeliveryAddress from '../page/Address/DeliveryAddress'
 import BookingSearch from '../page/BookingSearch'
 import BookingDetail from '../page/BookingDetail'
 import MyGoods from '../page/MyGoods/index'
@@ -41,8 +41,8 @@ import TradeSearch from '../page/TradeSearch'
 import TradeSearchResult from '../page/TradeSearchResult'
 import ActiveVip from '../page/ActiveVip'
 
-import Scan from '../page/scan'
-import Withdraw from '../page/withdraw'
+import Scan from '../page/Scan'
+import Withdraw from '../page/Withdraw'
 
 Vue.use(Router)
 
