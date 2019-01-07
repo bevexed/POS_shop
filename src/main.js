@@ -22,7 +22,9 @@ Vue.use(Mui)
 Vue.config.productionTip = false
 Vue.use(VueAwesomeSwiper)
 Vue.use(YDUI)
-
+import {Icons} from 'vue-ydui/dist/lib.px/icons';
+Vue.component(Icons.name, Icons);
+import 'vue-ydui/dist/ydui.base.css';
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
