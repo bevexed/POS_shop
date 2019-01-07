@@ -165,7 +165,7 @@
         this.courier_fees = data.courier_fees;
       },
       async getDefalutAddress() {
-        let res = await defaultAddress(localStorage.uid);
+        let res = await defaultAddress(localStorage.uid,this.$route.query.aid);
         this.addressObj = res.data;
       },
       async commit(uid, address_id, g_sku_infos, remark) {

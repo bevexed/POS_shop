@@ -2,7 +2,7 @@
   <div class="add">
     <headers :title="title" :isBack="true"></headers>
     <ul class="address_list">
-      <router-link tag="li" :to="{name:'editAddress',params:{id:v.id}}" v-for="(v,i) in addressDate" :key="v.id">
+      <li v-for="(v,i) in addressDate" @click="goTo(v.id)" :key="v.id">
         <div>
           <p>
             <span>{{v.name}}</span>
@@ -11,8 +11,8 @@
           </p>
           <p>{{v.address}}</p>
         </div>
-        <img @click="$router.push('/editAddress')" src="../../assets/edit.png" alt="">
-      </router-link>
+        <img @click="$router.push({name:'editAddress',params:{id:v.id}})" src="../../assets/edit.png" alt="">
+      </li>
     </ul>
     <div style="height: 44px"></div>
     <button class="addBtn" @click="$router.push('/addAddress')">新增收货地址</button>
@@ -27,13 +27,20 @@
     data() {
       return {
         title: '我的收货地址',
-        addressDate: []
+        addressDate: [],
+        path:'',
+        query:{}
       }
     },
     components: {
       headers
     },
     methods: {
+      goTo(aid){
+         if (this.query){
+           this.$router.push({path:'/booking',query:{...this.query,aid}})
+         }
+      },
       async getAddress() {
         let result = await address(localStorage.uid)
         if (result.code === 1) {
@@ -48,6 +55,15 @@
     },
     mounted() {
       this.getAddress()
+    },
+    beforeRouteEnter(to,from,next){
+      console.log(to, from);
+      next()
+      if (from.path === '/booking'){
+        next(vm =>{
+          vm.query = from.query
+        })
+      }
     }
   }
 </script>
@@ -77,7 +93,7 @@
         width: 20px;
       }
 
-      p{
+      p {
         width: 300px;
         word-break: break-all;
       }
