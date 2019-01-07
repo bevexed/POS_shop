@@ -115,18 +115,16 @@
           let select = this.items.filter(val => {
             return val.isChecked === true;
           });
-
-
           let cart_infos, arr = [];
           for (let i = 0; i < select.length; i++) {
             arr.push({'cart_id': select[i].id, 'amount': select[i].amount})
             cart_infos = JSON.stringify(arr);
           }
-          if (select.length !== 0) {
+          if (select.length > 0) {
             this.$router.push({path: '/Booking', query: {cart_infos: cart_infos}})
           } else {
-            this.$dialog.notify({
-              mes: '至少选择一件宝贝',
+            this.$dialog.toast({
+              mes: '至少购买一件宝贝',
               timeout: 1000
             })
           }
@@ -135,19 +133,25 @@
       async deleteItem() {
         if (this.items.length) {
           let select = this.items.filter(val => val.isChecked === true);
-
           let cart_infos, arr = [];
           for (let i = 0; i < select.length; i++) {
             arr.push({'cart_id': select[i].id})
             cart_infos = JSON.stringify(arr);
           }
-          let res = await destroy(localStorage.uid, cart_infos)
-          if (res.code === 1) {
-            this.$router.go(0)
-          } else {
-            this.$dialog.notify({
-              mes: res.message,
-              type: 'error'
+          if(select.length>0){
+            let res = await destroy(localStorage.uid, cart_infos);
+            if (res.code === 1) {
+              this.$router.go(0)
+            } else {
+              this.$dialog.notify({
+                mes: res.message,
+                type: 'error'
+              })
+            }
+          }else {
+            this.$dialog.toast({
+              mes: '至少删除一件宝贝',
+              timeout: 1000
             })
           }
         }

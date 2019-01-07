@@ -85,7 +85,7 @@
           })
           return
         }
-        let res = await addShop(uid, g_sku_id)
+        let res = await addShop(uid, g_sku_id);
         if (res.code === 1) {
           this.$dialog.notify({
             mes: '商品加入购物车成功',
@@ -99,7 +99,7 @@
         }
       },
       async getDetail(id) {
-        let result = await detail(id)
+        let result = await detail(id);
         if (result.code === 1) {
           this.detailData = result.data
         } else {
@@ -113,10 +113,10 @@
 
       },
       buy() {
-        if (this.val != '') {
+        if (this.val !== '') {
           this.$router.push({path: '/booking', query: {id: this.val}})
         } else {
-          this.$dialog.notify({
+          this.$dialog.toast({
             mes: '请选择通道类别',
             timeout: 3000
           })

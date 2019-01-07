@@ -2,7 +2,7 @@
   <div class="xinyongContent">
     <headers :title="title"></headers>
     <swiper class="wrap" ref="mySwiper" :options="swiperOption" v-if="bannerArr.length">
-      <swiper-slide v-for="(item,index) in bannerArr" :key="index"><a :href="item.url"><img :src="`${IMG_BASE_URL}${item.picture}`" alt="图片"></a></swiper-slide>
+      <swiper-slide v-for="(item,index) in bannerArr" :key="index"><div @click="$router.push({path:'/BannerLink',query:{url:item.url}})"><img :src="`${IMG_BASE_URL}${item.picture}`" alt="图片"></div></swiper-slide>
     </swiper>
     <div class="lineDiv"></div>
 
@@ -127,9 +127,9 @@
       width: 335px !important;
     }
 
-    a img {
+    div img {
       width: 335px;
-      height: 100%;
+      height: 143px;
       border-radius: 10px;
     }
   }

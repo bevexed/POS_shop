@@ -43,6 +43,7 @@ import ActiveVip from '../page/ActiveVip'
 
 import Scan from '../page/Scan'
 import Withdraw from '../page/Withdraw'
+import BannerLink from '../page/BannerLink'
 
 Vue.use(Router)
 
@@ -70,6 +71,11 @@ const router = new Router({
       path: '/forgetPwd',
       component: ForgetPwd,
       meta: {index: 1}
+    },
+    {
+      path: '/BannerLink',
+      component: BannerLink,
+      meta: {index: 2}
     },
     {
       path: '/index',
@@ -105,12 +111,12 @@ const router = new Router({
       path: '/productDetail/id/:id',
       component: productDetail,
       name: 'productDetail',
-      meta: {index: 1}
+      meta: {index: 3}
     },
     {
       path: '/booking',
       component: Booking,
-      meta: {index: 3}
+      meta: {index: 4}
     },
     {
       path: '/bookingDetail/id/:id',

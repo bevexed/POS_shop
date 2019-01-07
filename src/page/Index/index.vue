@@ -2,7 +2,7 @@
   <div class="index_content">
     <headers :title="title" :isPosition="true" :scanP="true"></headers>
     <swiper class="wrap" :options="swiperOption" ref="mySwiper" v-if="bannerImg.length>0">
-      <swiper-slide v-for="(val,i) in bannerImg" :key="i"><a :href="val.url"><img :src="`${IMG_BASE_URL}${val.picture}`"></a></swiper-slide>
+      <swiper-slide v-for="(val,i) in bannerImg" :key="i"><div @click="$router.push({path:'/BannerLink',query:{url:val.url}})"><img :src="`${IMG_BASE_URL}${val.picture}`"></div></swiper-slide>
     </swiper>
 
     <div class="commidity_class">
@@ -69,15 +69,12 @@
     },
     created() {
       this.getGoodLists(this.sold_type, this.sort_type)
-      // this.getBanner()
+      this.getBanner();
     },
     computed: {
       swiper() {
         return this.$refs.mySwiper.swiper
       }
-    },
-    mounted() {
-      this.getBanner();
     },
     methods: {
       async getGoodLists(sold_type, sort_type) {
@@ -125,7 +122,7 @@
 
       img {
         width: 100%;
-        height: 100%;
+        height: 143px;
         border-radius: 10px;
       }
     }
