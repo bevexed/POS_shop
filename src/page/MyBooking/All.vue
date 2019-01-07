@@ -3,7 +3,7 @@
     <section class="card" v-for="(v,i) in data" :key="i">
       <header v-for="(value,index) in v.goods_sku" :key="value.goods_id">
         <img src="../../assets/vip/831E3766A296D552A66A12405D6111F2.png" alt="" v-if="v.is_member_order === 1">
-        <img :src="IMG_BASE_URL + value.show_pic" alt="" v-else  @click="goTo(v,value)">
+        <img :src="IMG_BASE_URL + value.show_pic" alt="" v-else @click="goTo(v,value)">
         <p>
           {{value.goods_name}} <br>
           <span>通道：{{value.trad_channel}}</span> <br>
@@ -26,30 +26,31 @@
       <!--待付款-->
       <footer v-if="v.status === 0 && v.closed === 0">
         <span class="cancel" @click="doOrdersCancel(v.id)">取消订单</span>
-        <span class="pay>" @click="$router.push({name:'BookingDetail',params:{id:v.id}})">付款</span>
+        <span class="pay" @click="$router.push({name:'BookingDetail',params:{id:v.id}})">付款</span>
       </footer>
       <!--待发货-->
       <footer v-if="v.status === 1">
         <span class="del" @click="doOrdersDel(v.id)">删除订单</span>
-        <span class="elva">待发货</span>
+        <span class="elva">申请退款</span>
       </footer>
       <!--待收货-->
       <footer v-if="v.status === 2">
         <span class="del" @click="doOrdersDel(v.id)">删除订单</span>
-        <span class="post>">查看物流</span>
+        <!--<span class="post>">查看物流</span>-->
+        <span class="elva">申请退款</span>
         <span class="elva" @click="doOrderConfirm(v.id)">确认收货</span>
       </footer>
       <!--待评价-->
       <footer v-if="v.status === 3">
         <span class="del" @click="doOrdersDel(v.id)">删除订单</span>
         <span class="post" v-if="v.is_member_order !== 1">查看物流</span>
-        <span class="elva" v-if="v.is_member_order !== 1">评价</span>
+        <span class="elva" v-if="v.is_member_order !== 1" @click="$router.push({path:'/GoodEva',query:{id:v.id}})">评价</span>
       </footer>
       <!--带退款-->
-      <footer v-if="v.status === 4">
+      <footer v-if="v.status === 4||v.status === 5">
         <span class="del" @click="doOrdersDel(v.id)">删除订单</span>
-        <span class="post">查看物流</span>
-        <span class="elva">评价</span>
+        <!--<span class="post">查看物流</span>-->
+        <span class="elva" @click="$router.push({path:'/GoodEva',query:{id:v.id}})">评价</span>
       </footer>
     </section>
   </section>
@@ -77,7 +78,7 @@
       },
       // 确认收货
       async doOrderConfirm(id) {
-        let result = await orderConfirm(id, localStorage.uid)
+        let result = await orderConfirm(id, localStorage.uid);
         if (result.code === 1) {
           this.$dialog.notify({
             mes: result.message,
@@ -95,7 +96,7 @@
       },
       // 取消订单
       async doOrdersCancel(id) {
-        let result = await ordersCancel(id, localStorage.uid)
+        let result = await ordersCancel(id, localStorage.uid);
         if (result.code === 1) {
           this.$dialog.notify({
             mes: result.message,
@@ -113,7 +114,7 @@
       },
       // 删除订单
       async doOrdersDel(id) {
-        let result = await ordersDel(id, localStorage.uid)
+        let result = await ordersDel(id, localStorage.uid);
         if (result.code === 1) {
           this.$dialog.notify({
             mes: result.message,

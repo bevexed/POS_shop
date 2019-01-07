@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import store from '../store'
 import Router from 'vue-router'
 // users
 import EditAddress from '../page/Address/editAddress'
@@ -43,6 +42,7 @@ import ActiveVip from '../page/ActiveVip'
 
 import Scan from '../page/Scan'
 import Withdraw from '../page/Withdraw'
+import GoodEva from '../page/GoodEva'
 
 Vue.use(Router)
 
@@ -237,7 +237,12 @@ const router = new Router({
     {
       path: '/Withdraw',
       component: Withdraw,
-      meta: {index:4}
+      meta: {index: 4}
+    },
+    {
+      path: '/GoodEva',
+      component: GoodEva,
+      meta: {index: 5}
     }
   ],
   //跳转页面scrollTop为0
