@@ -43,7 +43,7 @@
       <!--待评价-->
       <footer v-if="v.status === 3">
         <span class="del" @click="doOrdersDel(v.id)">删除订单</span>
-        <span class="post" v-if="v.is_member_order !== 1">查看物流</span>
+        <!--<span class="post" v-if="v.is_member_order !== 1">查看物流</span>-->
         <span class="elva" v-if="v.is_member_order !== 1" @click="$router.push({path:'/GoodEva',query:{id:v.id}})">评价</span>
       </footer>
       <!--带退款-->
@@ -58,7 +58,7 @@
 
 <script>
   import {IMG_BASE_URL} from "../../api/BASE_URL";
-  import {orderConfirm, ordersCancel, ordersDel,orderRefund} from "../../api/orders";
+  import {orderConfirm, orderRefund, ordersCancel, ordersDel} from "../../api/orders";
 
   export default {
     name: "all",
@@ -139,7 +139,7 @@
             mes: result.message,
             timeout: 500,
             callback: () => {
-              this.$router.go(0)
+              this.$router.replace({name: 'myBooking', params: {type: '4'}})
             }
           })
         } else {
