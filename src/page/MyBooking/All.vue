@@ -44,7 +44,7 @@
       <footer v-if="v.status === 3">
         <span class="del" @click="doOrdersDel(v.id)">删除订单</span>
         <!--<span class="post" v-if="v.is_member_order !== 1">查看物流</span>-->
-        <span class="elva" v-if="v.is_member_order !== 1" @click="$router.push({path:'/GoodEva',query:{id:v.id}})">评价</span>
+        <span class="elva" v-if="v.is_member_order !== 1" @click="$router.pulsh({path:'/GoodEva',query:{id:v.id}})">评价</span>
       </footer>
       <!--带退款-->
       <footer v-if="v.status === 4||v.status === 5">
@@ -80,7 +80,7 @@
       async doOrderConfirm(id) {
         let result = await orderConfirm(id, localStorage.uid);
         if (result.code === 1) {
-          this.$dialog.notify({
+          this.$dialog.toast({
             mes: result.message,
             timeout: 500,
             callback: () => {
@@ -88,7 +88,7 @@
             }
           })
         } else {
-          this.$dialog.notify({
+          this.$dialog.toast({
             mes: result.message,
             timeout: 1500,
           })
@@ -98,7 +98,7 @@
       async doOrdersCancel(id) {
         let result = await ordersCancel(id, localStorage.uid);
         if (result.code === 1) {
-          this.$dialog.notify({
+          this.$dialog.toast({
             mes: result.message,
             timeout: 500,
             callback: () => {
@@ -106,7 +106,7 @@
             }
           })
         } else {
-          this.$dialog.notify({
+          this.$dialog.toast({
             mes: result.message,
             timeout: 1500,
           })
@@ -116,7 +116,7 @@
       async doOrdersDel(id) {
         let result = await ordersDel(id, localStorage.uid);
         if (result.code === 1) {
-          this.$dialog.notify({
+          this.$dialog.toast({
             mes: result.message,
             timeout: 500,
             callback: () => {
@@ -124,7 +124,7 @@
             }
           })
         } else {
-          this.$dialog.notify({
+          this.$dialog.toast({
             mes: result.message,
             timeout: 1500,
           })
@@ -135,7 +135,7 @@
       async doOrderRefund(id) {
         let result = await orderRefund(id, localStorage.uid);
         if (result.code === 1) {
-          this.$dialog.notify({
+          this.$dialog.toast({
             mes: result.message,
             timeout: 500,
             callback: () => {
@@ -143,7 +143,7 @@
             }
           })
         } else {
-          this.$dialog.notify({
+          this.$dialog.toast({
             mes: result.message,
             timeout: 1500,
           })
