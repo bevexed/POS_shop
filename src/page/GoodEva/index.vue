@@ -57,9 +57,9 @@
           });
           return false
         }
-        let id = this.ordersDetailData.goods_sku.map(item => item.goods_id)
-        console.log(id);
-        let res = await add(localStorage.uid, 0, id, this.text);
+        let id = []
+        this.ordersDetailData.goods_sku.map(item => id.push({g_id: item.goods_id}))
+        let res = await add(localStorage.uid, 0, JSON.stringify(id), this.text);
         this.$dialog.notify({
           mes: res.message,
           type: res.code === 1 ? "success" : "error"

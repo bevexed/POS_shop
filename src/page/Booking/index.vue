@@ -14,7 +14,9 @@
           <span>></span>
         </footer>
       </section>
+
       <section class="address" v-else @click="$router.push('/addaddress')">添加收货地址</section>
+
       <div v-if="fenlei == 1">
         <section class="detail">
           <div>
@@ -165,17 +167,17 @@
         this.courier_fees = data.courier_fees;
       },
       async getDefalutAddress() {
-        let res = await defaultAddress(localStorage.uid,this.$route.query.aid);
+        let res = await defaultAddress(localStorage.uid, this.$route.query.aid);
         this.addressObj = res.data;
       },
       async commit(uid, address_id, g_sku_infos, remark) {
-        let cart_ids = ''
+        let cart_ids = '';
         if (this.$route.query.cart_infos) {
           cart_ids = JSON.stringify(JSON.parse(this.$route.query.cart_infos).map(item => {
             return {'cart_id': item.cart_id}
           }))
         }
-        let result = await commitOrder(uid, address_id, g_sku_infos, cart_ids, remark)
+        let result = await commitOrder(uid, address_id, g_sku_infos, cart_ids, remark);
         if (result.code === 1) {
           this.bol = true;
           this.orderNo = result.out_trade_no;
@@ -189,8 +191,7 @@
             timeout: 3000
           })
         }
-        ;
-        this.totalPuch = (this.countPrice + parseInt(this.shopInfo.courier_fees)).toFixed(2)
+        this.totalPuch = (this.countPrice + parseInt(this.shopInfo.courier_fees)).toFixed(2);
         this.commit(localStorage.uid, this.addressObj.id, g_sku_infos, this.remarkVal)
       },
       commitO() {
@@ -200,14 +201,13 @@
             arr.push({'g_id': this.items[i].g_id, 'g_sku_id': this.items[i].g_sku[j].g_sku_id, 'amount': this.items[i].g_sku[j].amount})
           }
         }
-        let g_sku_infos = JSON.stringify(arr)
+        let g_sku_infos = JSON.stringify(arr);
         if (this.addressObj.id === undefined) {
           this.$dialog.notify({
             mes: '请填写收货地址',
             timeout: 3000
           })
         }
-        ;
         this.totalPuch = (parseInt(this.courier_fees) + parseInt(this.countTotal)).toFixed(2);
         this.commit(localStorage.uid, this.addressObj.id, g_sku_infos, this.remarkVal)
       },
@@ -248,7 +248,6 @@
       align-items: center;
 
       p {
-        margin: 0 4px;
       }
 
       span {

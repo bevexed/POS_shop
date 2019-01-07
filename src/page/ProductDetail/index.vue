@@ -29,16 +29,20 @@
 
     <section class="evaluate">
       <header>
-        宝贝评价（1）
+        宝贝评价（{{commentData.length}}）
         <span>查看全部</span>
       </header>
-      <section>
-        <img src="" alt="">
-        <span>123*9</span>
-      </section>
-      <footer>
-        哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
-      </footer>
+      <div v-for="v in commentData">
+        <section>
+          <img :src="IMG_BASE_URL+v.consumer.avatar" alt="">
+          <span>{{v.consumer.nick_name}}</span>
+          <time>{{v.create_time}}</time>
+        </section>
+        <footer>
+          {{v.content}}
+        </footer>
+      </div>
+
     </section>
 
     <section class="real">
@@ -65,7 +69,7 @@
         detailData: {},
         IMG_BASE_URL,
         val: "",
-        comment: ''
+        commentData: ''
       }
     },
     components: {},
@@ -82,7 +86,7 @@
       },
       async getComment() {
         let res = await comment(this.$route.params.id)
-        // this.comment = res.data
+        this.commentData = res.data
       },
       async addShoppingCar(uid, g_sku_id) {
         if (!this.val) {
@@ -259,7 +263,11 @@
         width: 28px;
         height: 28px;
         border-radius: 50%;
-        background: #808080;
+      }
+
+      time{
+        flex: 1;
+        text-align: right;
       }
     }
 
