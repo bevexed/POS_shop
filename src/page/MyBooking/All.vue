@@ -31,13 +31,13 @@
       <!--待发货-->
       <footer v-if="v.status === 1">
         <span class="del" @click="doOrdersDel(v.id)">删除订单</span>
-        <span class="elva">申请退款</span>
+        <span class="elva" @click="doOrderRefund(v.id)">申请退款</span>
       </footer>
       <!--待收货-->
       <footer v-if="v.status === 2">
         <span class="del" @click="doOrdersDel(v.id)">删除订单</span>
         <!--<span class="post>">查看物流</span>-->
-        <span class="elva">申请退款</span>
+        <span class="elva" @click="doOrderRefund(v.id)">申请退款</span>
         <span class="elva" @click="doOrderConfirm(v.id)">确认收货</span>
       </footer>
       <!--待评价-->
@@ -58,7 +58,7 @@
 
 <script>
   import {IMG_BASE_URL} from "../../api/BASE_URL";
-  import {orderConfirm, ordersCancel, ordersDel} from "../../api/orders";
+  import {orderConfirm, ordersCancel, ordersDel,orderRefund} from "../../api/orders";
 
   export default {
     name: "all",
@@ -115,6 +115,25 @@
       // 删除订单
       async doOrdersDel(id) {
         let result = await ordersDel(id, localStorage.uid);
+        if (result.code === 1) {
+          this.$dialog.notify({
+            mes: result.message,
+            timeout: 500,
+            callback: () => {
+              this.$router.go(0)
+            }
+          })
+        } else {
+          this.$dialog.notify({
+            mes: result.message,
+            timeout: 1500,
+          })
+        }
+      },
+
+      // 用户退款
+      async doOrderRefund(id) {
+        let result = await orderRefund(id, localStorage.uid);
         if (result.code === 1) {
           this.$dialog.notify({
             mes: result.message,
