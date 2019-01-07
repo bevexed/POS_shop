@@ -45,6 +45,10 @@
 </script>
 
 <style>
+  .yd-notify {
+    font-size: 18px;
+  }
+
   #app {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
