@@ -139,7 +139,7 @@
             mes: result.message,
             timeout: 500,
             callback: () => {
-              this.$router.go(0)
+              this.$router.replace({name: 'myBooking', params: {type: 4}})
             }
           })
         } else {
