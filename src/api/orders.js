@@ -32,6 +32,12 @@ export const ordersDel = (id, uid) => ajax(BASE_URL + '/orders/ordersDel', {id, 
 */
 export const ordersDetail = (id, uid) => ajax(BASE_URL + '/orders/ordersDetail', {id, uid})
 
+/* 用户退款
+*  @param    id      订单ID
+*  @param    uid     用户ID
+*/
+export const orderRefund = (id, uid) => ajax(BASE_URL + '/orders/orderRefund', {id, uid})
+
 /* 用户订单详情接口
 *  @param    id      订单ID
 */
