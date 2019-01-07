@@ -6,13 +6,18 @@
     </swiper>
 
     <div class="commidity_class">
-      <p :class="{active:sold_type === 1}" @click="getGoodLists(1,1)">企业POS机</p>
-      <p :class="{active:sold_type === 2}" @click="getGoodLists(2,1)">个人POS机</p>
+      <p v-show="sold_type !== 1" @click="getGoodLists(1,1)">企业POS机</p>
+      <p v-show="sold_type === 1" class="active">企业POS机</p>
+      <p v-show="sold_type !== 2" @click="getGoodLists(2,1)">个人POS机</p>
+      <p v-show="sold_type === 2" class="active">个人POS机</p>
     </div>
     <div class="commidity_step">
-      <span :class="{Aspan:sort_type === 1}" @click="getGoodLists(sold_type,1)">综合</span>
-      <span :class="{Aspan:sort_type === 2}" @click="getGoodLists(sold_type,2)">价格</span>
-      <span :class="{Aspan:sort_type === 3}" @click="getGoodLists(sold_type,3)">销量</span>
+      <span v-show="sort_type !== 1" @click="getGoodLists(sold_type,1)">综合</span>
+      <span v-show="sort_type === 1" class="Aspan">综合</span>
+      <span v-show="sort_type !== 2" @click="getGoodLists(sold_type,2)">价格</span>
+      <span v-show="sort_type === 2" class="Aspan">价格</span>
+      <span v-show="sort_type !== 3" @click="getGoodLists(sold_type,3)">销量</span>
+      <span v-show="sort_type === 3" class="Aspan">销量</span>
     </div>
     <ul class="commidity_ul">
       <li v-for="(v,i) in goodLists" :key="v.id">

@@ -15,7 +15,7 @@
       </ul>
     </nav>
     <section class="detail" v-for="(v,i) in listsUserDate" :key="i" v-if="listsUserDate">
-      <img :src="v.avatar" alt="">
+      <img :src="IMG_BASE_URL + v.avatar" alt="">
       <section>
         <p>{{v.nick_name}} <span>VIP{{level}}</span></p>
         <p>{{v.mobile.toString().slice(0,7)}}****</p>
@@ -44,6 +44,7 @@
 <script>
   import headers from '../../components/Headers'
   import {listsUser} from "../../api/members";
+  import {IMG_BASE_URL} from "../../api/BASE_URL";
 
   export default {
     name: "Vip",
@@ -57,6 +58,7 @@
         current_page: 1,
         loadingState: true,
         listsUserDate: [],
+        IMG_BASE_URL
       }
     },
     computed: {},

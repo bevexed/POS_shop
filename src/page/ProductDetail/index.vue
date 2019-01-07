@@ -21,7 +21,7 @@
       <footer>
         通道类别：
         <select id="select" v-model="val" @change="selectVal">
-          <option value="">--请选择--</option>
+          <option value="">请选择</option>
           <option v-for="(v,i) in detailData.sku" :value="v.id">{{v.trad_channel}}</option>
         </select>
       </footer>
@@ -210,7 +210,18 @@
 
       #select {
         width: 150px;
+        height: 30px;
+        border-radius: 5px;
+        border: 1px #1a1a1a solid;
+        option:hover{
+          background: #EBCCD1;
+        }
       }
+      #select:focus{
+        border: 2px #ddd solid;
+        box-shadow: 0 0 15px 1px #DDDDDD;
+      }
+
     }
   }
 
