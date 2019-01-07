@@ -21,6 +21,7 @@ Vue.use(Mui)
 
 Vue.config.productionTip = false
 Vue.use(VueAwesomeSwiper)
+
 Vue.use(YDUI)
 import {Icons} from 'vue-ydui/dist/lib.px/icons';
 Vue.component(Icons.name, Icons);
