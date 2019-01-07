@@ -48,7 +48,7 @@
             共{{num}}件商品
             <span>
           小计：
-          <i>￥{{countPrice.toFixed(2)}}</i>
+          <i>￥{{((countPrice - 0)+(shopInfo.courier_fees-0)).toFixed(2)}}</i>
         </span>
           </footer>
         </section>
@@ -115,7 +115,7 @@
 <script>
   import headers from '../../components/Headers'
   import pay from '../../components/pay'
-  import {info, defaultAddress, commitOrder, infos} from '../../api/order'
+  import {commitOrder, defaultAddress, info, infos} from '../../api/order'
   import {IMG_BASE_URL} from "../../api/BASE_URL";
 
   export default {
