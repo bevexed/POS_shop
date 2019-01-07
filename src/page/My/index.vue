@@ -1,7 +1,7 @@
 <template>
   <section>
     <header class="user" @click="$router.push('/setting')">
-      <img :src="homeData.avatars?IMG_BASE_URL + homeData.avatars:'../../assets/logoName.png'" alt="图片" />
+      <img :src="homeData.avatars?IMG_BASE_URL + homeData.avatars:'../../assets/logoName.png'" alt="图片"/>
       <p><span>{{homeData.nick_name?homeData.nick_name:homeData.mobiles}}</span> <br>
         {{homeData.is_actives === 1 ? '会员已激活':'会员未激活'}}
       </p>
@@ -55,7 +55,7 @@
           <p>会员管理</p>
         </li>
         <router-link to="/trade">
-          <img src="../../assets/my/jiaoyiguanli-2@3x.png" alt="">
+          <img :class="{vip:homeData.is_actives === 0}" src="../../assets/my/jiaoyiguanli-2@3x.png" alt="">
           <p>交易管理</p>
         </router-link>
         <li @click="vipGo('incomeManage')">
@@ -144,6 +144,7 @@
       margin-left: 10px;
       font-size: 12px;
       color: white;
+
       > span {
         display: inline-block;
         margin-bottom: 5px;

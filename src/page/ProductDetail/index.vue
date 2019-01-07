@@ -54,6 +54,7 @@
 
 <script>
   import {addShop, detail} from "../../api/cart";
+  import {comment} from "../../api/goods";
   import {IMG_BASE_URL} from '../../api/BASE_URL'
 
   export default {
@@ -63,12 +64,14 @@
         uid: localStorage.uid,
         detailData: {},
         IMG_BASE_URL,
-        val: ""
+        val: "",
+        comment: ''
       }
     },
     components: {},
     created() {
-      this.getDetail(this.$route.params.id)
+      this.getDetail(this.$route.params.id);
+      this.getComment()
     },
     methods: {
       backClick() {
@@ -77,15 +80,19 @@
       goCar() {
         this.$router.push('/shoppingCar')
       },
+      async getComment() {
+        let res = await comment(this.$route.params.id)
+        // this.comment = res.data
+      },
       async addShoppingCar(uid, g_sku_id) {
         if (!this.val) {
           this.$dialog.notify({
             mes: '请选择通道类别',
             timeout: 3000
-          })
+          });
           return
         }
-        let res = await addShop(uid, g_sku_id)
+        let res = await addShop(uid, g_sku_id);
         if (res.code === 1) {
           this.$dialog.notify({
             mes: '商品加入购物车成功',
@@ -99,7 +106,7 @@
         }
       },
       async getDetail(id) {
-        let result = await detail(id)
+        let result = await detail(id);
         if (result.code === 1) {
           this.detailData = result.data
         } else {
@@ -213,11 +220,13 @@
         height: 30px;
         border-radius: 5px;
         border: 1px #1a1a1a solid;
-        option:hover{
+
+        option:hover {
           background: #EBCCD1;
         }
       }
-      #select:focus{
+
+      #select:focus {
         border: 2px #ddd solid;
         box-shadow: 0 0 15px 1px #DDDDDD;
       }
