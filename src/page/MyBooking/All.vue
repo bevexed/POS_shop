@@ -1,9 +1,9 @@
 <template>
   <section>
     <section class="card" v-for="(v,i) in data" :key="i">
-      <header v-for="(value,index) in v.goods_sku" :key="value.goods_id" @click="goTo(v,value)">
+      <header v-for="(value,index) in v.goods_sku" :key="value.goods_id">
         <img src="../../assets/vip/831E3766A296D552A66A12405D6111F2.png" alt="" v-if="v.is_member_order === 1">
-        <img :src="IMG_BASE_URL + value.show_pic" alt="" v-else>
+        <img :src="IMG_BASE_URL + value.show_pic" alt="" v-else  @click="goTo(v,value)">
         <p>
           {{value.goods_name}} <br>
           <span>通道：{{value.trad_channel}}</span> <br>
@@ -17,6 +17,8 @@
       <section class="price">
         共一件商品 合计：<span>￥{{v.total_amount}}</span>
       </section>
+
+
       <!--已取消-->
       <footer v-if="v.closed === 1">
         <span class="pay>">已取消</span>

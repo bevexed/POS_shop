@@ -28,18 +28,18 @@
       return {
         title: '我的收货地址',
         addressDate: [],
-        path:'',
-        query:{}
+        path: '',
+        query: {}
       }
     },
     components: {
       headers
     },
     methods: {
-      goTo(aid){
-         if (this.query){
-           this.$router.push({path:'/booking',query:{...this.query,aid}})
-         }
+      goTo(aid) {
+        if (Object.keys(this.query) != 0) {
+          this.$router.replace({path: '/booking', query: {...this.query, aid}})
+        }
       },
       async getAddress() {
         let result = await address(localStorage.uid)
@@ -56,11 +56,11 @@
     mounted() {
       this.getAddress()
     },
-    beforeRouteEnter(to,from,next){
+    beforeRouteEnter(to, from, next) {
       console.log(to, from);
       next()
-      if (from.path === '/booking'){
-        next(vm =>{
+      if (from.path === '/booking') {
+        next(vm => {
           vm.query = from.query
         })
       }
