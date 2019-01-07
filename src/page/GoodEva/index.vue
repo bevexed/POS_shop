@@ -1,20 +1,8 @@
-ss<template>
-  <section v-if="ordersDetailData">
-    <headers :title="'订单详情'" :isBack="true"></headers>
-    <section class="address">
-      <header>
-        收货人：{{ordersDetailData.contact_name}} <span>{{ordersDetailData.contact_phone}}</span>
-      </header>
-      <footer>
-        <yd-icon size="22px" name="location"></yd-icon>
-        <p>
-          收货地址：{{ordersDetailData.address}}
-        </p>
-        <p></p>
-      </footer>
-    </section>
-    <section class="detail" v-for="(v,i) in ordersDetailData.goods_sku" @click="$router.push({name:'productDetail',params:{id:v.goods_id}})">
-      <img :src="IMG_BASE_URL+v.show_pic" alt="">
+<template>
+  <div>
+    <Headers :title="'评论'" :is-back="true"/>
+    <section class="detail" v-for="(v,i) in ordersDetailData.goods_sku">
+      <img :src="IMG_BASE_URL+v.show_pic" alt="" @click="$router.push({name:'productDetail',params:{id:v.goods_id}})">
       <section>
         <header>
           {{v.goods_name}}
@@ -30,70 +18,58 @@ ss<template>
         </div>
       </section>
     </section>
-    <section class="total_money">
-      <footer>
-        共{{1}}件商品
-        <span>
-          小计：
-          <i>￥{{ordersDetailData.total_amount.split('.')[0]}}.<span>{{ordersDetailData.total_amount.split('.')[1]}}</span></i>
-        </span>
-      </footer>
-    </section>
-    <footer class="post-detail">
-      <ul>
-        <li>
-          订单编号：{{ordersDetailData.no}}
-        </li>
-        <li>
-          创建时间：{{ordersDetailData.create_time}}
-        </li>
-        <li v-if="ordersDetailData.paid_time">
-          付款时间：{{ordersDetailData.paid_time}}
-        </li>
-        <li v-if="ordersDetailData.delivery_time">
-          发货时间：{{ordersDetailData.delivery_time | TimeDate}}
-        </li>
-        <li v-if="ordersDetailData.clinch_time">
-          成交时间：{{ordersDetailData.clinch_time | TimeDate}}
-        </li>
-      </ul>
+    <label>
+      <textarea placeholder="请输入评论信息" v-model="text" cols="30" rows="10"></textarea>
+    </label>
 
-    </footer>
-    <yd-button style="width: 90%;margin: 30px auto" bgcolor="#ff6d48" color="#fff" size="large" type="primary" shape="circle" @click.native="toPay">支付</yd-button>
-    <pay :isShow="show" @close="closeBox" :price="totalPuch" :orderNo="ordersDetailData.no"></pay>
-  </section>
+    <div class="button">
+      <yd-button size="large" type="primary" shape="circle" color="#fff" bgcolor="rgba(255,109,75,1)" @click.native="addComment">提交</yd-button>
+    </div>
+  </div>
 </template>
 
 <script>
-  import headers from '../../components/Headers'
-  import pay from '../../components/pay'
+  import Headers from '../../components/Headers'
   import {IMG_BASE_URL} from "../../api/BASE_URL";
   import {ordersDetail} from "../../api/orders";
+  import {add} from "../../api/users";
 
   export default {
-    name: "BookingDetail",
+    name: "GoodEva",
     components: {
-      headers,
-      pay
+      Headers,
     },
     data() {
       return {
-        show:false,
+        text: '',
         IMG_BASE_URL,
         ordersDetailData: '',
-        totalPuch:'',
-        orderNo:''
+        totalPuch: '',
+        orderNo: ''
       }
     },
     methods: {
-      toPay(){
-        this.show = true;
-      },
-      closeBox(e) {
-        this.show = e;
+      async addComment() {
+        if (!this.text) {
+          this.$dialog.notify({
+            mes: '评论内容不能为空',
+            type: "error"
+          });
+          return false
+        }
+        let id = []
+        this.ordersDetailData.goods_sku.map(item => id.push({g_id: item.goods_id}))
+        let res = await add(localStorage.uid, 0, JSON.stringify(id), this.text);
+        this.$dialog.notify({
+          mes: res.message,
+          type: res.code === 1 ? "success" : "error"
+        });
+        if (res.code === 1) {
+          this.$router.replace({path: "/myBooking/type/all"})
+        }
       },
       async getOrdersDetail() {
-        let result = await ordersDetail(this.$route.params.id, localStorage.uid)
+        let result = await ordersDetail(this.$route.query.id, localStorage.uid)
         if (result.code === 1) {
           this.ordersDetailData = result.data
           this.totalPuch = result.data.total_amount
@@ -113,7 +89,20 @@ ss<template>
   }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
+  textarea {
+    margin: 12px auto;
+    border: 1px solid #eee;
+    width: 100%;
+    padding: 2%;
+    background: white;
+  }
+
+  div.button {
+    width: 96%;
+    margin: 0 auto;
+  }
+
   .address {
     background: #ffffff;
     padding: 10px;
@@ -142,7 +131,7 @@ ss<template>
   }
 
   .detail {
-    background: white;
+    background: #fcfcfc;
     padding: 10px;
 
     img {

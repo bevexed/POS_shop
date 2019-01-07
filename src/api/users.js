@@ -85,6 +85,6 @@ export const addressDel = (uid, id) => ajax(BASE_URL + '/users/addressDel', {uid
 * @param   g_id           商品ID          必传
 * @param   content        评论内容         必传
 * */
-export const add = (uid, credit_id, g_id, content) => ajax(BASE_URL + '/comment/add', {uid, credit_id, g_id, content})
+export const add = (uid, credit_id, g_ids, content) => ajax(BASE_URL + '/comment/add', {uid, credit_id, g_ids, content})
 
 

@@ -29,16 +29,20 @@
 
     <section class="evaluate">
       <header>
-        宝贝评价（1）
+        宝贝评价（{{commentData.length}}）
         <span>查看全部</span>
       </header>
-      <section>
-        <img src="" alt="">
-        <span>123*9</span>
-      </section>
-      <footer>
-        哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
-      </footer>
+      <div v-for="v in commentData">
+        <section>
+          <img :src="IMG_BASE_URL+v.consumer.avatar" alt="">
+          <span>{{v.consumer.nick_name}}</span>
+          <time>{{v.create_time}}</time>
+        </section>
+        <footer>
+          {{v.content}}
+        </footer>
+      </div>
+
     </section>
 
     <section class="real">
@@ -54,6 +58,7 @@
 
 <script>
   import {addShop, detail} from "../../api/cart";
+  import {comment} from "../../api/goods";
   import {IMG_BASE_URL} from '../../api/BASE_URL'
 
   export default {
@@ -63,12 +68,14 @@
         uid: localStorage.uid,
         detailData: {},
         IMG_BASE_URL,
-        val: ""
+        val: "",
+        commentData: ''
       }
     },
     components: {},
     created() {
-      this.getDetail(this.$route.params.id)
+      this.getDetail(this.$route.params.id);
+      this.getComment()
     },
     methods: {
       backClick() {
@@ -77,12 +84,16 @@
       goCar() {
         this.$router.push('/shoppingCar')
       },
+      async getComment() {
+        let res = await comment(this.$route.params.id)
+        this.commentData = res.data
+      },
       async addShoppingCar(uid, g_sku_id) {
         if (!this.val) {
           this.$dialog.notify({
             mes: '请选择通道类别',
             timeout: 3000
-          })
+          });
           return
         }
         let res = await addShop(uid, g_sku_id);
@@ -213,11 +224,13 @@
         height: 30px;
         border-radius: 5px;
         border: 1px #1a1a1a solid;
-        option:hover{
+
+        option:hover {
           background: #EBCCD1;
         }
       }
-      #select:focus{
+
+      #select:focus {
         border: 2px #ddd solid;
         box-shadow: 0 0 15px 1px #DDDDDD;
       }
@@ -250,7 +263,11 @@
         width: 28px;
         height: 28px;
         border-radius: 50%;
-        background: #808080;
+      }
+
+      time{
+        flex: 1;
+        text-align: right;
       }
     }
 
