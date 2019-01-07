@@ -32,7 +32,8 @@
     <div style="height: 70px"></div>
     <footer>
       <div class="back">
-        <yd-icon name="compose" size="12px"></yd-icon>
+        <!--<yd-icon name="compose" size="12px"></yd-icon>-->
+        <img src="../../assets/edit.svg" style="width: 12px;height: 12px;border-radius: 0;" alt="">
         <input type="text" v-model="content" placeholder="写写你的看法">
       </div>
       <yd-button size="small" type="primary" shape="circle" style="padding: 0 25px" bgcolor="#ff6d48" color="#fff" @click.native="addComment">评论</yd-button>
