@@ -8,7 +8,7 @@
         </header>
         <footer>
           <p>
-            <yd-icon size="22px" name="location"></yd-icon>
+            <img src="../../assets/ad.svg" style="width: 22px" alt="">
             收货地址：{{addressObj.province}}{{addressObj.city}}{{addressObj.area}}{{addressObj.address}}
           </p>
           <span>></span>
@@ -248,6 +248,8 @@
       align-items: center;
 
       p {
+        display: flex;
+        align-items: center;
       }
 
       span {

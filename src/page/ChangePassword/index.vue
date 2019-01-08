@@ -63,7 +63,7 @@
         mobile: '',
         code: '',
         start1: false,
-        type: ''
+        type: 2
       }
     },
     methods: {

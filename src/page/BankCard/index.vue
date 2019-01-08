@@ -62,7 +62,7 @@
     data() {
       return {
         start: false,
-        type: 2,
+        type: 3,
         mobile: '',
         bank_card: '',
         is_default: false,
