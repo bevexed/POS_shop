@@ -38,7 +38,7 @@
         mobile: '', // 手机号
         new_pwd: '',
         code: '',
-        type: '',
+        type: 2,
         timer: 60,
         T: '',
       }
