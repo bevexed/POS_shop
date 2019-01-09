@@ -21,7 +21,7 @@
       return {
         downloadButton: true,
         config: {
-          value: `http://192.168.1.27:8082/index.html?promote=${this.$route.query.promotes}#register`,
+          value: `http://47.105.237.119:81/index.html?promote=${this.$route.query.promotes}#register`,
           imagePath: require('../../assets/sousuo.png'),
           filter: 'color'
         },
