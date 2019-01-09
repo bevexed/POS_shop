@@ -18,10 +18,10 @@
         手机号
         <span>{{homeData.mobiles}}</span>
       </section>
-      <section class="item">
-        结算信息
-        <span></span>
-      </section>
+      <!--<section class="item">-->
+        <!--结算信息-->
+        <!--<span></span>-->
+      <!--</section>-->
       <section class="item" @click="$router.push('/changePassword')">
         修改密码
         <span></span>
