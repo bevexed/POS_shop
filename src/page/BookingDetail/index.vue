@@ -59,8 +59,8 @@ ss<template>
       </ul>
 
     </footer>
-    <yd-button style="width: 90%;margin: 30px auto" bgcolor="#ff6d48" color="#fff" size="large" type="primary" shape="circle" @click.native="toPay">支付</yd-button>
-    <pay :isShow="show" @close="closeBox" :price="totalPuch" :orderNo="orderNo"></pay>
+    <yd-button v-if="ordersDetailData.status===0" style="width: 90%;margin: 30px auto" bgcolor="#ff6d48" color="#fff" size="large" type="primary" shape="circle" @click.native="toPay">支付</yd-button>
+    <pay :isShow="show" @close="closeBox" :price="totalPuch" :orderNo="ordersDetailData.no"></pay>
   </section>
 </template>
 

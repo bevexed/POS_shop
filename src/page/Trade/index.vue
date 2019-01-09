@@ -3,7 +3,7 @@
     <headers :title="'交易管理'" :isBack="true" :is-search="search"></headers>
     <header class="header">
       <p>
-        会数（条）
+        总数（条）
         <span>{{tradeData.total_volume}}</span>
       </p>
     </header>
