@@ -2,12 +2,12 @@
   <section>
     <section class="card" v-for="(v,i) in data" :key="i">
       <header v-for="(value,index) in v.goods_sku" :key="value.goods_id" @click="goToDetail(v,value)">
-        <img src="../../assets/vip/831E3766A296D552A66A12405D6111F2.png" alt="" v-if="v.is_member_order === 1">
-        <img :src="IMG_BASE_URL + value.show_pic" alt="" v-else @click.stop="goTo(v,value)">
-        <p v-if="v.is_member_order !== 1">
+        <!--<img src="../../assets/vip/831E3766A296D552A66A12405D6111F2.png" alt="" v-if="v.is_member_order === 1">-->
+        <img :src="IMG_BASE_URL + value.show_pic" alt="" @click.stop="goTo(v,value)">
+        <p>
           {{value.goods_name}} <br>
-          <span>通道：{{value.trad_channel}}</span> <br>
-          <span>系列：{{value.category}}</span>
+          <span  v-if="v.is_member_order !== 1">通道：{{value.trad_channel}}</span> <br>
+          <span  v-if="v.is_member_order !== 1">系列：{{value.category}}</span>
         </p>
         <div>
           ￥{{value.price}}

@@ -10,7 +10,7 @@
       <span class="address">修改/添加</span>
     </section>
     <footer>
-      <section class="item" @click="$router.push('/realName')">
+      <section class="item" @click="homeData.id_numbers? '': $router.push('/realName')">
         实名认证
         <span>{{homeData.id_numbers? '已认证' : '未实名'}}</span>
       </section>
@@ -19,8 +19,8 @@
         <span>{{homeData.mobiles}}</span>
       </section>
       <!--<section class="item">-->
-        <!--结算信息-->
-        <!--<span></span>-->
+      <!--结算信息-->
+      <!--<span></span>-->
       <!--</section>-->
       <section class="item" @click="$router.push('/changePassword')">
         修改密码
@@ -46,7 +46,7 @@
 
 <script>
   import headers from '../../components/Headers'
-  import {IMG_URL, IMG_BASE_URL} from "../../api/BASE_URL";
+  import {IMG_BASE_URL, IMG_URL} from "../../api/BASE_URL";
   import {home} from "../../api/users";
 
   export default {

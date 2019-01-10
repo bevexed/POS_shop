@@ -6,7 +6,7 @@
         宝贝评价（{{commentData.length}}）
         <span>查看全部</span>
       </header>
-      <div v-for="(v,i) in commentData" v-if="i<3">
+      <div v-for="(v,i) in commentData">
         <section>
           <img :src="IMG_BASE_URL+v.consumer.avatar" alt="">
           <span>{{v.consumer.nick_name}}</span>
