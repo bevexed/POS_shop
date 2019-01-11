@@ -138,10 +138,10 @@
 
       },
       buy() {
-        if (this.val != '') {
+        if (this.val !== '') {
           this.$router.push({path: '/booking', query: {id: this.val}})
         } else {
-          this.$dialog.notify({
+          this.$dialog.toast({
             mes: '请选择通道类别',
             timeout: 3000
           })
