@@ -2,7 +2,7 @@
   <div @keydown.enter="getCitySearchSelectList(search_key)" style="background: #eeeeee">
     <Headers :is-back="true" :title="'地址'"/>
     <form action="#" onsubmit="return false;" class="index_head" style="background: #ffffff">
-      <yd-icon name="search"></yd-icon>
+      <img src="../../assets/ad.svg" style="height: 24px" alt="">
       <yd-input
         style="margin-left: 10px"
         type="search"

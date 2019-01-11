@@ -6,8 +6,8 @@
         <img :src="IMG_BASE_URL + value.show_pic" alt="" @click.stop="goTo(v,value)">
         <p>
           {{value.goods_name}} <br>
-          <span  v-if="v.is_member_order !== 1">通道：{{value.trad_channel}}</span> <br>
-          <span  v-if="v.is_member_order !== 1">系列：{{value.category}}</span>
+          <span v-if="v.is_member_order !== 1">通道：{{value.trad_channel}}</span> <br>
+          <span v-if="v.is_member_order !== 1">系列：{{value.category}}</span>
         </p>
         <div>
           ￥{{value.price}}

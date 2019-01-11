@@ -6,7 +6,7 @@
         <router-view></router-view>
       </navigation>
     </transition>
-    <yd-backtop></yd-backtop>
+    <!--<yd-backtop></yd-backtop>-->
     <footers v-show="$route.meta.navShow"></footers>
   </div>
 </template>

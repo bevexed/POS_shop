@@ -58,7 +58,7 @@
         this.$refs[name].click()
       },
       getImgData(e) {
-        this[e.target.name] = e.target.files[0]
+        this[e.target.name] = e.target.files[0];
         this[e.target.name + '_url'] = window.URL.createObjectURL(e.target.files[0])
       },
       async doRealName() {
@@ -66,24 +66,24 @@
           this.$dialog.notify({
             mes: '请填写用户名',
             timeout: 3000,
-          })
+          });
           return
         }
         if (!this.idCard) {
           this.$dialog.notify({
             mes: '请填写银行卡号',
             timeout: 3000,
-          })
+          });
           return
         }
-        const {front_identity, reverse_identity} = this
-        let result = await realName(localStorage.uid, this.real_name, this.idCard, front_identity, reverse_identity)
+        const {front_identity, reverse_identity} = this;
+        let result = await realName(localStorage.uid, this.real_name, this.idCard, front_identity, reverse_identity);
         if (result.code === 1) {
           this.$dialog.toast({
             mes: result.message,
             timeout: 3000,
             icon: 'success'
-          })
+          });
           this.$router.replace('/setting')
         } else {
           this.$dialog.notify({
