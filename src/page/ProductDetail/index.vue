@@ -1,8 +1,10 @@
 <template>
-  <div class="product_content">
+  <div class="product_content" @wheel="change()" @scroll="change()" @touchmove="change()">
+    <headers v-if="!show" :title="`商品详情`" :is-back="!show" />
     <img class="productImg" :src="`${IMG_BASE_URL}${detailData.show_pic}`" alt="图片">
-    <img class="backIcon" src="../../assets/back.png" alt="图片" @click="backClick">
+    <img class="backIcon" src="../../assets/back.png" alt="图片" @click="backClick" v-if="show">
     <img class="shopCar" src="../../assets/gouwuche.png" alt="图片" @click="goCar">
+
     <div class="product_info">
       <p class="product_price">¥{{detailData.price}}</p>
       <p>{{detailData.name}}</p>
@@ -60,6 +62,7 @@
   import {addShop, detail} from "../../api/cart";
   import {comment} from "../../api/goods";
   import {IMG_BASE_URL} from '../../api/BASE_URL'
+  import headers from '../../components/Headers'
 
   export default {
     name: 'ProductDetail',
@@ -69,15 +72,26 @@
         detailData: {},
         IMG_BASE_URL,
         val: "",
-        commentData: ''
+        commentData: '',
+        show: true,
       }
     },
-    components: {},
+    components: {
+      headers
+    },
     created() {
       this.getDetail(this.$route.params.id);
       this.getComment()
     },
     methods: {
+      change() {
+        let app = document.querySelector('#app')
+        if (app.scrollTop > 30) {
+          this.show = false
+        } else {
+          this.show = true
+        }
+      },
       backClick() {
         this.$router.back();
       },
@@ -160,14 +174,15 @@
     .backIcon {
       width: 20px;
       position: absolute;
-      top: 33px;
+      top: 20px;
       left: 11px;
     }
 
     .shopCar {
+      z-index: 9999;
       width: 20px;
-      position: absolute;
-      top: 33px;
+      position: fixed;
+      top: 20px;
       right: 11px;
     }
 
@@ -256,7 +271,7 @@
       margin-top: 15px;
       display: flex;
       align-items: center;
-
+      padding-bottom: 5px;
       img {
         margin-right: 10px;
         display: inline-block;
@@ -276,6 +291,8 @@
       line-height: 1.5;
       color: #4d4d4d;
       font-size: 13px;
+      border-bottom: 1px solid #eeeeee;
+      padding-bottom: 5px;
     }
   }
 
@@ -307,7 +324,7 @@
     span, a {
       float: left;
       display: inline-block;
-      width: 128px;
+      width: 48%;
       height: 44px;
       line-height: 44px;
     }

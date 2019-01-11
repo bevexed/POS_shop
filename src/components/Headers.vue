@@ -1,7 +1,7 @@
 <template>
   <div class="head_content">
     <div class="head_top">
-      <section @click="goBack" v-if="!isPosition">
+      <section class="header" @click="goBack" v-if="!isPosition">
         <img class="backImg" v-if="isBack" src="../assets/back.png" alt="">
       </section>
       <section class="positionDiv" @click="$goTo('chooseCity')" v-else>
@@ -14,14 +14,16 @@
         <span v-if="isManage&&isMac" class="register_span" @click="manage">管理</span>
         <span v-if="isManage&&!isMac" class="register_span" @click="finish">完成</span>
         <span v-if="isKeep" class="register_span" @click="isKeep">保存</span>
-        <img src="../assets/fdj.svg" v-if="isSearch" style="width: 20px" name="search" @click="isSearch" class="register_span" alt="">
-        <div v-if="isScan" class="scanP" @click="scanClick">
+        <span v-if="isSearch" @click="isSearch">
+            <img src="../assets/fdj.svg" style="width: 20px" name="search" class="register_span" alt="">
+        </span>
+        <span v-if="isScan" class="scanP" @click="scanClick">
           <img src="../assets/scan.png" alt="图片">
           <span>扫码</span>
-        </div>
-        <div v-if="isSkir" class="scanP" @click="scanClick">
+        </span>
+        <span v-if="isSkir" class="scanP" @click="scanClick">
           <img src="../assets/scan.png" alt="">
-        </div>
+        </span>
       </section>
 
     </div>
@@ -92,17 +94,26 @@
       display: inline-block;
       height: 100%;
       width: 30%;
+      line-height: 60px;
+    }
+
+    .header {
+      text-align: left;
     }
 
     .right {
       text-align: right;
+      margin-right: 10px;
+
+      > span {
+        display: inline-block;
+        width: 100%;
+      }
     }
 
     .register_span {
       display: inline-block;
       width: 100%;
-      position: absolute;
-      right: 10px;
       cursor: pointer;
     }
 

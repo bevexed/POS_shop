@@ -77,7 +77,7 @@
         return this.dropDownData2.filter(item => item.id === this.form.sku_id).length ? this.dropDownData2.filter(item => item.id === this.form.sku_id)[0].name : '产品通道'
       },
       level() {
-        let arr = ['全选', '一级会员', '二级会员', '三级会员']
+        let arr = ['全选', '一级会员', '二级会员', '三级会员'];
         return arr[this.form.level]
       }
     },
@@ -110,8 +110,8 @@
         }
       },
       goTo(form) {
-        let moment = require("moment")
-        let {begin_time, end_time, sku_id, level, mobile} = form
+        let moment = require("moment");
+        let {begin_time, end_time, sku_id, level, mobile} = form;
         begin_time = moment(begin_time, 'YYYY-MM-DD HH:mm:ss').valueOf();
         end_time = moment(end_time, 'YYYY-MM-DD HH:mm:ss').valueOf();
         if (mobile && mobile.length !== 11) {

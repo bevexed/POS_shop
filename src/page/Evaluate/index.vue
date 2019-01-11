@@ -4,7 +4,6 @@
     <section class="evaluate">
       <header>
         宝贝评价（{{commentData.length}}）
-        <span>查看全部</span>
       </header>
       <div v-for="(v,i) in commentData">
         <section>
@@ -242,6 +241,8 @@
       line-height: 1.5;
       color: #4d4d4d;
       font-size: 13px;
+      border-bottom: 1px solid #eeeeee;
+      padding-bottom: 5px;
     }
   }
 

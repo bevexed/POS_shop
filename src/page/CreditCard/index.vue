@@ -85,11 +85,6 @@
         let data = await list();
         if (data.code === 1) {
           this.list1 = data.data;
-        } else {
-          this.$dialog.notify({
-            mes: data.message,
-            timeout: 3000
-          })
         }
       },
       async newList(type) {

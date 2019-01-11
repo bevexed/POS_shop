@@ -24,6 +24,7 @@
           <div>
             <img :src="IMG_BASE_URL+item.consumer.avatar" alt="图片">
             <p>{{item.consumer.nick_name}}</p>
+           <span>{{item.create_time}}</span>
           </div>
           <p>{{item.content}}</p>
         </div>
@@ -87,11 +88,6 @@
         let res = await dynamic(id);
         if (res.code === 1) {
           this.commentsData = res.data;
-        } else {
-          this.$dialog.notify({
-            mes: res.message,
-            timeout: 1000
-          })
         }
       }
     },
@@ -171,11 +167,13 @@
     .dynamic_list {
       & > div {
         margin-bottom: 7px;
-
         & > div {
           display: flex;
           align-items: center;
-
+          span{
+            flex: 1;
+            text-align: right;
+          }
           & > img {
             width: 28px;
             height: 28px;
@@ -191,6 +189,8 @@
         & > p {
           text-align: left;
           font-size: 13px;
+          border-bottom: 1px solid #e3e3e3;
+          padding-bottom: 5px;
         }
       }
     }
