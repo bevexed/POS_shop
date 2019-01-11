@@ -1,38 +1,12 @@
 <template>
   <div class="product_content">
-    <img class="productImg" :src="`${IMG_BASE_URL}${detailData.show_pic}`" alt="图片">
-    <img class="backIcon" src="../../assets/back.png" alt="图片" @click="backClick">
-    <img class="shopCar" src="../../assets/gouwuche.png" alt="图片" @click="goCar">
-    <div class="product_info">
-      <p class="product_price">¥{{detailData.price}}</p>
-      <p>{{detailData.name}}</p>
-      <div class="price">
-        <span>运费：{{detailData.courier_fees}}元 </span>
-        <span>已售：{{detailData.sold_out}} </span>
-        <span>{{detailData.vender}}</span>
-      </div>
-    </div>
-
-    <div class="detail">
-      <header>
-        系列：<span>{{detailData.category === 1 ? '企业pos机': '个人pos机'}}</span>
-      </header>
-      <!--<span v-for="(v,i) in detailData.sku">{{v.trad_channel}}</span>-->
-      <footer>
-        通道类别：
-        <select id="select" v-model="val" @change="selectVal">
-          <option value="">请选择</option>
-          <option v-for="(v,i) in detailData.sku" :key="i" :value="v.id">{{v.trad_channel}}</option>
-        </select>
-      </footer>
-    </div>
-
+    <Headers :title="'评论'" :is-back="true"/>
     <section class="evaluate">
       <header>
         宝贝评价（{{commentData.length}}）
-        <span @click="$router.push({name:'Evaluate',params:{id:$route.params.id}})">查看全部</span>
+        <span>查看全部</span>
       </header>
-      <div v-for="(v,i) in commentData" v-if="i<3">
+      <div v-for="(v,i) in commentData">
         <section>
           <img :src="IMG_BASE_URL+v.consumer.avatar" alt="">
           <span>{{v.consumer.nick_name}}</span>
@@ -44,15 +18,6 @@
       </div>
 
     </section>
-
-    <section class="real">
-      宝贝图文详情
-      <div class="deatail_shop_goods" v-html="detailData.details"></div>
-    </section>
-    <aside>
-      <span @click="addShoppingCar(uid,val)">加入购物车</span>
-      <span @click="buy">立即购买</span>
-    </aside>
   </div>
 </template>
 
@@ -60,9 +25,10 @@
   import {addShop, detail} from "../../api/cart";
   import {comment} from "../../api/goods";
   import {IMG_BASE_URL} from '../../api/BASE_URL'
+  import Headers from '../../components/Headers'
 
   export default {
-    name: 'ProductDetail',
+    name: 'Evaluate',
     data() {
       return {
         uid: localStorage.uid,
@@ -72,7 +38,7 @@
         commentData: ''
       }
     },
-    components: {},
+    components: {Headers},
     created() {
       this.getDetail(this.$route.params.id);
       this.getComment()
@@ -124,10 +90,10 @@
 
       },
       buy() {
-        if (this.val !== '') {
+        if (this.val != '') {
           this.$router.push({path: '/booking', query: {id: this.val}})
         } else {
-          this.$dialog.toast({
+          this.$dialog.notify({
             mes: '请选择通道类别',
             timeout: 3000
           })

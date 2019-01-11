@@ -44,8 +44,10 @@ import Scan from '../page/Scan'
 import Withdraw from '../page/Withdraw'
 import BannerLink from '../page/BannerLink'
 import GoodEva from '../page/GoodEva'
+import PaySuccess from '../page/PaySuccess'
+import Evaluate from '../page/Evaluate'
 
-Vue.use(Router)
+Vue.use(Router);
 
 const router = new Router({
   routes: [
@@ -249,6 +251,17 @@ const router = new Router({
       path: '/GoodEva',
       component: GoodEva,
       meta: {index: 5}
+    },
+    {
+      path: '/PaySuccess',
+      component: PaySuccess,
+      meta: {index: 5}
+    },
+    {
+      path: '/Evaluate/id/:id',
+      name: 'Evaluate',
+      component: Evaluate,
+      meta: {index: 5}
     }
   ],
   //跳转页面scrollTop为0
@@ -259,7 +272,7 @@ const router = new Router({
       return {x: 0, y: 0}
     }
   },
-})
+});
 
 router.beforeEach((to, from, next) => {
   if (to.path === '/login' || to.path === '/register' || to.path === '/forgetPwd' || to.path === '/index') { // 不需要登录权限的页面
@@ -271,6 +284,6 @@ router.beforeEach((to, from, next) => {
       next('/login')
     }
   }
-})
+});
 
 export default router

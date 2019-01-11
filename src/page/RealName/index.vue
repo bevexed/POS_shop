@@ -84,6 +84,7 @@
             timeout: 3000,
             icon: 'success'
           })
+          this.$router.replace('/setting')
         } else {
           this.$dialog.notify({
             mes: result.message,

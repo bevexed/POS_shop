@@ -21,7 +21,7 @@
       return {
         downloadButton: true,
         config: {
-          value: `http://192.168.1.27:8082/index.html?promote=${this.$route.query.promotes}#register`,
+          value: `http://47.105.237.119/index.html?promote=${this.$route.query.promotes}#register`,
           imagePath: require('../../assets/sousuo.png'),
           filter: 'color'
         },
@@ -34,17 +34,9 @@
     },
     methods: {
       saveCode() {
-        // const myCanvas = this.$refs.qart.children[0];
-        // const myCanvas = this.$refs.qart
         const myCanvas = document.querySelector('canvas');
         const type = 'image/png';
         let image = myCanvas.toDataURL(type).replace(type, "image/octet-stream");
-
-        // const download = document.createElement('a')
-        // download.href = image
-        // download.download = "img.png"
-        // download.click()
-        // window.location.href = image; // it will save locally
 
         this.saveFile(image, "img.png")
       },
