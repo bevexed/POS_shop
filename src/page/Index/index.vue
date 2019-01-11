@@ -2,7 +2,7 @@
   <div class="index_content">
     <headers :title="title" :isPosition="true" :scanP="true"></headers>
     <swiper class="wrap" :options="swiperOption" ref="mySwiper" v-if="bannerImg.length>0">
-      <swiper-slide v-for="(val,i) in bannerImg" :key="i"><div @click="$router.push({path:'/BannerLink',query:{url:val.url}})"><img :src="`${IMG_BASE_URL}${val.picture}`"></div></swiper-slide>
+      <swiper-slide v-for="(val,i) in bannerImg" :key="i"><div @click="val.url && $router.push({path:'/BannerLink',query:{url:val.url}})"><img :src="`${IMG_BASE_URL}${val.picture}`"></div></swiper-slide>
     </swiper>
 
     <div class="commidity_class">
