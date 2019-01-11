@@ -6,6 +6,9 @@ import router from './router'
 import store from './store'
 import './filter'
 import './util'
+import navigation from 'vue-navigation/dist/vue-navigation.esm'
+Vue.use(navigation,{router,store});
+
 
 import YDUI from 'vue-ydui'
 import 'vue-ydui/dist/ydui.px.css'
@@ -16,13 +19,14 @@ import 'vue-area-linkage/dist/index.css'; // v2 or higher
 import VueAreaLinkage from 'vue-area-linkage';
 
 Vue.use(VueAreaLinkage);
-Vue.use(Mui)
+Vue.use(Mui);
 
 
-Vue.config.productionTip = false
-Vue.use(VueAwesomeSwiper)
 
-Vue.use(YDUI)
+Vue.config.productionTip = false;
+Vue.use(VueAwesomeSwiper);
+
+Vue.use(YDUI);
 import {Icons} from 'vue-ydui/dist/lib.px/icons';
 Vue.component(Icons.name, Icons);
 import 'vue-ydui/dist/ydui.base.css';
