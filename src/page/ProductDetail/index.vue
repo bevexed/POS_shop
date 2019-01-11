@@ -85,7 +85,7 @@
         this.$router.push('/shoppingCar')
       },
       async getComment() {
-        let res = await comment(this.$route.params.id)
+        let res = await comment(this.$route.params.id);
         this.commentData = res.data
       },
       async addShoppingCar(uid, g_sku_id) {
