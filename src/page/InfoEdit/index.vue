@@ -76,7 +76,7 @@
             let imgData = canvas.toDataURL();
             let upImg = new Image()
             upImg.src = imgData
-            this[e.target.name] = upImg;
+            that[e.target.name] = upImg;
 
           })
 

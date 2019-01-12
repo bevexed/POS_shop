@@ -7,7 +7,8 @@ import store from './store'
 import './filter'
 import './util'
 import navigation from 'vue-navigation/dist/vue-navigation.esm'
-Vue.use(navigation,{router,store});
+
+Vue.use(navigation, {router, store});
 
 import YDUI from 'vue-ydui'
 import 'vue-ydui/dist/ydui.px.css'
@@ -21,12 +22,12 @@ Vue.use(VueAreaLinkage);
 Vue.use(Mui);
 
 
-
 Vue.config.productionTip = false;
 Vue.use(VueAwesomeSwiper);
 
 Vue.use(YDUI);
 import {Icons} from 'vue-ydui/dist/lib.px/icons';
+
 Vue.component(Icons.name, Icons);
 import 'vue-ydui/dist/ydui.base.css';
 /* eslint-disable no-new */
@@ -36,4 +37,4 @@ new Vue({
   store,
   components: {App},
   template: '<App/>'
-})
+});

@@ -2,7 +2,7 @@
   <section class="setting">
     <headers :title="'我的设置'" :isBack="true"></headers>
     <header @click="$router.push('./InfoEdit')">
-      <img :src="IMG_BASE_URL+homeData.avatars" alt="" v-if="homeData.avatars">
+      <img id="img" :src="IMG_BASE_URL+homeData.avatars" alt="" v-if="homeData.avatars" @load="rotates($event)">
       <p>{{homeData.nick_name ? homeData.nick_name :homeData.mobiles}}</p>
     </header>
     <section class="item" @click="$router.push('/deliveryAddress')">
@@ -48,6 +48,7 @@
   import headers from '../../components/Headers'
   import {IMG_BASE_URL, IMG_URL} from "../../api/BASE_URL";
   import {home} from "../../api/users";
+  import EXIF from '../../../static/exif'
 
   export default {
     name: "Setting",
@@ -58,22 +59,37 @@
       return {
         IMG_URL,
         IMG_BASE_URL,
-        homeData: {}
+        homeData: {},
+        rotate: 0,
       }
     },
+    computed: {},
     methods: {
+      rotates(e) {
+        console.log(e.target);
+        let a = document.querySelector("#img")
+        EXIF.getData(e.target, function () {
+          let Orientation = EXIF.getAllTags(this).Orientation;
+          console.log(Orientation);
+          if (Orientation === 6) {
+            this.rotate = 90
+          } else {
+            this.rotate = 0
+          }
+        })
+      },
       goVip(vip_status) {
         if (vip_status === 1)
           this.$dialog.notify({
             mes: '您已激活会员',
             timeout: 3000
-          })
+          });
         else
           this.$router.push('/activeVip')
       },
 
       loginOut() {
-        localStorage.uid = ''
+        localStorage.uid = '';
         this.$dialog.toast({
           mes: '退出成功',
           timeout: 500,
@@ -84,7 +100,7 @@
         })
       },
       async getHome() {
-        let result = await home(localStorage.uid)
+        let result = await home(localStorage.uid);
         if (result.code === 1) {
           this.homeData = result.data
 
