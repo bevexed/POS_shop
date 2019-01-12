@@ -2,7 +2,7 @@
   <section class="setting">
     <headers :title="'我的设置'" :isBack="true"></headers>
     <header @click="$router.push('./InfoEdit')">
-      <img id="img" :src="IMG_BASE_URL+homeData.avatars" alt="" v-if="homeData.avatars" @load="rotates($event)">
+      <img id="img" :src="IMG_BASE_URL+homeData.avatars" alt="" v-if="homeData.avatars">
       <p>{{homeData.nick_name ? homeData.nick_name :homeData.mobiles}}</p>
     </header>
     <section class="item" @click="$router.push('/deliveryAddress')">
@@ -65,19 +65,6 @@
     },
     computed: {},
     methods: {
-      rotates(e) {
-        console.log(e.target);
-        let a = document.querySelector("#img")
-        EXIF.getData(e.target, function () {
-          let Orientation = EXIF.getAllTags(this).Orientation;
-          console.log(Orientation);
-          if (Orientation === 6) {
-            this.rotate = 90
-          } else {
-            this.rotate = 0
-          }
-        })
-      },
       goVip(vip_status) {
         if (vip_status === 1)
           this.$dialog.notify({
