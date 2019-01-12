@@ -1,7 +1,8 @@
 <template>
   <div class="product_content" @wheel="change()" @scroll="change()" @touchmove="change()">
     <headers v-if="!show" :title="`商品详情`" :is-back="!show" />
-    <img class="productImg" :src="`${IMG_BASE_URL}${detailData.show_pic}`" alt="图片">
+    <banner :data="detailData.details_pic"/>
+    <!--<img class="productImg" :src="`${IMG_BASE_URL}${detailData.show_pic}`" alt="图片">-->
     <img class="backIcon" src="../../assets/back.png" alt="图片" @click="backClick" v-if="show">
     <img class="shopCar" src="../../assets/gouwuche.png" alt="图片" @click="goCar">
 
@@ -63,6 +64,7 @@
   import {comment} from "../../api/goods";
   import {IMG_BASE_URL} from '../../api/BASE_URL'
   import headers from '../../components/Headers'
+  import banner from './banner'
 
   export default {
     name: 'ProductDetail',
@@ -77,7 +79,8 @@
       }
     },
     components: {
-      headers
+      headers,
+      banner
     },
     created() {
       this.getDetail(this.$route.params.id);
