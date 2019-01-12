@@ -18,7 +18,10 @@
   window.onload = function () {
     window.viewportUnitsBuggyfill.init({hacks: window.viewportUnitsBuggyfillHacks});
   }
-
+  //判断有无网络连接
+  if (navigator && navigator.onLine === false){
+    mui.toast('请连接网络');
+  }
   mui.init({
     keyEventBind: {
       backbutton: true  //关闭back按键监听
