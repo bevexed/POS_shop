@@ -12,8 +12,9 @@
     </yd-cell-item>
     <div class="upload">
       <input type="file" ref="reverse_identity" id="img" hidden name="reverse_identity" accept="image/*" formenctype="multipart/form-data" @change="getImgData($event)">
-      <span @click="getImg('reverse_identity')" v-if="!reverse_identity">请上传头像</span>
-      <img :src="reverse_identity_url" @click="getImg('reverse_identity')" alt="" v-else>
+      <span @click="getImg('reverse_identity')" v-show="!reverse_identity">请上传头像</span>
+      <!--<img :src="reverse_identity_url" @click="getImg('reverse_identity')" alt="" v-else>-->
+      <canvas id="canvas" width="164" height="164" @click="getImg('reverse_identity')" v-show="reverse_identity"></canvas>
     </div>
     <footer>
       <yd-button bgcolor="#ff6d48" color="#fff" size="large" type="primary" shape="circle" @click.native="doRealName">确定</yd-button>
@@ -25,6 +26,7 @@
 <script>
   import headers from '../../components/Headers'
   import {infoEdit} from "../../api/users";
+  import EXIF from '../../../static/exif'
 
   export default {
     name: "InfoEdit",
@@ -46,31 +48,57 @@
         this.$refs[name].click()
       },
       getImgData(e) {
-        this[e.target.name] = e.target.files[0]
-        this[e.target.name + '_url'] = window.URL.createObjectURL(e.target.files[0])
+        let that = this
+        let file = e.target.files[0];
+        console.log(file);
+
+        this[e.target.name] = file;
+        this[e.target.name + '_url'] = window.URL.createObjectURL(file);
+
+        let canvas = document.querySelector('#canvas')
+        console.log(canvas);
+        let ctx = canvas.getContext('2d')
+        let img = new Image()
+        img.src = this[e.target.name + '_url']
+        img.onload = () => {
+          EXIF.getData(file, function () {
+            let Orientation = EXIF.getAllTags(this).Orientation;
+            console.log(Orientation);
+            ctx.drawImage(img, 0, 0, 164, 164)
+            if (Orientation === 6) {
+              ctx.clearRect(0, 0, 164, 164)
+              ctx.save()
+              ctx.translate(82, 82)
+              ctx.rotate(Math.PI / 2)
+              ctx.drawImage(img, -82, -82, 164, 164)
+              ctx.restore()
+            }
+            let imgData = canvas.toDataURL();
+            let upImg = new Image()
+            upImg.src = imgData
+            this[e.target.name] = upImg;
+
+          })
+
+        }
       },
       async doRealName() {
-        // if (!this.real_name) {
-        //   this.$dialog.notify({
-        //     mes: '请填写昵称',
-        //     timeout: 3000,
-        //   })
-        //   return
-        // }
+        if (!this.real_name) {
+          this.$dialog.notify({
+            mes: '请填写昵称',
+            timeout: 3000,
+          });
+          return
+        }
         const {reverse_identity} = this;
-        // if (!reverse_identity) {
-        //   this.$dialog.notify({
-        //     mes: '请选择图片',
-        //     timeout: 3000,
-        //   })
-        //   return
-        // }
-        // let url = 'http://lzxprogrammer.com/users/infoEdit'
-        // let data = new FormData()
-        // data.append('uid',localStorage.uid)
-        // data.append('avatar',reverse_identity)
-        // data.append('nick_name',this.real_name)
-        let result = await infoEdit(localStorage.uid,reverse_identity,this.real_name);
+        if (!reverse_identity) {
+          this.$dialog.notify({
+            mes: '请选择图片',
+            timeout: 3000,
+          });
+          return
+        }
+        let result = await infoEdit(localStorage.uid, reverse_identity, this.real_name);
         // let result = await axios.post(url, data)
         // result = result.data
         if (result.code === 1) {
@@ -79,7 +107,7 @@
             timeout: 500,
             icon: 'success',
             callback: () => {
-              this.$router.replace('/setting')
+              window.location.assign(`?${Math.random()}/#/setting`)
             }
           })
         } else {
@@ -113,7 +141,7 @@
   .upload {
     padding: 20px;
 
-    > img, > span {
+    > canvas, > span {
       margin: 0 auto;
       display: block;
       width: 164px;

@@ -16,7 +16,7 @@
       </section>
       <section class="item">
         手机号
-        <span>{{homeData.mobiles}}</span>
+        <i style="float: right"> {{homeData.mobiles}}</i>
       </section>
       <!--<section class="item">-->
       <!--结算信息-->

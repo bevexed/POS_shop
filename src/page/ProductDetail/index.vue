@@ -1,6 +1,6 @@
 <template>
   <div class="product_content" @wheel="change()" @scroll="change()" @touchmove="change()">
-    <headers v-if="!show" :title="`商品详情`" :is-back="!show" />
+    <headers v-if="!show" :title="`商品详情`" :is-back="!show"/>
     <banner :data="detailData.details_pic"/>
     <!--<img class="productImg" :src="`${IMG_BASE_URL}${detailData.show_pic}`" alt="图片">-->
     <img class="backIcon" src="../../assets/back.png" alt="图片" @click="backClick" v-if="show">
@@ -23,8 +23,8 @@
       <!--<span v-for="(v,i) in detailData.sku">{{v.trad_channel}}</span>-->
       <footer>
         通道类别：
-        <select id="select" v-model="val" @change="selectVal">
-          <option value="">请选择</option>
+        <select v-model="val" @change="selectVal">
+          <option value="0">请选择</option>
           <option v-for="(v,i) in detailData.sku" :key="i" :value="v.id">{{v.trad_channel}}</option>
         </select>
       </footer>
@@ -73,7 +73,7 @@
         uid: localStorage.uid,
         detailData: {},
         IMG_BASE_URL,
-        val: "",
+        val: 0,
         commentData: '',
         show: true,
       }
@@ -88,7 +88,7 @@
     },
     methods: {
       change() {
-        let app = document.querySelector('#app')
+        let app = document.querySelector('#app');
         if (app.scrollTop > 30) {
           this.show = false
         } else {
@@ -237,18 +237,26 @@
         margin-right: 5px;
       }
 
-      #select {
-        width: 150px;
-        height: 30px;
+      select {
         border-radius: 5px;
-        border: 1px #1a1a1a solid;
+        border: 1px #c3c3c3 solid;
+        text-align: center;
+        text-align-last: center;
+        padding: 2px 25px 2px 12px;
+        background: url("../../assets/s.png") right center / 16px no-repeat;
 
         option:hover {
           background: #EBCCD1;
         }
+
+        &:focus {
+          outline: none;
+          border: 1px #c3c3c3 solid !important;
+        }
+
       }
 
-      #select:focus {
+      select:focus {
         border: 2px #ddd solid;
         box-shadow: 0 0 15px 1px #DDDDDD;
       }
@@ -275,6 +283,7 @@
       display: flex;
       align-items: center;
       padding-bottom: 5px;
+
       img {
         margin-right: 10px;
         display: inline-block;

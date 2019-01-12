@@ -9,7 +9,6 @@ import './util'
 import navigation from 'vue-navigation/dist/vue-navigation.esm'
 Vue.use(navigation,{router,store});
 
-
 import YDUI from 'vue-ydui'
 import 'vue-ydui/dist/ydui.px.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
