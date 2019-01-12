@@ -104,7 +104,7 @@
       },
       async addShoppingCar(uid, g_sku_id) {
         if (!this.val) {
-          this.$dialog.notify({
+          this.$dialog.toast({
             mes: '请选择通道类别',
             timeout: 3000
           });
@@ -112,12 +112,12 @@
         }
         let res = await addShop(uid, g_sku_id);
         if (res.code === 1) {
-          this.$dialog.notify({
+          this.$dialog.toast({
             mes: '商品加入购物车成功',
             timeout: 3000,
           })
         } else {
-          this.$dialog.notify({
+          this.$dialog.toast({
             mes: res.message,
             timeout: 3000,
           })
@@ -128,7 +128,7 @@
         if (result.code === 1) {
           this.detailData = result.data
         } else {
-          this.$dialog.notify({
+          this.$dialog.toast({
             mes: result.message,
             timeout: 3000
           })

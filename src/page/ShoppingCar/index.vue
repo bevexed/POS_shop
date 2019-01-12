@@ -1,7 +1,7 @@
 <template>
   <div>
     <headers :title="title" :isManage="true" :isMac="isMac" @Tab1="getBool"></headers>
-    <ul class="shopList">
+    <ul class="shopList" v-if="items.length">
       <li v-for="(item,index) in items" :key="index">
         <div class="circle_div" :class="item.isChecked?'checked':''" @click="select(index)"></div>
         <img class="shopImg" @click.self="$router.push({name:'productDetail',params:{id:item.g_id}})" :src="IMG_BASE_URL + item.show_pic" alt="">
@@ -16,8 +16,9 @@
           </div>
         </div>
       </li>
+      <li class="empty"></li>
     </ul>
-    <div class="empty"></div>
+    <img src="../../assets/sort@3x.png" alt="" v-else style="width: 100%;">
     <div class="shop_bottom" v-show="items.length>0">
       <div>
         <div v-show="!isChecked" class="circle_div" @click="chooseAll"></div>

@@ -7638,6 +7638,11 @@ vue-loader@^13.3.0:
     vue-style-loader "^3.0.0"
     vue-template-es2015-compiler "^1.6.0"
 
+vue-navigation@^1.1.4:
+  version "1.1.4"
+  resolved "http://registry.npm.taobao.org/vue-navigation/download/vue-navigation-1.1.4.tgz#be990190624647daa34b8cd525fad4fb6d472542"
+  integrity sha1-vpkBkGJGR9qjS4zVJfrU+21HJUI=
+
 vue-qart@^2.2.0:
   version "2.2.0"
   resolved "http://registry.npm.taobao.org/vue-qart/download/vue-qart-2.2.0.tgz#13336325d01975c832489e8ece8bd6f777c211e7"
