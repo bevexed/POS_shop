@@ -1,6 +1,6 @@
 <template>
   <div @keydown.enter="getCitySearchSelectList(search_key)" style="background: #eeeeee">
-    <Headers :is-back="true" :title="'地址'" @click.native="$router.replace('/index')"/>
+    <Headers :isBack="true" :title="'地址'" @click.native="$router.replace('/index')"/>
     <form action="#" onsubmit="return false;" class="index_head" style="background: #ffffff">
       <img src="../../assets/ad.svg" style="height: 24px" alt="">
       <yd-input

@@ -1,12 +1,13 @@
 <template>
   <div class="head_content">
     <div class="head_top">
-      <section class="header" @click="goBack" v-if="!isPosition">
-        <img class="backImg" v-if="isBack" src="../assets/back.png" alt="">
+      <section class="header" @click="goBack" v-if="isBack">
+        <img class="backImg" src="../assets/back.png" alt="">
       </section>
-      <section class="positionDiv" @click="$goTo('chooseCity')" v-else>
-        <img v-if="isPosition" class="positionImg" src="../assets/dingwei.png" alt="">
-        <span class="positionSpan" v-if="isPosition">{{city?city:'定位中...' }}</span>
+      <section v-if="!isPosition && !isBack"></section>
+      <section class="positionDiv" @click="$goTo('chooseCity')" v-if="isPosition">
+        <img class="positionImg" src="../assets/dingwei.png" alt="">
+        <span class="positionSpan">{{city?city:'定位中...' }}</span>
       </section>
       <p v-if="title">{{title}}</p>
       <section class="right">

@@ -34,7 +34,7 @@
         } else {
           this.transitionName = 'slide-mid'
         }
-      }
+      },
     },
     mounted() {
       if (!localStorage.ad_code) {
