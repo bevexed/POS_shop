@@ -27,11 +27,13 @@
   import headers from '../../components/Headers'
   import {infoEdit} from "../../api/users";
   import EXIF from '../../../static/exif'
+  // import VueCoreImageUpload  from 'vue-core-image-upload';
 
   export default {
     name: "InfoEdit",
     components: {
       headers,
+      // VueCoreImageUpload,
     },
     data() {
       return {
@@ -76,10 +78,25 @@
             let imgData = canvas.toDataURL();
             let upImg = new Image()
             upImg.src = imgData
-            that[e.target.name] = upImg;
+            console.log(upImg);
+            that[e.target.name] = dataURLtoBlob(imgData);
 
           })
 
+
+          function dataURLtoBlob(dataurl) {
+            var arr = dataurl.split(','),
+              mime = arr[0].match(/:(.*?);/)[1],
+              bstr = atob(arr[1]),
+              n = bstr.length,
+              u8arr = new Uint8Array(n);
+            while (n--) {
+              u8arr[n] = bstr.charCodeAt(n);
+            }
+            return new Blob([u8arr], {
+              type: mime
+            });
+          }
         }
       },
       async doRealName() {

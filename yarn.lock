@@ -1764,6 +1764,11 @@ copy-webpack-plugin@^4.0.1:
     p-limit "^1.0.0"
     serialize-javascript "^1.4.0"
 
+core-image-xhr@^1.0.3:
+  version "1.0.3"
+  resolved "http://registry.npm.taobao.org/core-image-xhr/download/core-image-xhr-1.0.3.tgz#9211d7b5c41219af5ab69b9384ca2a47d572b476"
+  integrity sha1-khHXtcQSGa9atpuThMoqR9VytHY=
+
 core-js@^2.4.0, core-js@^2.5.0:
   version "2.5.7"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.7.tgz#f972608ff0cead68b841a16a932d0b183791814e"
@@ -2127,6 +2132,11 @@ dashdash@^1.12.0:
 date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
+
+daycaca@^1.0.6:
+  version "1.0.11"
+  resolved "http://registry.npm.taobao.org/daycaca/download/daycaca-1.0.11.tgz#35fd9ee928ffad647a1812b398015673a11cdf11"
+  integrity sha1-Nf2e6Sj/rWR6GBKzmAFWc6Ec3xE=
 
 de-indent@^1.0.2:
   version "1.0.2"
@@ -7603,6 +7613,16 @@ vue-axios@^2.1.4:
   resolved "http://registry.npm.taobao.org/vue-axios/download/vue-axios-2.1.4.tgz#a9d298f7e876f9a87feb336b37adcbce34ff9f9f"
   integrity sha1-qdKY9+h2+ah/6zNrN63LzjT/n58=
 
+vue-core-image-upload@^2.4.11:
+  version "2.4.11"
+  resolved "http://registry.npm.taobao.org/vue-core-image-upload/download/vue-core-image-upload-2.4.11.tgz#ebf455c0a2a926f97dc94c18ff90737c56325a2f"
+  integrity sha1-6/RVwKKpJvl9yUwY/5BzfFYyWi8=
+  dependencies:
+    babel-core "^6.26.0"
+    core-image-xhr "^1.0.3"
+    daycaca "^1.0.6"
+    vue "^2.5.13"
+
 vue-hot-reload-api@^2.1.0, vue-hot-reload-api@^2.2.0:
   version "2.3.1"
   resolved "http://registry.npm.taobao.org/vue-hot-reload-api/download/vue-hot-reload-api-2.3.1.tgz#b2d3d95402a811602380783ea4f566eb875569a2"
@@ -7708,6 +7728,11 @@ vue@^2.4.1:
   version "2.5.20"
   resolved "http://registry.npm.taobao.org/vue/download/vue-2.5.20.tgz#79fff9ccaa10cc37e7a7239b4c7adfac94df81ba"
   integrity sha1-ef/5zKoQzDfnpyObTHrfrJTfgbo=
+
+vue@^2.5.13:
+  version "2.5.22"
+  resolved "http://registry.npm.taobao.org/vue/download/vue-2.5.22.tgz#3bf88041af08b8539c37b268b70ca79245e9cc30"
+  integrity sha1-O/iAQa8IuFOcN7JotwynkkXpzDA=
 
 vue@^2.5.2:
   version "2.5.17"
