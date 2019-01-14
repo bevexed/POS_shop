@@ -1,7 +1,7 @@
 <template>
   <div class="head_content">
     <div class="head_top">
-      <section class="header" @click="goBack" v-if="isBack">
+      <section class="header" @click="goBack" v-show="isBack">
         <img class="backImg" src="../assets/back.png" alt="">
       </section>
       <section v-if="!isPosition && !isBack"></section>
@@ -59,7 +59,7 @@
         this.$router.push('/register')
       },
       goBack() {
-        this.$router.back();
+        this.$router.go(-1);
       },
       manage() {
         this.$emit('Tab1', false);

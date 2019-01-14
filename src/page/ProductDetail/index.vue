@@ -2,7 +2,7 @@
   <div class="product_content" @wheel="change()" @scroll="change()" @touchmove="change()">
     <headers v-show="!show" :title="`商品详情`" :is-back="!show"/>
     <banner :data="detailData.details_pic"/>
-    <!--<img class="productImg" :src="`${IMG_BASE_URL}${detailData.show_pic}`" alt="图片">-->
+    <img class="productImg" :src="`${IMG_BASE_URL}${detailData.show_pic}`" alt="图片">
     <img class="backIcon" src="../../assets/back.png" alt="图片" @click="backClick" v-if="show">
     <img class="shopCar" src="../../assets/gouwuche.png" alt="图片" @click="goCar">
 
@@ -96,7 +96,7 @@
         }
       },
       backClick() {
-        this.$router.back();
+        this.$router.go(-1);
       },
       goCar() {
         this.$router.push('/shoppingCar')

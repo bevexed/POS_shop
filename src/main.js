@@ -6,9 +6,9 @@ import router from './router'
 import store from './store'
 import './filter'
 import './util'
-import navigation from 'vue-navigation/dist/vue-navigation.esm'
+// import navigation from 'vue-navigation/dist/vue-navigation.esm'
 
-Vue.use(navigation, {router, store});
+// Vue.use(navigation, {router, store});
 
 import YDUI from 'vue-ydui'
 import 'vue-ydui/dist/ydui.px.css'
