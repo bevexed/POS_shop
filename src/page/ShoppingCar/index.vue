@@ -248,6 +248,7 @@
   }
 
   .empty {
+    background: transparent !important;
     height: 53px;
   }
 
