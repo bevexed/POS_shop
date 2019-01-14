@@ -1,6 +1,6 @@
 <template>
   <div class="product_content" @wheel="change()" @scroll="change()" @touchmove="change()">
-    <headers v-if="!show" :title="`商品详情`" :is-back="!show"/>
+    <headers v-show="!show" :title="`商品详情`" :is-back="!show"/>
     <banner :data="detailData.details_pic"/>
     <!--<img class="productImg" :src="`${IMG_BASE_URL}${detailData.show_pic}`" alt="图片">-->
     <img class="backIcon" src="../../assets/back.png" alt="图片" @click="backClick" v-if="show">
